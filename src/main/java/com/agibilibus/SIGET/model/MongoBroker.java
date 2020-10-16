@@ -17,9 +17,9 @@ public class MongoBroker {
 	private MongoDatabase db;
 	
 	private MongoBroker(){
- 		this.uri = new MongoClientURI("mongodb://proyecto0:proyecto0@cluster0-shard-00-00.wk722.mongodb.net:27017,cluster0-shard-00-01.wk722.mongodb.net:27017,cluster0-shard-00-02.wk722.mongodb.net:27017/db0?ssl=true&replicaSet=atlas-z5zrmr-shard-0&authSource=admin&retryWrites=true&w=majority");
+ 		this.uri = new MongoClientURI("mongodb://siget:siget@cluster0-shard-00-00.x8ylj.mongodb.net:27017,cluster0-shard-00-01.x8ylj.mongodb.net:27017,cluster0-shard-00-02.x8ylj.mongodb.net:27017/siget?ssl=true&replicaSet=atlas-njv3nf-shard-0&authSource=admin&retryWrites=true&w=majority");
  		this.mongoClient= new MongoClient(uri);
-        this.db= mongoClient.getDatabase("db0");
+        this.db= mongoClient.getDatabase("siget");
 	}
 	
 	public static MongoBroker get(){
