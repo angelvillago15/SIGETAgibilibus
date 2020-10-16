@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            background: url('recursos/cielo.jpg') center no-repeat;
+            min-height:100%;
+            background-size:cover;
+        }
+        ul, li {
+            margin:0;
+            padding:0;
+            list-style-type:none;
+        }
+        #container {
+            width:400px;
+            height:290px;
+            background:#fefefe;
+            margin:auto;  
+            border-top-color:#d3dbde;
+            border-bottom-color:#bfc9dc;
+            box-shadow:0 1px 1px #ccc;
+            border-radius:5px;
+            position:relative;
+        }
+        h2 {
+            margin:0;
+            padding:10px 0;
+            font-size:24px;
+            text-align:center;
+            background:#eff4f7;
+            border-bottom:1px solid #dde0e7;
+            box-shadow:0 -1px 0 #fff inset;
+            border-radius:5px 5px 0 0; /* otherwise we get some uncut corners with container div */
+            text-shadow:1px 1px 0 #fff;
+        }
+        #username,#pass{
+            display: inline-block;
+            width: 200px;
+        }
+        .flexContainer {
+            display:flex;
+            align-items:center;
+        }
+
+        .customSpan {
+            margin:0 0 4px 4px;  
+        }
+
+    </style>
+</head>
+<body><!--cuerpo del programa-->
+    <br>
+    <br>
+    <div id="container" class="modal-dialog text-center">
+           
+                <h2><strong>Login</strong></h2><!--formulario y la estructura de sus elementos-->
+                        <ul>
+                        <br>
+                            <li>
+                                <div class="flexContainer">
+                                    <div class="col-sm-3 col-form-label" style="margin-left: 10px"><span class="glyphicon glyphicon-user"></span></div>
+                                    <div class="customSpan"><input id= "username" type="text" class="form-control" placeholder="Usuario"></input></div>
+                                </div>
+                                <br>
+                                <div class="flexContainer">
+                                    <div class="col-sm-3 col-form-label" style="margin-left: 10px"><span class="glyphicon glyphicon-lock"></span></div>
+                                    <div class="customSpan"><input id= "pass" type="password" class="form-control" placeholder="Contraseña"></input></div>
+                                </div>
+                            </li>
+                        <br>
+                            <li>
+                                <p class="text-center"> <input type="button" class="btn btn-primary" id="login" value="Sign in"/></p>
+                            </li>
+                            <li>
+                                <div class="text-center">
+                                    <div class="col-sm-16">
+                                        <h6>¿No tienes cuenta?<a href="#"> Regístrate aqui</a></h6>
+                                        <h6><a href="#">¿Olvidaste tu contraseña?</a></h6>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+           
+    </div>
+    <script> //FUNCIONALIDAD Y LOGICA     
+    $("#login").click(function(){
+        var username = $("#username").val();
+        var pass=$("#pass").val();
+
+        if(username.length==0 || pass.length==0){
+            alert("Rellena todos los campos");
+        }
+    });
+    </script> 
+</body>
+</html>
