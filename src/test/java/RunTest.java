@@ -8,7 +8,7 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 @RunWith(Cucumber.class)
 
 @CucumberOptions(
-		features="src/test/java/features/escenario.feature",
+		features="src/test/java/features/visualizarCalendarioUsuario.feature",
 		glue="pasos",
 		plugin=	{"pretty", "html:target/cucumber-html-report", "json:target/cucumber.json"}	
 )

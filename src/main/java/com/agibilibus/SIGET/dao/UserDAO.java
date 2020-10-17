@@ -1,6 +1,6 @@
 package com.agibilibus.SIGET.dao;
 
-@MongoRepository
+//@MongoRepository
 public class UserDAO {
 
 }
