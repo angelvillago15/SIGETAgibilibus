@@ -7,9 +7,10 @@
 #Scenario Outline: List of steps for data-driven as an Examples and <placeholder>
 #Examples: Container for s table
 #Background: List of steps run before each of the scenarios
-Feature: Uso de cucumber en el que se va a probar el funcionamiento de una lista de tareas.
+Feature: Uso de cucumber en el que se va a probar la visualización del calendario.
 
-Scenario: Se inserta una tarea
-Given Una nueva tarea
-When se inserta
-Then no ha habido fallos
+Scenario: Como usuario, quiero visualizar mi calendario para ver mis reuniones
+
+Given Autenticacion como usuario
+When Visualizo mi calendario semanal
+Then Se cargan mis tareas en el calendario
