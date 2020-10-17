@@ -22,6 +22,7 @@ import com.agibilibus.SIGET.model.Manager;
 
 @RestController
 public class Controller {
+	
 
 
 }

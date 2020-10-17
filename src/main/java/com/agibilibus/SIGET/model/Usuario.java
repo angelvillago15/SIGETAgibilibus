@@ -1,134 +1,124 @@
 package com.agibilibus.SIGET.model;
-import java.util.Calendar;
-import java.util.Date;
 
+import org.json.JSONObject;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+import lombok.Data;
 
-
+@Data
+@Document(collection = "usuarios")
 public class Usuario {
-	
-	private String Nombre;
-	private String Apellidos;
-	private int Telefono;
+
+	@Id
+	private String user;
+	private String password;
+	private String nombre;
+	private String apellidos;
+	private int telefono;
 	private String email;
-	private String DNI;
-	private Calendar date = Calendar.getInstance();
-	private String User;
-	private String Password;
-	private Rol rol;
-	
-	
-	public Usuario(String nombre, String apellidos, int telefono, String email, String dNI, Calendar date, String user,
-			String password, Rol rol) {
+	private String dni;
+	private String nacimiento;
+	private String rol;
+
+	public Usuario(String user, String password, String nombre, String apellidos, int telefono, String email,
+	        String dni, String nacimiento, String rol) {
 		super();
-		Nombre = nombre;
-		Apellidos = apellidos;
-		Telefono = telefono;
+		this.user = user;
+		this.password = password;
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.telefono = telefono;
 		this.email = email;
-		DNI = dNI;
-		this.date =date; //calendar1.get(Calendar.DATE);
-		User = user;
-		Password = password;
+		this.dni = dni;
+		this.nacimiento = nacimiento;
 		this.rol = rol;
 	}
 
-
 	public String getNombre() {
-		return Nombre;
+		return nombre;
 	}
-
 
 	public void setNombre(String nombre) {
-		Nombre = nombre;
+		this.nombre = nombre;
 	}
-
 
 	public String getApellidos() {
-		return Apellidos;
+		return apellidos;
 	}
-
 
 	public void setApellidos(String apellidos) {
-		Apellidos = apellidos;
+		this.apellidos = apellidos;
 	}
-
 
 	public int getTelefono() {
-		return Telefono;
+		return telefono;
 	}
-
 
 	public void setTelefono(int telefono) {
-		Telefono = telefono;
+		this.telefono = telefono;
 	}
-
 
 	public String getEmail() {
 		return email;
 	}
 
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-
 	public String getDNI() {
-		return DNI;
+		return dni;
 	}
-
 
 	public void setDNI(String dNI) {
-		DNI = dNI;
+		dni = dNI;
 	}
 
-
-	public Calendar getDate() {
-		return date;
-	}
-	
-	public void setDate(Calendar date) {
-		this.date = date;
+	public String getDate() {
+		return nacimiento;
 	}
 
+	public void setDate(String date) {
+		this.nacimiento = date;
+	}
 
 	public String getUser() {
-		return User;
+		return user;
 	}
-
 
 	public void setUser(String user) {
-		User = user;
+		this.user = user;
 	}
-
 
 	public String getPassword() {
-		return Password;
+		return password;
 	}
-
 
 	public void setPassword(String password) {
-		Password = password;
+		this.password = password;
 	}
 
-
-	public Rol getRol() {
+	public String getRol() {
 		return rol;
 	}
 
-
-	public void setRol(String nombre_Rol) {
-		if(nombre_Rol.equals("Admin"))
-			this.rol = rol.ADMIN;
-		else
-			this.rol=rol.USUARIO;
+	public void setRol(String rol) {
+		this.rol = rol;
 	}
 
+	public JSONObject toJSON() {
+		JSONObject jso = new JSONObject();
+		jso.put("nombre", this.nombre);
+		jso.put("apellidos", this.apellidos);
+		jso.put("telefono", this.telefono);
+		jso.put("email", this.email);
+		jso.put("dni", this.dni);
+		jso.put("nacimiento", this.nacimiento);
+		jso.put("user", this.user);
+		jso.put("password", this.password);
+		jso.put("rol", this.rol);
+		return jso;
 
-	@Override
-	public String toString() {
-		return "Usuario [Nombre=" + Nombre + ", Apellidos=" + Apellidos + ", Telefono=" + Telefono + ", email=" + email
-				+ ", DNI=" + DNI + ", date=" + date + ", User=" + User + ", Password=" + Password + ", rol=" + rol
-				+ "]";
 	}
 }
