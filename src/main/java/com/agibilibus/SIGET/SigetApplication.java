@@ -6,7 +6,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.agibilibus.SIGET.dao.UserDAO;
-import com.agibilibus.SIGET.model.Rol;
 import com.agibilibus.SIGET.model.Usuario;
 
 
@@ -22,7 +21,7 @@ public class SigetApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		userdao.save(new Usuario("Carlos", "Rivas", 123, "a@a.com", "06", "10/05/1997", "carlos", "123", Rol.ADMIN));	
+		//userdao.save(new Usuario("carlos", "aaa", "Carlos", "Rivas", 666, "a@a.com", "062x","10/05/1997", "admin"));
 	}
 
 }

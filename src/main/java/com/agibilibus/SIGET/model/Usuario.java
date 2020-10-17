@@ -11,52 +11,52 @@ import lombok.Data;
 public class Usuario {
 
 	@Id
-	private String User;
-	private String Nombre;
-	private String Apellidos;
-	private int Telefono;
+	private String user;
+	private String password;
+	private String nombre;
+	private String apellidos;
+	private int telefono;
 	private String email;
-	private String DNI;
-	private String date;
-	private String Password;
-	private Rol rol;
+	private String dni;
+	private String nacimiento;
+	private String rol;
 
-	public Usuario(String nombre, String apellidos, int telefono, String email, String dNI, String nacimiento,
-	        String user, String password, Rol rol) {
+	public Usuario(String user, String password, String nombre, String apellidos, int telefono, String email,
+	        String dni, String nacimiento, String rol) {
 		super();
-		Nombre = nombre;
-		Apellidos = apellidos;
-		Telefono = telefono;
+		this.user = user;
+		this.password = password;
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.telefono = telefono;
 		this.email = email;
-		DNI = dNI;
-		this.date = nacimiento; // calendar1.get(Calendar.DATE);
-		User = user;
-		Password = password;
+		this.dni = dni;
+		this.nacimiento = nacimiento;
 		this.rol = rol;
 	}
 
 	public String getNombre() {
-		return Nombre;
+		return nombre;
 	}
 
 	public void setNombre(String nombre) {
-		Nombre = nombre;
+		this.nombre = nombre;
 	}
 
 	public String getApellidos() {
-		return Apellidos;
+		return apellidos;
 	}
 
 	public void setApellidos(String apellidos) {
-		Apellidos = apellidos;
+		this.apellidos = apellidos;
 	}
 
 	public int getTelefono() {
-		return Telefono;
+		return telefono;
 	}
 
 	public void setTelefono(int telefono) {
-		Telefono = telefono;
+		this.telefono = telefono;
 	}
 
 	public String getEmail() {
@@ -68,58 +68,55 @@ public class Usuario {
 	}
 
 	public String getDNI() {
-		return DNI;
+		return dni;
 	}
 
 	public void setDNI(String dNI) {
-		DNI = dNI;
+		dni = dNI;
 	}
 
 	public String getDate() {
-		return date;
+		return nacimiento;
 	}
 
 	public void setDate(String date) {
-		this.date = date;
+		this.nacimiento = date;
 	}
 
 	public String getUser() {
-		return User;
+		return user;
 	}
 
 	public void setUser(String user) {
-		User = user;
+		this.user = user;
 	}
 
 	public String getPassword() {
-		return Password;
+		return password;
 	}
 
 	public void setPassword(String password) {
-		Password = password;
+		this.password = password;
 	}
 
-	public Rol getRol() {
+	public String getRol() {
 		return rol;
 	}
 
-	public void setRol(String nombre_Rol) {
-		if (nombre_Rol.equals("Admin"))
-			this.rol = rol.ADMIN;
-		else
-			this.rol = rol.USUARIO;
+	public void setRol(String rol) {
+		this.rol = rol;
 	}
 
 	public JSONObject toJSON() {
 		JSONObject jso = new JSONObject();
-		jso.put("nombre", this.Nombre);
-		jso.put("apellidos", this.Apellidos);
-		jso.put("telefono", this.Telefono);
+		jso.put("nombre", this.nombre);
+		jso.put("apellidos", this.apellidos);
+		jso.put("telefono", this.telefono);
 		jso.put("email", this.email);
-		jso.put("dni", this.DNI);
-		jso.put("nacimiento", this.date);
-		jso.put("user", this.User);
-		jso.put("password", this.Password);
+		jso.put("dni", this.dni);
+		jso.put("nacimiento", this.nacimiento);
+		jso.put("user", this.user);
+		jso.put("password", this.password);
 		jso.put("rol", this.rol);
 		return jso;
 
