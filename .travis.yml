@@ -4,4 +4,4 @@ install:
 script:
   - mvn test
 notifications:
-  slack: uclm-grupo:T8sWAkWMCWVNyfOHGX4vMo00
+  slack: uclm-grupo:3S8XEYqzaXxorBKB8JRinrLZ
