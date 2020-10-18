@@ -2,6 +2,10 @@ package com.agibilibus.SIGET.model;
 
 public class CalendarioManager {
 	
+	public CalendarioManager() {
+		
+	}
+	
 	public static void autenticarme() {
 		
 	}
@@ -11,10 +15,8 @@ public class CalendarioManager {
 	}
 
 	public static void visualizarCalendario() {
-		// TODO Auto-generated method stub
+	
 		
 	}
-	
-
 	
 }

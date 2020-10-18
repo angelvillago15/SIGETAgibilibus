@@ -19,7 +19,7 @@ public class StepsVisualizarCalendario {
 	}
 	
 	@Then("^Visualizo mi calendario semanal$")
-	public void cargarTareasEnCalendario() throws Throwable{
+	public void visualizarCalendario() throws Throwable{
 		CalendarioManager.visualizarCalendario();
 	}
 	
