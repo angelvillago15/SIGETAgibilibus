@@ -9,7 +9,7 @@
 #Background: List of steps run before each of the scenarios
 Feature: Uso de cucumber en el que se va a probar la visualización del calendario.
 
-Scenario: Como usuario, quiero visualizar mi calendario para ver mis reuniones
+Scenario: Como usuario autenticado, quiero estar en mi pagina principal para visualizar mi calendario semanal
 
 Given Me autentico como usuario
 When Estoy en mi pagina principal
