@@ -11,6 +11,6 @@ Feature: Uso de cucumber en el que se va a probar la visualización del calendar
 
 Scenario: Como usuario, quiero visualizar mi calendario para ver mis reuniones
 
-Given Autenticacion como usuario
-When Visualizo mi calendario semanal
-Then Se cargan mis tareas en el calendario
+Given Me autentico como usuario
+When Estoy en mi pagina principal
+Then Visualizo mi calendario semanal

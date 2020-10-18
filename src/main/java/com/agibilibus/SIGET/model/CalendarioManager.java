@@ -1,17 +1,20 @@
 package com.agibilibus.SIGET.model;
 
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-
 public class CalendarioManager {
 	
-	@When("^Visualizo mi calendario semanal$")
-	public void getSemana() {
+	public static void autenticarme() {
 		
 	}
 	
-	@Then("^Se cargan mis tareas en el calendario$")
-	public void getReuniones() {
+	public static void estoyEnMenuPrincipal() {
 		
 	}
+
+	public static void visualizarCalendario() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+
+	
 }
