@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Todolist</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <style>
+  body {
+    background: url('recursos/ubuntuF.jpg') center no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    min-height:100%;
+    background-size:cover;
+  }
+
+  .container{
+      height: 60px;
+  }
+
+  .left {
+      position: fixed;
+      top: 0px; 
+      left: 10px;
+  }  
+  h2 {
+      margin:0;
+      padding:10px 0;
+      font-size:24px;
+      text-align:center;
+      background:#eff4f7;
+      border-bottom:1px solid #dde0e7;
+      box-shadow:0 -1px 0 #fff inset;
+      border-radius:5px 5px 0 0; /* otherwise we get some uncut corners with container div */
+      text-shadow:1px 1px 0 #fff;
+  }
+</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <div class="left">
+        <a href="UserCalendar.html"><span class="logo"><img src="recursos/logo.png" width="60" height="60"></span>
+      </div>
+  </a>
+  </div>  
+</nav>
+
+<br>
+<br>
+
+<div class="container">
+  <h2>Mi Cuenta</h2>
+<br>  
+  <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading"> <strong>Datos Personales</strong></div>
+      <div class="panel-body">
+      	<form>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">DNI:</label>
+              <div class="col-sm-3">
+                  <input type="text" class="form-control" id="dni">
+              </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Nombre:</label>
+              <div class="col-sm-3">
+                  <input type="text" class="form-control" id="name">
+              </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Apellidos:</label>
+              <div class="col-sm-3">
+                  <input type="text" class="form-control" id="Apellidos" required="true">
+              </div>
+            <label class="col-sm-2 col-form-label">Teléfono:</label>
+              <div class="col-sm-3">
+                  <input type="text" class="form-control" id="teléfono" required="true">
+              </div>
+          </div>
+	  	</form>
+      </div>
+    </div>
+    <br>
+    <div class="panel panel-default">
+      <div class="panel-heading"><strong>Datos de Usuario</strong></div>
+      <div class="panel-body">
+      	<form>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Nombre de Usuario:</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id= "username">
+            </div>
+        </div>
+        <div class="form-group row" id=userData>
+          <label class="col-sm-2 col-form-label" >Contraseña:</label>
+            <div class="col-sm-3">
+                <input id= "pass" type="password" class="form-control checkSeguridad">
+            </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">E-mail:</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="mail1" required="true">
+            </div>
+          <label class="col-sm-2 col-form-label">Rol:</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="mail2" required="true">
+            </div>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-1.7.min.js"></script>
+</html>
+
