@@ -8,8 +8,8 @@ import cucumber.api.java.en.When;
 public class StepsVisualizarCalendario {
 
 	@Given("^Estoy autenticado como usuario en el sistema$")
-	public void autenticar(String usuario, String pwd) throws Throwable{
-		UsuarioManager.autenticar(usuario, pwd);
+	public Usuario autenticar(String usuario, String pwd) throws Throwable{
+		return UsuarioManager.autenticar(usuario, pwd);
 	}
 	
 	
