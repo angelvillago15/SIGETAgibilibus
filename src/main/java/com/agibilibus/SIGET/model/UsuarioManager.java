@@ -6,7 +6,6 @@ public class UsuarioManager {
 		
 	}
 	
-	public static Usuario autenticar(String usuario, String contraseña) {
-		return null;
+	public static void autenticar() {
 	}
 }

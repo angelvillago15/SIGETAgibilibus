@@ -10,7 +10,7 @@ public class CalendarioManager {
 		
 	}
 
-	public static void cargarReuniones(Usuario usuario, Calendario c) {
+	public static void cargarReuniones() {
 		
 	}
 	

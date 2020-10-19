@@ -8,8 +8,8 @@ import cucumber.api.java.en.When;
 public class StepsVisualizarCalendario {
 
 	@Given("^Estoy autenticado como usuario en el sistema$")
-	public Usuario autenticar(String usuario, String pwd) throws Throwable{
-		return UsuarioManager.autenticar(usuario, pwd);
+	public void autenticar() throws Throwable{
+		UsuarioManager.autenticar();
 	}
 	
 	
@@ -19,8 +19,8 @@ public class StepsVisualizarCalendario {
 	}
 	
 	@Then("^Veo mis reuniones de la semana$")
-	public void cargarReuniones(Usuario usuario, Calendario c) throws Throwable{
-		CalendarioManager.cargarReuniones(usuario, c);
+	public void cargarReuniones() throws Throwable{
+		CalendarioManager.cargarReuniones();
 	}
 	
 }
