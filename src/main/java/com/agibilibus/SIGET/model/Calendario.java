@@ -11,9 +11,11 @@ import java.util.List;
 
 public class Calendario {
 	private int day;
+	private int semana;
 	
 	public Calendario () {
 		this.day = Calendar.DAY_OF_WEEK;
+		this.semana = 0;
 	}
 	/**
 	 * El JSONArray contiene 7 JSON Object uno por cada dia de la semana de lunes a domingo
@@ -22,13 +24,14 @@ public class Calendario {
 	 *  - un cambo "reuniones" con un JSONArray de JSONObjects que corresponden a las reuniones
 	 * */
 	public JSONArray getSemana() {
+		this.semana = 0;
 		return getSemana(0);
 	}
 	public JSONArray getSemanaSiguiente() {
-		return getSemana(1);
+		return getSemana(++this.semana);
 	}
 	public JSONArray getSemanaAnterior() {
-		return getSemana(-1);
+		return getSemana(--this.semana);
 	}
 
 	private List<Date> getDates(int semana) {

@@ -1,4 +1,7 @@
+<<<<<<< HEAD
   
+=======
+>>>>>>> Develop
 package com.agibilibus.SIGET.model;
 
 import java.util.List;
@@ -109,4 +112,8 @@ public class Reunion {
 		this.url = url;
 	}
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> Develop
