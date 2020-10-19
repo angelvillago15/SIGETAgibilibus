@@ -3,7 +3,12 @@ package com.agibilibus.SIGET.model;
 import org.json.JSONObject;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.time.*;
+
+import javax.persistence.Transient;
+import javax.servlet.http.HttpSession;
+
 import lombok.Data;
 
 @Data
@@ -20,6 +25,8 @@ public class Usuario {
 	private String dni;
 	private LocalDate nacimiento;
 	private String rol;
+	@Transient
+	private HttpSession httpSession;
 
 	public Usuario(String user, String password, String nombre, String apellidos, int telefono, String email,
 	        String dni, LocalDate nacimiento, String rol) {
@@ -105,6 +112,14 @@ public class Usuario {
 
 	public void setRol(String rol) {
 		this.rol = rol;
+	}
+	
+	public void setHttpSession(HttpSession httpSession) {
+		this.httpSession = httpSession;
+	}
+
+	public HttpSession getHttpSession() {
+		return httpSession;
 	}
 
 	public JSONObject toJSON() {
