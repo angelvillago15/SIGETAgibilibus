@@ -3,7 +3,7 @@ package com.agibilibus.SIGET.model;
 import org.json.JSONObject;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
+import java.time.*;
 import lombok.Data;
 
 @Data
@@ -18,11 +18,11 @@ public class Usuario {
 	private int telefono;
 	private String email;
 	private String dni;
-	private String nacimiento;
+	private LocalDate nacimiento;
 	private String rol;
 
 	public Usuario(String user, String password, String nombre, String apellidos, int telefono, String email,
-	        String dni, String nacimiento, String rol) {
+	        String dni, LocalDate nacimiento, String rol) {
 		super();
 		this.user = user;
 		this.password = password;
@@ -75,11 +75,11 @@ public class Usuario {
 		dni = dNI;
 	}
 
-	public String getDate() {
+	public LocalDate getDate() {
 		return nacimiento;
 	}
 
-	public void setDate(String date) {
+	public void setDate(LocalDate date) {
 		this.nacimiento = date;
 	}
 
