@@ -1,5 +1,5 @@
 package pasos;
-import com.agibilibus.SIGET.model.CalendarioManager;
+import com.agibilibus.SIGET.model.*;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -7,20 +7,20 @@ import cucumber.api.java.en.When;
 
 public class StepsVisualizarCalendario {
 
-	@Given("^Me autentico como usuario$")
-	public void autenticarme() throws Throwable{
-		CalendarioManager.autenticarme();
+	@Given("^Estoy autenticado como usuario en el sistema$")
+	public void autenticar(String usuario, String pwd) throws Throwable{
+		UsuarioManager.autenticar(usuario, pwd);
 	}
 	
 	
-	@When("^Estoy en mi pagina principal$")
-	public void estoyEnMenuPrincipal() throws Throwable{
-		CalendarioManager.estoyEnMenuPrincipal();
-	}
-	
-	@Then("^Visualizo mi calendario semanal$")
+	@When("^Entro a la pantalla de calendario semanal$")
 	public void visualizarCalendario() throws Throwable{
 		CalendarioManager.visualizarCalendario();
+	}
+	
+	@Then("^Veo mis reuniones de la semana$")
+	public void cargarReuniones(Usuario usuario, Calendario c) throws Throwable{
+		CalendarioManager.cargarReuniones(usuario, c);
 	}
 	
 }

@@ -7,10 +7,12 @@
 #Scenario Outline: List of steps for data-driven as an Examples and <placeholder>
 #Examples: Container for s table
 #Background: List of steps run before each of the scenarios
-Feature: Uso de cucumber en el que se va a probar la visualización del calendario.
 
-Scenario: Como usuario autenticado, quiero estar en mi pagina principal para visualizar mi calendario semanal
 
-Given Me autentico como usuario
-When Estoy en mi pagina principal
-Then Visualizo mi calendario semanal
+Feature: Visualizar mi calendario semanal con mis reuniones
+
+Scenario: Como usuario autenticado, quiero entrar en la pantalla de calendario semanal para visualizar mis reuniones de la semana
+
+Given Estoy autenticado como usuario en el sistema
+When Entro a la pantalla de calendario semanal
+Then Veo mis reuniones de la semana

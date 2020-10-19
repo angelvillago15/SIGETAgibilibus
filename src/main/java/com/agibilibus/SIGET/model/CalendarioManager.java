@@ -6,16 +6,11 @@ public class CalendarioManager {
 		
 	}
 	
-	public static void autenticarme() {
-		
-	}
-	
-	public static void estoyEnMenuPrincipal() {
+	public static void visualizarCalendario() {
 		
 	}
 
-	public static void visualizarCalendario() {
-	
+	public static void cargarReuniones(Usuario usuario, Calendario c) {
 		
 	}
 	
