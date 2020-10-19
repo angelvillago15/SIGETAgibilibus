@@ -15,20 +15,18 @@ public class Reunion {
 	private int idReunion;
 	private String titulo;
 	private String descripcion;
-	private LocalDate dia;
 	private LocalDate horaInicio;
 	private LocalDate horaFin;
 	private Usuario organizador;
 	private List<Usuario> asistentes;
 	private String url;
 
-	public Reunion(int idReunion, String titulo, String descripcion, LocalDate dia, LocalDate horaInicio,
-	        LocalDate horaFin, Usuario organizador, List<Usuario> asistentes, String url) {
+	public Reunion(int idReunion, String titulo, String descripcion, LocalDate horaInicio, LocalDate horaFin,
+	        Usuario organizador, List<Usuario> asistentes, String url) {
 		super();
 		this.idReunion = idReunion;
 		this.titulo = titulo;
 		this.descripcion = descripcion;
-		this.dia = dia;
 		this.horaInicio = horaInicio;
 		this.horaFin = horaFin;
 		this.organizador = organizador;
@@ -58,14 +56,6 @@ public class Reunion {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
-	}
-
-	public LocalDate getFecha() {
-		return dia;
-	}
-
-	public void setFecha(LocalDate fecha) {
-		this.dia = fecha;
 	}
 
 	public LocalDate getHoraInicio() {
