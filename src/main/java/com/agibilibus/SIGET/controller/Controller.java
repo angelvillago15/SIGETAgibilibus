@@ -25,5 +25,5 @@ public class Controller {
 		Usuario user = Manager.get().login(session, userName, pwd);
 		session.setAttribute("user", user);
 	}
-
+	
 }
