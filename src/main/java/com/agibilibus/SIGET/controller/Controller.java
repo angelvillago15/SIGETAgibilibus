@@ -1,29 +1,29 @@
 package com.agibilibus.SIGET.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.json.JSONException;
 import org.json.JSONObject;
-import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import org.json.JSONArray;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
 import com.agibilibus.SIGET.model.Manager;
+import com.agibilibus.SIGET.model.Usuario;
 
 @RestController
 public class Controller {
-	
 
+	@PostMapping("/login")
+	public void login(HttpSession session, @RequestBody Map<String, Object> credenciales) throws Exception {
+		JSONObject jso = new JSONObject(credenciales);
+		String userName = jso.getString("userName");
+		String pwd = jso.getString("pwd");
+		Usuario user = Manager.get().login(session, userName, pwd);
+		session.setAttribute("user", user);
+	}
 
 }
-

@@ -3,6 +3,7 @@ package com.agibilibus.SIGET.model;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
+
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -13,7 +14,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import com.agibilibus.SIGET.dao.UserDAO;
-
 
 
 @Component
@@ -28,6 +28,34 @@ public class Manager {
 		this.connectedUsersByUserName = new ConcurrentHashMap<>();
 		this.connectedUsersByHttpSession = new ConcurrentHashMap<>();
 
+	}
+
+	private static class ManagerHolder {
+		static Manager singleton = new Manager();
+	}
+
+	@Bean
+	public static Manager get() {
+		return ManagerHolder.singleton;
+	}
+
+	public Usuario login(HttpSession httpSession, String userName, String pwd) throws Exception {
+		try {
+			Optional<Usuario> optUser = userdao.findById(userName);
+
+			if (optUser.isPresent()) {
+				Usuario user = optUser.get();
+				if (user.getPassword().equals(pwd)) {
+					user.setHttpSession(httpSession);
+					this.connectedUsersByUserName.put(userName, user);
+					this.connectedUsersByHttpSession.put(httpSession.getId(), user);
+					return user;
+				}
+			}
+			throw new Exception("Credenciales inválidas");
+		} catch (SQLException e) {
+			throw new Exception("Credenciales inválidas");
+		}
 	}
 
 	private static class ManagerHolder {
