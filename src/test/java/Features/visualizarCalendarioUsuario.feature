@@ -13,6 +13,8 @@ Feature: Visualizar mi calendario semanal con mis reuniones
 
 Scenario: Como usuario autenticado, quiero entrar en la pantalla de calendario semanal para visualizar mis reuniones de la semana
 
-Given Estoy autenticado como usuario en el sistema
+Given Estoy autenticado como usuario en el sistema con <httpSession>,<userName> y <pwd>:
+			| httpSession  | userName    | pwd   |
+	    | 1234 				 | hola			   | aaa   |
 When Entro a la pantalla de calendario semanal
 Then Veo mis reuniones de la semana

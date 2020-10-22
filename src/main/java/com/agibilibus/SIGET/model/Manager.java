@@ -62,5 +62,13 @@ public class Manager {
 		
 		
 	}
+	
+	
+	public void cargarCalendario () {
+	}
+	
+	public void cargarReuniones() {
+		
+	}
 
 }

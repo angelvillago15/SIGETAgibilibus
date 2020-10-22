@@ -16,17 +16,18 @@
 #""
 ## (Comments)
 #Sample Feature Definition Template
-@tag
+
 Feature: Crear reunion
   
-
-  @tag1
-  Scenario: Como usuario autenticado en el sistema, quiero pulsar en el boton crear reunion y rellenar los campos de la ventana emergente para guardar esa reunion y verla en mi calendario
-    Given Estoy autenticado como usuario en el sistema
-    When Pulso en el boton crear reunion
-    And Confirmo los campos rellenados para crear una reunion 
-    Then Guardo esa reunion
-    And Actualizo mi calendario con esa reunion
-
+  Scenario: Como usuario autenticado en el sistema, quiero crear reunion para verla en mi calendario
+    Given Estoy autenticado como usuario en el sistema con <httpSession>, <userName>, <pwd>:
+	    | httpSession  | userName    | pwd   |
+	    | 		 				 | hola			   | aaa   |
+    When Guardo una nueva reunion con los atributos <idReunion>, <titulo>, <descripcion>, <horaInicio>, <horaFin>, <organizador>, <asistentes>, <url>:
+    	| idReunion  | titulo    			| descripcion   		|  horaInicio  | horaFin	|	organizador | asistentes	|	url														|
+	    | 1234 			 | Inicio Spring	| Reunion de inicio |  18:30  		 | 19:00		| usuario1		| usuario2		| https://www.reunionInicio.es	| 
+    Then Actualizo mi calendario con la nueva reunion
+ 
+    
 
  
