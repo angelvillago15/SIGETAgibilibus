@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <!--archivos para calendario-->
     <link href='UserCalendar.css' rel='stylesheet' />
@@ -105,7 +106,7 @@
             <div class="container">
                 <a class="navbar-brand" href="#">
                     <div class="left">
-                        <a href="UserCalendar.html"></a><span class="logo"><img src="recursos/logo.png" width="60" height="60"></span>
+                        <span class="logo"><img src="recursos/logo.png" width="60" height="60"></span>
                     </div>
                 </a>
                 <div class="right">
@@ -139,50 +140,36 @@
     </div>  
 </body>
 
-    <table class="calendar-table table table-condensed table-tight">
-      <thead>
-        <tr>
-          <td colspan="7" style="text-align: center">
-            <table style="white-space: nowrap; width: 100%">
-              <tr>
-                <td style="text-align: left;">
-                  <span class="btn-group">
-                    <button class="js-cal-prev btn btn-default" data-bind="click : SemanaAnterior" value="<"></button>
-                    <button class="js-cal-next btn btn-default" data-bind="click : SemanaSiguiente" value=">"></button>
-                  </span>
-                </td>
-              </tr>
-            </table>
-            
-          </td>
-        </tr>
-      </thead>
-
-      <tbody>
-      <thead>
-        <tr class="c-weeks">
-            <th class="c-name" id="dia0"></th>
-            <th class="c-name" id="dia1"></th>
-            <th class="c-name" id="dia2"></th>
-            <th class="c-name" id="dia3"></th>
-            <th class="c-name" id="dia4"></th>
-            <th class="c-name" id="dia5"></th>
-            <th class="c-name" id="dia6"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><div class="date" id="tabla0"></div></td>
-          <td><div class="date" id="tabla1"></div></td>
-          <td><div class="date" id="tabla2"></div></td>
-          <td><div class="date" id="tabla3"></div></td>
-          <td><div class="date" id="tabla4"></div></td>
-          <td><div class="date" id="tabla5"></div></td>
-          <td><div class="date" id="tabla6"></div></td>
-        </tr>
-      </tbody>
-
-    </table>
+			<ul class="pager">
+				<li class="previous disabled"><a onclick="getSemanaAnterior()"> Anterior</a></li>
+				<li class="next"><a onclick="getSemanaSiguiente()">Siguiente &rarr;</a></li>
+			</ul>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Lunes &nbsp;<div id="d0"></div></th>
+      <th scope="col">Martes&nbsp;<div id="d1"></div></th>
+      <th scope="col">Miercoles&nbsp;<div id="d2"></div></th>
+      <th scope="col">Jueves&nbsp;<div id="d3"></div></th>
+      <th scope="col">Viernes&nbsp;<div id="d4"></div></th>
+      <th scope="col">Sabado&nbsp;<div id="d5"></div></th>
+      <th scope="col">Domingo&nbsp;<div id="d6"></div></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"></th>
+      <td>Evento<div id="ls0"></div></td>
+      <td>Evento<div id="ls1"></div></td>
+      <td>Evento<div id="ls2"></div></td>
+      <td>Evento<div id="ls3"></div></td>
+      <td>Evento<div id="ls4"></div></td>
+      <td>Evento<div id="ls5"></div></td>
+      <td>Evento<div id="ls6"></div></td>
+    </tr>
+  </tbody>
+</table>
   
 
 </html>
