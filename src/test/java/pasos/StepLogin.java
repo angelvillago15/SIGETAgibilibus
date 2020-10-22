@@ -1,5 +1,10 @@
 package pasos;
 
+import javax.servlet.http.HttpSession;
+
+import org.json.JSONObject;
+
+import com.agibilibus.SIGET.model.Manager;
 import com.agibilibus.SIGET.model.Usuario;
 
 import cucumber.api.java.en.Given;
@@ -16,12 +21,13 @@ public class StepLogin {
 	}
 	
 	@When("introduzco en el campo usuario <usuario> correctamente")
-	public void introducirUsuario(String usu, String pwd) {
-		UsuarioManager.IniciarSesion(usu, pwd);
+	public void introducirUsuario(String usu, String pwd, HttpSession httpSession) {
+		UsuarioManager.login(httpSession,usu,pwd);
+		
 	}
 	@When("introduzco contraseña <password> correctamente")
 	public void introducirContraseña(String usu, String pwd) {
-		UsuarioManager.IniciarSesion(usu, pwd);
+		UsuarioManager.login(httpSession,usu,pwd);
 	}
 	
 	@When("pulso el boton de validar <boton>")
@@ -32,9 +38,21 @@ public class StepLogin {
 	
 	@Then("voy a la pagina de inicio del sistema")
 	public void mostrarPantallaInicio(String url) {
-		
+		UsuarioMAnager.visualizaPaginaPrincipal();
 		
 	}
+	
+	@Then("Usuario es incorrecto, mostrar el mensaje <mensaje>")
+	public void mostrarMensajeErrorUsu() {
+		System.out.println("Error el usuario es incorrecto");
+	}
+	
+	@Then("contraseña es correcta, mostrar el mensaje <mensaje>")
+	public void mostrarMensajeErrorPwd() {
+	
+		System.out.println("Error la contraseña es incorrecto");
+	}
+	
 
 	
 }

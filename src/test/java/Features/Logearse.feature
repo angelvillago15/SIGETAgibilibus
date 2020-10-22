@@ -1,18 +1,20 @@
 
 Feature: login
 
-Scenario: Hacer login correctamente 
+Scenario Outline: Validar campos
 Given estoy registrado como usuario 
-When introduzco en el campo usuario <usuario> correctamente
-And  introduzco contraseña <password> correctamente 
+When introduzco en el campo usuario <usuario> 
+And  introduzco contraseña <password>  
 And pulso el boton de validar <boton>
 Then voy a la pagina de inicio del sistema <pagina>
 
-Examples:
+
+Examples: 
 |usuario	|password	|boton  	 |pagina	|
 |hola	  	| aaa  	  |validar 	 |  login	|
 
-Scenario: Validar los campos 
+
+Scenario Outline: Validar los campos 
 Given estoy registrado como usuario 
 When relleno los campos usuario <usuario> 
 And introduzco  contraseña <password>
