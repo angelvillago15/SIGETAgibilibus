@@ -7,10 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <!--archivos para calendario-->
-    <link href='UserCalendar.css' rel='stylesheet' />
+    <!--archivo para calendario-->
     <script src="UserCalendar.js"></script> 
     <style>
         body {
@@ -87,16 +85,11 @@
         #wrap {
             width: 1100px;
             margin: 0 auto;
-            }
+        }
 
-        #calendar {
-        /* 		float: right; */
-            margin: 0 auto;
-            width: 900px;
-            background-color: #FFFFFF;
-            border-radius: 6px;
-            box-shadow: 0 1px 2px #C3C3C3;
-            }
+        #ls0, #ls1, #ls2, #ls3, #ls4, #ls5, #ls6{
+            background-color:rgb(39, 204, 226);
+        }
 
     </style>
 </head>
@@ -134,42 +127,37 @@
         <br>
         <br>
         <div class="container theme-showcase">
-            
-          <div id="holder" class="row" ></div>
-        </div>
-    </div>  
-</body>
-
-			<ul class="pager">
-				<li class="previous disabled"><a onclick="getSemanaAnterior()"> Anterior</a></li>
+            <ul class="pager">
+				<li class="previous"><a onclick="getSemanaAnterior()"> &larr; Anterior</a></li>
 				<li class="next"><a onclick="getSemanaSiguiente()">Siguiente &rarr;</a></li>
 			</ul>
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col"></th>
-      <th scope="col">Lunes &nbsp;<div id="d0"></div></th>
-      <th scope="col">Martes&nbsp;<div id="d1"></div></th>
-      <th scope="col">Miercoles&nbsp;<div id="d2"></div></th>
-      <th scope="col">Jueves&nbsp;<div id="d3"></div></th>
-      <th scope="col">Viernes&nbsp;<div id="d4"></div></th>
-      <th scope="col">Sabado&nbsp;<div id="d5"></div></th>
-      <th scope="col">Domingo&nbsp;<div id="d6"></div></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row"></th>
-      <td>Evento<div id="ls0"></div></td>
-      <td>Evento<div id="ls1"></div></td>
-      <td>Evento<div id="ls2"></div></td>
-      <td>Evento<div id="ls3"></div></td>
-      <td>Evento<div id="ls4"></div></td>
-      <td>Evento<div id="ls5"></div></td>
-      <td>Evento<div id="ls6"></div></td>
-    </tr>
-  </tbody>
-</table>
-  
+            <table class="table table-bordered">
+            <thead>
+                <tr>
+                <th scope="col"><div id="d0" class="text-center">Lunes&nbsp;</div></th>
+                <th scope="col"><div id="d1" class="text-center">Martes&nbsp;</div></th>
+                <th scope="col"><div id="d2" class="text-center">Miércoles&nbsp;</div></th>
+                <th scope="col"><div id="d3" class="text-center">Jueves&nbsp;</div></th>
+                <th scope="col"><div id="d4" class="text-center">Viernes&nbsp;</div></th>
+                <th scope="col"><div id="d5" class="text-center">Sábado&nbsp;</div></th>
+                <th scope="col"><div id="d6" class="text-center">Domingo&nbsp;</div></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td><div id="ls0" class="text-center" >Evento</div></td>
+                <td><div id="ls1" class="text-center" >Evento</div></td>
+                <td><div id="ls2" class="text-center" >Evento</div></td>
+                <td><div id="ls3" class="text-center" >Evento</div></td>
+                <td><div id="ls4" class="text-center" >Evento</div></td>
+                <td><div id="ls5" class="text-center" >Evento</div></td>
+                <td><div id="ls6" class="text-center" >Evento</div></td>
+                </tr>
+            </tbody>
+            </table>
+        </div>    
+        <div id="holder" class="row" ></div>
+    </div>  
+</body>
 
 </html>
