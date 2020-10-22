@@ -1,5 +1,6 @@
 package com.agibilibus.SIGET.model;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
@@ -14,21 +15,18 @@ public class Reunion {
 	private int idReunion;
 	private String titulo;
 	private String descripcion;
-	private String fecha;
-	private String horaInicio;
-	private String horaFin;
+	private LocalDate horaInicio;
+	private LocalDate horaFin;
 	private Usuario organizador;
 	private List<Usuario> asistentes;
 	private String url;
-	
 
-	public Reunion(int idReunion, String titulo, String descripcion, String fecha, String horaInicio, String horaFin,
+	public Reunion(int idReunion, String titulo, String descripcion, LocalDate horaInicio, LocalDate horaFin,
 	        Usuario organizador, List<Usuario> asistentes, String url) {
 		super();
 		this.idReunion = idReunion;
 		this.titulo = titulo;
 		this.descripcion = descripcion;
-		this.fecha = fecha;
 		this.horaInicio = horaInicio;
 		this.horaFin = horaFin;
 		this.organizador = organizador;
@@ -60,27 +58,19 @@ public class Reunion {
 		this.descripcion = descripcion;
 	}
 
-	public String getFecha() {
-		return fecha;
-	}
-
-	public void setFecha(String fecha) {
-		this.fecha = fecha;
-	}
-
-	public String getHoraInicio() {
+	public LocalDate getHoraInicio() {
 		return horaInicio;
 	}
 
-	public void setHoraInicio(String horaInicio) {
+	public void setHoraInicio(LocalDate horaInicio) {
 		this.horaInicio = horaInicio;
 	}
 
-	public String getHoraFin() {
+	public LocalDate getHoraFin() {
 		return horaFin;
 	}
 
-	public void setHoraFin(String horaFin) {
+	public void setHoraFin(LocalDate horaFin) {
 		this.horaFin = horaFin;
 	}
 
