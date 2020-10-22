@@ -20,7 +20,7 @@ And pulso el boton validar <boton>
 Then usuario es incorrecto, mostrar el mensaje <mensaje>
 And contraseña es correcta, mostrar el mensaje <mensaje>
 
-Examples:
+Examples: 
 |usuario	|password	|boton  	 |mensaje						|
 |Amanda  	| aaa  	  |validar 	 | Error en  login 	|
 |usuario	|					|validar 	 | Error en  login	|
