@@ -58,34 +58,6 @@ public class Manager {
 		}
 	}
 
-	private static class ManagerHolder {
-		static Manager singleton = new Manager();
-	}
-
-	@Bean
-	public static Manager get() {
-		return ManagerHolder.singleton;
-	}
-
-	public Usuario login(HttpSession httpSession, String userName, String pwd) throws Exception {
-		try {
-			Optional<Usuario> optUser = userdao.findById(userName);
-
-			if (optUser.isPresent()) {
-				Usuario user = optUser.get();
-				if (user.getPassword().equals(pwd)) {
-					user.setHttpSession(httpSession);
-					this.connectedUsersByUserName.put(userName, user);
-					this.connectedUsersByHttpSession.put(httpSession.getId(), user);
-					return user;
-				}
-			}
-			throw new Exception("Credenciales inválidas");
-		} catch (SQLException e) {
-			throw new Exception("Credenciales inválidas");
-		}
-	}
-	
 	public void guardarReunion(int idReunion, String titulo, String descripcion, LocalDate horaInicio, LocalDate horaFin, Usuario organizador, List<Usuario> asistentes, String url) throws Exception {
 		
 		

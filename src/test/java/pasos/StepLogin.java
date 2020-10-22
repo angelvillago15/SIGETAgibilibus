@@ -17,17 +17,17 @@ public class StepLogin {
 	
 	@Given("estoy registrado como usuario ")
 	public void registro( ) {
-		Manager.registrarse();
+		//Manager.registrarse();
 	}
 	
 	@When("introduzco en el campo usuario <usuario> correctamente")
 	public void introducirUsuario(String usu, String pwd, HttpSession httpSession) throws Exception {
-		Manager.login(httpSession,usu,pwd);
+		//Manager.login(httpSession,usu,pwd);
 		
 	}
 	@When("introduzco contraseña <password> correctamente")
 	public void introducirContraseña(String usu, String pwd, HttpSession httpSession) throws Exception {
-		Manager.login(httpSession,usu,pwd);
+		//Manager.login(httpSession,usu,pwd);
 	}
 	
 	@When("pulso el boton de validar <boton>")
@@ -38,7 +38,7 @@ public class StepLogin {
 	
 	@Then("voy a la pagina de inicio del sistema")
 	public void mostrarPantallaInicio(String url) {
-		Manager.visualizaPaginaPrincipal();
+		//Manager.visualizaPaginaPrincipal();
 		
 	}
 	

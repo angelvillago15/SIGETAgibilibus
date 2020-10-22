@@ -20,10 +20,10 @@
 Feature: Crear reunion
   
   Scenario: Como usuario autenticado en el sistema, quiero crear reunion para verla en mi calendario
-    Given Estoy autenticado como usuario en el sistema con <httpSession>, <userName>, <pwd>:
+    Given Estoy autenticado como usuario en el sistema con <httpSession>, <userName>, <pwd> :
 	    | httpSession  | userName    | pwd   |
 	    | 		 				 | hola			   | aaa   |
-    When Guardo una nueva reunion con los atributos <idReunion>, <titulo>, <descripcion>, <horaInicio>, <horaFin>, <organizador>, <asistentes>, <url>:
+    When Guardo una nueva reunion con los atributos <idReunion>, <titulo>, <descripcion>, <horaInicio>, <horaFin>, <organizador>, <asistentes>, <url> :
     	| idReunion  | titulo    			| descripcion   		|  horaInicio  | horaFin	|	organizador | asistentes	|	url														|
 	    | 1234 			 | Inicio Spring	| Reunion de inicio |  18:30  		 | 19:00		| usuario1		| usuario2		| https://www.reunionInicio.es	| 
     Then Actualizo mi calendario con la nueva reunion
