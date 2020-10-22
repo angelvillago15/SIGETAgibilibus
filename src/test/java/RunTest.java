@@ -8,9 +8,13 @@ import cucumber.api.junit.Cucumber;
 
 @CucumberOptions(
 		features="src/test/java/features/visualizarCalendarioUsuario.feature",
+
+		features="src/test/java/features/Logearse.feature",
 		glue="pasos",
 		plugin=	{"pretty", "html:target/cucumber-html-report", "json:target/cucumber.json"}	
 )
 
-public class RunTest {
+
+public class RunTest extends AbstractTestNGCucumberTests {
+	
 }
