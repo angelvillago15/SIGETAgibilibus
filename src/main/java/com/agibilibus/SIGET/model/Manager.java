@@ -6,6 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,8 @@ import com.agibilibus.SIGET.dao.UserDAO;
 public class Manager {
 	@Autowired
 	private UserDAO userdao;
+	private Usuario user;
+	private Calendario calendar;
 
 	private ConcurrentHashMap<String, Usuario> connectedUsersByUserName;
 	private ConcurrentHashMap<String, Usuario> connectedUsersByHttpSession;
@@ -23,6 +26,8 @@ public class Manager {
 	private Manager() {
 		this.connectedUsersByUserName = new ConcurrentHashMap<>();
 		this.connectedUsersByHttpSession = new ConcurrentHashMap<>();
+		this.user = null;
+		this.calendar = null;
 
 	}
 
@@ -45,6 +50,7 @@ public class Manager {
 					user.setHttpSession(httpSession);
 					this.connectedUsersByUserName.put(userName, user);
 					this.connectedUsersByHttpSession.put(httpSession.getId(), user);
+					this.user = user;
 					return user;
 				}
 			}
@@ -53,5 +59,34 @@ public class Manager {
 			throw new Exception("Credenciales inválidas");
 		}
 	}
+	public JSONArray getSemana()throws Exception {
+		if(user == null)
+			throw new Exception("No hay usuario");
+		
+		if(calendar == null)
+			calendar = new Calendario();
+		
+		return calendar.getSemana(user);
+	}
+	public JSONArray getSemanaSiguiente()throws Exception {
+		if(user == null)
+			throw new Exception("No hay usuario");
+		
+		if(calendar == null)
+			calendar = new Calendario();
+		
+		return calendar.getSemanaSiguiente(user);
+	}
+	public JSONArray getSemanaAnterior()throws Exception {
+		if(user == null)
+			throw new Exception("No hay usuario");
+		
+		if(calendar == null)
+			calendar = new Calendario();
+		
+		return calendar.getSemanaAnterior(user);
+	}
+	
+	
 
 }
