@@ -1,192 +1,59 @@
-<!doctype html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Todolist</title>
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <style>
-  body {
-    background: url('recursos/ubuntuF.jpg') center no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    min-height:100%;
-    background-size:cover;
-  }
+$(document).ready(function() {
+    $('input[type=password]').keyup(function() {
+        var pswd = $(this).val();
+        //length
+        if ( pswd.length < 8 ) {
+            $('#length').removeClass('valid').addClass('invalid');
+        } else {
+            $('#length').removeClass('invalid').addClass('valid');
+        }
+        //letter
+        if ( pswd.match(/[A-z]/) ) {
+            $('#letter').removeClass('invalid').addClass('valid');
+        } else {
+            $('#letter').removeClass('valid').addClass('invalid');
+        }
+        //validate number
+        if ( pswd.match(/\d/) ) {
+            $('#number').removeClass('invalid').addClass('valid');
+        } else {
+            $('#number').removeClass('valid').addClass('invalid');
+        }
+        //mayus
+        if ( pswd.match(/[A-Z]/) ) {
+            $('#capital').removeClass('invalid').addClass('valid');
+        } else {
+            $('#capital').removeClass('valid').addClass('invalid');
+        }
 
-  .container{
-      height: 60px;
-  }
+    }).focus(function() {
+        $('#alertPass').show();
+    }).blur(function() {
+        $('#alertPass').hide();
+    });
 
-  .left {
-      position: fixed;
-      top: 0px; 
-      left: 10px;
-  }  
-  
-  ul, li {
-      margin:0;
-      padding:0;
-      list-style-type:none;
-  }
-  #container {
-      width:400px;
-      height:290px;
-      background:#fefefe;
-      margin:auto;  
-      border-top-color:#d3dbde;
-      border-bottom-color:#bfc9dc;
-      box-shadow:0 1px 1px #ccc;
-      border-radius:5px;
-      position:relative;
-  }
-  h2 {
-      margin:0;
-      padding:10px 0;
-      font-size:24px;
-      text-align:center;
-      background:#eff4f7;
-      border-bottom:1px solid #dde0e7;
-      box-shadow:0 -1px 0 #fff inset;
-      border-radius:5px 5px 0 0; /* otherwise we get some uncut corners with container div */
-      text-shadow:1px 1px 0 #fff;
-  }
-  #alertPass {
-      position: absolute;
-      bottom:100px;
-      right:480px;
-      width:250px;
-      padding:15px;
-      background:#fefefe;
-      font-size:.875em;
-      border-radius:5px;
-      box-shadow:0 1px 3px #ccc;
-      border:1px solid #ddd;
-      display:none;
-  }
-  #alertPass::before {
-      content: "\025C4";
-      position:absolute;
-      top:143px;
-      left:-5%;
-      font-size:14px;
-      line-height:14px;
-      color:#ddd;
-      text-shadow:none;
-      display:block;
-  }
-  #alertPass h5 {
-      margin:0 0 10px 0;
-      padding:0;
-      font-weight:normal;
-  }
-  .invalid {
-      background:url('recursos/Eliminar.png') no-repeat 0 50%;
-      padding-left:22px;
-      line-height:24px;
-      color:#ec3f41;
-  }
-  .valid {
-      background:url('recursos/tick.png') no-repeat 0 50%;
-      padding-left:22px;
-      line-height:24px;
-      color:#3a7d34;
-  }
-</style>
-</head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
-    <a class="navbar-brand" href="#">
-      <div class="left">
-        <a href="Login.html"><span class="logo"><img src="recursos/logo.png" width="60" height="60"></span>
-      </div>
-  </a>
-  </div>  
-</nav>
+    $("#registro").click(function(){//solo estan como necesarios mail usuario y contrase�a como dijimos en el drive
+        var mail1 = $("#mail1").val();
+        var username = $("#username").val();
+        var pass=$("#pass").val();
 
-<br>
-<br>
+        if(mail1.length==0 || mail2.length==0 || username.length==0 || pass.length==0){
+            alert("Rellena todos los campos");
+        }else if(pass.length < 8 ||  !pass.match(/[A-z]/) || !pass.match(/\d/) || !pass.match(/[A-Z]/)){
+            alert("La contrase�a no tiene los requisitos requeridos");
+        }else{
+            alert("Usuario registrado");
+            window.location="Login.html";
+            limpiarCampos();
+        }
+    });
 
-<div class="container">
-  <h2>Crear una cuenta</h2>
-<br>  
-  <div class="panel-group">
-    <div class="panel panel-default">
-      <div class="panel-heading"> <strong>Datos Personales</strong></div>
-      <div class="panel-body">
-      	<form>
-          <div class="form-group row">
-            <label class="col-sm-2 col-form-label">DNI:</label>
-              <div class="col-sm-3">
-                  <input type="text" class="form-control" id="dni">
-              </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Nombre:</label>
-              <div class="col-sm-3">
-                  <input type="text" class="form-control" id="name">
-              </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Apellidos:</label>
-              <div class="col-sm-3">
-                  <input type="text" class="form-control" id="Apellidos" required="true">
-              </div>
-            <label class="col-sm-2 col-form-label">Teléfono:</label>
-              <div class="col-sm-3">
-                  <input type="text" class="form-control" id="teléfono" required="true">
-              </div>
-          </div>
-	  	</form>
-      </div>
-    </div>
-    <br>
-    <div class="panel panel-default">
-      <div class="panel-heading"><strong>Datos de Usuario</strong></div>
-      <div class="panel-body">
-      	<form>
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-label">Nombre de Usuario:</label>
-            <div class="col-sm-3">
-                <input type="text" class="form-control" id= "username">
-            </div>
-        </div>
-        <div class="form-group row" id=userData>
-          <label class="col-sm-2 col-form-label" >Contraseña:</label>
-            <div class="col-sm-3">
-                <input id= "pass" type="password" class="form-control checkSeguridad">
-            </div>
-            <div id="alertPass">
-              <h6><strong>La contraseña debe tener los siguientes requisitos:</strong></h6>
-              <ul>
-                <li id="length" class="invalid">Al menos <strong> 8 caracteres</strong></li>
-                <li id="capital" class="invalid">Al menos <strong>una letra mayúscula (A-Z)</strong></li>
-                <li id="letter" class="invalid">Al menos <strong>una letra minúscula (a-z)</strong></li>
-                <li id="number" class="invalid">Al menos <strong>un número</strong></li>
-              </ul>
-            </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-label">E-mail:</label>
-            <div class="col-sm-3">
-                <input type="text" class="form-control" id="mail1" required="true">
-            </div>
-          <label class="col-sm-2 col-form-label">Validar:</label>
-            <div class="col-sm-3">
-                <input type="text" class="form-control" id="mail2" required="true">
-            </div>
-        </div>
-      </form>
-      </div>
-    </div>
-  </div>
-<p align="right"><input type="button" class="btn btn-success" id="registro" value="Registrar"/></p>
-</div>
-</body>
-<script src="https://code.jquery.com/jquery-1.7.min.js"></script>
-<script src="Register.js"></script>
-</html>
-
+    function limpiarCampos(){ // resetear todos los campos
+        document.getElementById("username").value="";
+        document.getElementById("dni").value="";
+        document.getElementById("name").value="";
+        document.getElementById("Apellidos").value="";
+        document.getElementById("telefono").value="";
+        document.getElementById("pass").value="";
+    };
+});
