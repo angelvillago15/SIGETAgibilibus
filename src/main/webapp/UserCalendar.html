@@ -5,12 +5,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel='stylesheet' type='text/css' href='css/fullcalendar.css' />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <!--archivo para calendario-->
-    <script src="UserCalendar.js"></script> 
     <style>
         body {
             background: url('recursos/ubuntuF.jpg') center no-repeat;
@@ -83,8 +80,6 @@
             .sidenav a {font-size: 18px;}
         }
 
-
-
         #wrap {
             width: 1100px;
             margin: 0 auto;
@@ -130,14 +125,6 @@
         <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menú</span>
         <br>
         <br>
-<<<<<<< HEAD
-        <div id="calendar"></div>
-    </div>  
-</body>   
-<script type='text/javascript' src='js/moment.min.js'></script>
-<script type='text/javascript' src='js/fullcalendar.min.js'></script>
-<script type='text/javascript' src='js/es.js'></script>
-
         <div class="container theme-showcase">
             <ul class="pager">
 				<li class="previous"><a onclick="getSemanaAnterior()"> &larr; Anterior</a></li>
@@ -146,13 +133,13 @@
             <table class="table table-bordered">
             <thead>
                 <tr>
-                <th scope="col"><div id="d0" class="text-center">Lunes&nbsp;</div></th>
-                <th scope="col"><div id="d1" class="text-center">Martes&nbsp;</div></th>
-                <th scope="col"><div id="d2" class="text-center">Miércoles&nbsp;</div></th>
-                <th scope="col"><div id="d3" class="text-center">Jueves&nbsp;</div></th>
-                <th scope="col"><div id="d4" class="text-center">Viernes&nbsp;</div></th>
-                <th scope="col"><div id="d5" class="text-center">Sábado&nbsp;</div></th>
-                <th scope="col"><div id="d6" class="text-center">Domingo&nbsp;</div></th>
+                <th scope="col" class="warning"><div id="d0" class="text-center">Lunes&nbsp;</div></th>
+                <th scope="col" class="warning"><div id="d1" class="text-center">Martes&nbsp;</div></th>
+                <th scope="col" class="warning"><div id="d2" class="text-center">Miércoles&nbsp;</div></th>
+                <th scope="col" class="warning"><div id="d3" class="text-center">Jueves&nbsp;</div></th>
+                <th scope="col" class="warning"><div id="d4" class="text-center">Viernes&nbsp;</div></th>
+                <th scope="col" class="warning"><div id="d5" class="text-center">Sábado&nbsp;</div></th>
+                <th scope="col" class="warning"><div id="d6" class="text-center">Domingo&nbsp;</div></th>
                 </tr>
             </thead>
             <tbody>
@@ -171,5 +158,6 @@
         <div id="holder" class="row" ></div>
     </div>  
 </body>
-
+<!--archivo para calendario-->
+<script src="UserCalendar.js"></script>
 </html>
