@@ -70,7 +70,7 @@ class Reunion{
 
     crearReunion(){
         var msg ={
-            type : "nuevaReunion",
+            type : "nueva Reunion",
 			nombre : this.nombre,
             fecha : this.fecha,
             horaInicio : this.horaInicio,
