@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
+
+
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -104,5 +106,21 @@ public class Manager {
 	public void cargarReuniones() {
 		
 	}
+
+	public void enviarInivitacion() {
+	
+		
+	}
+
+	public void mostrarNotificacion(Reunion reunion, List<Usuario> asistentes) {
+		
+		
+	}
+
+	public void responderInvitacion(Reunion reunion, Usuario asistente) {
+		
+		
+	}
+
 
 }

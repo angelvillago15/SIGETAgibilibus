@@ -23,6 +23,7 @@ public class StepLogin {
 	@When("introduzco en el campo usuario <usuario> correctamente")
 	public void introducirUsuario(String usu, String pwd, HttpSession httpSession) throws Exception {
 		Manager.get().login(httpSession,usu,pwd);
+		
 	}
 	@When("introduzco contraseña <password> correctamente")
 	public void introducirContraseña(String usu, String pwd, HttpSession httpSession) throws Exception {
