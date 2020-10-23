@@ -107,5 +107,20 @@ public class Manager {
 		
 	}
 
+	public void enviarInivitacion() {
+	
+		
+	}
+
+	public void mostrarNotificacion(Reunion reunion, List<Usuario> asistentes) {
+		
+		
+	}
+
+	public void responderInvitacion(Reunion reunion, Usuario asistente) {
+		
+		
+	}
+
 
 }
