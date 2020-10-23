@@ -1,6 +1,8 @@
 package com.agibilibus.SIGET.model;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -53,5 +55,7 @@ public class Manager {
 			throw new Exception("Credenciales inválidas");
 		}
 	}
+
+	
 
 }

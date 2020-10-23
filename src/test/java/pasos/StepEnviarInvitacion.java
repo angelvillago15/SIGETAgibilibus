@@ -1,9 +1,9 @@
 package pasos;
 
-import java.awt.List;
-import java.time.LocalDate;
 
-import com.agibilibus.SIGET.model.Manager;
+import java.time.LocalDate;
+import java.util.List;
+
 import com.agibilibus.SIGET.model.Reunion;
 import com.agibilibus.SIGET.model.Usuario;
 
@@ -14,18 +14,19 @@ import cucumber.api.java.en.When;
 public class StepEnviarInvitacion {
 
 	@Given("he rellenado el formulario para crear la reunion")
-	public void crearReunion(int idReunion, String titulo, String descripcion, LocalDate horaInicio, LocalDate horaFin, Usuario organizador, List asistentes, String url) {
+	public void crearReunion(int idReunion, String titulo, String descripcion, LocalDate horaInicio, LocalDate horaFin, Usuario organizador, List <Usuario>asistentes, String url) {
 		//Manager.get().guardarReunion(idReunion, titulo, descripcion, horaInicio, horaFin, organizador, asistentes, url);
 	}
 	
-	@When("doy al boton <crearReunion> ")
-	public void pulsarBotonCrearReunion() {
-		
+	
+	@When("envio la invitacion a los asistentes <asistentes> ")
+	public void enviarInvitacion() {
+		//Manager.get().enviarInivitacion();
 	}
 	
 	@Then("me aparece una notificacion ")
-	public void mostrarNotificacion(Reunion reunion) {
-		//Manager.get().mostrarNotificacion(reunion);
+	public void mostrarNotificacion(Reunion reunion, List <Usuario> asistentes) {
+		//Manager.get().mostrarNotificacion(reunion, asistentes);
 	}
 	
 	@Then("respondo invitación ")
