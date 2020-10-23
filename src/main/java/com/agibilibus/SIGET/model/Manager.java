@@ -1,6 +1,9 @@
 package com.agibilibus.SIGET.model;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.List;
+
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -12,6 +15,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import com.agibilibus.SIGET.dao.UserDAO;
+
 
 @Component
 public class Manager {
@@ -88,5 +92,17 @@ public class Manager {
 	}
 	
 	
+
+	public void guardarReunion(int idReunion, String titulo, String descripcion, LocalDate horaInicio, LocalDate horaFin, Usuario organizador, List<Usuario> asistentes, String url) throws Exception {
+		
+		
+	}
+	
+	public void cargarCalendario () {
+	}
+	
+	public void cargarReuniones() {
+		
+	}
 
 }
