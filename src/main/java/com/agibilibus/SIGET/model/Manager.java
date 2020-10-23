@@ -56,6 +56,23 @@ public class Manager {
 		}
 	}
 
+	public void enviarInivitacion() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void mostrarNotificacion(Reunion reunion, List<Usuario> asistentes) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void responderInvitacion(Reunion reunion, Usuario asistente) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+
 	
 
 }
