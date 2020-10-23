@@ -4,15 +4,18 @@ import javax.servlet.http.HttpSession;
 
 import com.agibilibus.SIGET.model.*;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 public class stepsVisualizarCalendario {
 
-	@Given("^Estoy autenticado como usuario en el sistema con <httpSession>,<userName> y <pwd>$")
+	@Given("^Estoy autenticado como usuario en el sistema /.*/ /.*/ /.*/$")
 	public void estoy_autenticado_como_usuario (HttpSession httpSession, String userName, String pwd) throws Throwable{
 		Manager.get().login(httpSession, userName, pwd);
+		
+		throw new PendingException();
 	}
 	
 	

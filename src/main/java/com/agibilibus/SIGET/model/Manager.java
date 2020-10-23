@@ -63,7 +63,6 @@ public class Manager {
 		
 	}
 	
-	
 	public void cargarCalendario () {
 	}
 	
