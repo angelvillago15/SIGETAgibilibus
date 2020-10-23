@@ -3,21 +3,28 @@ package com.agibilibus.SIGET.model;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
+
+
+
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import com.agibilibus.SIGET.dao.UserDAO;
 
+
 @Component
 public class Manager {
 	@Autowired
 	private UserDAO userdao;
+	private Usuario user;
+	private Calendario calendar;
 
 	private ConcurrentHashMap<String, Usuario> connectedUsersByUserName;
 	private ConcurrentHashMap<String, Usuario> connectedUsersByHttpSession;
@@ -25,6 +32,8 @@ public class Manager {
 	private Manager() {
 		this.connectedUsersByUserName = new ConcurrentHashMap<>();
 		this.connectedUsersByHttpSession = new ConcurrentHashMap<>();
+		this.user = null;
+		this.calendar = null;
 
 	}
 
@@ -47,6 +56,7 @@ public class Manager {
 					user.setHttpSession(httpSession);
 					this.connectedUsersByUserName.put(userName, user);
 					this.connectedUsersByHttpSession.put(httpSession.getId(), user);
+					this.user = user;
 					return user;
 				}
 			}
@@ -55,24 +65,47 @@ public class Manager {
 			throw new Exception("Credenciales inválidas");
 		}
 	}
-
-	public void enviarInivitacion() {
-		// TODO Auto-generated method stub
+	public JSONArray getSemana()throws Exception {
+		if(user == null)
+			throw new Exception("No hay usuario");
 		
-	}
-
-	public void mostrarNotificacion(Reunion reunion, List<Usuario> asistentes) {
-		// TODO Auto-generated method stub
+		if(calendar == null)
+			calendar = new Calendario();
 		
+		return calendar.getSemana(user);
 	}
-
-	public void responderInvitacion(Reunion reunion, Usuario asistente) {
-		// TODO Auto-generated method stub
+	public JSONArray getSemanaSiguiente()throws Exception {
+		if(user == null)
+			throw new Exception("No hay usuario");
 		
+		if(calendar == null)
+			calendar = new Calendario();
+		
+		return calendar.getSemanaSiguiente(user);
 	}
-
+	public JSONArray getSemanaAnterior()throws Exception {
+		if(user == null)
+			throw new Exception("No hay usuario");
+		
+		if(calendar == null)
+			calendar = new Calendario();
+		
+		return calendar.getSemanaAnterior(user);
+	}
+	
 	
 
+	public void guardarReunion(int idReunion, String titulo, String descripcion, LocalDate horaInicio, LocalDate horaFin, Usuario organizador, List<Usuario> asistentes, String url) throws Exception {
+		
+		
+	}
 	
+	public void cargarCalendario () {
+	}
+	
+	public void cargarReuniones() {
+		
+	}
+
 
 }

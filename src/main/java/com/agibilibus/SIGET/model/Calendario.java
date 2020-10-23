@@ -23,15 +23,15 @@ public class Calendario {
 	 *  - un campo "fecha" con un objeto Date del dia
 	 *  - un cambo "reuniones" con un JSONArray de JSONObjects que corresponden a las reuniones
 	 * */
-	public JSONArray getSemana() {
+	public JSONArray getSemana(Usuario user) {
 		this.semana = 0;
-		return getSemana(0);
+		return getSemana(0,user);
 	}
-	public JSONArray getSemanaSiguiente() {
-		return getSemana(++this.semana);
+	public JSONArray getSemanaSiguiente(Usuario user) {
+		return getSemana(++this.semana,user);
 	}
-	public JSONArray getSemanaAnterior() {
-		return getSemana(--this.semana);
+	public JSONArray getSemanaAnterior(Usuario user) {
+		return getSemana(--this.semana,user);
 	}
 
 	private List<Date> getDates(int semana) {
@@ -41,12 +41,13 @@ public class Calendario {
 		
 		for(int i=2;i<9;i++) {
 			Calendar c = Calendar.getInstance();
+			c.setFirstDayOfWeek(Calendar.SUNDAY); //Si empieza en lunes lo quitamos
 			c.add(Calendar.DAY_OF_YEAR,semana+i-day );
 			result.add(c.getTime());
 		}
 		return result;
 	}
-	private JSONObject getReuniones(Date dia) {
+	private JSONObject getReuniones(Date dia,Usuario user) {
 		JSONObject jso = new JSONObject();
 		JSONArray jsa = new JSONArray();
 		
@@ -54,11 +55,11 @@ public class Calendario {
 		jso.put("reuniones", jsa);
 		return jso;
 	}
-	private JSONArray getSemana(int semana) {
+	private JSONArray getSemana(int semana,Usuario user) {
 		JSONArray jsa = new JSONArray();
 		List<Date> ls = getDates(semana);
 		for(Date d : ls)
-			jsa.put(getReuniones(d));
+			jsa.put(getReuniones(d,user));
 		return jsa;
 	}
 }
