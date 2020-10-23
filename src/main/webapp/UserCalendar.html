@@ -9,8 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <!--archivos para calendario-->
-    <link href='UserCalendar.css' rel='stylesheet' />
+    <!--archivo para calendario-->
     <script src="UserCalendar.js"></script> 
     <style>
         body {
@@ -84,6 +83,18 @@
             .sidenav a {font-size: 18px;}
         }
 
+<<<<<<< HEAD
+=======
+        #wrap {
+            width: 1100px;
+            margin: 0 auto;
+        }
+
+        #ls0, #ls1, #ls2, #ls3, #ls4, #ls5, #ls6{
+            background-color:rgb(39, 204, 226);
+        }
+
+>>>>>>> T1.4-ControladorCalendario
     </style>
 </head>
 <body><!--cuerpo del programa-->
@@ -92,7 +103,7 @@
             <div class="container">
                 <a class="navbar-brand" href="#">
                     <div class="left">
-                        <a href="UserCalendar.html"></a><span class="logo"><img src="recursos/logo.png" width="60" height="60"></span>
+                        <span class="logo"><img src="recursos/logo.png" width="60" height="60"></span>
                     </div>
                 </a>
                 <div class="right">
@@ -119,10 +130,47 @@
         <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menú</span>
         <br>
         <br>
+<<<<<<< HEAD
         <div id="calendar"></div>
     </div>  
 </body>   
 <script type='text/javascript' src='js/moment.min.js'></script>
 <script type='text/javascript' src='js/fullcalendar.min.js'></script>
 <script type='text/javascript' src='js/es.js'></script>
+=======
+        <div class="container theme-showcase">
+            <ul class="pager">
+				<li class="previous"><a onclick="getSemanaAnterior()"> &larr; Anterior</a></li>
+				<li class="next"><a onclick="getSemanaSiguiente()">Siguiente &rarr;</a></li>
+			</ul>
+            <table class="table table-bordered">
+            <thead>
+                <tr>
+                <th scope="col"><div id="d0" class="text-center">Lunes&nbsp;</div></th>
+                <th scope="col"><div id="d1" class="text-center">Martes&nbsp;</div></th>
+                <th scope="col"><div id="d2" class="text-center">Miércoles&nbsp;</div></th>
+                <th scope="col"><div id="d3" class="text-center">Jueves&nbsp;</div></th>
+                <th scope="col"><div id="d4" class="text-center">Viernes&nbsp;</div></th>
+                <th scope="col"><div id="d5" class="text-center">Sábado&nbsp;</div></th>
+                <th scope="col"><div id="d6" class="text-center">Domingo&nbsp;</div></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td><div id="ls0" class="text-center" >Evento</div></td>
+                <td><div id="ls1" class="text-center" >Evento</div></td>
+                <td><div id="ls2" class="text-center" >Evento</div></td>
+                <td><div id="ls3" class="text-center" >Evento</div></td>
+                <td><div id="ls4" class="text-center" >Evento</div></td>
+                <td><div id="ls5" class="text-center" >Evento</div></td>
+                <td><div id="ls6" class="text-center" >Evento</div></td>
+                </tr>
+            </tbody>
+            </table>
+        </div>    
+        <div id="holder" class="row" ></div>
+    </div>  
+</body>
+
+>>>>>>> T1.4-ControladorCalendario
 </html>
