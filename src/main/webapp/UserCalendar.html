@@ -8,11 +8,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <!--archivo para calendario-->
-    <script src="UserCalendar.js"></script> 
     <style>
         body {
-            background: url('recursos/ubuntuF.jpg') center no-repeat;
+            background: url('recursos/ubuntu.jpg') center no-repeat;
             background-attachment: fixed;
             background-size: cover;
             min-height:100%;
@@ -93,7 +91,9 @@
 
     </style>
 </head>
-<body><!--cuerpo del programa-->
+<body>
+<!--cuerpo del programa-->
+
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="container">
@@ -108,7 +108,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="MyAccount.html"><span class="glyphicon glyphicon-user"></span>  Mi Cuenta</a></li>
                             <li><a href="editAccount.html"><span class="glyphicon glyphicon-cog"></span>  Editar Cuenta</a></li>
-                            <li><a href="Login.html"><span class="glyphicon glyphicon-log-out"></span>  Cerrar Sesión<nav></nav></a></li>
+                            <li><a href="Login.html"><span class="glyphicon glyphicon-log-out"></span>  Cerrar Sesión</a></li>
                         </ul>
                         </li>
                     </ul>
@@ -128,19 +128,19 @@
         <br>
         <div class="container theme-showcase">
             <ul class="pager">
-				<li class="previous"><a onclick="getSemanaAnterior()"> &larr; Anterior</a></li>
-				<li class="next"><a onclick="getSemanaSiguiente()">Siguiente &rarr;</a></li>
+				<li class="previous"><a href="" data-bind = "click : anterior"> &larr; Anterior</a></li>
+				<li class="next"><a href="" data-bind = "click : siguiente">Siguiente &rarr;</a></li>
 			</ul>
             <table class="table table-bordered">
             <thead>
                 <tr>
-                <th scope="col"><div id="d0" class="text-center">Lunes&nbsp;</div></th>
-                <th scope="col"><div id="d1" class="text-center">Martes&nbsp;</div></th>
-                <th scope="col"><div id="d2" class="text-center">Miércoles&nbsp;</div></th>
-                <th scope="col"><div id="d3" class="text-center">Jueves&nbsp;</div></th>
-                <th scope="col"><div id="d4" class="text-center">Viernes&nbsp;</div></th>
-                <th scope="col"><div id="d5" class="text-center">Sábado&nbsp;</div></th>
-                <th scope="col"><div id="d6" class="text-center">Domingo&nbsp;</div></th>
+                <th scope="col"><div class="text-center">Lunes&nbsp;<div id="d0"></div></div></th>
+                <th scope="col"><div class="text-center">Martes&nbsp;<div id="d1"></div></div></th>
+                <th scope="col"><div class="text-center">Miércoles&nbsp;<div id="d2"></div></div></th>
+                <th scope="col"><div class="text-center">Jueves&nbsp;<div id="d3"></div></div></th>
+                <th scope="col"><div class="text-center">Viernes&nbsp;<div id="d4"></div></div></th>
+                <th scope="col"><div class="text-center">Sábado&nbsp;<div id="d5"></div></div></th>
+                <th scope="col"><div class="text-center">Domingo&nbsp;<div id="d6"></div></div></th>
                 </tr>
             </thead>
             <tbody>
@@ -158,6 +158,9 @@
         </div>    
         <div id="holder" class="row" ></div>
     </div>  
+    <!--archivo para calendario-->
+    <script src="https://knockoutjs.com/downloads/knockout-3.5.0.js"></script>
+    <script src="UserCalendar.js"></script> 
 </body>
 
 </html>

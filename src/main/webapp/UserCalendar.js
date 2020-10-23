@@ -1,25 +1,18 @@
-
-  function getSemana () {
+function ViewModel() {
+	var self = this;
+	
+  	function getSemana () {
 		var data = {
 
 				url : "getSemana",
 				type : "post",
 				
 				success : function(response) {
-
-					for (var i=0; i<response.length; i++) {
-					//se escribe el dia
-					$("#d"+i).val(response[i].fecha);
-						
-						var reunion = response[i].reuniones;
-						var html ="<table>";
-						for (var j=0; j<reunion.length; j++) {
-							html = html + "<tr><td>"+reunion[j].nombre+"</td></tr>";
-						}
-						html = html +"</table>"
-						$("#ls"+i).val(html);
-
-					}
+					var datos =  JSON.parse(response);
+					for(var i=0;i<7;i++){
+						$('#d'+i).text(datos['d'+i]);
+						var ls = datos['ls'+i];
+					}	
 				},
 				error : function(response) {
 					alert(response.message);
@@ -29,28 +22,18 @@
 	}
 	getSemana();
 	
-	function getSemanaSiguiente () {
-		alert("siguiente");
+	
+	self.siguiente = function getSemanaSiguiente () {
 		var data = {
 
 				url : "getSemanaSiguiente",
 				type : "post",
 				
 				success : function(response) {
-					for (var i=0; i<response.length; i++) {
-					jso = JSON.parse(response[i]);
-					//se escribe el dia
-					$("#d"+i).val(jso.fecha);
-						
-						var reunion = jso.reuniones;
-						var html ="<table>";
-						for (var j=0; j<reunion.length; j++) {
-							html = html + "<tr><td>"+reunion[j].nombre+"</td></tr>";
-						}
-						html = html +"</table>"
-						$("#ls"+i).val(html);
-
-					}
+					var datos =  JSON.parse(response);
+					for(var i=0;i<7;i++){
+						$('#d'+i).text(datos['d'+i]);
+					}	
 				},
 				error : function(response) {
 					alert(response.message);
@@ -58,28 +41,17 @@
 			};
 			$.ajax(data);
 	}
-	 function getSemanaAnterior () {
-	 	alert("anterior");
+	 self.anterior = function getSemanaAnterior () {
 		var data = {
 				
 				url : "getSemanaAnterior",
 				type : "post",
 				
 				success : function(response) {
-					for (var i=0; i<response.length; i++) {
-					//se escribe el dia
-					$("#d"+i).val(response[i].fecha);
-						
-						var reunion = response[i].reuniones;
-						var html ="<table>";
-						for (var j=0; j<reunion.length; j++) {
-							html = html + "<tr><td>"+reunion[j].nombre+"</td></tr>";
-						}
-						html = html +"</table>"
-						$("#ls"+i).val(html);
-
-					}
-
+					var datos =  JSON.parse(response);
+					for(var i=0;i<7;i++){
+						$('#d'+i).text(datos['d'+i]);
+					}	
 				},
 				error : function(response) {
 					alert(response.message);
@@ -88,6 +60,9 @@
 			$.ajax(data);
 	}
 
+}
+var vm = new ViewModel();
+ko.applyBindings(vm);
 
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";

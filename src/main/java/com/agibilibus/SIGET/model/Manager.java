@@ -6,7 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpSession;
 
-import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -59,7 +59,7 @@ public class Manager {
 			throw new Exception("Credenciales inválidas");
 		}
 	}
-	public JSONArray getSemana()throws Exception {
+	public JSONObject getSemana()throws Exception {
 		if(user == null)
 			throw new Exception("No hay usuario");
 		
@@ -68,7 +68,7 @@ public class Manager {
 		
 		return calendar.getSemana(user);
 	}
-	public JSONArray getSemanaSiguiente()throws Exception {
+	public JSONObject getSemanaSiguiente()throws Exception {
 		if(user == null)
 			throw new Exception("No hay usuario");
 		
@@ -77,7 +77,7 @@ public class Manager {
 		
 		return calendar.getSemanaSiguiente(user);
 	}
-	public JSONArray getSemanaAnterior()throws Exception {
+	public JSONObject getSemanaAnterior()throws Exception {
 		if(user == null)
 			throw new Exception("No hay usuario");
 		

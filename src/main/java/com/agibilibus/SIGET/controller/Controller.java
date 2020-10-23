@@ -4,7 +4,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,18 +27,19 @@ public class Controller {
 	}
 	
 	@PostMapping("/getSemana")
-	public JSONArray getSemana(HttpSession session ) throws Exception {
-		return Manager.get().getSemana();
+	public String getSemana(HttpSession session ) throws Exception {
+		return Manager.get().getSemana().toString();
 
 	}
 	@PostMapping("/getSemanaSiguiente")
-	public JSONArray getSemanaSiguiente(HttpSession session ) throws Exception {
-		return Manager.get().getSemanaSiguiente();
+	public String getSemanaSiguiente(HttpSession session ) throws Exception {
+		JSONObject jso = Manager.get().getSemanaSiguiente();
+		return jso.toString();
 
 	}
 	@PostMapping("/getSemanaAnterior")
-	public JSONArray getSemanaAnterior(HttpSession session ) throws Exception {
-		return Manager.get().getSemanaAnterior();
+	public String getSemanaAnterior(HttpSession session ) throws Exception {
+		return Manager.get().getSemanaAnterior().toString();
 
 	}
 	
