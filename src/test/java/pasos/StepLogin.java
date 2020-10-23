@@ -30,11 +30,6 @@ public class StepLogin {
 		Manager.get().login(httpSession,usu,pwd);
 	}
 	
-	@When("pulso el boton de validar <boton>")
-	public void usuarioPulsaBoton(String usu, String pwd) {
-		//driver.getElement(By.name("login")).click();
-		
-	}
 	
 	@Then("voy a la pagina de inicio del sistema")
 	public void mostrarPantallaInicio(String url) {
