@@ -27,6 +27,7 @@ public class Controller {
 		session.setAttribute("user", user);
 	}
 	
+
 	@PostMapping("/getSemana")
 	public JSONArray getSemana(HttpSession session ) throws Exception {
 		return Manager.get().getSemana();
@@ -42,6 +43,4 @@ public class Controller {
 		return Manager.get().getSemanaAnterior();
 
 	}
-	
-
 }
