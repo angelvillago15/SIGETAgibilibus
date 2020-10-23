@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
  function getSemana () {
   var data = {
@@ -87,7 +88,73 @@ function getSemanaSiguiente () {
     };
     $.ajax(data);
 }
+=======
+function ViewModel() {
+	var self = this;
+	
+  	function getSemana () {
+		var data = {
 
+				url : "getSemana",
+				type : "post",
+				
+				success : function(response) {
+					var datos =  JSON.parse(response);
+					for(var i=0;i<7;i++){
+						$('#d'+i).text(datos['d'+i]);
+						var ls = datos['ls'+i];
+					}	
+				},
+				error : function(response) {
+					alert(response.message);
+				}
+			};
+			$.ajax(data);
+	}
+	getSemana();
+	
+	
+	self.siguiente = function getSemanaSiguiente () {
+		var data = {
+
+				url : "getSemanaSiguiente",
+				type : "post",
+				
+				success : function(response) {
+					var datos =  JSON.parse(response);
+					for(var i=0;i<7;i++){
+						$('#d'+i).text(datos['d'+i]);
+					}	
+				},
+				error : function(response) {
+					alert(response.message);
+				}
+			};
+			$.ajax(data);
+	}
+	 self.anterior = function getSemanaAnterior () {
+		var data = {
+				
+				url : "getSemanaAnterior",
+				type : "post",
+				
+				success : function(response) {
+					var datos =  JSON.parse(response);
+					for(var i=0;i<7;i++){
+						$('#d'+i).text(datos['d'+i]);
+					}	
+				},
+				error : function(response) {
+					alert(response.message);
+				}
+			};
+			$.ajax(data);
+	}
+>>>>>>> T1.4-ControladorCalendario
+
+}
+var vm = new ViewModel();
+ko.applyBindings(vm);
 
 function openNav() {
   document.getElementById("mySidenav").style.width = "250px";
