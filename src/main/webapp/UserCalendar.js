@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
  function getSemana () {
   var data = {
@@ -88,7 +87,7 @@ function getSemanaSiguiente () {
     };
     $.ajax(data);
 }
-=======
+
 function ViewModel() {
 	var self = this;
 	
@@ -150,7 +149,7 @@ function ViewModel() {
 			};
 			$.ajax(data);
 	}
->>>>>>> T1.4-ControladorCalendario
+
 
 }
 var vm = new ViewModel();
