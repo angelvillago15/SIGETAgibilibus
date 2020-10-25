@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
+import com.agibilibus.SIGET.dao.ReunionDAO;
 import com.agibilibus.SIGET.dao.UserDAO;
 
 @Component
@@ -21,6 +22,7 @@ public class Manager {
 	private UserDAO userdao;
 	private Usuario user;
 	private Calendario calendar;
+	private ReunionDAO reuniondao;
 
 	private ConcurrentHashMap<String, Usuario> connectedUsersByUserName;
 	private ConcurrentHashMap<String, Usuario> connectedUsersByHttpSession;
@@ -92,8 +94,8 @@ public class Manager {
 	
 
 	public void guardarReunion(int idReunion, String titulo, String descripcion, LocalDate horaInicio, LocalDate horaFin, Usuario organizador, List<Usuario> asistentes, String url) throws Exception {
-		
-		
+		Reunion reunionNueva = new Reunion(idReunion, titulo, descripcion, horaInicio, horaFin, organizador, asistentes, url);
+		reuniondao.save(reunionNueva);
 	}
 	
 	public void cargarCalendario () {

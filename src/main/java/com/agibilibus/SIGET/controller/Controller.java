@@ -43,4 +43,11 @@ public class Controller {
 		return Manager.get().getSemanaAnterior().toString();
 
 	}
+
+	@PostMapping("/guardarReunion")
+	public void guardarReunion(HttpSession session, @RequestBody Map<String, Object> datosReunion) throws Exception {
+		
+	}
+	
+	
 }
