@@ -3,9 +3,6 @@ package com.agibilibus.SIGET.model;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
-
-
-
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -17,7 +14,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import com.agibilibus.SIGET.dao.UserDAO;
-
 
 @Component
 public class Manager {

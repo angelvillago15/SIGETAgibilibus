@@ -1,6 +1,5 @@
 package com.agibilibus.SIGET.model;
 
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.util.Calendar;
