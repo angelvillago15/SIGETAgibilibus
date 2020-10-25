@@ -41,7 +41,7 @@ public class Calendario {
 		
 		for(int i=2;i<9;i++) {
 			Calendar c = Calendar.getInstance();
-			c.add(Calendar.DAY_OF_YEAR,semana+i-day+1 );
+			c.add(Calendar.DAY_OF_YEAR,semana+i-day-1);
 			result.add(c.getTime());
 		}
 		return result;
