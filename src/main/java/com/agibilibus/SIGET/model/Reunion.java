@@ -1,8 +1,8 @@
 package com.agibilibus.SIGET.model;
 
-import java.time.LocalDate;
 import java.util.List;
 
+import org.joda.time.DateTime;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -15,13 +15,13 @@ public class Reunion {
 	private int idReunion;
 	private String titulo;
 	private String descripcion;
-	private LocalDate horaInicio;
-	private LocalDate horaFin;
+	private DateTime horaInicio;
+	private DateTime horaFin;
 	private Usuario organizador;
 	private List<Usuario> asistentes;
 	private String url;
 
-	public Reunion(int idReunion, String titulo, String descripcion, LocalDate horaInicio, LocalDate horaFin,
+	public Reunion(int idReunion, String titulo, String descripcion, DateTime horaInicio, DateTime horaFin,
 	        Usuario organizador, List<Usuario> asistentes, String url) {
 		super();
 		this.idReunion = idReunion;
@@ -58,19 +58,19 @@ public class Reunion {
 		this.descripcion = descripcion;
 	}
 
-	public LocalDate getHoraInicio() {
+	public DateTime getHoraInicio() {
 		return horaInicio;
 	}
 
-	public void setHoraInicio(LocalDate horaInicio) {
+	public void setHoraInicio(DateTime horaInicio) {
 		this.horaInicio = horaInicio;
 	}
 
-	public LocalDate getHoraFin() {
+	public DateTime getHoraFin() {
 		return horaFin;
 	}
 
-	public void setHoraFin(LocalDate horaFin) {
+	public void setHoraFin(DateTime horaFin) {
 		this.horaFin = horaFin;
 	}
 

@@ -1,10 +1,9 @@
 package com.agibilibus.SIGET.model;
 
+import org.joda.time.DateTime;
 import org.json.JSONObject;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.time.*;
 
 import javax.persistence.Transient;
 import javax.servlet.http.HttpSession;
@@ -23,13 +22,13 @@ public class Usuario {
 	private int telefono;
 	private String email;
 	private String dni;
-	private LocalDate nacimiento;
+	private DateTime nacimiento;
 	private String rol;
 	@Transient
 	private HttpSession httpSession;
 
 	public Usuario(String user, String password, String nombre, String apellidos, int telefono, String email,
-	        String dni, LocalDate nacimiento, String rol) {
+	        String dni, DateTime nacimiento, String rol) {
 		super();
 		this.user = user;
 		this.password = password;
@@ -82,11 +81,11 @@ public class Usuario {
 		dni = dNI;
 	}
 
-	public LocalDate getDate() {
+	public DateTime getDate() {
 		return nacimiento;
 	}
 
-	public void setDate(LocalDate date) {
+	public void setDate(DateTime date) {
 		this.nacimiento = date;
 	}
 
@@ -113,7 +112,7 @@ public class Usuario {
 	public void setRol(String rol) {
 		this.rol = rol;
 	}
-	
+
 	public void setHttpSession(HttpSession httpSession) {
 		this.httpSession = httpSession;
 	}
