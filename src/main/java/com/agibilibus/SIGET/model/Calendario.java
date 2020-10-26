@@ -15,8 +15,8 @@ public class Calendario {
 	
 	public Calendario () {
 		Calendar today = Calendar.getInstance();
-		today.setFirstDayOfWeek(Calendar.MONDAY);
 		this.day = today.DAY_OF_WEEK;
+		today.setFirstDayOfWeek(Calendar.MONDAY);
 		this.semana = 0;
 	}
 	/**
@@ -44,7 +44,7 @@ public class Calendario {
 		for(int i=2;i<9;i++) {
 			Calendar c = Calendar.getInstance();
 			c.setFirstDayOfWeek(Calendar.MONDAY);
-			c.add(Calendar.DAY_OF_YEAR,semana+i-day-1);
+			c.add(Calendar.DAY_OF_YEAR,semana+i-day);
 			result.add(c.getTime());
 		}
 		return result;
