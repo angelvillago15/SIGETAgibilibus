@@ -4,9 +4,12 @@ function crear () { // se le llama cuando se da al boton crear
         if(fechaCorrecta()){ //se comprueba la fecha
             var reunion= new Reunion($("#nombreReunion").val(),$("#fecha").val(),$("#horaInicio").val(),$("#horaFin").val(),$("#descripcion").val(),$("#url").val(),$("#invitar").val()); // crear objeto reunion
             alert('Se creó una reunion correctamente ');
-            limpiarCampos();
+            window.location.href = "UserCalendar.html";
+            
+            //limpiarCampos();
         }
     };
+    
 };
 function validarCampo(campo) { // comprobar que no hay campos vacios
     var valido = new Boolean(true); 
