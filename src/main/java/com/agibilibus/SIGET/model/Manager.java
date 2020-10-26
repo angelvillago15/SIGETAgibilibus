@@ -93,9 +93,10 @@ public class Manager {
 	
 	
 
-	public void guardarReunion(int idReunion, String titulo, String descripcion, DateTime horaInicio, DateTime horaFin, Usuario organizador, List<Usuario> asistentes, String url) throws Exception {
+	public Reunion guardarReunion(int idReunion, String titulo, String descripcion, DateTime horaInicio, DateTime horaFin, Usuario organizador, List<Usuario> asistentes, String url) throws Exception {
 		Reunion reunionNueva = new Reunion(idReunion, titulo, descripcion, horaInicio, horaFin, organizador, asistentes, url);
 		reuniondao.save(reunionNueva);
+		return reunionNueva;
 	}
 	
 	public void cargarCalendario () {
