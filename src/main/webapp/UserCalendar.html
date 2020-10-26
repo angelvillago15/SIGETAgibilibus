@@ -10,7 +10,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <style>
         body {
-            background: url('recursos/ubuntu.jpg') center no-repeat;
+            background: url('recursos/ubuntuF.jpg') center no-repeat;
             background-attachment: fixed;
             background-size: cover;
             min-height:100%;
@@ -137,9 +137,7 @@
         }
     </style>
 </head>
-<body>
-<!--cuerpo del programa-->
-
+<body><!--cuerpo del programa-->
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="container">
@@ -174,7 +172,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="MyAccount.html"><span class="glyphicon glyphicon-user"></span>  Mi Cuenta</a></li>
                             <li><a href="editAccount.html"><span class="glyphicon glyphicon-cog"></span>  Editar Cuenta</a></li>
-                            <li><a href="Login.html"><span class="glyphicon glyphicon-log-out"></span>  Cerrar Sesión</a></li>
+                            <li><a href="Login.html"><span class="glyphicon glyphicon-log-out"></span>  Cerrar Sesión<nav></nav></a></li>
                         </ul>
                         </li>
                     </ul>
@@ -184,7 +182,7 @@
     </nav>
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="newEvent.html"><span class="glyphicon glyphicon-plus-sign"></span>Nuevo Evento</a>
+        <a href="#"><span class="glyphicon glyphicon-plus-sign"></span>Nuevo Evento</a>
         <a href="AboutUs.html"><span class="glyphicon glyphicon-briefcase"></span> Sobre Nosotros</a>
     </div>
     
@@ -195,18 +193,12 @@
         <div class="text-center" id="fecha"><h2>Semana-Mes</h2></div>
         <div class="container theme-showcase">
             <ul class="pager">
-<<<<<<< HEAD
                 <li class="previous"><a onclick="getSemanaAnterior()"> &larr; Anterior</a><!--<h3 id="fecha">Semana - Mes</h3>--></li>
 				<li class="next"><a onclick="getSemanaSiguiente()">Siguiente &rarr;</a></li>
-=======
-				<li class="previous"><a href="" data-bind = "click : anterior"> &larr; Anterior</a></li>
-				<li class="next"><a href="" data-bind = "click : siguiente">Siguiente &rarr;</a></li>
->>>>>>> T1.4-ControladorCalendario
 			</ul>
             <table class="table table-bordered">
             <thead>
                 <tr>
-<<<<<<< HEAD
                 <th scope="col" class="warning"><div id="d0" class="text-center">Lunes&nbsp;</div></th>
                 <th scope="col" class="warning"><div id="d1" class="text-center">Martes&nbsp;</div></th>
                 <th scope="col" class="warning"><div id="d2" class="text-center">Miércoles&nbsp;</div></th>
@@ -214,15 +206,6 @@
                 <th scope="col" class="warning"><div id="d4" class="text-center">Viernes&nbsp;</div></th>
                 <th scope="col" class="warning"><div id="d5" class="text-center">Sábado&nbsp;</div></th>
                 <th scope="col" class="warning"><div id="d6" class="text-center">Domingo&nbsp;</div></th>
-=======
-                <th scope="col"><div class="text-center">Lunes&nbsp;<div id="d0"></div></div></th>
-                <th scope="col"><div class="text-center">Martes&nbsp;<div id="d1"></div></div></th>
-                <th scope="col"><div class="text-center">Miércoles&nbsp;<div id="d2"></div></div></th>
-                <th scope="col"><div class="text-center">Jueves&nbsp;<div id="d3"></div></div></th>
-                <th scope="col"><div class="text-center">Viernes&nbsp;<div id="d4"></div></div></th>
-                <th scope="col"><div class="text-center">Sábado&nbsp;<div id="d5"></div></div></th>
-                <th scope="col"><div class="text-center">Domingo&nbsp;<div id="d6"></div></div></th>
->>>>>>> T1.4-ControladorCalendario
                 </tr>
             </thead>
             <tbody>
@@ -240,9 +223,6 @@
         </div>    
         <div id="holder" class="row" ></div>
     </div>  
-    <!--archivo para calendario-->
-    <script src="https://knockoutjs.com/downloads/knockout-3.5.0.js"></script>
-    <script src="UserCalendar.js"></script> 
 </body>
 <!--archivo para calendario-->
 <script src="UserCalendar.js"></script>
