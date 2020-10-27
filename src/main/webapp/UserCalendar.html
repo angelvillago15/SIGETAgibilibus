@@ -76,18 +76,49 @@
             padding: 16px;
         }
 
-        @media screen and (max-height: 450px) {
-            .sidenav {padding-top: 15px;}
-            .sidenav a {font-size: 18px;}
+        .list-notificacao{
+            min-width: 30px;
+            background: #ffffff;
+            min-height: 75px;
         }
 
-        #wrap {
-            width: 1100px;
-            margin: 0 auto;
+        .list-notificacao li{
+            border-bottom : 1px #d8d8d8 solid;
+            text-align    : justify;
+            padding       : 4px 10px 4px 10px;
+            cursor: pointer;
+            font-size: 12px;
         }
 
-        #ls0, #ls1, #ls2, #ls3, #ls4, #ls5, #ls6{
-            background-color:rgb(39, 204, 226);
+        .list-notificacao li:hover{
+            background: #f1eeee;
+        }
+
+        .list-notificacao li:hover .exclusaoNotificacao{
+            display: block;
+        }
+
+        .list-notificacao li  p{
+            color: black;
+            width: 305px;
+        }       
+
+        .badgeAlert {
+            display: inline-block;
+            min-width: 10px;
+            padding: 3px 7px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1;
+            vertical-align: baseline;
+            white-space: nowrap;
+            text-align: center;
+            background-color: #d9534f;
+            border-radius: 10px;
+            position: absolute;
+            margin-top: -10px;
+            margin-left: -10px
         }
 
     </style>
@@ -104,11 +135,31 @@
                 </a>
                 <div class="right">
                     <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="glyphicon glyphicon-bell alertNotificacao" style="color:whitesmoke"><span class="caret"></span></span><span class='badgeAlert'>1</span></a>
+                                <ul class="list-notificacao dropdown-menu">
+                                    <li id='notification'>
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <div class="text-right">
+                                                    <button type="button" class="close" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <p>@X te ha invitado a una reunión</p>
+                                                <button type="button" class="btn btn-success">Aceptar</button>
+                                                <button type="button" class="btn btn-danger">Rechazar</button>
+                                            </div>
+                                        </div>
+                                    </li>                              
+                                </ul>
+                        </li>
                         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color:whitesmoke">Usuario<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="MyAccount.html"><span class="glyphicon glyphicon-user"></span>  Mi Cuenta</a></li>
                             <li><a href="editAccount.html"><span class="glyphicon glyphicon-cog"></span>  Editar Cuenta</a></li>
-                            <li><a href="Login.html"><span class="glyphicon glyphicon-log-out"></span>  Cerrar Sesión</a></li>
+                            <li><a href="Login.html"><span class="glyphicon glyphicon-log-out"></span>  Cerrar Sesión<nav></nav></a></li>
                         </ul>
                         </li>
                     </ul>
