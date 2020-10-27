@@ -1,23 +1,20 @@
 package com.agibilibus.SIGET.model;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.List;
-
-
-
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpSession;
 
+import org.joda.time.DateTime;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
+import com.agibilibus.SIGET.dao.ReunionDAO;
 import com.agibilibus.SIGET.dao.UserDAO;
-
 
 @Component
 public class Manager {
@@ -25,6 +22,7 @@ public class Manager {
 	private UserDAO userdao;
 	private Usuario user;
 	private Calendario calendar;
+	private ReunionDAO reuniondao;
 
 	private ConcurrentHashMap<String, Usuario> connectedUsersByUserName;
 	private ConcurrentHashMap<String, Usuario> connectedUsersByHttpSession;
@@ -95,9 +93,9 @@ public class Manager {
 	
 	
 
-	public void guardarReunion(int idReunion, String titulo, String descripcion, LocalDate horaInicio, LocalDate horaFin, Usuario organizador, List<Usuario> asistentes, String url) throws Exception {
-		
-		
+	public void guardarReunion(int idReunion, String titulo, String descripcion, DateTime horaInicio, DateTime horaFin, Usuario organizador, List<Usuario> asistentes, String url) throws Exception {
+		Reunion reunionNueva = new Reunion(idReunion, titulo, descripcion, horaInicio, horaFin, organizador, asistentes, url);
+		reuniondao.save(reunionNueva);
 	}
 	
 	public void cargarCalendario () {
