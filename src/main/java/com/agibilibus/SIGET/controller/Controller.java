@@ -53,12 +53,15 @@ public class Controller {
 		JSONObject jso = new JSONObject(datosReunion);
 		String titulo = jso.getString("nombre");
 		String descripcion = jso.getString("descripcion");
-		DateTime horaI = new DateTime(2020,10,30,10,30,DateTimeZone.forID("UTC"));
-		DateTime horaF = new DateTime(2020,10,30,11,30,DateTimeZone.forID("UTC"));
+		String [] fecha = jso.getString("fecha").split("-");
+		String [] horaIni = jso.getString("horaInicio").split(":");
+		String [] horaFin = jso.getString("horaFin").split(":");
+		DateTime horaI = new DateTime(Integer.parseInt(fecha[0]),Integer.parseInt(fecha[1]),Integer.parseInt(fecha[2]),Integer.parseInt(horaIni[0]),Integer.parseInt(horaIni[1]),DateTimeZone.forID("UTC"));
+		DateTime horaF = new DateTime(Integer.parseInt(fecha[0]),Integer.parseInt(fecha[1]),Integer.parseInt(fecha[2]),Integer.parseInt(horaFin[0]),Integer.parseInt(horaFin[1]),DateTimeZone.forID("UTC"));
 		Usuario organizador = (Usuario) session.getAttribute("user");
 		String url = jso.getString("url");
 		String[] correosAsistentes = ((jso.getString("correos")).replace(" ", "")).split(","); 
-		Manager.get().guardarReunion(6, titulo, descripcion, horaI,horaF, organizador, correosAsistentes, url);
+		Manager.get().guardarReunion(((int) (Math.random() * (1000000) + 1)), titulo, descripcion, horaI,horaF, organizador, correosAsistentes, url);
 		
 	}
 	
