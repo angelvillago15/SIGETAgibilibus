@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Editar una Reunion</title>
+  <title>Invitar a Reunion</title>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -72,9 +72,8 @@
 </nav>
 
 </p>
-<button type="button" class="btn btn-default " aria-label="Left Align" onclick="atras()">
-  <span class="glyphicon glyphicon-chevron-left " aria-hidden="true"></span>
-</button>
+
+
 <div class="container">
   
   <h2>Editar reunion</h2>
@@ -84,7 +83,7 @@
     <div class="panel panel-default">
      
       <div class="panel-heading"> <strong>Datos de la Reunion:</strong></div>
-      <div class="panel-body" readonly>
+      <div class="panel-body" >
           
       	<form>
           <div class="form-group row row-md-6">
@@ -134,8 +133,20 @@
 
     
   </div>
-<p align="right"><input type="button" class="btn btn-success btn-lg" id="crear" value="reunion" onclick="reunion()"/>
+<p align="right"><input type="button" class="btn btn-success btn-lg" id="crear" value="Invitar" onclick="invitar()"/>
 </div>
+<script>
+function cargarDatosIniciales(){
+	document.getElementById("nombreReunion").value="a";
+    document.getElementById("fecha").value="";
+    document.getElementById("horaInicio").value="";
+    document.getElementById("horaFin").value="";
+    document.getElementById("descripcion").value="aaa";
+    document.getElementById("url").value="aaa";
+    document.getElementById("invitar").value="aa";
+    };
+    window.onload = cargarDatosIniciales;
+  </script>
 <script src="newEvent.js"></script>
 <script src="https://code.jquery.com/jquery-1.7.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
