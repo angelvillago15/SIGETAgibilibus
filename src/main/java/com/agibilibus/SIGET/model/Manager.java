@@ -9,6 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.servlet.http.HttpSession;
 
 import org.joda.time.DateTime;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -108,6 +109,18 @@ public class Manager {
 		reuniondao.save(new Reunion(idReunion, titulo, descripcion, horaInicio, horaFin, or, asistentes, estados, url));
 	}
 	
+	public JSONObject getReuniones(Usuario u) {
+		JSONArray jsaReuniones = new JSONArray();
+		Usuario usuario = userdao.findById(u.getUser()).get();
+		List<Reunion> reuniones = reuniondao.findAll();
+		for (Reunion r : reuniones) {
+			if (r.getOrganizador().getUser().equals(usuario.getUser()) || r.getAsistentes().contains(usuario))
+				jsaReuniones.put(r.toJSON());
+		}
+		JSONObject jso = new JSONObject();
+		jso.put("reuniones", jsaReuniones);
+		return jso;
+	}
 	
 	
 	public void cargarCalendario () {

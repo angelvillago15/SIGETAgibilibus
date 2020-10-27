@@ -3,8 +3,12 @@ package com.agibilibus.SIGET.model;
 import java.util.List;
 
 import org.joda.time.DateTime;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.mongodb.util.JSON;
 
 import lombok.Data;
 
@@ -106,6 +110,27 @@ public class Reunion {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	
+	public JSONObject toJSON () {
+		JSONObject jso = new JSONObject();
+		JSONArray jsaAsistentes = new JSONArray();
+		JSONArray jsaEstados = new JSONArray();
+		jso.put("idReunion", this.idReunion);
+		jso.put("titulo", this.titulo);
+		jso.put("descripcion", this.descripcion);
+		jso.put("horaInicio", this.horaInicio);
+		jso.put("horaFin", this.horaFin);
+		jso.put("organizador", this.organizador.toJSON());
+		for (Usuario u : this.asistentes)
+			jsaAsistentes.put(u.toJSON());
+		jso.put("asistentes", jsaAsistentes);
+		for (Estado e : this.estadosInvitaciones)
+			jsaEstados.put(e.toString());
+		jso.put("estados", jsaEstados);
+		jso.put("url", this.url);
+		
+		return jso;
 	}
 
 }

@@ -28,6 +28,7 @@ public class Controller {
 		String pwd = jso.getString("pwd");
 		Usuario user = Manager.get().login(session, userName, pwd);
 		session.setAttribute("user", user);
+		Usuario usuario = (Usuario) session.getAttribute("user");
 	}
 	
 
@@ -61,8 +62,14 @@ public class Controller {
 		Usuario organizador = (Usuario) session.getAttribute("user");
 		String url = jso.getString("url");
 		String[] correosAsistentes = ((jso.getString("correos")).replace(" ", "")).split(","); 
-		Manager.get().guardarReunion(((int) (Math.random() * (1000000) + 1)), titulo, descripcion, horaI,horaF, organizador, correosAsistentes, url);
+		Manager.get().guardarReunion(((int) (Math.random()*(1000000)+1)), titulo, descripcion, horaI,horaF, organizador, correosAsistentes, url);
 		
+	}
+	
+	@PostMapping("/getReuniones")
+	public String getReuniones(HttpSession session) {
+		Usuario usuario = (Usuario) session.getAttribute("user");
+		return Manager.get().getReuniones(usuario).toString();
 	}
 	
 	
