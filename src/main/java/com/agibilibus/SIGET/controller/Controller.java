@@ -57,8 +57,8 @@ public class Controller {
 		DateTime horaF = new DateTime(2020,10,30,11,30,DateTimeZone.forID("UTC"));
 		Usuario organizador = (Usuario) session.getAttribute("user");
 		String url = jso.getString("url");
-		List<Usuario> asistentes = new ArrayList<>();
-		Manager.get().guardarReunion(6, titulo, descripcion, horaI,horaF, organizador, asistentes, url);
+		String[] correosAsistentes = ((jso.getString("correos")).replace(" ", "")).split(","); 
+		Manager.get().guardarReunion(6, titulo, descripcion, horaI,horaF, organizador, correosAsistentes, url);
 	}
 	
 	

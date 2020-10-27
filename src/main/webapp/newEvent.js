@@ -42,8 +42,7 @@ function validarCampo(campo) { // comprobar que no hay campos vacios
     }
     return correcto;
   }
-
-  
+    
 
 function limpiarCampos(){ // resetear todos los campos
     document.getElementById("nombreReunion").value="";

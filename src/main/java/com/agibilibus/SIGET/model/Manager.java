@@ -1,6 +1,7 @@
 package com.agibilibus.SIGET.model;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
@@ -93,11 +94,14 @@ public class Manager {
 		return calendar.getSemanaAnterior(user);
 	}
 	
-	public void guardarReunion(int idReunion, String titulo, String descripcion, DateTime horaInicio, DateTime horaFin, Usuario organizador, List<Usuario> asistentes, String url) throws Exception {
-		Usuario a = userdao.findById("carlos").get();
-		Usuario b = userdao.findById("normal").get();
-		asistentes.add(a);
-		asistentes.add(b);
+	public void guardarReunion(int idReunion, String titulo, String descripcion, DateTime horaInicio, DateTime horaFin, Usuario organizador, String[] correosAsistentes, String url) throws Exception {
+		List<Usuario> asistentes = new ArrayList<Usuario>();
+		for (String asistente: correosAsistentes){
+			Optional<Usuario> a = userdao.findById(asistente);
+			if (a.isPresent()) {
+				asistentes.add(a.get());
+			}
+		}
 		Usuario or = userdao.findById(organizador.getUser()).get();
 		reuniondao.save(new Reunion(idReunion, titulo, descripcion, horaInicio, horaFin, or, asistentes, url));
 	}

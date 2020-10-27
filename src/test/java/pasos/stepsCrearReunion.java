@@ -1,7 +1,5 @@
 package pasos;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.joda.time.DateTime;
@@ -24,7 +22,7 @@ public class stepsCrearReunion {
     	throw new PendingException();
     }
 	@When("^Guardo una nueva reunion /.*/ /.*/ /.*/ /.*/ /.*/ /.*/ /.*/ /.*/$")
-	public void guardar_esa_reunion (int idReunion, String titulo, String descripcion, DateTime horaInicio, DateTime horaFin, Usuario organizador, List<Usuario> asistentes, String url) throws Throwable{
+	public void guardar_esa_reunion (int idReunion, String titulo, String descripcion, DateTime horaInicio, DateTime horaFin, Usuario organizador, String[] asistentes, String url) throws Throwable{
 		Manager.get().guardarReunion(idReunion, titulo, descripcion, horaInicio, horaFin, organizador, asistentes, url);
 		
 		throw new PendingException();
