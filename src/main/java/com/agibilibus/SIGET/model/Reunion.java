@@ -19,10 +19,11 @@ public class Reunion {
 	private DateTime horaFin;
 	private Usuario organizador;
 	private List<Usuario> asistentes;
+	private List<Estado> estadosInvitaciones;
 	private String url;
 
 	public Reunion(int idReunion, String titulo, String descripcion, DateTime horaInicio, DateTime horaFin,
-	        Usuario organizador, List<Usuario> asistentes, String url) {
+	        Usuario organizador, List<Usuario> asistentes,  List <Estado> estadosInvitaciones, String url) {
 		super();
 		this.idReunion = idReunion;
 		this.titulo = titulo;
@@ -31,6 +32,7 @@ public class Reunion {
 		this.horaFin = horaFin;
 		this.organizador = organizador;
 		this.asistentes = asistentes;
+		this.estadosInvitaciones = estadosInvitaciones;
 		this.url = url;
 	}
 
@@ -88,6 +90,14 @@ public class Reunion {
 
 	public void setAsistentes(List<Usuario> asistentes) {
 		this.asistentes = asistentes;
+	}
+	
+	public List<Estado> getEstadosInvitaciones() {
+		return estadosInvitaciones;
+	}
+	
+	public void setEstadosInvitaciones(List<Estado> estadosInvitaciones) {
+		this.estadosInvitaciones = estadosInvitaciones;
 	}
 
 	public String getUrl() {

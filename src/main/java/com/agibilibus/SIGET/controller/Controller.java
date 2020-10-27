@@ -59,6 +59,7 @@ public class Controller {
 		String url = jso.getString("url");
 		String[] correosAsistentes = ((jso.getString("correos")).replace(" ", "")).split(","); 
 		Manager.get().guardarReunion(6, titulo, descripcion, horaI,horaF, organizador, correosAsistentes, url);
+		
 	}
 	
 	

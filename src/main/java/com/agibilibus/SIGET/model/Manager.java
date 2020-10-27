@@ -96,14 +96,16 @@ public class Manager {
 	
 	public void guardarReunion(int idReunion, String titulo, String descripcion, DateTime horaInicio, DateTime horaFin, Usuario organizador, String[] correosAsistentes, String url) throws Exception {
 		List<Usuario> asistentes = new ArrayList<Usuario>();
+		List<Estado> estados = new ArrayList<>();
 		for (String asistente: correosAsistentes){
 			Optional<Usuario> a = userdao.findById(asistente);
 			if (a.isPresent()) {
 				asistentes.add(a.get());
+				estados.add(Estado.pendiente);
 			}
 		}
 		Usuario or = userdao.findById(organizador.getUser()).get();
-		reuniondao.save(new Reunion(idReunion, titulo, descripcion, horaInicio, horaFin, or, asistentes, url));
+		reuniondao.save(new Reunion(idReunion, titulo, descripcion, horaInicio, horaFin, or, asistentes, estados, url));
 	}
 	
 	
