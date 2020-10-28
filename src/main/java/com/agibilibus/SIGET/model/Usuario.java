@@ -28,6 +28,8 @@ public class Usuario implements Serializable {
 	private String rol;
 	@Transient
 	private HttpSession httpSession;
+	
+	public Usuario() {}
 
 	public Usuario(String user, String password, String nombre, String apellidos, int telefono, String email,
 	        String dni, DateTime nacimiento, String rol) {

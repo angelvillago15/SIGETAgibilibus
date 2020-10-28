@@ -1,5 +1,6 @@
 package com.agibilibus.SIGET.model;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -62,8 +63,8 @@ public class Manager {
 		} catch (SQLException e) {
 			throw new Exception("Credenciales inválidas");
 		}
-	}	
-	
+	}
+
 
 	public void guardarReunion(int idReunion, String titulo, String descripcion, DateTime horaInicio, DateTime horaFin, Usuario organizador, List<Usuario> asistentes, String url) throws Exception {
 		Reunion reunionNueva = new Reunion(idReunion, titulo, descripcion, horaInicio, horaFin, organizador, asistentes, url);
@@ -91,6 +92,23 @@ public class Manager {
 		
 		
 	}
+	
+	public Usuario register(String pwd1, String nombreCompleto, String nombre, String apellidos, DateTime userDate, String userDni, int userTelf, String email){
+		user = new Usuario();
+		user.setNombre(nombreCompleto);
+		user.setUser(nombre);
+		user.setApellidos(apellidos);
+		user.setDate(userDate);
+		user.setDNI(userDni);
+		user.setTelefono(userTelf);
+		user.setEmail(email);
+		user.setPassword(pwd1);
+		
+		return userdao.save(user);
+
+	
+	}
+
 
 
 }

@@ -12,15 +12,12 @@ public class Calendario {
 	private int day;
 	private int semana;
 	
-	public Calendario () {
-		Calendar today = Calendar.getInstance();
-		today.setFirstDayOfWeek(Calendar.MONDAY);
-		this.day = today.DAY_OF_WEEK;
-		this.semana = 0;			
-	}
+	public Calendario () {}
+
 	private JSONArray getReuniones(Date dia,Usuario user) {
 		JSONArray jsa = new JSONArray();
 		return jsa;
 	}
 	
+
 }
