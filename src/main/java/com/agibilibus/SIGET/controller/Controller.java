@@ -26,24 +26,6 @@ public class Controller {
 		session.setAttribute("user", user);
 	}
 	
-
-	@PostMapping("/getSemana")
-	public String getSemana(HttpSession session ) throws Exception {
-		return Manager.get().getSemana().toString();
-
-	}
-	@PostMapping("/getSemanaSiguiente")
-	public String getSemanaSiguiente(HttpSession session ) throws Exception {
-		JSONObject jso = Manager.get().getSemanaSiguiente();
-		return jso.toString();
-
-	}
-	@PostMapping("/getSemanaAnterior")
-	public String getSemanaAnterior(HttpSession session ) throws Exception {
-		return Manager.get().getSemanaAnterior().toString();
-
-	}
-
 	@PostMapping("/guardarReunion")
 	public void guardarReunion(HttpSession session, @RequestBody Map<String, Object> datosReunion) throws Exception {
 		

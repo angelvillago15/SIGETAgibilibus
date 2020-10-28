@@ -62,35 +62,7 @@ public class Manager {
 		} catch (SQLException e) {
 			throw new Exception("Credenciales inválidas");
 		}
-	}
-	public JSONObject getSemana()throws Exception {
-		if(user == null)
-			throw new Exception("No hay usuario");
-		
-		if(calendar == null)
-			calendar = new Calendario();
-		
-		return calendar.getSemana(user);
-	}
-	public JSONObject getSemanaSiguiente()throws Exception {
-		if(user == null)
-			throw new Exception("No hay usuario");
-		
-		if(calendar == null)
-			calendar = new Calendario();
-		
-		return calendar.getSemanaSiguiente(user);
-	}
-	public JSONObject getSemanaAnterior()throws Exception {
-		if(user == null)
-			throw new Exception("No hay usuario");
-		
-		if(calendar == null)
-			calendar = new Calendario();
-		
-		return calendar.getSemanaAnterior(user);
-	}
-	
+	}	
 	
 
 	public void guardarReunion(int idReunion, String titulo, String descripcion, DateTime horaInicio, DateTime horaFin, Usuario organizador, List<Usuario> asistentes, String url) throws Exception {
