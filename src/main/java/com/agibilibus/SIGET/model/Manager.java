@@ -1,5 +1,6 @@
 package com.agibilibus.SIGET.model;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -63,7 +64,8 @@ public class Manager {
 			throw new Exception("Credenciales inválidas");
 		}
 	}
-	public JSONObject getSemana()throws Exception {
+	/** Metodos para cargar el calendario anterior
+    public JSONObject getSemana()throws Exception {
 		if(user == null)
 			throw new Exception("No hay usuario");
 		
@@ -90,7 +92,7 @@ public class Manager {
 		
 		return calendar.getSemanaAnterior(user);
 	}
-	
+	**/
 	
 
 	public void guardarReunion(int idReunion, String titulo, String descripcion, DateTime horaInicio, DateTime horaFin, Usuario organizador, List<Usuario> asistentes, String url) throws Exception {
@@ -119,6 +121,23 @@ public class Manager {
 		
 		
 	}
+	
+	public Usuario register(String pwd1, String nombreCompleto, String nombre, String apellidos, DateTime userDate, String userDni, int userTelf, String email){
+		user = new Usuario();
+		user.setNombre(nombreCompleto);
+		user.setUser(nombre);
+		user.setApellidos(apellidos);
+		user.setDate(userDate);
+		user.setDNI(userDni);
+		user.setTelefono(userTelf);
+		user.setEmail(email);
+		user.setPassword(pwd1);
+		
+		return userdao.save(user);
+
+	
+	}
+
 
 
 }

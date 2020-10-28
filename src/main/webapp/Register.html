@@ -121,27 +121,27 @@
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">DNI:</label>
               <div class="col-sm-3">
-                  <input type="text" class="form-control" id="dni">
+                  <input type="text" class="form-control" id="userDni">
               </div>
           </div>
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">Nombre:</label>
               <div class="col-sm-3">
-                  <input type="text" class="form-control" id="name">
+                  <input type="text" class="form-control" id="userCompletName">
               </div>
               <label class="col-sm-2 col-form-label">Apellidos:</label>
               <div class="col-sm-3">
-                  <input type="text" class="form-control" id="Apellidos" required="true">
+                  <input type="text" class="form-control" id="userApellidos" required="true">
               </div>
           </div>
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">Teléfono:</label>
               <div class="col-sm-3">
-                  <input type="text" class="form-control" id="telefono" required="true">
+                  <input type="text" class="form-control" id="userTelf" required="true">
               </div>
             <label class="col-sm-2 col-form-label">Fecha de Nacimiento:</label>
               <div class="col-sm-3">
-                  <input type="text" class="form-control" id="fechaN" required="true">
+                  <input type="text" class="form-control" id="userDate" required="true">
               </div>
               <label class="col-sm-2 col-form-label">(dd/mm/aaaa)</label>
           </div>
@@ -156,13 +156,13 @@
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">Nombre de Usuario:</label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" id= "username">
+                <input type="text" class="form-control" id= "userName">
             </div>
         </div>
         <div class="form-group row" id=userData>
           <label class="col-sm-2 col-form-label" >Contraseña:</label>
             <div class="col-sm-3">
-                <input id= "pass" type="password" class="form-control checkSeguridad">
+                <input id= "pwd1" type="password" class="form-control checkSeguridad">
             </div>
             <div id="alertPass">
               <h6><strong>La contraseña debe tener los siguientes requisitos:</strong></h6>
@@ -177,11 +177,11 @@
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">E-mail:</label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" id="mail1" required="true">
+                <input type="text" class="form-control" id="userMail" required="true">
             </div>
-          <label class="col-sm-2 col-form-label">Validar:</label>
+          <label class="col-sm-2 col-form-label">Validar cuenta (Contraseña):</label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" id="mail2" required="true">
+                 <input id= "pwd2" type="password" class="form-control checkSeguridad">
             </div>
         </div>
       </form>
@@ -191,12 +191,12 @@
   <div class="row">
     <div class="col">
       <a href="Login.html"><span class="float-left"><span class="btn btn-info">Volver al Login</span></span></a>
-      <span class="float-right" id="registro"><span class="btn btn-success">Registrar</span></span>
+      <span class="float-right"><button class="btn btn-success" id="registro" onclick="register()">Registrar</button></span>
     </div>
   </div>
 </div>
 </body>
 <script src="https://code.jquery.com/jquery-1.7.min.js"></script>
-<script src="Register.js"></script>
+<script src="js/Register.js"></script>
 </html>
 

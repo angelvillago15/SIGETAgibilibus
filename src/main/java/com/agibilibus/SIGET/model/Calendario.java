@@ -18,12 +18,18 @@ public class Calendario {
 		this.day = today.DAY_OF_WEEK;
 		this.semana = 0;			
 	}
+	
+	private JSONArray getReuniones(Date dia,Usuario user) {
+		JSONArray jsa = new JSONArray();
+		return jsa;
+	}
+	
 	/**
 	 * El JSONArray contiene 7 JSON Object uno por cada dia de la semana de lunes a domingo
 	 * Los JSONObject contienen:
 	 *  - un campo "fecha" con un objeto Date del dia
 	 *  - un cambo "reuniones" con un JSONArray de JSONObjects que corresponden a las reuniones
-	 * */
+	 * 
 	public JSONObject getSemana(Usuario user) {
 		this.semana = 0;
 		return getSemana(0,user);
@@ -48,10 +54,7 @@ public class Calendario {
 		}
 		return result;
 	}
-	private JSONArray getReuniones(Date dia,Usuario user) {
-		JSONArray jsa = new JSONArray();
-		return jsa;
-	}
+
 	@SuppressWarnings("deprecation")
 	private JSONObject getSemana(int semana,Usuario user) {
 		
@@ -68,4 +71,5 @@ public class Calendario {
 			
 		return jso;
 	}
+	*/
 }
