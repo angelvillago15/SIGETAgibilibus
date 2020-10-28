@@ -76,24 +76,7 @@ public class Controller {
 	}
 	
 	
-	/** Metodos para el calendario anterior
-	@PostMapping("/getSemana")
-	public String getSemana(HttpSession session ) throws Exception {
-		return Manager.get().getSemana().toString();
 
-	}
-	@PostMapping("/getSemanaSiguiente")
-	public String getSemanaSiguiente(HttpSession session ) throws Exception {
-		JSONObject jso = Manager.get().getSemanaSiguiente();
-		return jso.toString();
-
-	}
-	@PostMapping("/getSemanaAnterior")
-	public String getSemanaAnterior(HttpSession session ) throws Exception {
-		return Manager.get().getSemanaAnterior().toString();
-
-	}
-	**/
 	
 	
 
