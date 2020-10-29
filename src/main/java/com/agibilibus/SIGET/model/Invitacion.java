@@ -1,5 +1,7 @@
 package com.agibilibus.SIGET.model;
 
+import org.json.JSONObject;
+
 public class Invitacion {
 	private Usuario usuario;
 	private Reunion reunion;
@@ -34,6 +36,15 @@ public class Invitacion {
 	}
 	public void aceptarInvitacion() {}
 	public void rechazarInvitacion() {}
+	
+	public JSONObject toJSON() {
+		JSONObject jso = new JSONObject();
+		jso.put("usuario", this.usuario);
+		jso.put("reunion", this.reunion);
+		jso.put("estado", this.estado);
+		return jso;
+
+	}
 	
 	
 
