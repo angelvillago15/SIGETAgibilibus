@@ -1,208 +1,216 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Registro</title>
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker.css"/>
-  <style>
-  body {
-    background: url('recursos/ubuntu.jpg') center no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    min-height:100%;
-    background-size:cover;
-  }
+    <title>Ventana de Usuario</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href='fullcalendar/main.css' rel='stylesheet' />
+    <style>
+        body {
+            background: url('recursos/ubuntu.jpg') center no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            min-height:100%;
+            background-size:cover;
+            transition: background-color .5s;
+        }
 
-  .container{
-      height: 60px;
-  }
+        .container{
+            height: 60px;
+        }
 
-  .left {
-      position: absolute;
-      top: 0px; 
-      left: 10px;
-  }  
-  
-  ul, li {
-      margin:0;
-      padding:0;
-      list-style-type:none;
-  }
-  #container {
-      width:400px;
-      height:290px;
-      background:#fefefe;
-      margin:auto;  
-      border-top-color:#d3dbde;
-      border-bottom-color:#bfc9dc;
-      box-shadow:0 1px 1px #ccc;
-      border-radius:5px;
-      position:relative;
-  }
-  h2 {
-      margin:0;
-      padding:10px 0;
-      font-size:24px;
-      text-align:center;
-      background:#eff4f7;
-      border-bottom:1px solid #dde0e7;
-      box-shadow:0 -1px 0 #fff inset;
-      border-radius:5px 5px 0 0; /* otherwise we get some uncut corners with container div */
-      text-shadow:1px 1px 0 #fff;
-  }
-  #alertPass {
-      position: absolute;
-      bottom:0px;
-      right:425px;
-      width:300px;
-      padding:15px;
-      background:#fefefe;
-      font-size:.875em;
-      border-radius:5px;
-      box-shadow:0 1px 3px #ccc;
-      border:1px solid #ddd;
-      display:none
-  }
-  #alertPass::before {
-      content: "\025C4";
-      position:absolute;
-      top:143px;
-      left:-5%;
-      font-size:14px;
-      line-height:14px;
-      color:#ddd;
-      text-shadow:none;
-      display:block;
-  }
-  #alertPass h5 {
-      margin:0 0 10px 0;
-      padding:0;
-      font-weight:normal;
-  }
-  .invalid {
-      background:url('recursos/Eliminar.png') no-repeat 0 50%;
-      padding-left:22px;
-      line-height:24px;
-      color:#ec3f41;
-  }
-  .valid {
-      background:url('recursos/tick.png') no-repeat 0 50%;
-      padding-left:22px;
-      line-height:24px;
-      color:#3a7d34;
-  }
-</style>
+        .left {
+            position: absolute;
+            top: 0px; 
+            left: 10px;
+        }
+
+        .right{
+            position: absolute;
+            top:10px;
+            right: 63px;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        #main {
+            transition: margin-left .5s;
+            padding: 16px;
+        }
+
+        .list-notificacao{
+            min-width: 30px;
+            background: #ffffff;
+            min-height: 75px;
+        }
+
+        .list-notificacao li{
+            border-bottom : 1px #d8d8d8 solid;
+            text-align    : justify;
+            padding       : 4px 10px 4px 10px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .list-notificacao li:hover{
+            background: #f1eeee;
+        }
+
+        .list-notificacao li:hover .exclusaoNotificacao{
+            display: block;
+        }
+
+        .list-notificacao li  p{
+            color: black;
+            width: 305px;
+        }       
+
+        .badgeAlert {
+            display: inline-block;
+            min-width: 10px;
+            padding: 3px 7px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1;
+            vertical-align: baseline;
+            white-space: nowrap;
+            text-align: center;
+            background-color: #d9534f;
+            border-radius: 10px;
+            position: absolute;
+            margin-top: -10px;
+            margin-left: -10px
+        }
+
+    </style>
 </head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
-    <a class="navbar-brand" href="#">
-      <div class="left">
-        <a href="Login.html"><span class="logo"><img src="recursos/logo.png" width="60" height="60"></span></a>
-      </div>
-    </a>
-  </div>  
-</nav>
+<!--cuerpo del programa-->
 
-<br>
-<br>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <div class="left">
+                        <span class="logo"><img src="recursos/logo.png" alt="logotipo" width="60" height="60"></span>
+                    </div>
+                </a>
+                <div class="right">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="glyphicon glyphicon-bell alertNotificacao" style="color:whitesmoke"><span class="caret"></span></span><span class='badgeAlert'>1</span></a>
+                                <ul class="list-notificacao dropdown-menu">
+                                    <li id='notification'>
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <div class="text-right">
+                                                    <button type="button" class="close" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <p>@X te ha invitado a una reunión</p>
+                                                <button type="button" class="btn btn-success">Aceptar</button>
+                                                <button type="button" class="btn btn-danger">Rechazar</button>
+                                            </div>
+                                        </div>
+                                    </li>                              
+                                </ul>
+                        </li>
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color:whitesmoke">Usuario<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="MyAccount.html"><span class="glyphicon glyphicon-user"></span>  Mi Cuenta</a></li>
+                            <li><a href="editAccount.html"><span class="glyphicon glyphicon-cog"></span>  Editar Cuenta</a></li>
+                            <li><a href="Login.html"><span class="glyphicon glyphicon-log-out"></span>  Cerrar Sesión<nav></nav></a></li>
+                        </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="newEvent.html"><span class="glyphicon glyphicon-plus-sign"></span>Nuevo Evento</a>
+        <a href="AboutUs.html"><span class="glyphicon glyphicon-briefcase"></span> Sobre Nosotros</a>
+    </div>
+    
+    <div id="main">
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menú</span>
+        <br>
+        <br>
+        <div class="container theme-showcase">
+			<div id='calendar'></div>
+        </div>    
+        <div id="holder" class="row" ></div>
+    </div>  
 
-<div class="container">
-  <h2>Crear una cuenta</h2>
-<br>  
-  <div class="panel-group">
-    <div class="panel panel-default">
-      <div class="panel-heading"> <strong>Datos Personales</strong></div>
-      <div class="panel-body">
-      	<form>
-          <div class="form-group row">
-            <label class="col-sm-2 col-form-label">DNI:</label>
-              <div class="col-sm-3">
-                  <input type="text" class="form-control" id="dni">
-              </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Nombre:</label>
-              <div class="col-sm-3">
-                  <input type="text" class="form-control" id="name">
-              </div>
-              <label class="col-sm-2 col-form-label">Apellidos:</label>
-              <div class="col-sm-3">
-                  <input type="text" class="form-control" id="Apellidos" required="true">
-              </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Teléfono:</label>
-              <div class="col-sm-3">
-                  <input type="text" class="form-control" id="telefono" required="true">
-              </div>
-            <label class="col-sm-2 col-form-label">Fecha de Nacimiento:</label>
-              <div class="col-sm-3">
-                  <input type="date" class="form-control" id="fechaN" required="true">
-              </div>
-          </div>
-	  	</form>
-      </div>
-    </div>
-    <br>
-    <div class="panel panel-default">
-      <div class="panel-heading"><strong>Datos de Usuario</strong></div>
-      <div class="panel-body">
-      	<form>
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-label">Nombre de Usuario:</label>
-            <div class="col-sm-3">
-                <input type="text" class="form-control" id= "username">
-            </div>
-        </div>
-        <div class="form-group row" id=userData>
-          <label class="col-sm-2 col-form-label" >Contraseña:</label>
-            <div class="col-sm-3">
-                <input id= "pass" type="password" id="pass" class="form-control">
-            </div>
-            <label class="col-sm-2 col-form-label">Validar:</label>
-            <div class="col-sm-3">
-                <input type="text" class="form-control" id="pass2" required="true">
-            </div>
-            <div id="alertPass">
-              <h6><strong>La contraseña debe tener los siguientes requisitos:</strong></h6>
-              <ul>
-                <li id="length" class="invalid">Al menos <strong> 8 caracteres</strong></li>
-                <li id="capital" class="invalid">Al menos <strong>una letra mayúscula (A-Z)</strong></li>
-                <li id="letter" class="invalid">Al menos <strong>una letra minúscula (a-z)</strong></li>
-                <li id="number" class="invalid">Al menos <strong>un número</strong></li>
-              </ul>
-            </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-label">E-mail:</label>
-            <div class="col-sm-3">
-                <input type="text" class="form-control" id="mail1" required="true">
-            </div>
-          <label class="col-sm-2 col-form-label">Validar:</label>
-            <div class="col-sm-3">
-                <input type="text" class="form-control" id="mail2" required="true">
-            </div>
-        </div>
-      </form>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <a href="Login.html"><span class="float-left"><span class="btn btn-info">Volver al Login</span></span></a>
-      <span class="float-right" id="registro"><span class="btn btn-success">Registrar</span></span>
-    </div>
-  </div>
-</div>
 </body>
-<script src="https://code.jquery.com/jquery-1.7.min.js"></script>
-<script src="js/Register.js"></script>
-</html>
+<script src="js/UserCalendar.js"></script>
+<script src='fullcalendar/main.js'></script>
+<script src='fullcalendar/local/es.js'></script>
+<script>
 
+  document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'timeGridWeek',
+      nowIndicator: true,
+      headerToolbar: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+      },
+      locale : 'es',
+      initialView : 'timeGridWeek',
+      navLinks: true, // can click day/week names to navigate views
+      editable: true,
+      selectable: true,
+      selectMirror: true,
+      dayMaxEvents: true, // allow "more" link when too many events
+    });
+
+    calendar.render();
+  });
+
+</script>
+</html>
