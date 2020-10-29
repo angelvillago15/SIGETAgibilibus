@@ -13,7 +13,7 @@
 
   <style>
   body {
-    background: url('recursos/ubuntuF.jpg') center no-repeat;
+    background: url('recursos/ubuntu.jpg') center no-repeat;
     background-attachment: fixed;
     background-size: cover;
     min-height:100%;
@@ -21,11 +21,11 @@
   }
 
   .container{
-      height: 80px;
+    height: 60px;
   }
 
   .left {
-      position: fixed;
+      position: absolute;
       top: 0px; 
       left: 10px;
   }  
@@ -70,11 +70,6 @@
   </a>
   </div>  
 </nav>
-
-</p>
-<button type="button" class="btn btn-default " aria-label="Left Align" onclick="atras()">
-  <span class="glyphicon glyphicon-chevron-left " aria-hidden="true"></span>
-</button>
 <div class="container">
   
   <h2>Nueva reunion</h2>
@@ -83,7 +78,7 @@
   <div class="panel-group">
     <div class="panel panel-default">
      
-      <div class="panel-heading"> <strong>Datos de la Reuinion:</strong></div>
+      <div class="panel-heading"> <strong>Datos de la Reunión:</strong></div>
       <div class="panel-body">
           
       	<form>
@@ -133,7 +128,7 @@
     </div>
     
   </div>
-<p align="right"><input type="button" class="btn btn-success btn-lg" id="crear" value="Crear" onclick="crear()"/>
+  <span class="float-right" id="crear"><span class="btn btn-success" onclick="crear()">Crear</span></span>
 </div>
 <script src="newEvent.js"></script>
 <script src="https://code.jquery.com/jquery-1.7.min.js"></script>
