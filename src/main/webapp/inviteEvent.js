@@ -7,6 +7,10 @@ function invitar () { // se le llama cuando se da al boton Invitar
 	window.location.href = "UserCalendar.html";
 };
 
+function Cancelar(){
+	window.location.href = "UserCalendar.html";
+};
+
 function loadEvento() {
 	var data = {
 
