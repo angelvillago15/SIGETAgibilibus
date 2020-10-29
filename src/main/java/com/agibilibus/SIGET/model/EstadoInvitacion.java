@@ -1,6 +1,6 @@
 package com.agibilibus.SIGET.model;
 
-public enum Estado {
+public enum EstadoInvitacion{
 	pendiente , aceptada , rechazada
 
 }

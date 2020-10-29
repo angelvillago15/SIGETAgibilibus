@@ -1,13 +1,18 @@
 package com.agibilibus.SIGET.model;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.joda.time.DateTime;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.agibilibus.SIGET.dao.ReunionDAO;
+import com.agibilibus.SIGET.dao.UserDAO;
 import com.mongodb.util.JSON;
 
 import lombok.Data;
@@ -23,11 +28,17 @@ public class Reunion {
 	private DateTime horaFin;
 	private Usuario organizador;
 	private List<Usuario> asistentes;
-	private List<Estado> estadosInvitaciones;
+	private List<EstadoInvitacion> estadosInvitaciones;
 	private String url;
+	
+	@Autowired
+	private ReunionDAO reuniondao;
+	
+	@Autowired 
+	private UserDAO userdao;
 
 	public Reunion(int idReunion, String titulo, String descripcion, DateTime horaInicio, DateTime horaFin,
-	        Usuario organizador, List<Usuario> asistentes,  List <Estado> estadosInvitaciones, String url) {
+	        Usuario organizador, List<Usuario> asistentes,  List <EstadoInvitacion> estadosInvitaciones, String url) {
 		super();
 		this.idReunion = idReunion;
 		this.titulo = titulo;
@@ -96,11 +107,11 @@ public class Reunion {
 		this.asistentes = asistentes;
 	}
 	
-	public List<Estado> getEstadosInvitaciones() {
+	public List<EstadoInvitacion> getEstadosInvitaciones() {
 		return estadosInvitaciones;
 	}
 	
-	public void setEstadosInvitaciones(List<Estado> estadosInvitaciones) {
+	public void setEstadosInvitaciones(List<EstadoInvitacion> estadosInvitaciones) {
 		this.estadosInvitaciones = estadosInvitaciones;
 	}
 
@@ -125,12 +136,26 @@ public class Reunion {
 		for (Usuario u : this.asistentes)
 			jsaAsistentes.put(u.toJSON());
 		jso.put("asistentes", jsaAsistentes);
-		for (Estado e : this.estadosInvitaciones)
+		for (EstadoInvitacion e : this.estadosInvitaciones)
 			jsaEstados.put(e.toString());
 		jso.put("estados", jsaEstados);
 		jso.put("url", this.url);
 		
 		return jso;
+	}
+	
+	public void crearReunion(int idReunion, String titulo, String descripcion, DateTime horaInicio, DateTime horaFin, Usuario organizador, String[] correosAsistentes, String url) {
+		List<Usuario> asistentes = new ArrayList<Usuario>();
+		List<EstadoInvitacion> estados = new ArrayList<>();
+		for (String asistente: correosAsistentes){
+			Optional<Usuario> a = userdao.findById(asistente);
+			if (a.isPresent()) {
+				asistentes.add(a.get());
+				estados.add(EstadoInvitacion.pendiente);
+			}
+		}
+		Usuario or = userdao.findById(organizador.getUser()).get();
+		reuniondao.save(new Reunion(idReunion, titulo, descripcion, horaInicio, horaFin, or, asistentes, estados, url));
 	}
 
 }
