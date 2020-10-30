@@ -42,7 +42,7 @@ public class StepLogin {
 		System.out.println("Error el usuario es incorrecto");
 	}
 	
-	@Then("contraseña es correcta, mostrar el mensaje <mensaje>")
+	@Then("contraseña es incorrecta, mostrar el mensaje <mensaje>")
 	public void mostrarMensajeErrorPwd() {
 	
 		System.out.println("Error la contraseña es incorrecto");
