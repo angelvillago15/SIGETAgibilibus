@@ -5,16 +5,11 @@ import org.json.JSONObject;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.io.Serializable;
-
-import javax.persistence.Transient;
-import javax.servlet.http.HttpSession;
-
 import lombok.Data;
 
 @Data
 @Document(collection = "usuarios")
-public class Usuario implements Serializable {
+public class Usuario {
 
 	@Id
 	private String user;
@@ -26,13 +21,12 @@ public class Usuario implements Serializable {
 	private String dni;
 	private DateTime nacimiento;
 	private String rol;
-	@Transient
-	private HttpSession httpSession;
-	
-	public Usuario() {}
+
+	public Usuario() {
+	}
 
 	public Usuario(String user, String password, String nombre, String apellidos, int telefono, String email,
-	        String dni, DateTime nacimiento, String rol) {
+			String dni, DateTime nacimiento, String rol) {
 		super();
 		this.user = user;
 		this.password = password;
@@ -115,14 +109,6 @@ public class Usuario implements Serializable {
 
 	public void setRol(String rol) {
 		this.rol = rol;
-	}
-
-	public void setHttpSession(HttpSession httpSession) {
-		this.httpSession = httpSession;
-	}
-
-	public HttpSession getHttpSession() {
-		return httpSession;
 	}
 
 	public JSONObject toJSON() {
