@@ -46,10 +46,6 @@ $(document).ready(function() {
             alert("Las contraseñas no puede ser distintas");
         }else if(mail1!==mail2){
             alert("Los e-mails no pueden ser distintos");
-        }else{
-            alert("Usuario registrado");
-            window.location="Login.html";
-            limpiarCampos();
         }
     });
 
@@ -94,4 +90,7 @@ $(document).ready(function() {
                     }
                 };
                 $.ajax(data);
+                alert("Usuario registrado");
+                limpiarCampos();
+                window.location="Login.html";
         }
