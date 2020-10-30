@@ -46,7 +46,6 @@ public class Controller {
 		String userMail = jso.getString("userMail");
 		String pwd1 = jso.getString("pwd1");
 		String pwd2 = jso.getString("pwd2");
-		
 		DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy");
 		DateTime dt = formatter.parseDateTime(userDate);
 		
