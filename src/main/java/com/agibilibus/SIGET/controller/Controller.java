@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.agibilibus.SIGET.model.Manager;
+import com.agibilibus.SIGET.model.Sesion;
 import com.agibilibus.SIGET.model.Usuario;
 
 @RestController
@@ -29,8 +30,8 @@ public class Controller {
 		JSONObject jso = new JSONObject(credenciales);
 		String userName = jso.getString("userName");
 		String pwd = jso.getString("pwd");
-		Usuario user = Manager.get().login(session, userName, pwd);
-		session.setAttribute("user", user);
+		Sesion.get().login(session, userName, pwd);
+		
 	}
 	
 	@PostMapping("/register")
