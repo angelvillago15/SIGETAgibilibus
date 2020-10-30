@@ -5,6 +5,8 @@ import org.json.JSONObject;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.agibilibus.SIGET.dao.UserDAO;
+
 import lombok.Data;
 
 @Data
@@ -21,7 +23,7 @@ public class Usuario {
 	private String dni;
 	private DateTime nacimiento;
 	private String rol;
-
+	private UserDAO userdao;
 	public Usuario() {
 	}
 
@@ -110,7 +112,10 @@ public class Usuario {
 	public void setRol(String rol) {
 		this.rol = rol;
 	}
+	public Usuario register() {
+			return userdao.save(this);
 
+		}
 	public JSONObject toJSON() {
 		JSONObject jso = new JSONObject();
 		jso.put("nombre", this.nombre);

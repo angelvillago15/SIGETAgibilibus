@@ -44,7 +44,7 @@ public class Manager {
 	}
 
 	public void guardarReunion(int idReunion, String titulo, String descripcion, DateTime horaInicio, DateTime horaFin,
-	        Usuario organizador, List<Usuario> asistentes, String url) throws Exception {
+	    Usuario organizador, List<Usuario> asistentes, String url) throws Exception {
 		Reunion reunionNueva = new Reunion(idReunion, titulo, descripcion, horaInicio, horaFin, organizador, asistentes,
 		        url);
 		reuniondao.save(reunionNueva);
@@ -70,7 +70,7 @@ public class Manager {
 	}
 
 	public Usuario register(String pwd1, String nombreCompleto, String nombre, String apellidos, DateTime userDate,
-	        String userDni, int userTelf, String email) {
+	    String userDni, int userTelf, String email) {
 		user = new Usuario();
 		user.setNombre(nombreCompleto);
 		user.setUser(nombre);

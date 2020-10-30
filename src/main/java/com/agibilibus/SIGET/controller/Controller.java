@@ -54,7 +54,8 @@ public class Controller {
 		
 		if(pwd1.equals(pwd2)) {
 				try {
-					Manager.get().register(pwd1, userCompletName, userName, userApellidos, dt, userDni, userTelf, userMail);
+					Usuario user = new Usuario(userName,pwd1,userCompletName,userApellidos,userTelf,userMail,userDni,dt,"usuario" );
+					user.register();
 					resultado.put("type", "OK");
 				}
 				catch (Exception e) {

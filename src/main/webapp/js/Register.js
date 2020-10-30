@@ -34,11 +34,10 @@ $(document).ready(function() {
 });
 
     $("#registro").click(function(){//solo estan como necesarios mail usuario y contraseña como dijimos en el drive
-        var mail1 = $("#mail1").val();
-        var username = $("#username").val();
-        var pass=$("#pass").val();
-        var pass2=$("#pass2").val();
-        var mail=$("#mail1").val();
+        var mail1 = $("#userMail").val();
+        var username = $("#userName").val();
+        var pass=$("#pwd1").val();
+        var pass2=$("#pwd2").val();
         var mail2=$("#mail2").val();
         
         if(mail1.length==0 || mail2.length==0 || username.length==0 || pass.length==0){
@@ -56,13 +55,16 @@ $(document).ready(function() {
 
 
     function limpiarCampos(){ // resetear todos los campos
-        document.getElementById("username").value="";
-        document.getElementById("dni").value="";
-        document.getElementById("name").value="";
-        document.getElementById("Apellidos").value="";
-        document.getElementById("telefono").value="";
-        document.getElementById("pass").value="";
-        document.getElementById("fechaN").value="";
+        document.getElementById("userCompletName").value="";
+        document.getElementById("userDni").value="";
+        document.getElementById("userName").value="";
+        document.getElementById("userApellidos").value="";
+        document.getElementById("userTelf").value="";
+        document.getElementById("userMail").value="";
+        document.getElementById("pwd1").value="";
+        document.getElementById("userDate").value="";
+        document.getElementById("pwd2").value="";
+        document.getElementById("mail2").value="";
     };
     function register(){
             var info = {
