@@ -2,21 +2,21 @@
 <testng-results total="1" passed="0" failed="0" skipped="1">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2020-10-30T11:51:37Z" name="Default suite" finished-at="2020-10-30T11:51:37Z" duration-ms="532">
+  <suite started-at="2020-10-30T17:20:55Z" name="Default suite" finished-at="2020-10-30T17:20:56Z" duration-ms="1193">
     <groups>
       <group name="cucumber">
-        <method signature="AbstractTestNGCucumberTests.feature(cucumber.api.testng.CucumberFeatureWrapper)[pri:0, instance:RunTest@7161d8d1]" name="feature" class="cucumber.api.testng.AbstractTestNGCucumberTests"/>
+        <method signature="AbstractTestNGCucumberTests.feature(cucumber.api.testng.CucumberFeatureWrapper)[pri:0, instance:RunTest@235ecd9f]" name="feature" class="cucumber.api.testng.AbstractTestNGCucumberTests"/>
       </group> <!-- cucumber -->
     </groups>
-    <test started-at="2020-10-30T11:51:37Z" name="Default test" finished-at="2020-10-30T11:51:37Z" duration-ms="532">
+    <test started-at="2020-10-30T17:20:55Z" name="Default test" finished-at="2020-10-30T17:20:56Z" duration-ms="1193">
       <class name="RunTest">
-        <test-method is-config="true" signature="setUpClass()[pri:0, instance:RunTest@7161d8d1]" started-at="2020-10-30T12:51:37Z" name="setUpClass" finished-at="2020-10-30T12:51:37Z" duration-ms="0" status="FAIL">
+        <test-method is-config="true" signature="setUpClass()[pri:0, instance:RunTest@235ecd9f]" started-at="2020-10-30T18:20:55Z" name="setUpClass" finished-at="2020-10-30T18:20:55Z" duration-ms="0" status="FAIL">
           <exception class="cucumber.runtime.DuplicateStepDefinitionException">
             <message>
-              <![CDATA[Duplicate step definitions in pasos.StepResponderInvitacion.estoy_autenticado_en_el_sistema(HttpSession,String,String) in file:/C:/Users/duende/Eli-cuarto/SIGETAgibilibus/target/test-classes/ and pasos.stepsCrearReunion.estoy_autenticado_en_el_sistema(HttpSession,String,String) in file:/C:/Users/duende/Eli-cuarto/SIGETAgibilibus/target/test-classes/]]>
+              <![CDATA[Duplicate step definitions in pasos.stepsCrearReunion.estoy_autenticado_en_el_sistema(HttpSession,String,String) in file:/C:/Users/duende/Eli-cuarto/SIGETAgibilibus/target/test-classes/ and pasos.StepResponderInvitacion.estoy_autenticado_en_el_sistema(HttpSession,String,String) in file:/C:/Users/duende/Eli-cuarto/SIGETAgibilibus/target/test-classes/]]>
             </message>
             <full-stacktrace>
-              <![CDATA[cucumber.runtime.DuplicateStepDefinitionException: Duplicate step definitions in pasos.StepResponderInvitacion.estoy_autenticado_en_el_sistema(HttpSession,String,String) in file:/C:/Users/duende/Eli-cuarto/SIGETAgibilibus/target/test-classes/ and pasos.stepsCrearReunion.estoy_autenticado_en_el_sistema(HttpSession,String,String) in file:/C:/Users/duende/Eli-cuarto/SIGETAgibilibus/target/test-classes/
+              <![CDATA[cucumber.runtime.DuplicateStepDefinitionException: Duplicate step definitions in pasos.stepsCrearReunion.estoy_autenticado_en_el_sistema(HttpSession,String,String) in file:/C:/Users/duende/Eli-cuarto/SIGETAgibilibus/target/test-classes/ and pasos.StepResponderInvitacion.estoy_autenticado_en_el_sistema(HttpSession,String,String) in file:/C:/Users/duende/Eli-cuarto/SIGETAgibilibus/target/test-classes/
 	at cucumber.runtime.RuntimeGlue.addStepDefinition(RuntimeGlue.java:33)
 	at cucumber.runtime.java.JavaBackend.addStepDefinition(JavaBackend.java:151)
 	at cucumber.runtime.java.MethodScanner.scan(MethodScanner.java:68)
@@ -57,7 +57,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpClass -->
-        <test-method signature="feature(cucumber.api.testng.CucumberFeatureWrapper)[pri:0, instance:RunTest@7161d8d1]" started-at="2020-10-30T12:51:37Z" name="feature" description="Runs Cucumber Feature" data-provider="features" finished-at="2020-10-30T12:51:37Z" duration-ms="0" status="SKIP">
+        <test-method signature="feature(cucumber.api.testng.CucumberFeatureWrapper)[pri:0, instance:RunTest@235ecd9f]" started-at="2020-10-30T18:20:56Z" name="feature" description="Runs Cucumber Feature" data-provider="features" finished-at="2020-10-30T18:20:56Z" duration-ms="0" status="SKIP">
           <exception class="java.lang.RuntimeException">
             <message>
               <![CDATA[java.lang.NullPointerException]]>
@@ -100,7 +100,7 @@ Caused by: java.lang.NullPointerException
           <reporter-output>
           </reporter-output>
         </test-method> <!-- feature -->
-        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:RunTest@7161d8d1]" started-at="2020-10-30T12:51:37Z" name="tearDownClass" finished-at="2020-10-30T12:51:37Z" duration-ms="0" status="FAIL">
+        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:RunTest@235ecd9f]" started-at="2020-10-30T18:20:56Z" name="tearDownClass" finished-at="2020-10-30T18:20:56Z" duration-ms="0" status="FAIL">
           <exception class="java.lang.NullPointerException">
             <full-stacktrace>
               <![CDATA[java.lang.NullPointerException

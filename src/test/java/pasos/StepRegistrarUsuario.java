@@ -18,29 +18,12 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 public class StepRegistrarUsuario {
-
-	@Given("un usuario que ha pulsado el boton Registrarme ")
-
-	@When("cuando introduzco en el campo nombre de usuario <nombre de usuario>")
-	public void introducirNombre(String nombreUsuario) throws Exception {
-		Manager.get().register(nombreUsuario);
+	@Given("^Los campos estan vacios$")
+	public void comprobarCampo () {
+		Manager.get().comprobarCampos();
 	}
-	
-	@When("cuando introduzco en el campo contraseña <contraseña>")
-	
-	
-	@When("cuando introduzco en el campo email <email>")
-	
-	@When("cuando introduzco en el campo validar la misma <contraseña>")
 
-	
-	@Then("Se añade mi nuevo usuario al sistema")
 
-	
-	@Then("Las contraseñas no coinciden. Mostrar el mensaje <mensaje>")
-	public void mostrarMensajeErrorPwd() {	
-		System.out.println("Las contraseñas no coinciden");
-	}
 
 	
 
