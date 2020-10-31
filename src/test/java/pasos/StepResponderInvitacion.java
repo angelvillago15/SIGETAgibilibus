@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 
 import org.joda.time.DateTime;
 
-import com.agibilibus.SIGET.model.Manager;
 import com.agibilibus.SIGET.model.Reunion;
 import com.agibilibus.SIGET.model.Usuario;
 
@@ -20,14 +19,14 @@ public class StepResponderInvitacion {
 
 	@Given("^Estoy autenticado como usuario /.*/ /.*/ /.*/$")
     public void estoy_autenticado_en_el_sistema(HttpSession httpSession, String userName, String pwd) throws Throwable{
-    	Manager.get().login(httpSession, userName, pwd);
+    	//Manager.get().login(httpSession, userName, pwd);
     	
     	throw new PendingException();
     }
 	
 	@Then("^Respondo a la reunion /.*/ /.*/$")
 	public void responder_invitacion(Reunion reunion, Usuario asistente) throws Throwable{
-		Manager.get().responderInvitacion(reunion, asistente);
+		//Manager.get().responderInvitacion(reunion, asistente);
 		
 		throw new PendingException();
 	}

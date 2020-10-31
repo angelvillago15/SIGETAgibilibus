@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 
 import com.agibilibus.SIGET.dao.UserDAO;
 
+import com.agibilibus.SIGET.dao.UserDAO;
+
 import lombok.Data;
 
 @Component
@@ -27,9 +29,13 @@ public class Usuario {
 	private String dni;
 	private DateTime nacimiento;
 	private String rol;
+
+	
+
 	
 	@Autowired 
 	private UserDAO userdao;
+
 
 	public Usuario() {
 	}
@@ -119,7 +125,10 @@ public class Usuario {
 	public void setRol(String rol) {
 		this.rol = rol;
 	}
-
+	public Usuario register() {
+		return userdao.save(this);
+		}
+	
 	public JSONObject toJSON() {
 		JSONObject jso = new JSONObject();
 		jso.put("nombre", this.nombre);

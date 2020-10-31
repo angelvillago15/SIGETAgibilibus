@@ -4,7 +4,6 @@ package pasos;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.agibilibus.SIGET.model.Manager;
 import com.agibilibus.SIGET.model.Reunion;
 import com.agibilibus.SIGET.model.Usuario;
 
@@ -22,17 +21,17 @@ public class StepEnviarInvitacion {
 	
 	@When("envio la invitacion a los asistentes <asistentes> ")
 	public void enviarInvitacion() {
-		Manager.get().enviarInivitacion();
+		//Manager.get().enviarInivitacion();
 	}
 	
 	@Then("me aparece una notificacion ")
 	public void mostrarNotificacion(Reunion reunion, List <Usuario> asistentes) {
-		Manager.get().mostrarNotificacion(reunion, asistentes);
+		//Manager.get().mostrarNotificacion(reunion, asistentes);
 	}
 	
 	@Then("respondo invitación ")
 	public void responderInvitacion(Reunion reunion, Usuario asistente) {
-		Manager.get().responderInvitacion(reunion, asistente);
+		//Manager.get().responderInvitacion(reunion, asistente);
 	}
 	
 	@Then(" muestra mensaje de error <mensaje>")
