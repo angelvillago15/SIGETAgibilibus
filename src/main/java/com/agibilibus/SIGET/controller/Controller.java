@@ -16,12 +16,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.agibilibus.SIGET.model.Manager;
-import com.agibilibus.SIGET.model.Usuario;
+import com.agibilibus.SIGET.model.Sesion;
 
 @RestController
 public class Controller {
-	private static String error = "error";
-	private static String message = "message";
+
 
 
 	@PostMapping("/login")
@@ -29,51 +28,83 @@ public class Controller {
 		JSONObject jso = new JSONObject(credenciales);
 		String userName = jso.getString("userName");
 		String pwd = jso.getString("pwd");
-		Usuario user = Manager.get().login(session, userName, pwd);
-		session.setAttribute("user", user);
+		Sesion.get().login(session, userName, pwd);
+		
 	}
 	
 	@PostMapping("/register")
 	public String register(HttpSession session, @RequestBody Map<String, Object> credenciales){
 		JSONObject jso = new JSONObject(credenciales);
-		String userCompletName = jso.getString("userCompletName");
+		JSONObject resultado = new JSONObject();
+		boolean error = false;
+		String message ="";
+		
 		String userName = jso.getString("userName");
-		String userApellidos = jso.getString("userApellidos");
-		String userDate = jso.getString("userDate");
-		String userDni = jso.getString("userDni");
-		int userTelf = Integer.parseInt(jso.getString("userTelf"));
-		String userMail = jso.getString("userMail");
+		String userMail1 = jso.getString("userMail1");
+		String userMail2 = jso.getString("userMail2");
 		String pwd1 = jso.getString("pwd1");
 		String pwd2 = jso.getString("pwd2");
 		
-		DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy");
-		DateTime dt = formatter.parseDateTime(userDate);
+		String userDate = jso.getString("userDate");
+		String strTelf = jso.getString("userTelf");
+		int userTelf=0;
+		DateTime dt = new DateTime();
 		
-		JSONObject resultado = new JSONObject();
-		
-		if(pwd1.equals(pwd2)) {
-				try {
-					Manager.get().register(pwd1, userCompletName, userName, userApellidos, dt, userDni, userTelf, userMail);
-					resultado.put("type", "OK");
-				}
-				catch (Exception e) {
-					resultado.put("type", error);
-					resultado.put(message, e.getMessage());
-				}
-		}else {
-			resultado.put("type", error);
-			resultado.put(message, "las password no coinciden.");
+		if(userName.isEmpty()) {
+			error = true;
+			message += "Falta el nombre de usuario.\n";
+		}
+		if(!pwd1.equals(pwd2)) {
+			error = true;
+			message += "Las contraseñas no coinciden.\n";
+		}
+		if(!userMail1.equals(userMail2)) {
+			error = true;
+			message += "Los correos no coinciden.\n";
+		}
+		if(!strTelf.isEmpty()) {
+			try {
+				userTelf = Integer.parseInt(jso.getString("userTelf"));
+			}
+			catch(NumberFormatException e) {
+				error = true;
+				message += "Error en el formato del telefono.\n";
+			}
 		}
 		
+		if(!userDate.isEmpty()) {
+			try {
+				DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
+				dt = formatter.parseDateTime(userDate);
+				
+			}catch(Exception e) {
+				error = true;
+				message += "Error en el formato de la fecha.\n";
+			}
+		}
 		
+		if(error) {
+			resultado.put("type", error);
+			resultado.put(message, message);
+			return resultado.toString();
+		}
+		
+		String userCompletName = jso.getString("userCompletName");
+		String userApellidos = jso.getString("userApellidos");
+		String userDni = jso.getString("userDni");
+		
+		try {
+				Manager.get().register(pwd1, userCompletName, userName, userApellidos, dt, userDni, userTelf, userMail1);
+				resultado.put("type", "OK");
+		}
+		catch (Exception e) {
+				resultado.put("type", error);
+				resultado.put(message, e.getMessage());
+		}
 		return resultado.toString();
 	}
 
-	@PostMapping("/guardarReunion")
-	public void guardarReunion(HttpSession session, @RequestBody Map<String, Object> datosReunion) throws Exception {
-		
-		
-	}
+
 	
 	
 
