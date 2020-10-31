@@ -145,16 +145,7 @@ public class Usuario {
 	}
 
 	public Usuario crearUsuario(String pwd1, String nombreCompleto, String nombre, String apellidos, DateTime userDate, String userDni, int userTelf, String email) {
-		Usuario user;
-		user = new Usuario();
-		user.setNombre(nombreCompleto);
-		user.setUser(nombre);
-		user.setApellidos(apellidos);
-		user.setDate(userDate);
-		user.setDNI(userDni);
-		user.setTelefono(userTelf);
-		user.setEmail(email);
-		user.setPassword(pwd1);
+		Usuario user = new Usuario(nombre,pwd1,nombreCompleto,apellidos,userTelf,email,userDni,userDate,"usuario");
 		
 		return userdao.save(user);
 	}
