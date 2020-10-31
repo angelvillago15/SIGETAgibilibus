@@ -2,14 +2,14 @@ package com.agibilibus.SIGET.model;
 
 import org.joda.time.DateTime;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.agibilibus.SIGET.dao.UserDAO;
+
+import java.beans.Transient;
 import java.io.Serializable;
-
-import javax.persistence.Transient;
-import javax.servlet.http.HttpSession;
-
 import lombok.Data;
 
 @Data
@@ -26,9 +26,10 @@ public class Usuario implements Serializable {
 	private String dni;
 	private DateTime nacimiento;
 	private String rol;
-	@Transient
-	private HttpSession httpSession;
 	
+	@Autowired
+	private UserDAO userdao;
+		
 	public Usuario() {}
 
 	public Usuario(String user, String password, String nombre, String apellidos, int telefono, String email,
@@ -117,14 +118,6 @@ public class Usuario implements Serializable {
 		this.rol = rol;
 	}
 
-	public void setHttpSession(HttpSession httpSession) {
-		this.httpSession = httpSession;
-	}
-
-	public HttpSession getHttpSession() {
-		return httpSession;
-	}
-
 	public JSONObject toJSON() {
 		JSONObject jso = new JSONObject();
 		jso.put("nombre", this.nombre);
@@ -138,5 +131,28 @@ public class Usuario implements Serializable {
 		jso.put("rol", this.rol);
 		return jso;
 
+	}
+	
+	public Usuario crearUsuario(String pwd1, String nombreCompleto, String nombre, String apellidos, DateTime userDate, String userDni, int userTelf, String email) {
+		Usuario user;
+		user = new Usuario();
+		user.setNombre(nombreCompleto);
+		user.setUser(nombre);
+		user.setApellidos(apellidos);
+		user.setDate(userDate);
+		user.setDNI(userDni);
+		user.setTelefono(userTelf);
+		user.setEmail(email);
+		user.setPassword(pwd1);
+		
+		return userdao.save(user);
+	}
+	
+	public Usuario modificarUsuario(Usuario u) {
+		return null;
+	}
+	
+	public void eliminarUsuario (Usuario u) {
+		
 	}
 }

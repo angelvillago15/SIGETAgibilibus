@@ -52,7 +52,7 @@ public class Manager {
 			if (optUser.isPresent()) {
 				Usuario user = optUser.get();
 				if (user.getPassword().equals(pwd)) {
-					user.setHttpSession(httpSession);
+					//user.setHttpSession(httpSession);
 					this.connectedUsersByUserName.put(userName, user);
 					this.connectedUsersByHttpSession.put(httpSession.getId(), user);
 					this.user = user;
