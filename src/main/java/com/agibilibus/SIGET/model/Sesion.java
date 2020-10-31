@@ -77,7 +77,7 @@ public class Sesion implements Serializable{
 		static Sesion singleton = new Sesion();
 	}
 
-	@Bean
+	@Bean(name="beanSesion")
 	public static Sesion get() {
 		return SesionHolder.singleton;
 	}

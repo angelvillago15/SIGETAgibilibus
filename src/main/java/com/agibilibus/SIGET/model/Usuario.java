@@ -2,13 +2,19 @@ package com.agibilibus.SIGET.model;
 
 import org.joda.time.DateTime;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.stereotype.Component;
+
+import com.agibilibus.SIGET.dao.UserDAO;
 
 import com.agibilibus.SIGET.dao.UserDAO;
 
 import lombok.Data;
 
+@Component
 @Data
 @Document(collection = "usuarios")
 public class Usuario {
@@ -23,7 +29,14 @@ public class Usuario {
 	private String dni;
 	private DateTime nacimiento;
 	private String rol;
+
+	
+
+	
+	@Autowired 
 	private UserDAO userdao;
+
+
 	public Usuario() {
 	}
 
@@ -129,5 +142,35 @@ public class Usuario {
 		jso.put("rol", this.rol);
 		return jso;
 
+	}
+
+	public Usuario crearUsuario(String pwd1, String nombreCompleto, String nombre, String apellidos, DateTime userDate, String userDni, int userTelf, String email) {
+		Usuario user;
+		user = new Usuario();
+		user.setNombre(nombreCompleto);
+		user.setUser(nombre);
+		user.setApellidos(apellidos);
+		user.setDate(userDate);
+		user.setDNI(userDni);
+		user.setTelefono(userTelf);
+		user.setEmail(email);
+		user.setPassword(pwd1);
+		
+		return userdao.save(user);
+	}
+	
+	public Usuario modificarUsuario(Usuario u) {
+		return null;
+	}
+	
+	public void eliminarUsuario (Usuario u) {
+		
+	}
+	private static class UsuarioHolder {
+		static Usuario singleton = new Usuario();
+	}
+	@Bean(name="beanUsuario")
+	public static Usuario get() {
+		return UsuarioHolder.singleton;
 	}
 }
