@@ -30,7 +30,7 @@ public class stepsCrearReunion {
 	
 	@Then("^Actualizo mi calendario con la nueva reunion$")
 	public void actualizar_mi_calendario_con_la_nueva_reunion()  throws Throwable{
-		Manager.get().cargarCalendario();
+		//Manager.get().cargarCalendario();
 	}
 	
 

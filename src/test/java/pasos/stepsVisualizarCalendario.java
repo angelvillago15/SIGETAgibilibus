@@ -21,7 +21,7 @@ public class stepsVisualizarCalendario {
 	
 	@When("^Entro a la pantalla de calendario semanal$")
 	public void visualizarCalendario() throws Throwable{
-		Manager.get().cargarCalendario();
+		//Manager.get().cargarCalendario();
 	}
 	
 	@Then("^Veo mis reuniones de la semana$")

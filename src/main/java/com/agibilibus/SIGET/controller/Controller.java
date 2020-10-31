@@ -92,7 +92,7 @@ public class Controller {
 	@PostMapping("/getReuniones")
 	public String getReuniones(HttpSession session) {
 		Usuario usuario = (Usuario) session.getAttribute("user");
-		return Manager.get().getReuniones(usuario).toString();
+		return Reunion.get().getReuniones(usuario).toString();
 	}
 	
 
