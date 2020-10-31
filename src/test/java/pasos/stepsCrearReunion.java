@@ -4,7 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.joda.time.DateTime;
 
-import com.agibilibus.SIGET.model.Manager;
+
 import com.agibilibus.SIGET.model.Reunion;
 import com.agibilibus.SIGET.model.Usuario;
 
@@ -18,7 +18,7 @@ public class stepsCrearReunion {
 	    
     @Given("^Estoy autenticado como usuario /.*/ /.*/ /.*/$")
     public void estoy_autenticado_en_el_sistema(HttpSession httpSession, String userName, String pwd) throws Throwable{
-    	Manager.get().login(httpSession, userName, pwd);
+    	//Manager.get().login(httpSession, userName, pwd);
     	
     	throw new PendingException();
     }
@@ -31,7 +31,7 @@ public class stepsCrearReunion {
 	
 	@Then("^Actualizo mi calendario con la nueva reunion$")
 	public void actualizar_mi_calendario_con_la_nueva_reunion()  throws Throwable{
-		Manager.get().cargarCalendario();
+		//Manager.get().cargarCalendario();
 	}
 	
 
