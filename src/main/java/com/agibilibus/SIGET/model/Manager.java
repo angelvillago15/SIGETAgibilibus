@@ -9,7 +9,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.servlet.http.HttpSession;
 
 import org.joda.time.DateTime;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import com.agibilibus.SIGET.dao.ReunionDAO;
@@ -38,10 +40,10 @@ public class Manager {
 		static Manager singleton = new Manager();
 	}
 
+	@Bean
 	public static Manager get() {
 		return ManagerHolder.singleton;
 	}
-
 
 	public Usuario login(HttpSession httpSession, String userName, String pwd) throws Exception {
 		try {
@@ -63,27 +65,34 @@ public class Manager {
 		}
 	}
 
-	public void cargarCalendario() {
+	public void guardarReunion(int idReunion, String titulo, String descripcion, DateTime horaInicio, DateTime horaFin, Usuario organizador, List<Usuario> asistentes, String url) throws Exception {
+		Reunion reunionNueva = new Reunion(idReunion, titulo, descripcion, horaInicio, horaFin, organizador, asistentes, url);
+		reuniondao.save(reunionNueva);
 	}
-
+	
+	public void cargarCalendario () {
+	}
+	
 	public void cargarReuniones() {
-
+		
 	}
 
 	public void enviarInivitacion() {
-
+	
+		
 	}
 
 	public void mostrarNotificacion(Reunion reunion, List<Usuario> asistentes) {
-
+		
+		
 	}
 
 	public void responderInvitacion(Reunion reunion, Usuario asistente) {
-
+		
+		
 	}
-
-	public Usuario register(String pwd1, String nombreCompleto, String nombre, String apellidos, DateTime userDate,
-	        String userDni, int userTelf, String email) {
+	
+	public Usuario register(String pwd1, String nombreCompleto, String nombre, String apellidos, DateTime userDate, String userDni, int userTelf, String email){
 		user = new Usuario();
 		user.setNombre(nombreCompleto);
 		user.setUser(nombre);
@@ -93,9 +102,12 @@ public class Manager {
 		user.setTelefono(userTelf);
 		user.setEmail(email);
 		user.setPassword(pwd1);
-
+		
 		return userdao.save(user);
 
+	
 	}
+
+
 
 }

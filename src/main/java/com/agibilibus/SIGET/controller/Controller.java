@@ -6,7 +6,6 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.json.JSONObject;
@@ -16,8 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.agibilibus.SIGET.model.Reunion;
-import com.agibilibus.SIGET.model.Sesion;
+import com.agibilibus.SIGET.model.Manager;
 import com.agibilibus.SIGET.model.Usuario;
 
 @RestController
@@ -31,8 +29,8 @@ public class Controller {
 		JSONObject jso = new JSONObject(credenciales);
 		String userName = jso.getString("userName");
 		String pwd = jso.getString("pwd");
-		Sesion.get().login(session, userName, pwd);
-		
+		Usuario user = Manager.get().login(session, userName, pwd);
+		session.setAttribute("user", user);
 	}
 	
 	@PostMapping("/register")
@@ -55,7 +53,7 @@ public class Controller {
 		
 		if(pwd1.equals(pwd2)) {
 				try {
-					Usuario.get().crearUsuario(pwd1, userCompletName, userName, userApellidos, dt, userDni, userTelf, userMail);
+					Manager.get().register(pwd1, userCompletName, userName, userApellidos, dt, userDni, userTelf, userMail);
 					resultado.put("type", "OK");
 				}
 				catch (Exception e) {
@@ -67,25 +65,21 @@ public class Controller {
 			resultado.put(message, "las password no coinciden.");
 		}
 		
+		
 		return resultado.toString();
 	}
 
-	@PostMapping("/nuevaTarea")
+	@PostMapping("/guardarReunion")
 	public void guardarReunion(HttpSession session, @RequestBody Map<String, Object> datosReunion) throws Exception {
-		JSONObject jso = new JSONObject(datosReunion);
-		String titulo = jso.getString("nombre");
-		String descripcion = jso.getString("descripcion");
-		String [] fecha = jso.getString("fecha").split("-");
-		String [] horaIni = jso.getString("horaInicio").split(":");
-		String [] horaFin = jso.getString("horaFin").split(":");
-		DateTime horaI = new DateTime(Integer.parseInt(fecha[0]),Integer.parseInt(fecha[1]),Integer.parseInt(fecha[2]),Integer.parseInt(horaIni[0]),Integer.parseInt(horaIni[1]),DateTimeZone.forID("UTC"));
-		DateTime horaF = new DateTime(Integer.parseInt(fecha[0]),Integer.parseInt(fecha[1]),Integer.parseInt(fecha[2]),Integer.parseInt(horaFin[0]),Integer.parseInt(horaFin[1]),DateTimeZone.forID("UTC"));
-		Usuario organizador = (Usuario) session.getAttribute("user");
-		String url = jso.getString("url");
-		String[] correosAsistentes = ((jso.getString("correos")).replace(" ", "")).split(","); 
-		Reunion.get().guardarReunion(((int) (Math.random()*(1000000)+1)), titulo, descripcion, horaI,horaF, organizador, correosAsistentes, url);
+		
 		
 	}
 	
+	
 
+	
+	
+
+	
+	
 }
