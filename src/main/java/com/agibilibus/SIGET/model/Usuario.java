@@ -2,19 +2,14 @@ package com.agibilibus.SIGET.model;
 
 import org.joda.time.DateTime;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.agibilibus.SIGET.dao.UserDAO;
-
-import java.beans.Transient;
-import java.io.Serializable;
 import lombok.Data;
 
 @Data
 @Document(collection = "usuarios")
-public class Usuario implements Serializable {
+public class Usuario {
 
 	@Id
 	private String user;
@@ -26,14 +21,12 @@ public class Usuario implements Serializable {
 	private String dni;
 	private DateTime nacimiento;
 	private String rol;
-	
-	@Autowired
-	private UserDAO userdao;
-		
-	public Usuario() {}
+
+	public Usuario() {
+	}
 
 	public Usuario(String user, String password, String nombre, String apellidos, int telefono, String email,
-	        String dni, DateTime nacimiento, String rol) {
+			String dni, DateTime nacimiento, String rol) {
 		super();
 		this.user = user;
 		this.password = password;
@@ -132,7 +125,7 @@ public class Usuario implements Serializable {
 		return jso;
 
 	}
-	
+
 	public Usuario crearUsuario(String pwd1, String nombreCompleto, String nombre, String apellidos, DateTime userDate, String userDni, int userTelf, String email) {
 		Usuario user;
 		user = new Usuario();
