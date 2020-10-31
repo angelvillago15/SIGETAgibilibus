@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.agibilibus.SIGET.model.Manager;
 import com.agibilibus.SIGET.model.Reunion;
 import com.agibilibus.SIGET.model.Sesion;
 import com.agibilibus.SIGET.model.Usuario;
@@ -56,7 +55,7 @@ public class Controller {
 		
 		if(pwd1.equals(pwd2)) {
 				try {
-					Manager.get().register(pwd1, userCompletName, userName, userApellidos, dt, userDni, userTelf, userMail);
+					Usuario.get().crearUsuario(pwd1, userCompletName, userName, userApellidos, dt, userDni, userTelf, userMail);
 					resultado.put("type", "OK");
 				}
 				catch (Exception e) {

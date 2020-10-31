@@ -3,6 +3,7 @@ package com.agibilibus.SIGET.model;
 import org.joda.time.DateTime;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
@@ -34,7 +35,7 @@ public class Usuario {
 	}
 
 	public Usuario(String user, String password, String nombre, String apellidos, int telefono, String email,
-			String dni, DateTime nacimiento, String rol) {
+			String dni, DateTime nacimiento) {
 		super();
 		this.user = user;
 		this.password = password;
@@ -44,7 +45,6 @@ public class Usuario {
 		this.email = email;
 		this.dni = dni;
 		this.nacimiento = nacimiento;
-		this.rol = rol;
 	}
 
 	public String getNombre() {
@@ -155,5 +155,12 @@ public class Usuario {
 	
 	public void eliminarUsuario (Usuario u) {
 		
+	}
+	private static class UsuarioHolder {
+		static Usuario singleton = new Usuario();
+	}
+	@Bean(name="beanUsuario")
+	public static Usuario get() {
+		return UsuarioHolder.singleton;
 	}
 }

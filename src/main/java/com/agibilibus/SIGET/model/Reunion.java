@@ -138,7 +138,7 @@ public class Reunion {
 	
 	
 	public void guardarReunion(int idReunion, String titulo, String descripcion, DateTime horaInicio, DateTime horaFin, Usuario organizador, String[] correosAsistentes, String url) {
-		List<Usuario> asistentes = new ArrayList<Usuario>();
+		List<Usuario> asistentes = new ArrayList <Usuario>();
 		for (String asistente: correosAsistentes){
 			Optional<Usuario> a = userdao.findById(asistente);
 			if (a.isPresent()) {
