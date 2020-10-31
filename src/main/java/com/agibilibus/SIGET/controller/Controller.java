@@ -55,8 +55,8 @@ public class Controller {
 		if(pwd1.equals(pwd2)) {
 				try {
 
-					Usuario user = new Usuario(userName,pwd1,userCompletName,userApellidos,userTelf,userMail,userDni,dt,"usuario" );
-					user.register();
+					//Usuario user = new Usuario(userName,pwd1,userCompletName,userApellidos,userTelf,userMail,userDni,dt,"usuario" );
+					//user.register();
 
 					Usuario.get().crearUsuario(pwd1, userCompletName, userName, userApellidos, dt, userDni, userTelf, userMail);
 

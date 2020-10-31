@@ -126,7 +126,7 @@ public class Usuario {
 		this.rol = rol;
 	}
 	public Usuario register() {
-			return userdao.save(this);
+		return userdao.save(this);
 
 		}
 	public JSONObject toJSON() {
