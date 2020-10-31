@@ -47,18 +47,21 @@ public class Controller {
 		String userMail = jso.getString("userMail");
 		String pwd1 = jso.getString("pwd1");
 		String pwd2 = jso.getString("pwd2");
-		DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy");
-		DateTime dt = formatter.parseDateTime(userDate);
+		
+		
+		DateTime fecha = DateTime.parse(userDate);
+		//DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy");
+		//DateTime dt = formatter.parseDateTime(userDate);
 		
 		JSONObject resultado = new JSONObject();
 		
 		if(pwd1.equals(pwd2)) {
 				try {
 
-					//Usuario user = new Usuario(userName,pwd1,userCompletName,userApellidos,userTelf,userMail,userDni,dt,"usuario" );
+					//Usuario user = new Usuario(userName,pwd1,userCompletName,userApellidos,userTelf,userMail,userDni,fecha,"usuario" );
 					//user.register();
 
-					Usuario.get().crearUsuario(pwd1, userCompletName, userName, userApellidos, dt, userDni, userTelf, userMail);
+					Usuario.get().crearUsuario(pwd1, userCompletName, userName, userApellidos, fecha, userDni, userTelf, userMail);
 
 					resultado.put("type", "OK");
 				}

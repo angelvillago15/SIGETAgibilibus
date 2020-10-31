@@ -127,8 +127,8 @@ public class Usuario {
 	}
 	public Usuario register() {
 		return userdao.save(this);
-
 		}
+	
 	public JSONObject toJSON() {
 		JSONObject jso = new JSONObject();
 		jso.put("nombre", this.nombre);
