@@ -11,8 +11,9 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import org.json.JSONArray;
 import org.json.JSONObject;
-
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -89,10 +90,11 @@ public class Controller {
 		
 	}
 	
-	@PostMapping("/getReuniones")
-	public String getReuniones(HttpSession session) {
+	@GetMapping("/getReuniones")
+	public JSONArray getReuniones(HttpSession session) {
 		Usuario usuario = (Usuario) session.getAttribute("user");
-		return Reunion.get().getReuniones(usuario).toString();
+		System.out.println(Reunion.get().getReuniones(usuario));
+		return Reunion.get().getReuniones(usuario);
 	}
 	
 

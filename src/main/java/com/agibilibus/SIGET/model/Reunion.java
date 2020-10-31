@@ -146,6 +146,16 @@ public class Reunion {
 		jso.put("url", this.url);
 		return jso;
 	}
+	
+	public JSONObject toEvent() {
+		JSONObject jso = new JSONObject();
+		jso.put("id", this.idReunion);
+		jso.put("title", this.titulo);
+		jso.put("start", this.horaInicio);
+		jso.put("end", this.horaFin);
+		jso.put("url", this.url);
+		return jso;
+	}
 
 	public void guardarReunion(int idReunion, String titulo, String descripcion, DateTime horaInicio, DateTime horaFin, Usuario organizador, String[] correosAsistentes, String url) {
 		List<Usuario> asistentes = new ArrayList <Usuario>();
@@ -167,17 +177,15 @@ public class Reunion {
 		reuniondao.delete(r);
 	}
 	
-	public JSONObject getReuniones(Usuario u) {
+	public JSONArray getReuniones(Usuario u) {
 		JSONArray jsaReuniones = new JSONArray();
 		Usuario usuario = userdao.findById(u.getUser()).get();
 		List<Reunion> reuniones = reuniondao.findAll();
 		for (Reunion r : reuniones) {
 			if (r.getOrganizador().getUser().equals(usuario.getUser()) || r.getAsistentes().contains(usuario))
-				jsaReuniones.put(r.toJSON());
+				jsaReuniones.put(r.toEvent());
 		}
-		JSONObject jso = new JSONObject();
-		jso.put("reuniones", jsaReuniones);
-		return jso;
+		return jsaReuniones;
 	}
 	
 	private static class ReunionHolder {
