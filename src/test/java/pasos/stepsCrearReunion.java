@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.joda.time.DateTime;
 
 import com.agibilibus.SIGET.model.Manager;
+import com.agibilibus.SIGET.model.Reunion;
 import com.agibilibus.SIGET.model.Usuario;
 
 import cucumber.api.PendingException;
@@ -23,8 +24,7 @@ public class stepsCrearReunion {
     }
 	@When("^Guardo una nueva reunion /.*/ /.*/ /.*/ /.*/ /.*/ /.*/ /.*/ /.*/$")
 	public void guardar_esa_reunion (int idReunion, String titulo, String descripcion, DateTime horaInicio, DateTime horaFin, Usuario organizador, String[] asistentes, String url) throws Throwable{
-		Manager.get().guardarReunion(idReunion, titulo, descripcion, horaInicio, horaFin, organizador, asistentes, url);
-		
+		Reunion.get().guardarReunion(idReunion, titulo, descripcion, horaInicio, horaFin, organizador, asistentes, url);
 		throw new PendingException();
 	}
 	

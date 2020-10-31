@@ -7,9 +7,12 @@
   <title>Registro</title>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker.css"/>
   <style>
   body {
-    background: url('recursos/ubuntuF.jpg') center no-repeat;
+    background: url('recursos/ubuntu.jpg') center no-repeat;
     background-attachment: fixed;
     background-size: cover;
     min-height:100%;
@@ -55,16 +58,16 @@
   }
   #alertPass {
       position: absolute;
-      bottom:100px;
-      right:480px;
-      width:250px;
+      bottom:0px;
+      right:425px;
+      width:300px;
       padding:15px;
       background:#fefefe;
       font-size:.875em;
       border-radius:5px;
       box-shadow:0 1px 3px #ccc;
       border:1px solid #ddd;
-      display:none;
+      display:none
   }
   #alertPass::before {
       content: "\025C4";
@@ -101,7 +104,7 @@
   <div class="container">
     <a class="navbar-brand" href="#">
       <div class="left">
-        <!--<a href="Login.html"><span class="logo"><img src="recursos/logo.png" width="60" height="60"></span></a>-->
+        <a href="Login.html"><span class="logo"><img src="recursos/logo.png" width="60" height="60"></span></a>
       </div>
     </a>
   </div>  
@@ -141,9 +144,8 @@
               </div>
             <label class="col-sm-2 col-form-label">Fecha de Nacimiento:</label>
               <div class="col-sm-3">
-                  <input type="text" class="form-control" id="fechaN" required="true">
+                  <input type="date" class="form-control" id="fechaN" required="true">
               </div>
-              <label class="col-sm-2 col-form-label">(dd/mm/aaaa)</label>
           </div>
 	  	</form>
       </div>
@@ -162,7 +164,11 @@
         <div class="form-group row" id=userData>
           <label class="col-sm-2 col-form-label" >Contraseña:</label>
             <div class="col-sm-3">
-                <input id= "pass" type="password" class="form-control checkSeguridad">
+                <input id= "pass" type="password" id="pass" class="form-control">
+            </div>
+            <label class="col-sm-2 col-form-label">Validar:</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="pass2" required="true">
             </div>
             <div id="alertPass">
               <h6><strong>La contraseña debe tener los siguientes requisitos:</strong></h6>
@@ -197,6 +203,6 @@
 </div>
 </body>
 <script src="https://code.jquery.com/jquery-1.7.min.js"></script>
-<script src="Register.js"></script>
+<script src="js/Register.js"></script>
 </html>
 

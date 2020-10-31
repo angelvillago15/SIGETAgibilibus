@@ -31,22 +31,29 @@ $(document).ready(function() {
     }).blur(function() {
         $('#alertPass').hide();
     });
+});
 
     $("#registro").click(function(){//solo estan como necesarios mail usuario y contraseña como dijimos en el drive
         var mail1 = $("#mail1").val();
         var username = $("#username").val();
         var pass=$("#pass").val();
-
+        var pass2=$("#pass2").val();
+        var mail=$("#mail1").val();
+        var mail2=$("#mail2").val();
+        
         if(mail1.length==0 || mail2.length==0 || username.length==0 || pass.length==0){
             alert("Rellena todos los campos");
-        }else if(pass.length < 8 ||  !pass.match(/[A-z]/) || !pass.match(/\d/) || !pass.match(/[A-Z]/)){
-            alert("La contraseña no tiene los requisitos requeridos");
+        }else if(pass!==pass2){
+            alert("Las contraseñas no puede ser distintas");
+        }else if(mail1!==mail2){
+            alert("Los e-mails no pueden ser distintos");
         }else{
             alert("Usuario registrado");
             window.location="Login.html";
             limpiarCampos();
         }
     });
+
 
     function limpiarCampos(){ // resetear todos los campos
         document.getElementById("username").value="";
@@ -57,38 +64,32 @@ $(document).ready(function() {
         document.getElementById("pass").value="";
         document.getElementById("fechaN").value="";
     };
-    class Reunion{
-        constructor(dni, nombre, apellidos, telefono, fechaN, usuario, password, mail){
-            this.dni=dni;
-            this.nombre=nombre;
-            this.apellidos=apellidos;
-            this.telefono=telefono;
-            this.fechaN=fechaN;
-            this.usuario=usuario;
-            this.password=password;
-            this.mail=mail;
-        }
-    
-        crearReunion(){
-            var msg ={
-                type : "nuevo usuario",
-                dni : this.dni;
-                nombre : this.nombre,
-                apellidos : this.apellidos,
-                telefono : this.telefono,
-                fechaN : this.fechaN,
-                usuario : this.usuario,
-                password : this.password,
-                mail : this.mail,
-                rol : "usuario"
+    function register(){
+            var info = {
+                type : "Register",
+                userCompletName : userName.value,
+                userName : userName.value,
+                userApellidos : userApellidos.value,
+                userDni : userDni.value,
+                userDate : userDate.value,
+                userTelf : userTelf.value,
+                userMail : userMail.value,
+                pwd1 : pwd1.value,
+                pwd2 : pwd2.value
+
             };
             var data = {
-                data : JSON.stringify(msg),
-                url : "nuevoUsuario",
-                type : "post",
-                contentType : 'application/json',
-                dataType : 'json',
-            }
-            //pasar a json JSON.stringify(msg)
+                    data : JSON.stringify(info),
+                    url : "register",
+                    type : "post",
+                    contentType: 'application/json',
+
+                    success : function() {
+                        alert("OK");
+                    },
+                    error : function(response) {
+                        alert(response.responseText);
+                    }
+                };
+                $.ajax(data);
         }
-});
