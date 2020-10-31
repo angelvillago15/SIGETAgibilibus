@@ -71,7 +71,7 @@ public class Manager {
 
 	public Usuario register(String pwd1, String nombreCompleto, String nombre, String apellidos, DateTime userDate,
 	        String userDni, int userTelf, String email) {
-		user = new Usuario();
+		Usuario user = new Usuario();
 		user.setNombre(nombreCompleto);
 		user.setUser(nombre);
 		user.setApellidos(apellidos);

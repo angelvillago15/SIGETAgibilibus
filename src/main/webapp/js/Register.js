@@ -33,63 +33,33 @@ $(document).ready(function() {
     });
 });
 
-    $("#registro").click(function(){//solo estan como necesarios mail usuario y contraseña como dijimos en el drive
-        var mail1 = $("#mail1").val();
-        var username = $("#username").val();
-        var pass=$("#pass").val();
-        var pass2=$("#pass2").val();
-        var mail=$("#mail1").val();
-        var mail2=$("#mail2").val();
-        
-        if(mail1.length==0 || mail2.length==0 || username.length==0 || pass.length==0){
-            alert("Rellena todos los campos");
-        }else if(pass!==pass2){
-            alert("Las contraseñas no puede ser distintas");
-        }else if(mail1!==mail2){
-            alert("Los e-mails no pueden ser distintos");
-        }else{
-            alert("Usuario registrado");
-            window.location="Login.html";
-            limpiarCampos();
-        }
-    });
+function register(){
+		var info = {
+			type : "Register",
+			userCompletName : userName.value,
+			userName : userName.value,
+			userApellidos : userApellidos.value,
+			userDni : userDni.value,
+			userDate : userDate.value,
+			userTelf : userTelf.value,
+			userMail1 : userMail1.value,
+			userMail2 : userMail2.value,
+			pwd1 : pwd1.value,
+			pwd2 : pwd2.value
 
+		};
+		var data = {
+				data : JSON.stringify(info),
+				url : "register",
+				type : "post",
+				contentType: 'application/json',
 
-    function limpiarCampos(){ // resetear todos los campos
-        document.getElementById("username").value="";
-        document.getElementById("dni").value="";
-        document.getElementById("name").value="";
-        document.getElementById("Apellidos").value="";
-        document.getElementById("telefono").value="";
-        document.getElementById("pass").value="";
-        document.getElementById("fechaN").value="";
-    };
-    function register(){
-            var info = {
-                type : "Register",
-                userCompletName : userName.value,
-                userName : userName.value,
-                userApellidos : userApellidos.value,
-                userDni : userDni.value,
-                userDate : userDate.value,
-                userTelf : userTelf.value,
-                userMail : userMail.value,
-                pwd1 : pwd1.value,
-                pwd2 : pwd2.value
-
-            };
-            var data = {
-                    data : JSON.stringify(info),
-                    url : "register",
-                    type : "post",
-                    contentType: 'application/json',
-
-                    success : function() {
-                        alert("OK");
-                    },
-                    error : function(response) {
-                        alert(response.responseText);
-                    }
-                };
-                $.ajax(data);
-        }
+				success : function() {
+					alert("OK");
+				},
+				error : function(response) {
+					alert(response.responseText);
+				}
+			};
+			$.ajax(data);
+	}
