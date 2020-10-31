@@ -68,7 +68,6 @@ public class Controller {
 			resultado.put(message, "las password no coinciden.");
 		}
 		
-		
 		return resultado.toString();
 	}
 
@@ -85,17 +84,9 @@ public class Controller {
 		Usuario organizador = (Usuario) session.getAttribute("user");
 		String url = jso.getString("url");
 		String[] correosAsistentes = ((jso.getString("correos")).replace(" ", "")).split(","); 
-		
 		Reunion.get().guardarReunion(((int) (Math.random()*(1000000)+1)), titulo, descripcion, horaI,horaF, organizador, correosAsistentes, url);
-		
 		
 	}
 	
-	
 
-	
-	
-
-	
-	
 }

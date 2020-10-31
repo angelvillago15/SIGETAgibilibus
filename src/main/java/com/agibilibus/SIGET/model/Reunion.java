@@ -11,12 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.stereotype.Component;
 
 import com.agibilibus.SIGET.dao.ReunionDAO;
 import com.agibilibus.SIGET.dao.UserDAO;
 
 import lombok.Data;
 
+@Component
 @Data
 @Document(collection = "reuniones")
 public class Reunion {
@@ -29,16 +31,17 @@ public class Reunion {
 	private Usuario organizador;
 	private List<Usuario> asistentes;
 	private String url;
-	
+
+
 	@Autowired
 	private ReunionDAO reuniondao;
-	
+
+
 	@Autowired 
 	private UserDAO userdao;
 
-	public Reunion () {
-		
-	}
+	public Reunion () {}
+	
 	public Reunion (int idReunion, String titulo, String descripcion, DateTime horaInicio, DateTime horaFin,
 	        Usuario organizador, List<Usuario> asistentes, String url) {
 		super();
@@ -170,8 +173,7 @@ public class Reunion {
 	private static class ReunionHolder {
 		static Reunion singleton = new Reunion();
 	}
-
-	@Bean
+	@Bean(name="beanReunion")
 	public static Reunion get() {
 		return ReunionHolder.singleton;
 	}

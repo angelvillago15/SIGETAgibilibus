@@ -1,14 +1,18 @@
+var data;
 function crear () { // se le llama cuando se da al boton crear
     
     if(false!=(validarCampo("nombreReunion") && validarCampo("fecha") && validarCampo("horaInicio")&& validarCampo("horaFin") && validarCampo("descripcion") && validarCampo("url") && validarCampo("invitar"))){ // no hay un campo vacio
         if(fechaCorrecta()){ //se comprueba la fecha
-            var reunion= new Reunion($("#nombreReunion").val(),$("#fecha").val(),$("#horaInicio").val(),$("#horaFin").val(),$("#descripcion").val(),$("#url").val(),$("#invitar").val()); // crear objeto reunion
+            var reunion= new Reunion($("#nombreReunion").val(),$("#fecha").val(),$("#horaInicio").val(),$("#horaFin").val(),$("#descripcion").val(),$("#url").val(),$("#invitar").val()); // crear objeto reunion            
+            reunion.crearReunion();
             alert('Se creó una reunion correctamente ');
             window.location.href = "UserCalendar.html";
             
             //limpiarCampos();
         }
     };
+    $.ajax(data);
+    
     
 };
 function validarCampo(campo) { // comprobar que no hay campos vacios
@@ -38,8 +42,7 @@ function validarCampo(campo) { // comprobar que no hay campos vacios
     }
     return correcto;
   }
-
-  
+    
 
 function limpiarCampos(){ // resetear todos los campos
     document.getElementById("nombreReunion").value="";
@@ -51,11 +54,13 @@ function limpiarCampos(){ // resetear todos los campos
     document.getElementById("invitar").value="";
 };
 
-function atras(){ // debe volver a la pagina anterior 
-    var msg = {
+function atras(){  
+	window.location.href = "UserCalendar.html";
+	//posiblemente quitar lo que hay detras
+    /*var msg = {
         type : "atras",
         subtype: "crear reunion"
-    }
+    }*/
     //mandar al controler convertir a json como en el metodo crear reunion
 }
 
@@ -82,12 +87,12 @@ class Reunion{
             url: this.url,
             correos: this.correos
         };
-        var data = {
+        data = {
             data : JSON.stringify(msg),
             url : "nuevaTarea",
             type : "post",
             contentType : 'application/json',
-            dataType : 'json',
+            dataType : 'json'
         }
         //  con esto se pasa a json JSON.stringify(msg)
         // con Macario se mandaba asi self.ws.send(JSON.stringify(msg)); ahora es con el api rest (no se bien como es)

@@ -2,11 +2,16 @@ package com.agibilibus.SIGET.model;
 
 import org.joda.time.DateTime;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.stereotype.Component;
+
+import com.agibilibus.SIGET.dao.UserDAO;
 
 import lombok.Data;
 
+@Component
 @Data
 @Document(collection = "usuarios")
 public class Usuario {
@@ -21,6 +26,9 @@ public class Usuario {
 	private String dni;
 	private DateTime nacimiento;
 	private String rol;
+	
+	@Autowired 
+	private UserDAO userdao;
 
 	public Usuario() {
 	}
