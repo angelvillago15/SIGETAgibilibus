@@ -39,9 +39,10 @@ public class Reunion {
 	@Autowired
 	private UserDAO userdao;
 
-	public Reunion () {}
-	
-	public Reunion (String idReunion, String titulo, String descripcion, DateTime horaInicio, DateTime horaFin,
+	public Reunion() {
+	}
+
+	public Reunion(String idReunion, String titulo, String descripcion, DateTime horaInicio, DateTime horaFin,
 	        Usuario organizador, List<Usuario> asistentes, String url) {
 		super();
 		this.idReunion = idReunion;
@@ -53,7 +54,7 @@ public class Reunion {
 		this.asistentes = asistentes;
 		this.url = url;
 	}
-	
+
 	public String getIdReunion() {
 		return idReunion;
 	}
@@ -144,20 +145,27 @@ public class Reunion {
 
 	public JSONObject toEvent() {
 		JSONObject jsoEvento = new JSONObject();
+		jsoEvento.put("id", this.idReunion);
 		jsoEvento.put("title", this.titulo);
 		jsoEvento.put("start", this.horaInicio);
 		jsoEvento.put("end", this.horaFin);
 		return jsoEvento;
 	}
 
-	public void guardarReunion(String titulo, String descripcion, DateTime horaInicio, DateTime horaFin, Usuario organizador, String[] correosAsistentes, String url) {
-		List<Usuario> asistentes = new ArrayList <Usuario>();
-		String id = organizador.getUser()+"#"+titulo+"#"+horaInicio.toString()+"#"+horaFin.toString();//Formato para guardar el id: Organizador#Titulo#HoraInicio#HoraFin#Asistente1#Asistente2....
-		for (String asistente: correosAsistentes){
+	public void guardarReunion(String titulo, String descripcion, DateTime horaInicio, DateTime horaFin,
+	        Usuario organizador, String[] correosAsistentes, String url) {
+		List<Usuario> asistentes = new ArrayList<Usuario>();
+		String id = organizador.getUser() + "#" + titulo + "#" + horaInicio.toString() + "#" + horaFin.toString();// Formato
+		                                                                                                          // para
+		                                                                                                          // guardar
+		                                                                                                          // el
+		                                                                                                          // id:
+		                                                                                                          // Organizador#Titulo#HoraInicio#HoraFin#Asistente1#Asistente2....
+		for (String asistente : correosAsistentes) {
 			Optional<Usuario> a = userdao.findById(asistente);
 			if (a.isPresent()) {
 				asistentes.add(a.get());
-				id += "#"+a.get().getUser();
+				id += "#" + a.get().getUser();
 			}
 		}
 		Optional<Usuario> optUser = userdao.findById(organizador.getUser());
