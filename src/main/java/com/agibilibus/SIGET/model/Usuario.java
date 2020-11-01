@@ -1,19 +1,25 @@
 package com.agibilibus.SIGET.model;
 
+import java.io.Serializable;
+
 import org.joda.time.DateTime;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.stereotype.Component;
 
-import javax.persistence.Transient;
-import javax.servlet.http.HttpSession;
+import com.agibilibus.SIGET.dao.UserDAO;
 
 import lombok.Data;
 
+@Component
 @Data
 @Document(collection = "usuarios")
-public class Usuario {
+public class Usuario implements Serializable {
 
+	private static final long serialVersionUID = 1446243385065996422L;
 	@Id
 	private String user;
 	private String password;
@@ -24,8 +30,12 @@ public class Usuario {
 	private String dni;
 	private DateTime nacimiento;
 	private String rol;
-	@Transient
-	private HttpSession httpSession;
+
+	@Autowired
+	private UserDAO userdao;
+
+	public Usuario() {
+	}
 
 	public Usuario(String user, String password, String nombre, String apellidos, int telefono, String email,
 	        String dni, DateTime nacimiento, String rol) {
@@ -113,12 +123,8 @@ public class Usuario {
 		this.rol = rol;
 	}
 
-	public void setHttpSession(HttpSession httpSession) {
-		this.httpSession = httpSession;
-	}
-
-	public HttpSession getHttpSession() {
-		return httpSession;
+	public Usuario register() {
+		return userdao.save(this);
 	}
 
 	public JSONObject toJSON() {
@@ -134,5 +140,30 @@ public class Usuario {
 		jso.put("rol", this.rol);
 		return jso;
 
+	}
+
+	public Usuario crearUsuario(String pwd1, String nombreCompleto, String nombre, String apellidos, DateTime userDate,
+	        String userDni, int userTelf, String email) {
+		Usuario user = new Usuario(nombre, pwd1, nombreCompleto, apellidos, userTelf, email, userDni, userDate,
+		        "usuario");
+
+		return userdao.save(user);
+	}
+
+	public Usuario modificarUsuario(Usuario u) {
+		return null;
+	}
+
+	public void eliminarUsuario(Usuario u) {
+
+	}
+
+	private static class UsuarioHolder {
+		static Usuario singleton = new Usuario();
+	}
+
+	@Bean(name = "beanUsuario")
+	public static Usuario get() {
+		return UsuarioHolder.singleton;
 	}
 }

@@ -1,216 +1,232 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Ventana de Usuario</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link href='fullcalendar/main.css' rel='stylesheet' />
-    <style>
-        body {
-            background: url('recursos/ubuntu.jpg') center no-repeat;
-            background-attachment: fixed;
-            background-size: cover;
-            min-height:100%;
-            background-size:cover;
-            transition: background-color .5s;
-        }
+<title>Ventana de Usuario</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link href='fullcalendar/main.css' rel='stylesheet' />
+<style>
+body {
+	background: url('recursos/ubuntu.jpg') center no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+	min-height: 100%;
+	transition: background-color .5s;
+}
 
-        .container{
-            height: 60px;
-        }
+.container {
+	height: 60px;
+}
 
-        .left {
-            position: absolute;
-            top: 0px; 
-            left: 10px;
-        }
+.left {
+	position: absolute;
+	top: 0px;
+	left: 10px;
+}
 
-        .right{
-            position: absolute;
-            top:10px;
-            right: 63px;
-            font-weight: bold;
-            font-size: 15px;
-        }
+.right {
+	position: absolute;
+	top: 10px;
+	right: 63px;
+	font-weight: bold;
+	font-size: 15px;
+}
 
-        .sidenav {
-            height: 100%;
-            width: 0;
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            left: 0;
-            background-color: #111;
-            overflow-x: hidden;
-            transition: 0.5s;
-            padding-top: 60px;
-        }
+.sidenav {
+	height: 100%;
+	width: 0;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: #111;
+	overflow-x: hidden;
+	transition: 0.5s;
+	padding-top: 60px;
+}
 
-        .sidenav a {
-            padding: 8px 8px 8px 32px;
-            text-decoration: none;
-            font-size: 25px;
-            color: #818181;
-            display: block;
-            transition: 0.3s;
-        }
+.sidenav a {
+	padding: 8px 8px 8px 32px;
+	text-decoration: none;
+	font-size: 25px;
+	color: #818181;
+	display: block;
+	transition: 0.3s;
+}
 
-        .sidenav a:hover {
-            color: #f1f1f1;
-        }
+.sidenav a:hover {
+	color: #f1f1f1;
+}
 
-        .sidenav .closebtn {
-            position: absolute;
-            top: 0;
-            right: 25px;
-            font-size: 36px;
-            margin-left: 50px;
-        }
+.sidenav .closebtn {
+	position: absolute;
+	top: 0;
+	right: 25px;
+	font-size: 36px;
+	margin-left: 50px;
+}
 
-        #main {
-            transition: margin-left .5s;
-            padding: 16px;
-        }
+#main {
+	transition: margin-left .5s;
+	padding: 16px;
+}
 
-        .list-notificacao{
-            min-width: 30px;
-            background: #ffffff;
-            min-height: 75px;
-        }
+.list-notificacao {
+	min-width: 30px;
+	background: #ffffff;
+	min-height: 75px;
+}
 
-        .list-notificacao li{
-            border-bottom : 1px #d8d8d8 solid;
-            text-align    : justify;
-            padding       : 4px 10px 4px 10px;
-            cursor: pointer;
-            font-size: 12px;
-        }
+.list-notificacao li {
+	border-bottom: 1px #d8d8d8 solid;
+	text-align: justify;
+	padding: 4px 10px 4px 10px;
+	cursor: pointer;
+	font-size: 12px;
+}
 
-        .list-notificacao li:hover{
-            background: #f1eeee;
-        }
+.list-notificacao li:hover {
+	background: #f1eeee;
+}
 
-        .list-notificacao li:hover .exclusaoNotificacao{
-            display: block;
-        }
+.list-notificacao li:hover .exclusaoNotificacao {
+	display: block;
+}
 
-        .list-notificacao li  p{
-            color: black;
-            width: 305px;
-        }       
+.list-notificacao li  p {
+	color: black;
+	width: 305px;
+}
 
-        .badgeAlert {
-            display: inline-block;
-            min-width: 10px;
-            padding: 3px 7px;
-            font-size: 12px;
-            font-weight: 700;
-            color: #fff;
-            line-height: 1;
-            vertical-align: baseline;
-            white-space: nowrap;
-            text-align: center;
-            background-color: #d9534f;
-            border-radius: 10px;
-            position: absolute;
-            margin-top: -10px;
-            margin-left: -10px
-        }
-
-    </style>
+.badgeAlert {
+	display: inline-block;
+	min-width: 10px;
+	padding: 3px 7px;
+	font-size: 12px;
+	font-weight: 700;
+	color: #fff;
+	line-height: 1;
+	vertical-align: baseline;
+	white-space: nowrap;
+	text-align: center;
+	background-color: #d9534f;
+	border-radius: 10px;
+	position: absolute;
+	margin-top: -10px;
+	margin-left: -10px
+}
+</style>
 </head>
 <!--cuerpo del programa-->
 
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="container">
-                <a class="navbar-brand" href="#">
-                    <div class="left">
-                        <span class="logo"><img src="recursos/logo.png" width="60" height="60"></span>
-                    </div>
-                </a>
-                <div class="right">
-                    <ul class="nav navbar-nav">
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                <span class="glyphicon glyphicon-bell alertNotificacao" style="color:whitesmoke"><span class="caret"></span></span><span class='badgeAlert'>1</span></a>
-                                <ul class="list-notificacao dropdown-menu">
-                                    <li id='notification'>
-                                        <div class="media">
-                                            <div class="media-body">
-                                                <div class="text-right">
-                                                    <button type="button" class="close" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <p>@X te ha invitado a una reunión</p>
-                                                <button type="button" class="btn btn-success">Aceptar</button>
-                                                <button type="button" class="btn btn-danger">Rechazar</button>
-                                            </div>
-                                        </div>
-                                    </li>                              
-                                </ul>
-                        </li>
-                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color:whitesmoke">Usuario<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="MyAccount.html"><span class="glyphicon glyphicon-user"></span>  Mi Cuenta</a></li>
-                            <li><a href="editAccount.html"><span class="glyphicon glyphicon-cog"></span>  Editar Cuenta</a></li>
-                            <li><a href="Login.html"><span class="glyphicon glyphicon-log-out"></span>  Cerrar Sesión<nav></nav></a></li>
-                        </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </nav>
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="#"><span class="glyphicon glyphicon-plus-sign"></span>Nuevo Evento</a>
-        <a href="AboutUs.html"><span class="glyphicon glyphicon-briefcase"></span> Sobre Nosotros</a>
-    </div>
-    
-    <div id="main">
-        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menú</span>
-        <br>
-        <br>
-        <div class="container theme-showcase">
-			<div id='calendar'></div>
-        </div>    
-        <div id="holder" class="row" ></div>
-    </div>  
+<nav class="navbar navbar-inverse">
+	<div class="container-fluid">
+		<div class="container">
+			<a class="navbar-brand" href="#">
+				<div class="left">
+					<span class="logo"><img src="recursos/logo.png"
+						alt="logotipo" width="60" height="60"></span>
+				</div>
+			</a>
+			<div class="right">
+				<ul class="nav navbar-nav">
+					<li class="dropdown"><a class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false"> <span
+							class="glyphicon glyphicon-bell alertNotificacao"
+							style="color: whitesmoke"><span class="caret"></span></span><span
+							class='badgeAlert'>1</span></a>
+						<ul class="list-notificacao dropdown-menu">
+							<li id='notification'>
+								<div class="media">
+									<div class="media-body">
+										<div class="text-right">
+											<button type="button" class="close" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<p>@X te ha invitado a una reunión</p>
+										<button type="button" class="btn btn-success">Aceptar</button>
+										<button type="button" class="btn btn-danger">Rechazar</button>
+									</div>
+								</div>
+							</li>
+						</ul></li>
+					<li class="dropdown"><a class="dropdown-toggle"
+						data-toggle="dropdown" href="#" style="color: whitesmoke">Usuario<span
+							class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="MyAccount.html"><span
+									class="glyphicon glyphicon-user"></span> Mi Cuenta</a></li>
+							<li><a href="editAccount.html"><span
+									class="glyphicon glyphicon-cog"></span> Editar Cuenta</a></li>
+							<li><a href="Login.html"><span
+									class="glyphicon glyphicon-log-out"></span> Cerrar Sesión
+									<nav></nav></a></li>
+						</ul></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</nav>
+<div id="mySidenav" class="sidenav">
+	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+	<a href="newEvent.html"><span class="glyphicon glyphicon-plus-sign"></span>Nuevo
+		Evento</a> <a href="AboutUs.html"><span
+		class="glyphicon glyphicon-briefcase"></span> Sobre Nosotros</a>
+</div>
+
+<div id="main">
+	<span style="font-size: 30px; cursor: pointer" onclick="openNav()">&#9776;
+		Menú</span> <br> <br>
+	<div class="container theme-showcase">
+		<div id='calendar'></div>
+	</div>
+	<div id="holder" class="row"></div>
+</div>
 
 </body>
 <script src="js/UserCalendar.js"></script>
 <script src='fullcalendar/main.js'></script>
 <script src='fullcalendar/local/es.js'></script>
 <script>
+	document.addEventListener('DOMContentLoaded', function() {
 
-  document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
+		var calendarEl = document.getElementById('calendar');
+		var calendar = new FullCalendar.Calendar(calendarEl, {
+			initialView : 'timeGridWeek',
+			nowIndicator : true,
+			headerToolbar : {
+				left : 'prev,next today',
+				center : 'title',
+				right : 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+			},
+			eventSources : [ {
+				url : '/getReuniones',
+				method : 'POST',
+				failure : function() {
+					alert('Hay un error cargando los eventos!');
+				},
+				color : 'gray',
+				editable : true
+			} ],
+			locale : 'es',
+			initialView : 'timeGridWeek',
+			navLinks : true, // can click day/week names to navigate views
+			editable : true,
+			selectable : true,
+			selectMirror : true,
+			dayMaxEvents : true, // allow "more" link when too many events
+		});
 
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-      initialView: 'timeGridWeek',
-      nowIndicator: true,
-      headerToolbar: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-      },
-      locale : 'es',
-      initialView : 'timeGridWeek',
-      navLinks: true, // can click day/week names to navigate views
-      editable: true,
-      selectable: true,
-      selectMirror: true,
-      dayMaxEvents: true, // allow "more" link when too many events
-    });
-
-    calendar.render();
-  });
-
+		calendar.render();
+	});
 </script>
 </html>

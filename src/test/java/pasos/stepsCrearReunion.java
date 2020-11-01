@@ -1,12 +1,12 @@
 package pasos;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.joda.time.DateTime;
 
-import com.agibilibus.SIGET.model.Manager;
+
+import com.agibilibus.SIGET.model.Reunion;
+import com.agibilibus.SIGET.model.Sesion;
 import com.agibilibus.SIGET.model.Usuario;
 
 import cucumber.api.PendingException;
@@ -19,20 +19,19 @@ public class stepsCrearReunion {
 	    
     @Given("^Estoy autenticado como usuario /.*/ /.*/ /.*/$")
     public void estoy_autenticado_en_el_sistema(HttpSession httpSession, String userName, String pwd) throws Throwable{
-    	Manager.get().login(httpSession, userName, pwd);
+    	Sesion.get().login(httpSession, userName, pwd);
     	
     	throw new PendingException();
     }
 	@When("^Guardo una nueva reunion /.*/ /.*/ /.*/ /.*/ /.*/ /.*/ /.*/ /.*/$")
-	public void guardar_esa_reunion (int idReunion, String titulo, String descripcion, DateTime horaInicio, DateTime horaFin, Usuario organizador, List<Usuario> asistentes, String url) throws Throwable{
-		Manager.get().guardarReunion(idReunion, titulo, descripcion, horaInicio, horaFin, organizador, asistentes, url);
-		
+	public void guardar_esa_reunion (int idReunion, String titulo, String descripcion, DateTime horaInicio, DateTime horaFin, Usuario organizador, String[] asistentes, String url) throws Throwable{
+		Reunion.get().guardarReunion(titulo, descripcion, horaInicio, horaFin, organizador, asistentes, url);
 		throw new PendingException();
 	}
 	
 	@Then("^Actualizo mi calendario con la nueva reunion$")
 	public void actualizar_mi_calendario_con_la_nueva_reunion()  throws Throwable{
-		Manager.get().cargarCalendario();
+		//Manager.get().cargarCalendario();
 	}
 	
 
