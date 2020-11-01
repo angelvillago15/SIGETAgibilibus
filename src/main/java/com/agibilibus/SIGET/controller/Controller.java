@@ -8,11 +8,6 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.json.JSONObject;
 
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
-
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -53,14 +48,14 @@ public class Controller {
 		String pwd1 = jso.getString("pwd1");
 		String pwd2 = jso.getString("pwd2");
 
-		//DateTime fecha = DateTime.parse(userDate);
-		DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy");
-		DateTime fecha = formatter.parseDateTime(userDate);
+		DateTime fecha = DateTime.parse(userDate);
 
 		JSONObject resultado = new JSONObject();
 
 		if (pwd1.equals(pwd2)) {
 			try {
+
+				// Usuario user = new Usuario();
 
 				Usuario.get().crearUsuario(pwd1, userCompletName, userName, userApellidos, fecha, userDni, userTelf, userMail);
 				resultado.put("type", "OK");
@@ -94,7 +89,7 @@ public class Controller {
 		Usuario organizador = (Usuario) session.getAttribute("user");
 		String url = jso.getString("url");
 		String[] correosAsistentes = ((jso.getString("correos")).replace(" ", "")).split(",");
-		Reunion.get().guardarReunion(titulo, descripcion, horaI, horaF, organizador, correosAsistentes, url);
+		//Reunion.get().guardarReunion(titulo, descripcion, horaI, horaF, organizador, correosAsistentes, url);
 
 	}
 
