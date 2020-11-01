@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 
 import com.agibilibus.SIGET.dao.ReunionDAO;
 import com.agibilibus.SIGET.dao.UserDAO;
-import com.mongodb.util.JSON;
 
 import lombok.Data;
 
@@ -24,7 +23,7 @@ import lombok.Data;
 @Document(collection = "reuniones")
 public class Reunion {
 	@Id
-	private int idReunion;
+	private String idReunion;
 	private String titulo;
 	private String descripcion;
 	private DateTime horaInicio;
@@ -42,7 +41,7 @@ public class Reunion {
 
 	public Reunion () {}
 	
-	public Reunion (int idReunion, String titulo, String descripcion, DateTime horaInicio, DateTime horaFin,
+	public Reunion (String idReunion, String titulo, String descripcion, DateTime horaInicio, DateTime horaFin,
 	        Usuario organizador, List<Usuario> asistentes, String url) {
 		super();
 		this.idReunion = idReunion;
@@ -55,11 +54,11 @@ public class Reunion {
 		this.url = url;
 	}
 	
-	public int getIdReunion() {
+	public String getIdReunion() {
 		return idReunion;
 	}
 
-	public void setIdReunion(int idReunion) {
+	public void setIdReunion(String idReunion) {
 		this.idReunion = idReunion;
 	}
 
@@ -151,16 +150,18 @@ public class Reunion {
 		return jsoEvento;
 	}
 
-	public void guardarReunion(int idReunion, String titulo, String descripcion, DateTime horaInicio, DateTime horaFin, Usuario organizador, String[] correosAsistentes, String url) {
+	public void guardarReunion(String titulo, String descripcion, DateTime horaInicio, DateTime horaFin, Usuario organizador, String[] correosAsistentes, String url) {
 		List<Usuario> asistentes = new ArrayList <Usuario>();
+		String id = organizador.getUser()+"#"+titulo+"#"+horaInicio.toString()+"#"+horaFin.toString();//Formato para guardar el id: Organizador#Titulo#HoraInicio#HoraFin#Asistente1#Asistente2....
 		for (String asistente: correosAsistentes){
 			Optional<Usuario> a = userdao.findById(asistente);
 			if (a.isPresent()) {
 				asistentes.add(a.get());
+				id += "#"+a.get().getUser();
 			}
 		}
 		Usuario or = userdao.findById(organizador.getUser()).get();
-		reuniondao.save(new Reunion(idReunion, titulo, descripcion, horaInicio, horaFin, or, asistentes, url));
+		reuniondao.save(new Reunion(id, titulo, descripcion, horaInicio, horaFin, or, asistentes, url));
 	}
 	
 	public Reunion modificarReunion(Reunion r) {

@@ -223,17 +223,6 @@
 
     calendar.render();
   });
-  
-  function getReuniones() {
-		$.get("getReuniones", function(reuniones) {
-			var json = "";
-			console.log(reuniones);
-			for (var i = 0; i < reuniones.length; i++) {
-				json = json + reuniones[i];
-			}
-			
-		});
-	}
 
 </script>
 </html>
