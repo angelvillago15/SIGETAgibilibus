@@ -49,8 +49,6 @@ public class Controller {
 		String pwd2 = jso.getString("pwd2");
 
 		DateTime fecha = DateTime.parse(userDate);
-		// DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy");
-		// DateTime dt = formatter.parseDateTime(userDate);
 
 		JSONObject resultado = new JSONObject();
 
@@ -91,7 +89,7 @@ public class Controller {
 		Usuario organizador = (Usuario) session.getAttribute("user");
 		String url = jso.getString("url");
 		String[] correosAsistentes = ((jso.getString("correos")).replace(" ", "")).split(",");
-		Reunion.get().guardarReunion(titulo, descripcion, horaI, horaF, organizador, correosAsistentes, url);
+		//Reunion.get().guardarReunion(titulo, descripcion, horaI, horaF, organizador, correosAsistentes, url);
 
 	}
 
