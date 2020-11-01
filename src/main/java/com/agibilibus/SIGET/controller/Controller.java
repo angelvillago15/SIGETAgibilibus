@@ -94,10 +94,10 @@ public class Controller {
 		String[] horaFin = jso.getString("horaFin").split(":");
 		DateTime horaI = new DateTime(Integer.parseInt(fecha[0]), Integer.parseInt(fecha[1]),
 		        Integer.parseInt(fecha[2]), Integer.parseInt(horaIni[0]), Integer.parseInt(horaIni[1]),
-		        DateTimeZone.forID("UTC"));
+		        DateTimeZone.forID("Europe/Madrid"));
 		DateTime horaF = new DateTime(Integer.parseInt(fecha[0]), Integer.parseInt(fecha[1]),
 		        Integer.parseInt(fecha[2]), Integer.parseInt(horaFin[0]), Integer.parseInt(horaFin[1]),
-		        DateTimeZone.forID("UTC"));
+		        DateTimeZone.forID("Europe/Madrid"));
 		Usuario organizador = (Usuario) session.getAttribute("user");
 		String url = jso.getString("url");
 		String[] correosAsistentes = ((jso.getString("correos")).replace(" ", "")).split(",");
