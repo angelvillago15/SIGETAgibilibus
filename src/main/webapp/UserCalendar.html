@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -79,9 +80,10 @@ body {
 }
 
 .list-notificacao {
-	min-width: 30px;
+    min-width: 35px;
 	background: #ffffff;
 	min-height: 75px;
+    left: -200px;
 }
 
 .list-notificacao li {
@@ -102,7 +104,7 @@ body {
 
 .list-notificacao li  p {
 	color: black;
-	width: 305px;
+	width: 210px;
 }
 
 .badgeAlert {
@@ -121,6 +123,10 @@ body {
 	position: absolute;
 	margin-top: -10px;
 	margin-left: -10px
+}
+
+.clickable{
+    cursor: pointer;
 }
 </style>
 </head>
@@ -152,9 +158,28 @@ body {
 												<span aria-hidden="true">&times;</span>
 											</button>
 										</div>
-										<p>@X te ha invitado a una reunión</p>
+										<p><label>X</label> te ha invitado a una reunión</p>
 										<button type="button" class="btn btn-success">Aceptar</button>
-										<button type="button" class="btn btn-danger">Rechazar</button>
+                                        <button type="button" class="btn btn-danger">Rechazar</button>
+										<br>
+										<br>
+                                        <div class="panel panel-info autocollapse">
+                                            <div class="panel-heading clickable">
+                                                <h6 class="panel-title">
+                                                     Quiero saber más
+                                                </h6>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="alert alert-info" role="alert">
+                                                    - Título: <label id="titulo">Nombre</label><br>
+													- Descripción: <label id="descripcion">Nombre</label><br>
+													- Día: <label id="dia">Nombre</label><br>
+													- Hora de inicio: <label id="Hinicio">Nombre</label><br>
+													- Hora de fin: <label id="Hfin">Nombre</label><br>
+													- url: <label id="url">Nombre</label>
+                                                </div>
+                                            </div>
+                                        </div>
 									</div>
 								</div>
 							</li>
@@ -228,5 +253,26 @@ body {
 
 		calendar.render();
 	});
+
+    $(document).on('click', '.panel div.clickable', function (e) {
+    var $this = $(this); //Heading
+    var $panel = $this.parent('.panel');
+    var $panel_body = $panel.children('.panel-body');
+    var $display = $panel_body.css('display');
+
+        if ($display == 'block') {
+            $panel_body.slideUp();
+        } else if($display == 'none') {
+            $panel_body.slideDown();
+        }
+    });
+
+    $(document).ready(function(e){
+        var $classy = '.panel.autocollapse';
+
+        var $found = $($classy);
+        $found.find('.panel-body').hide();
+        $found.removeClass($classy);
+    });
 </script>
 </html>
