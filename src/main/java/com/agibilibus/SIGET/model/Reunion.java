@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import com.agibilibus.SIGET.dao.ReunionDAO;
 import com.agibilibus.SIGET.dao.UserDAO;
+import com.mongodb.util.JSON;
 
 import lombok.Data;
 
@@ -30,13 +31,12 @@ public class Reunion {
 	private DateTime horaFin;
 	private Usuario organizador;
 	private List<Usuario> asistentes;
+	private List<EstadoInvitacion> estadosInvitaciones;
 	private String url;
-
-
+	
 	@Autowired
 	private ReunionDAO reuniondao;
-
-
+	
 	@Autowired 
 	private UserDAO userdao;
 
@@ -110,6 +110,14 @@ public class Reunion {
 	public void setAsistentes(List<Usuario> asistentes) {
 		this.asistentes = asistentes;
 	}
+	
+	public List<EstadoInvitacion> getEstadosInvitaciones() {
+		return estadosInvitaciones;
+	}
+	
+	public void setEstadosInvitaciones(List<EstadoInvitacion> estadosInvitaciones) {
+		this.estadosInvitaciones = estadosInvitaciones;
+	}
 
 	public String getUrl() {
 		return url;
@@ -132,11 +140,17 @@ public class Reunion {
 			jsaAsistentes.put(u.toJSON());
 		jso.put("asistentes", jsaAsistentes);
 		jso.put("url", this.url);
-		
 		return jso;
 	}
 	
-	
+	public JSONObject toEvent () {
+		JSONObject jsoEvento = new JSONObject();
+		jsoEvento.put("title", this.titulo);
+		jsoEvento.put("start", this.horaInicio);
+		jsoEvento.put("end", this.horaFin);
+		return jsoEvento;
+	}
+
 	public void guardarReunion(int idReunion, String titulo, String descripcion, DateTime horaInicio, DateTime horaFin, Usuario organizador, String[] correosAsistentes, String url) {
 		List<Usuario> asistentes = new ArrayList <Usuario>();
 		for (String asistente: correosAsistentes){
@@ -157,22 +171,21 @@ public class Reunion {
 		reuniondao.delete(r);
 	}
 	
-	public JSONObject getReuniones(Usuario u) {
+	public JSONArray getReuniones(Usuario u) {
 		JSONArray jsaReuniones = new JSONArray();
 		Usuario usuario = userdao.findById(u.getUser()).get();
 		List<Reunion> reuniones = reuniondao.findAll();
 		for (Reunion r : reuniones) {
 			if (r.getOrganizador().getUser().equals(usuario.getUser()) || r.getAsistentes().contains(usuario))
-				jsaReuniones.put(r.toJSON());
+				jsaReuniones.put(r.toEvent());
 		}
-		JSONObject jso = new JSONObject();
-		jso.put("reuniones", jsaReuniones);
-		return jso;
+		return jsaReuniones;
 	}
 	
 	private static class ReunionHolder {
 		static Reunion singleton = new Reunion();
 	}
+	
 	@Bean(name="beanReunion")
 	public static Reunion get() {
 		return ReunionHolder.singleton;

@@ -25,7 +25,6 @@ public class stepsCrearReunion {
 	@When("^Guardo una nueva reunion /.*/ /.*/ /.*/ /.*/ /.*/ /.*/ /.*/ /.*/$")
 	public void guardar_esa_reunion (int idReunion, String titulo, String descripcion, DateTime horaInicio, DateTime horaFin, Usuario organizador, String[] asistentes, String url) throws Throwable{
 		Reunion.get().guardarReunion(idReunion, titulo, descripcion, horaInicio, horaFin, organizador, asistentes, url);
-		
 		throw new PendingException();
 	}
 	

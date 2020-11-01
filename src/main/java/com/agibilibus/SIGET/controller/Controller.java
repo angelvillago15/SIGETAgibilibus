@@ -8,8 +8,11 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import org.json.JSONArray;
 import org.json.JSONObject;
-import org.springframework.http.HttpStatus;
+
+import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -36,7 +39,6 @@ public class Controller {
 			throw new Exception(e);
 
 		}
-
 	}
 
 	@PostMapping("/register")
@@ -88,16 +90,22 @@ public class Controller {
 		String[] horaFin = jso.getString("horaFin").split(":");
 		DateTime horaI = new DateTime(Integer.parseInt(fecha[0]), Integer.parseInt(fecha[1]),
 		        Integer.parseInt(fecha[2]), Integer.parseInt(horaIni[0]), Integer.parseInt(horaIni[1]),
-		        DateTimeZone.forID("UTC"));
+		        DateTimeZone.forID("Europe/Madrid"));
 		DateTime horaF = new DateTime(Integer.parseInt(fecha[0]), Integer.parseInt(fecha[1]),
 		        Integer.parseInt(fecha[2]), Integer.parseInt(horaFin[0]), Integer.parseInt(horaFin[1]),
-		        DateTimeZone.forID("UTC"));
+		        DateTimeZone.forID("Europe/Madrid"));
 		Usuario organizador = (Usuario) session.getAttribute("user");
 		String url = jso.getString("url");
 		String[] correosAsistentes = ((jso.getString("correos")).replace(" ", "")).split(",");
 		Reunion.get().guardarReunion(((int) (Math.random() * (1000000) + 1)), titulo, descripcion, horaI, horaF,
 		        organizador, correosAsistentes, url);
 
+	}
+
+	@PostMapping("/getReuniones")
+	public String getReuniones(HttpSession session) {
+		Usuario usuario = (Usuario) session.getAttribute("user");
+		return Reunion.get().getReuniones(usuario).toString();
 	}
 
 }
