@@ -4,7 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
-import com.agibilibus.SIGET.model.Manager;
+import com.agibilibus.SIGET.model.Sesion;
 import com.agibilibus.SIGET.model.Usuario;
 
 import cucumber.api.java.en.Given;
@@ -17,17 +17,17 @@ public class StepLogin {
 	
 	@Given("estoy registrado como usuario ")
 	public void registro( ) {
-		//Manager.get().registrarse();
+		Usuario.get().register();
 	}
 	
 	@When("introduzco en el campo usuario <usuario> correctamente")
 	public void introducirUsuario(String usu, String pwd, HttpSession httpSession) throws Exception {
-		Manager.get().login(httpSession,usu,pwd);
+		Sesion.get().login(httpSession,usu,pwd);
 		
 	}
 	@When("introduzco contraseña <password> correctamente")
 	public void introducirContraseña(String usu, String pwd, HttpSession httpSession) throws Exception {
-		Manager.get().login(httpSession,usu,pwd);
+		Sesion.get().login(httpSession,usu,pwd);
 	}
 	
 	
