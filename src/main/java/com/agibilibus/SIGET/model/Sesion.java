@@ -1,6 +1,5 @@
 package com.agibilibus.SIGET.model;
 
-import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
@@ -15,11 +14,8 @@ import org.springframework.stereotype.Component;
 import com.agibilibus.SIGET.dao.UserDAO;
 
 @Component
-public class Sesion implements Serializable{
+public class Sesion {
 
-	
-	private static final long serialVersionUID = 1L;
-	@Transient
 	@Autowired
 	private UserDAO userdao;
 	private Usuario user;
@@ -43,6 +39,7 @@ public class Sesion implements Serializable{
 	}
 
 	public void login(HttpSession httpSession, String userName, String pwd) throws Exception {
+		String msg = "Credenciales inválidas";
 		try {
 
 			Optional<Usuario> optUser = userdao.findById(userName);
@@ -59,12 +56,14 @@ public class Sesion implements Serializable{
 					sesion.getHttpSession().setAttribute("user", user);
 
 				} else {
-					throw new Exception("Credenciales inválidas");
+					throw new Exception(msg);
 				}
+			} else {
+				throw new Exception(msg);
 			}
 
 		} catch (SQLException e) {
-			throw new Exception("Credenciales inválidas");
+			throw new Exception(msg);
 		}
 	}
 
@@ -77,7 +76,7 @@ public class Sesion implements Serializable{
 		static Sesion singleton = new Sesion();
 	}
 
-	@Bean(name="beanSesion")
+	@Bean(name = "beanSesion")
 	public static Sesion get() {
 		return SesionHolder.singleton;
 	}

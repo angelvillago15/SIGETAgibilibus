@@ -13,7 +13,7 @@ public class stepsVisualizarCalendario {
 
 	@Given("^Estoy autenticado como usuario en el sistema /.*/ /.*/ /.*/$")
 	public void estoy_autenticado_como_usuario (HttpSession httpSession, String userName, String pwd) throws Throwable{
-		Manager.get().login(httpSession, userName, pwd);
+		Sesion.get().login(httpSession, userName, pwd);
 		
 		throw new PendingException();
 	}
@@ -21,12 +21,12 @@ public class stepsVisualizarCalendario {
 	
 	@When("^Entro a la pantalla de calendario semanal$")
 	public void visualizarCalendario() throws Throwable{
-		Manager.get().cargarCalendario();
+		//Manager.get().cargarCalendario();
 	}
 	
 	@Then("^Veo mis reuniones de la semana$")
 	public void cargarReuniones() throws Throwable{
-		Manager.get().cargarReuniones();
+		//Manager.get().cargarReuniones();
 	}
 	
 }

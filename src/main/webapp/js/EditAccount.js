@@ -9,7 +9,7 @@ $("#edit").click(function(){
       alert("La contraseña debe ser la misma");
     }else{
       alert("Cuenta editada");
-      setInterval(location.href=location.href,20000);
+      setInterval(this.location.href=location.href,20000);
     }
 
   });
