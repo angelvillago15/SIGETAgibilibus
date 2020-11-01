@@ -106,11 +106,10 @@ public class Controller {
 
 	}
 
-	@GetMapping("/getReuniones")
-	public JSONArray getReuniones(HttpSession session) {
+	@PostMapping("/getReuniones")
+	public String getReuniones(HttpSession session) {
 		Usuario usuario = (Usuario) session.getAttribute("user");
-		System.out.println(Reunion.get().getReuniones(usuario));
-		return Reunion.get().getReuniones(usuario);
+		return Reunion.get().getReuniones(usuario).toString();
 	}
 
 }
