@@ -114,15 +114,22 @@
 			url : "login",
 			type : "post",
 			contentType : 'application/json',
-			success : function() {
-				window.location.href = "UserCalendar.html";
+			success : function(rol) {
+				if(rol==="admin"){
+					window.location.href = "adminCalendar.html";
+				}
+				else if(rol=="usuario"){
+					window.location.href = "UserCalendar.html";
+				}
 			},
 			error : function(response) {
 				alert(response.message);
 			}
+			
 		};
 		$.ajax(data);
 	}
+	
     </script> 
 </body>
 </html>

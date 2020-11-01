@@ -1,13 +1,14 @@
 package com.agibilibus.SIGET.controller;
 
 import java.util.Map;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.json.JSONObject;
-
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -23,16 +24,20 @@ public class Controller {
 	private static String message = "message";
 
 	@PostMapping("/login")
-	public void login(HttpSession session, @RequestBody Map<String, Object> credenciales) throws Exception {
+	public String login(HttpSession session, @RequestBody Map<String, Object> credenciales) throws Exception {
+		String rol;
 		try {
 			JSONObject jso = new JSONObject(credenciales);
 			String userName = jso.getString("userName");
 			String pwd = jso.getString("pwd");
-			Sesion.get().login(session, userName, pwd);
+			
+			rol=Sesion.get().login(session, userName, pwd);
 		} catch (Exception e) {
 			throw new Exception(e);
 
 		}
+		
+		return rol;
 	}
 
 	@PostMapping("/register")
@@ -49,15 +54,12 @@ public class Controller {
 		String pwd2 = jso.getString("pwd2");
 
 		DateTime fecha = DateTime.parse(userDate);
-		// DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy");
-		// DateTime dt = formatter.parseDateTime(userDate);
+
 
 		JSONObject resultado = new JSONObject();
 
 		if (pwd1.equals(pwd2)) {
 			try {
-
-				// Usuario user = new Usuario();
 
 				Usuario.get().crearUsuario(pwd1, userCompletName, userName, userApellidos, fecha, userDni, userTelf, userMail);
 				resultado.put("type", "OK");
@@ -101,4 +103,8 @@ public class Controller {
 		return Reunion.get().getReuniones(usuario).toString();
 	}
 
+	@GetMapping("/getTipoUsuario")
+	public void  getTipoUsuario(HttpSession session,@RequestBody Map<String, Object> tipoUsuario) {
+		System.out.print(tipoUsuario);
+	}
 }

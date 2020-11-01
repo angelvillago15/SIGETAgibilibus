@@ -38,7 +38,7 @@ public class Sesion {
 
 	}
 
-	public void login(HttpSession httpSession, String userName, String pwd) throws Exception {
+	public String login(HttpSession httpSession, String userName, String pwd) throws Exception {
 		String msg = "Credenciales inválidas";
 		try {
 
@@ -54,7 +54,6 @@ public class Sesion {
 					this.connectedUsersByHttpSession.put(httpSession.getId(), user);
 					this.user = user;
 					sesion.getHttpSession().setAttribute("user", user);
-
 				} else {
 					throw new Exception(msg);
 				}
@@ -65,6 +64,7 @@ public class Sesion {
 		} catch (SQLException e) {
 			throw new Exception(msg);
 		}
+		return user.getRol();
 	}
 
 	public Usuario logout(HttpSession httpSession, String userName) {
@@ -85,6 +85,9 @@ public class Sesion {
 		this.httpSession = httpSession;
 	}
 
+	public Usuario getUser() {
+		return this.user;
+	}
 	public HttpSession getHttpSession() {
 		return httpSession;
 	}
