@@ -33,16 +33,17 @@ public class Reunion {
 	private List<Usuario> asistentes;
 	private List<EstadoInvitacion> estadosInvitaciones;
 	private String url;
-	
+
 	@Autowired
 	private ReunionDAO reuniondao;
-	
-	@Autowired 
+
+	@Autowired
 	private UserDAO userdao;
 
-	public Reunion () {}
-	
-	public Reunion (int idReunion, String titulo, String descripcion, DateTime horaInicio, DateTime horaFin,
+	public Reunion() {
+	}
+
+	public Reunion(int idReunion, String titulo, String descripcion, DateTime horaInicio, DateTime horaFin,
 	        Usuario organizador, List<Usuario> asistentes, String url) {
 		super();
 		this.idReunion = idReunion;
@@ -54,7 +55,7 @@ public class Reunion {
 		this.asistentes = asistentes;
 		this.url = url;
 	}
-	
+
 	public int getIdReunion() {
 		return idReunion;
 	}
@@ -110,11 +111,11 @@ public class Reunion {
 	public void setAsistentes(List<Usuario> asistentes) {
 		this.asistentes = asistentes;
 	}
-	
+
 	public List<EstadoInvitacion> getEstadosInvitaciones() {
 		return estadosInvitaciones;
 	}
-	
+
 	public void setEstadosInvitaciones(List<EstadoInvitacion> estadosInvitaciones) {
 		this.estadosInvitaciones = estadosInvitaciones;
 	}
@@ -126,8 +127,8 @@ public class Reunion {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	
-	public JSONObject toJSON () {
+
+	public JSONObject toJSON() {
 		JSONObject jso = new JSONObject();
 		JSONArray jsaAsistentes = new JSONArray();
 		jso.put("idReunion", this.idReunion);
@@ -142,8 +143,8 @@ public class Reunion {
 		jso.put("url", this.url);
 		return jso;
 	}
-	
-	public JSONObject toEvent () {
+
+	public JSONObject toEvent() {
 		JSONObject jsoEvento = new JSONObject();
 		jsoEvento.put("title", this.titulo);
 		jsoEvento.put("start", this.horaInicio);
@@ -151,44 +152,51 @@ public class Reunion {
 		return jsoEvento;
 	}
 
-	public void guardarReunion(int idReunion, String titulo, String descripcion, DateTime horaInicio, DateTime horaFin, Usuario organizador, String[] correosAsistentes, String url) {
-		List<Usuario> asistentes = new ArrayList <Usuario>();
-		for (String asistente: correosAsistentes){
+	public void guardarReunion(int idReunion, String titulo, String descripcion, DateTime horaInicio, DateTime horaFin,
+	        Usuario organizador, String[] correosAsistentes, String url) {
+		List<Usuario> asistentes = new ArrayList<Usuario>();
+		for (String asistente : correosAsistentes) {
 			Optional<Usuario> a = userdao.findById(asistente);
 			if (a.isPresent()) {
 				asistentes.add(a.get());
 			}
 		}
-		Usuario or = userdao.findById(organizador.getUser()).get();
-		reuniondao.save(new Reunion(idReunion, titulo, descripcion, horaInicio, horaFin, or, asistentes, url));
+		Optional<Usuario> optUser = userdao.findById(organizador.getUser());
+		if (optUser.isPresent()) {
+			Usuario or = optUser.get();
+			reuniondao.save(new Reunion(idReunion, titulo, descripcion, horaInicio, horaFin, or, asistentes, url));
+		}
 	}
-	
+
 	public Reunion modificarReunion(Reunion r) {
 		return null;
 	}
-	
-	public void eliminarReunion (Reunion r) {
+
+	public void eliminarReunion(Reunion r) {
 		reuniondao.delete(r);
 	}
-	
+
 	public JSONArray getReuniones(Usuario u) {
 		JSONArray jsaReuniones = new JSONArray();
-		Usuario usuario = userdao.findById(u.getUser()).get();
-		List<Reunion> reuniones = reuniondao.findAll();
-		for (Reunion r : reuniones) {
-			if (r.getOrganizador().getUser().equals(usuario.getUser()) || r.getAsistentes().contains(usuario))
-				jsaReuniones.put(r.toEvent());
+		Optional<Usuario> optUser = userdao.findById(u.getUser());
+		if (optUser.isPresent()) {
+			Usuario usuario = optUser.get();
+			List<Reunion> reuniones = reuniondao.findAll();
+			for (Reunion r : reuniones) {
+				if (r.getOrganizador().getUser().equals(usuario.getUser()) || r.getAsistentes().contains(usuario))
+					jsaReuniones.put(r.toEvent());
+			}
 		}
 		return jsaReuniones;
 	}
-	
+
 	private static class ReunionHolder {
 		static Reunion singleton = new Reunion();
 	}
-	
-	@Bean(name="beanReunion")
+
+	@Bean(name = "beanReunion")
 	public static Reunion get() {
 		return ReunionHolder.singleton;
 	}
-	
+
 }

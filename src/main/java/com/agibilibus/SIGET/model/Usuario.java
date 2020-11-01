@@ -1,5 +1,7 @@
 package com.agibilibus.SIGET.model;
 
+import java.io.Serializable;
+
 import org.joda.time.DateTime;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,15 +12,14 @@ import org.springframework.stereotype.Component;
 
 import com.agibilibus.SIGET.dao.UserDAO;
 
-import com.agibilibus.SIGET.dao.UserDAO;
-
 import lombok.Data;
 
 @Component
 @Data
 @Document(collection = "usuarios")
-public class Usuario {
+public class Usuario implements Serializable {
 
+	private static final long serialVersionUID = 1446243385065996422L;
 	@Id
 	private String user;
 	private String password;
@@ -30,18 +31,14 @@ public class Usuario {
 	private DateTime nacimiento;
 	private String rol;
 
-	
-
-	
-	@Autowired 
+	@Autowired
 	private UserDAO userdao;
-
 
 	public Usuario() {
 	}
 
 	public Usuario(String user, String password, String nombre, String apellidos, int telefono, String email,
-			String dni, DateTime nacimiento, String rol) {
+	        String dni, DateTime nacimiento, String rol) {
 		super();
 		this.user = user;
 		this.password = password;
@@ -125,10 +122,11 @@ public class Usuario {
 	public void setRol(String rol) {
 		this.rol = rol;
 	}
+
 	public Usuario register() {
 		return userdao.save(this);
-		}
-	
+	}
+
 	public JSONObject toJSON() {
 		JSONObject jso = new JSONObject();
 		jso.put("nombre", this.nombre);
@@ -144,23 +142,27 @@ public class Usuario {
 
 	}
 
-	public Usuario crearUsuario(String pwd1, String nombreCompleto, String nombre, String apellidos, DateTime userDate, String userDni, int userTelf, String email) {
-		Usuario user = new Usuario(nombre,pwd1,nombreCompleto,apellidos,userTelf,email,userDni,userDate,"usuario");
-		
+	public Usuario crearUsuario(String pwd1, String nombreCompleto, String nombre, String apellidos, DateTime userDate,
+	        String userDni, int userTelf, String email) {
+		Usuario user = new Usuario(nombre, pwd1, nombreCompleto, apellidos, userTelf, email, userDni, userDate,
+		        "usuario");
+
 		return userdao.save(user);
 	}
-	
+
 	public Usuario modificarUsuario(Usuario u) {
 		return null;
 	}
-	
-	public void eliminarUsuario (Usuario u) {
-		
+
+	public void eliminarUsuario(Usuario u) {
+
 	}
+
 	private static class UsuarioHolder {
 		static Usuario singleton = new Usuario();
 	}
-	@Bean(name="beanUsuario")
+
+	@Bean(name = "beanUsuario")
 	public static Usuario get() {
 		return UsuarioHolder.singleton;
 	}
