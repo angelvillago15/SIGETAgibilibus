@@ -1,6 +1,5 @@
 package com.agibilibus.SIGET.model;
 
-import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
@@ -15,9 +14,7 @@ import org.springframework.stereotype.Component;
 import com.agibilibus.SIGET.dao.UserDAO;
 
 @Component
-public class Sesion implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+public class Sesion {
 
 	@Autowired
 	private UserDAO userdao;
