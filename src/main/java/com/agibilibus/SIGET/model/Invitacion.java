@@ -1,12 +1,36 @@
 package com.agibilibus.SIGET.model;
 
+
+import java.util.List;
+import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.stereotype.Component;
+
+import com.agibilibus.SIGET.dao.InvitacionDAO;
+import com.agibilibus.SIGET.dao.UserDAO;
+
+import lombok.Data;
+
+@Component
+@Data
+@Document(collection = "invitaciones")
 
 public class Invitacion {
+	@Id
+	private String idInvitacion;
 	private Usuario usuario;
 	private Reunion reunion;
 	private EstadoInvitacion estado;
+
+	@Autowired
+	private InvitacionDAO invitaciondao;
+
+	@Autowired
+	private UserDAO userdao;
 
 	public Invitacion() {
 	}
@@ -66,14 +90,24 @@ public class Invitacion {
 		return InvitacionHolder.singleton;
 	}
 
-	public void enviarInivitacion() {
-		// TODO Auto-generated method stub
-		
+	public void enviarInvitacion() {
+
 	}
 
-	public void responderInvitacion(Reunion reunion2, Usuario asistente) {
-		// TODO Auto-generated method stub
-		
+	public JSONArray recibirInvitacion(Usuario user) {
+		JSONArray jsaInvitaciones = new JSONArray();
+
+		List<Invitacion> invitaciones = invitaciondao.findAll();
+
+		for (Invitacion inv : invitaciones) {
+			if ((inv.getReunion().getAsistentes().contains(user)) && inv.getEstado() == EstadoInvitacion.pendiente) {
+				jsaInvitaciones.put(inv.toJSON());
+			}
+		}
+		return jsaInvitaciones;
+	}
+
+	public void responderInvitacion() {
 	}
 
 }

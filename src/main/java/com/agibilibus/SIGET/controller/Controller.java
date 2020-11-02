@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.agibilibus.SIGET.model.Invitacion;
 import com.agibilibus.SIGET.model.Reunion;
 import com.agibilibus.SIGET.model.Sesion;
 import com.agibilibus.SIGET.model.Usuario;
@@ -97,6 +98,12 @@ public class Controller {
 	public String getReuniones(HttpSession session) {
 		Usuario usuario = (Usuario) session.getAttribute("user");
 		return Reunion.get().getReuniones(usuario).toString();
+	}
+	
+	@PostMapping("/recibirInvitacion")
+	public String getInvitaciones(HttpSession session) {
+		Usuario usuario = (Usuario) session.getAttribute("user");
+		return Invitacion.get().recibirInvitacion(usuario).toString();
 	}
 
 }
