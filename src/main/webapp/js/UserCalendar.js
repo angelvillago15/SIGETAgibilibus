@@ -10,4 +10,22 @@ function closeNav() {
   document.body.style.backgroundColor = "white";
 }
 
+function invitar() {
+	var msg = {
+		type : "asistentes nuevos",
+		id : this.id,
+		correos : this.correos
+	};
+	var data = {
+		data : JSON.stringify(msg),
+		url : "asistentesNuevos",
+		type : "post",
+		contentType : 'application/json',
+		dataType : 'json',
+	}
+	$.ajax(data);
+
+	window.location.href = "UserCalendar.html";
+}
+
 
