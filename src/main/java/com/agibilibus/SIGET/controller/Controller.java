@@ -92,6 +92,13 @@ public class Controller {
 		//Reunion.get().guardarReunion(titulo, descripcion, horaI, horaF, organizador, correosAsistentes, url);
 
 	}
+	
+	@PostMapping("/loadReunion")
+	public String loadReunion(HttpSession session, @RequestBody Map<String, Object> loadReunion) throws Exception {
+		JSONObject jso = new JSONObject(loadReunion);
+		String id = jso.getString("id");
+		return Reunion.get().loadReunion(id).toString();
+	}
 
 	@PostMapping("/getReuniones")
 	public String getReuniones(HttpSession session) {

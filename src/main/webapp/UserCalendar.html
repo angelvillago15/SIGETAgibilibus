@@ -205,97 +205,128 @@ body {
 					<div class="form-group row row-md-6">
 						<label class="col-sm-2 col-form-label">Nombre Reunion:</label>
 						<div class="col-sm-3">
-							<input type="text" class="form-control" id="nombreReunion">
+							<input type="text" class="form-control" id="nombreReunion"
+								readonly>
 						</div>
 						<label class="col-sm-1 col-form-label">URL:</label>
 						<div class="col-sm-3">
-							<input type="text" class="form-control" id="url" required="true">
-						</div>
-					</div>
-					<div class="form-group row row-md-6">
-						<label for="example-date-input" class="col-2 col-form-label">Fecha</label>
-						<div class="col-2">
-							<input class="form-control" type="date" id="fecha">
+							<input type="text" class="form-control" id="url" required="true"
+								readonly>
 						</div>
 
-						<label class="col-sm-1 col-form-label offset-md-1">Invitar:</label>
-						<div class="col-sm-4">
-							<input type="text" class="form-control" id="invitar"
-								required="true"
-								placeholder="ejemplo1@correo.com , ejemplo2@correo.com,...">
-						</div>
-					</div>
-
-
-					<div class="form-group row row-md-6">
-						<label class="col-sm-2 col-form-label">Hora de Inicio:</label>
-						<div class="col-sm-1">
-							<input type="time" name="horaInicio" min="07:00" max="20:00"
-								id="horaInicio">
-						</div>
-						<label class="col-sm-3col-form-label">Hora Fin:</label>
-						<div class="col-sm-1">
-							<input type="time" name="horaFin" min="07:00" max="20:00"
-								id="horaFin">
-						</div>
 					</div>
 					<div class="form-group row row-md-6">
-						<label class="col-sm-2 col-form-label">Descripcion:</label>
+						<label for="example-date-input" class="col-sm-2 col-form-label">Fecha</label>
 						<div class="col-sm-3">
-							<textarea class="form-control" id="descripcion"></textarea>
+							<input class="form-control" type="text" id="fecha" required="true" readonly>
+						</div>
+					</div>
+
+					<div class="form-group row row-md-6">
+						<label class="col-sm-2 col-form-label">Hora de inicio: </label>
+						<div class="col-sm-3">
+							<input type="text" class="form-control" id="horaInicio"
+								readonly>
+						</div>
+						<label class="col-sm-1 col-form-label">Hora de fin:</label>
+						<div class="col-sm-3">
+							<input type="text" class="form-control" id="horaFin" required="true"
+								readonly>
+						</div>
+					</div>
+						<div class="form-group row row-md-6">
+							<label class="col-sm-2 col-form-label">Descripcion:</label>
+							<div class="col-sm-3">
+								<textarea class="form-control" id="descripcion" readonly></textarea>
+							</div>
 						</div>
 
+						<div class="form-group row row-md-6">
+							<label class="col-sm-1 col-form-label offset-md-1">Invitar:</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="invitar"
+									required="true"
+									placeholder="ejemplo1@correo.com , ejemplo2@correo.com,...">
+							</div>
 
+						</div>
 					</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button"></button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+					<div class="modal-footer">
+						<p align="right">
+							<button type="button" class="btn btn-success btn-lg" onclick="invitar()">Invitar</button>
+							<button type="button" class="btn btn-danger"
+								data-dismiss="modal">Cerrar</button>
+					</div>
 			</div>
 		</div>
 	</div>
-</div>
 
-</body>
-<script src="js/UserCalendar.js"></script>
-<script src='fullcalendar/main.js'></script>
-<script src='fullcalendar/local/es.js'></script>
-<script>
-	document.addEventListener('DOMContentLoaded', function() {
+	</body>
+	<script src="js/UserCalendar.js"></script>
+	<script src='fullcalendar/main.js'></script>
+	<script src='fullcalendar/local/es.js'></script>
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
 
-		var calendarEl = document.getElementById('calendar');
-		var calendar = new FullCalendar.Calendar(calendarEl, {
-			initialView : 'timeGridWeek',
-			nowIndicator : true,
-			headerToolbar : {
-				left : 'prev,next today',
-				center : 'title',
-				right : 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-			},
-			eventSources : [ {
-				url : '/getReuniones',
-				method : 'POST',
-				failure : function() {
-					alert('Hay un error cargando los eventos!');
+			var calendarEl = document.getElementById('calendar');
+			var calendar = new FullCalendar.Calendar(calendarEl, {
+				initialView : 'timeGridWeek',
+				nowIndicator : true,
+				headerToolbar : {
+					left : 'prev,next today',
+					center : 'title',
+					right : 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
 				},
+				eventSources : [ {
+					url : '/getReuniones',
+					method : 'POST',
+					failure : function() {
+						alert('Hay un error cargando los eventos!');
+					},
 
-				editable : true,
-				selectable : true
-			} ],
-			eventClick : function(event, jsEvent, view) {
-				$('#modalTitle').text(event.title);
-				$('#modalBody').text(event.description);
-				//$('#eventUrl').attr('href',event.url);
-				$('#calendarModal').modal();
-			},
-			locale : 'es',
-			initialView : 'timeGridWeek',
-			navLinks : true, // can click day/week names to navigate views
-			selectMirror : true,
-			dayMaxEvents : true, // allow "more" link when too many events
+					editable : true,
+					selectable : true
+				} ],
+				eventClick : function(event, jsEvent, view) {
+					var msg = {
+						type : "load Reunion",
+						id : event.event._def.publicId,
+					};
+					data = {
+						data : JSON.stringify(msg),
+						url : "loadReunion",
+						type : "post",
+						contentType : 'application/json',
+						dataType : 'json',
+						success : function(response) {
+							$('#nombreReunion').val(response.title);
+							$('#descripcion').val(response.descripcion);
+							$('#url').val(response.url);
+							$('#fecha').val(response.fecha);
+							$('#horaInicio').val(response.start);
+							$('#horaFin').val(response.end);
+
+						},
+						error : function(response) {
+							alert(response.message);
+						}
+					}
+					$.ajax(data);
+
+					$('#modalTitle').text(event.title);
+					$('#modalBody').text(event.description);
+					//$('#eventUrl').attr('href',event.url);
+					$('#calendarModal').modal();
+
+				},
+				locale : 'es',
+				initialView : 'timeGridWeek',
+				navLinks : true, // can click day/week names to navigate views
+				selectMirror : true,
+				dayMaxEvents : true, // allow "more" link when too many events
+			});
+
+			calendar.render();
 		});
-
-		calendar.render();
-	});
-</script>
+	</script>
 </html>

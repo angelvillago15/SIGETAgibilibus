@@ -130,11 +130,15 @@ public class Reunion {
 	public JSONObject toJSON() {
 		JSONObject jso = new JSONObject();
 		JSONArray jsaAsistentes = new JSONArray();
-		jso.put("idReunion", this.idReunion);
-		jso.put("titulo", this.titulo);
+		jso.put("id", this.idReunion);
+		jso.put("title", this.titulo);
 		jso.put("descripcion", this.descripcion);
-		jso.put("horaInicio", this.horaInicio);
-		jso.put("horaFin", this.horaFin);
+		String horaInicio = this.horaInicio.toString().substring(11,19);
+		String fecha = this.horaInicio.toString().substring(0,10);
+		String horaFin = this.horaFin.toString().substring(11,19);
+		jso.put("fecha", fecha);
+		jso.put("start", horaInicio);
+		jso.put("end", horaFin);
 		jso.put("organizador", this.organizador.toJSON());
 		for (Usuario u : this.asistentes)
 			jsaAsistentes.put(u.toJSON());
@@ -204,6 +208,15 @@ public class Reunion {
 	@Bean(name = "beanReunion")
 	public static Reunion get() {
 		return ReunionHolder.singleton;
+	}
+
+	public JSONObject loadReunion(String id) {
+		Optional<Reunion> reunion = reuniondao.findById(id);
+		Reunion r = new Reunion();
+		if(reunion.isPresent()) {
+			r = reunion.get();
+		}
+		return r.toJSON();
 	}
 
 }
