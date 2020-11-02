@@ -144,8 +144,8 @@ public class Usuario implements Serializable {
 
 	public Usuario crearUsuario(String pwd1, String nombreCompleto, String nombre, String apellidos, DateTime userDate,
 	        String userDni, int userTelf, String email) {
-		Usuario user = new Usuario(nombre, pwd1, nombreCompleto, apellidos, userTelf, email, userDni, userDate,
-		        "usuario");
+		Usuario user;
+		user = new Usuario(nombre, pwd1, nombreCompleto, apellidos, userTelf, email, userDni, userDate, "usuario");
 
 		return userdao.save(user);
 	}
