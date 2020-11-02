@@ -74,8 +74,8 @@ public class Invitacion {
 
 	public JSONObject toJSON() {
 		JSONObject jso = new JSONObject();
-		jso.put("usuario", this.usuario);
-		jso.put("reunion", this.reunion);
+		jso.put("usuario", this.usuario.getNombre());
+		jso.put("reunion", this.reunion.toJSON());
 		jso.put("estado", this.estado);
 		return jso;
 

@@ -166,4 +166,12 @@ public class Usuario implements Serializable {
 	public static Usuario get() {
 		return UsuarioHolder.singleton;
 	}
+	public boolean equals(Object obj) {
+		if(obj == null)
+			return false;
+		if (this.getClass() != obj.getClass())
+		    return false;
+
+		return ((Usuario)obj).getNombre().equals(this.nombre);
+	}
 }

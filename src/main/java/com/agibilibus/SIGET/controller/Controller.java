@@ -103,7 +103,9 @@ public class Controller {
 	@PostMapping("/recibirInvitacion")
 	public String getInvitaciones(HttpSession session) {
 		Usuario usuario = (Usuario) session.getAttribute("user");
-		return Invitacion.get().recibirInvitacion(usuario).toString();
+		JSONObject jso = new JSONObject();
+		jso.put("invitaciones", Invitacion.get().recibirInvitacion(usuario));
+		return jso.toString();	
 	}
 
 }
