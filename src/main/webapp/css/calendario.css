@@ -1,0 +1,114 @@
+body {
+	background: url('/recursos/ubuntu.jpg') center no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+	min-height: 100%;
+	transition: background-color .5s;
+}
+
+.container {
+	height: 60px;
+}
+
+.left {
+	position: absolute;
+	top: 0px;
+	left: 10px;
+}
+
+.right {
+	position: absolute;
+	top: 10px;
+	right: 63px;
+	font-weight: bold;
+	font-size: 15px;
+}
+
+.sidenav {
+	height: 100%;
+	width: 0;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: #111;
+	overflow-x: hidden;
+	transition: 0.5s;
+	padding-top: 60px;
+}
+
+.sidenav a {
+	padding: 8px 8px 8px 32px;
+	text-decoration: none;
+	font-size: 25px;
+	color: #818181;
+	display: block;
+	transition: 0.3s;
+}
+
+.sidenav a:hover {
+	color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+	position: absolute;
+	top: 0;
+	right: 25px;
+	font-size: 36px;
+	margin-left: 50px;
+}
+
+#main {
+	transition: margin-left .5s;
+	padding: 16px;
+}
+
+.list-notificacao {
+	min-width: 35px;
+	background: #ffffff;
+	min-height: 75px;
+	left: -200px;
+}
+
+.list-notificacao li {
+	border-bottom: 1px #d8d8d8 solid;
+	text-align: justify;
+	padding: 4px 10px 4px 10px;
+	cursor: pointer;
+	font-size: 12px;
+}
+
+.list-notificacao li:hover {
+	background: #f1eeee;
+}
+
+.list-notificacao li:hover .exclusaoNotificacao {
+	display: block;
+}
+
+.list-notificacao li  p {
+	color: black;
+	width: 210px;
+}
+
+.badgeAlert {
+	display: inline-block;
+	min-width: 10px;
+	padding: 3px 7px;
+	font-size: 12px;
+	font-weight: 700;
+	color: #fff;
+	line-height: 1;
+	vertical-align: baseline;
+	white-space: nowrap;
+	text-align: center;
+	background-color: #d9534f;
+	border-radius: 10px;
+	position: absolute;
+	margin-top: -10px;
+	margin-left: -10px
+}
+
+.clickable {
+	cursor: pointer;
+}

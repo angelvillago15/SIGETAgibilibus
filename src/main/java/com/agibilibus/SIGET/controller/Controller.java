@@ -107,6 +107,7 @@ public class Controller {
 		return Reunion.get().getReuniones(usuario).toString();
 	}
 	
+
 	@PostMapping("/recibirInvitacion")
 	public String getInvitaciones(HttpSession session) {
 		Usuario usuario = (Usuario) session.getAttribute("user");
@@ -114,6 +115,14 @@ public class Controller {
 		jso.put("invitaciones", Invitacion.get().recibirInvitacion(usuario));
 		System.out.println(jso);
 		return jso.toString();	
+	}
+
+	@PostMapping("/nuevaInvitacion")
+	public void nuevaInvitacion(HttpSession session, @RequestBody Map<String, Object> correos) throws Exception {
+		JSONObject jso = new JSONObject(correos);
+		String id = jso.getString("id");
+		String[] correosAsistentes = ((jso.getString("correos")).replace(" ", "")).split(",");
+		Invitacion.get().enviarInivitacion(id, correosAsistentes);
 	}
 	
 	@PostMapping("/responderInvitacion")
