@@ -27,7 +27,7 @@ function getInvitaciones () {
 					for (i in datos.invitaciones) {
 					 var inv = datos.invitaciones[i];
 						txt = txt + "<p><label>"+ inv.reunion.organizador.nombre +"</label> te ha invitado a una reunión</p>"
-						+" <button type='button' class='btn btn-success' onclick='aceptarInvitacion()'>Aceptar</button>"
+						+" <button type='button' class='btn btn-success' onclick='aceptarInvitacion(i)'>Aceptar</button>"
                         +" <button type='button' class='btn btn-danger'>Rechazar</button>"
 						+" <br><div class='panel panel-info autocollapse'>"
                         +" <div class='panel-heading clickable'><h6 class='panel-title'>Quiero saber más</h6></div>"
@@ -45,21 +45,37 @@ function getInvitaciones () {
 	}
 	getInvitaciones();
 	
-function aceptarInvitacion(){
-	//trae la invitacion
-	var info = {
-			type : "AceptarInvitacion",
-			//campos de la reunion id : $("#loginUserName").val(),
-			pwd : $("#loginPwd").val()
-		};
+function aceptarInvitacion(event){
+	/*
+	var data = {
 
-		var data = {
-			data : JSON.stringify(info),
-			url : "responderInvitacion",
+			url : "recibirInvitacion",
 			type : "post",
-			contentType : 'application/json'
+			
+			success : function(response) {
+				var datos =  JSON.parse(response);
+				var info = {
+						type : "AceptarInvitacion",
+						id : datos.invitaciones[i].id;
+					};
+
+					var data = {
+						data : JSON.stringify(info),
+						url : "responderInvitacion",
+						type : "post",
+						contentType : 'application/json'
+					};
+					$.ajax(data);
+				    
+				    
+			},
+			error : function(response) {
+				alert(response.message);
+			}
 		};
 		$.ajax(data);
+	
+*/
 }
 
 function rechazarInvitacion(){

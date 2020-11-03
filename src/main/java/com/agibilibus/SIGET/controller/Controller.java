@@ -113,7 +113,6 @@ public class Controller {
 		Usuario usuario = (Usuario) session.getAttribute("user");
 		JSONObject jso = new JSONObject();
 		jso.put("invitaciones", Invitacion.get().recibirInvitacion(usuario));
-		System.out.println(jso);
 		return jso.toString();	
 	}
 
@@ -123,6 +122,10 @@ public class Controller {
 		String id = jso.getString("id");
 		String[] correosAsistentes = ((jso.getString("correos")).replace(" ", "")).split(",");
 		Invitacion.get().enviarInivitacion(id, correosAsistentes);
+		System.out.println("controler");
+		for (String i : correosAsistentes) {
+			System.out.println(i);
+		}
 	}
 	
 	@PostMapping("/responderInvitacion")

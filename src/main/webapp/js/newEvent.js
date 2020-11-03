@@ -56,12 +56,6 @@ function limpiarCampos(){ // resetear todos los campos
 
 function atras(){  
 	window.location.href = "UserCalendar.html";
-	//posiblemente quitar lo que hay detras
-    /*var msg = {
-        type : "atras",
-        subtype: "crear reunion"
-    }*/
-    //mandar al controler convertir a json como en el metodo crear reunion
 }
 
 

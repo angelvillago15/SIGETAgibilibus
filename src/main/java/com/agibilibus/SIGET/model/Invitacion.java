@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -106,11 +105,12 @@ public class Invitacion {
 		}
 		List<Invitacion> invitaciones = invitaciondao.findAll();
 		for (Invitacion inv : invitaciones) {
-			System.out.println(inv.getReunion().getTitulo());
-			
-	
+			/*
 			if ((inv.getReunion().getAsistentes()).contains(user)&& inv.getEstado() == EstadoInvitacion.pendiente) {
 				System.out.println("entra");
+				jsaInvitaciones.put(inv.toJSON());
+			}*/
+			if(inv.getUsuario().getUser().equals(user.getUser()) && inv.getEstado() == EstadoInvitacion.pendiente) {
 				jsaInvitaciones.put(inv.toJSON());
 			}
 		}
@@ -133,6 +133,7 @@ public class Invitacion {
 					Usuario usuario = a.get();
 					asist.add(usuario);
 					idInv=r.toString()+usuario.toString();
+					System.out.println("guarda invitacion");
 					invitaciondao.save(new Invitacion(idInv, usuario, r, EstadoInvitacion.pendiente));
 				}
 			}
