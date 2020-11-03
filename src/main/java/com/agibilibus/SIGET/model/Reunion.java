@@ -13,6 +13,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
 
+import com.agibilibus.SIGET.dao.InvitacionDAO;
 import com.agibilibus.SIGET.dao.ReunionDAO;
 import com.agibilibus.SIGET.dao.UserDAO;
 
@@ -38,6 +39,9 @@ public class Reunion {
 
 	@Autowired
 	private UserDAO userdao;
+	
+	@Autowired
+	private InvitacionDAO invitaciondao;
 
 	public Reunion() {
 	}
@@ -172,7 +176,13 @@ public class Reunion {
 		Optional<Usuario> optUser = userdao.findById(organizador.getUser());
 		if (optUser.isPresent()) {
 			Usuario or = optUser.get();
-			reuniondao.save(new Reunion(id, titulo, descripcion, horaInicio, horaFin, or, asist, url));
+			Reunion r=new Reunion(id, titulo, descripcion, horaInicio, horaFin, or, asist, url);
+			reuniondao.save(r);
+			for(Usuario u:asist) {
+				String idInv=r.getIdReunion()+u.getUser();
+				invitaciondao.save(new Invitacion(idInv, u, r, EstadoInvitacion.pendiente));
+			}
+			
 		}
 	}
 

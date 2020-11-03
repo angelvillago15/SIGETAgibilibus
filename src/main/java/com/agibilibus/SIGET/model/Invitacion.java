@@ -129,11 +129,18 @@ public class Invitacion {
 				Optional<Usuario> a = userdao.findByEmail(correo);
 				if (a.isPresent()) {
 					Usuario usuario = a.get();
-					asist.add(usuario);
-					idInv=r.toString()+usuario.toString();
-					invitaciondao.save(new Invitacion(idInv, usuario, r, EstadoInvitacion.pendiente));
+					if(!r.getAsistentes().contains(usuario)) {
+						asist.add(usuario);
+						idInv=r.getIdReunion()+usuario.getUser();
+						invitaciondao.save(new Invitacion(idInv, usuario, r, EstadoInvitacion.pendiente));
+					}
 				}
 			}
+			List <Usuario> asistReunion = r.getAsistentes();
+			asistReunion.addAll(asist);
+			
+			r.setAsistentes(asistReunion);
+			reuniondao.save(r);
 
 		}
 	}
