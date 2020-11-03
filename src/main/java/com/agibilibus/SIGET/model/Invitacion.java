@@ -14,6 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
 
 import com.agibilibus.SIGET.dao.InvitacionDAO;
+import com.agibilibus.SIGET.dao.ReunionDAO;
 import com.agibilibus.SIGET.dao.UserDAO;
 
 
@@ -115,6 +116,8 @@ public class Invitacion {
 	}
 
 	public void responderInvitacion() {
+	
+	}
 
 	public void enviarInivitacion(String id, String[] correosAsistentes) {
 		Optional<Reunion> optReunion = reuniondao.findById(id);
