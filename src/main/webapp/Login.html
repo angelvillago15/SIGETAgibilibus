@@ -10,53 +10,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <style>
-        body {
-            background: url('recursos/cielo.jpg') center no-repeat;
-            min-height:100%;
-            background-size:cover;
-        }
-        ul, li {
-            margin:0;
-            padding:0;
-            list-style-type:none;
-        }
-        #container {
-            width:400px;
-            height:290px;
-            background:#fefefe;
-            margin:auto;  
-            border-top-color:#d3dbde;
-            border-bottom-color:#bfc9dc;
-            box-shadow:0 1px 1px #ccc;
-            border-radius:5px;
-            position:relative;
-        }
-        h2 {
-            margin:0;
-            padding:10px 0;
-            font-size:24px;
-            text-align:center;
-            background:#eff4f7;
-            border-bottom:1px solid #dde0e7;
-            box-shadow:0 -1px 0 #fff inset;
-            border-radius:5px 5px 0 0; /* otherwise we get some uncut corners with container div */
-            text-shadow:1px 1px 0 #fff;
-        }
-        #username,#pass{
-            display: inline-block;
-            width: 200px;
-        }
-        .flexContainer {
-            display:flex;
-            align-items:center;
-        }
-
-        .customSpan {
-            margin:0 0 4px 4px;  
-        }
-
-    </style>
+    <link href='css/Login.css' rel='stylesheet' />
 </head>
 <body><!--cuerpo del programa-->
     <br>
@@ -92,37 +46,7 @@
                         </ul>
            
     </div>
-    <script> //FUNCIONALIDAD Y LOGICA     
-    $("#login").click(function(){
-        var username = $("#username").val();
-        var pass=$("#pass").val();
-
-        if(username.length==0 || pass.length==0){
-            alert("Rellena todos los campos");
-        }
-    });
     
-    function login() {
-		var info = {
-			type : "Login",
-			userName : $("#username").val(),
-			pwd : $("#pass").val()
-		};
-
-		var data = {
-			data : JSON.stringify(info),
-			url : "login",
-			type : "post",
-			contentType : 'application/json',
-			success : function() {
-				window.location.href = "UserCalendar.html";
-			},
-			error : function(response) {
-				alert(response.message);
-			}
-		};
-		$.ajax(data);
-	}
-    </script> 
+    <script src="js/Login.js"></script>
 </body>
 </html>

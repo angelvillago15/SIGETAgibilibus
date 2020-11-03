@@ -1,0 +1,12 @@
+body {
+            background: url('../recursos/ubuntu.jpg') center no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            min-height:100%;
+        }
+
+        .left {
+            position: fixed;
+            top: 0px; 
+            left: 10px;
+        }
