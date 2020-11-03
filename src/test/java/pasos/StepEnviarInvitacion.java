@@ -22,7 +22,7 @@ public class StepEnviarInvitacion {
 
 	@When("envio la invitacion a los asistentes <asistentes> ")
 	public void enviarInvitacion() {
-		Invitacion.get().enviarInivitacion();
+		//Invitacion.get().enviarInvitacion();
 	}
 
 	@Then("me aparece una notificacion ")

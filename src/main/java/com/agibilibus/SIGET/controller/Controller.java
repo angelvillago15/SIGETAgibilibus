@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.agibilibus.SIGET.model.Invitacion;
 import com.agibilibus.SIGET.model.Reunion;
 import com.agibilibus.SIGET.model.Sesion;
 import com.agibilibus.SIGET.model.Usuario;
@@ -89,7 +90,7 @@ public class Controller {
 		Usuario organizador = (Usuario) session.getAttribute("user");
 		String url = jso.getString("url");
 		String[] correosAsistentes = ((jso.getString("correos")).replace(" ", "")).split(",");
-		//Reunion.get().guardarReunion(titulo, descripcion, horaI, horaF, organizador, correosAsistentes, url);
+		Reunion.get().guardarReunion(titulo, descripcion, horaI, horaF, organizador, correosAsistentes, url);
 
 	}
 	
@@ -104,6 +105,14 @@ public class Controller {
 	public String getReuniones(HttpSession session) {
 		Usuario usuario = (Usuario) session.getAttribute("user");
 		return Reunion.get().getReuniones(usuario).toString();
+	}
+	
+	@PostMapping("/nuevaInvitacion")
+	public void nuevaInvitacion(HttpSession session, @RequestBody Map<String, Object> correos) throws Exception {
+		JSONObject jso = new JSONObject(correos);
+		String id = jso.getString("id");
+		String[] correosAsistentes = ((jso.getString("correos")).replace(" ", "")).split(",");
+		Invitacion.get().enviarInivitacion(id, correosAsistentes);
 	}
 
 }

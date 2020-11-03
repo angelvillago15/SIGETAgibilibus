@@ -133,9 +133,9 @@ public class Reunion {
 		jso.put("id", this.idReunion);
 		jso.put("title", this.titulo);
 		jso.put("descripcion", this.descripcion);
-		String horaInicio = this.horaInicio.toString().substring(11,19);
-		String fecha = this.horaInicio.toString().substring(0,10);
-		String horaFin = this.horaFin.toString().substring(11,19);
+		String horaInicio = this.horaInicio.toString().substring(11, 19);
+		String fecha = this.horaInicio.toString().substring(0, 10);
+		String horaFin = this.horaFin.toString().substring(11, 19);
 		jso.put("fecha", fecha);
 		jso.put("start", horaInicio);
 		jso.put("end", horaFin);
@@ -158,24 +158,21 @@ public class Reunion {
 
 	public void guardarReunion(String titulo, String descripcion, DateTime horaInicio, DateTime horaFin,
 	        Usuario organizador, String[] correosAsistentes, String url) {
-		List<Usuario> asistentes = new ArrayList<Usuario>();
-		String id = organizador.getUser() + "#" + titulo + "#" + horaInicio.toString() + "#" + horaFin.toString();// Formato
-		                                                                                                          // para
-		                                                                                                          // guardar
-		                                                                                                          // el
-		                                                                                                          // id:
-		                                                                                                          // Organizador#Titulo#HoraInicio#HoraFin#Asistente1#Asistente2....
+		List<Usuario> asist = new ArrayList<>();
+		String id = organizador.getUser() + "#" + titulo + "#" + horaInicio.toString() + "#" + horaFin.toString();
+		// Formato para guardar el id:
+		// Organizador#Titulo#HoraInicio#HoraFin#Asistente1#Asistente2....
 		for (String asistente : correosAsistentes) {
-			Optional<Usuario> a = userdao.findById(asistente);
+			Optional<Usuario> a = userdao.findByEmail(asistente);
 			if (a.isPresent()) {
-				asistentes.add(a.get());
+				asist.add(a.get());
 				id += "#" + a.get().getUser();
 			}
 		}
 		Optional<Usuario> optUser = userdao.findById(organizador.getUser());
 		if (optUser.isPresent()) {
 			Usuario or = optUser.get();
-			reuniondao.save(new Reunion(id, titulo, descripcion, horaInicio, horaFin, or, asistentes, url));
+			reuniondao.save(new Reunion(id, titulo, descripcion, horaInicio, horaFin, or, asist, url));
 		}
 	}
 
@@ -213,7 +210,7 @@ public class Reunion {
 	public JSONObject loadReunion(String id) {
 		Optional<Reunion> reunion = reuniondao.findById(id);
 		Reunion r = new Reunion();
-		if(reunion.isPresent()) {
+		if (reunion.isPresent()) {
 			r = reunion.get();
 		}
 		return r.toJSON();

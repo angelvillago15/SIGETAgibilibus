@@ -215,7 +215,7 @@ body {
 						</div>
 
 					</div>
-					<div class="form-group row row-md-6">
+					<div class="form-group row row-md-6" id=idReunion>
 						<label for="example-date-input" class="col-sm-2 col-form-label">Fecha</label>
 						<div class="col-sm-3">
 							<input class="form-control" type="text" id="fecha" required="true" readonly>
@@ -244,7 +244,7 @@ body {
 						<div class="form-group row row-md-6">
 							<label class="col-sm-1 col-form-label offset-md-1">Invitar:</label>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" id="invitar"
+								<input type="text" class="form-control" id="correos"
 									required="true"
 									placeholder="ejemplo1@correo.com , ejemplo2@correo.com,...">
 							</div>
@@ -253,7 +253,7 @@ body {
 					</div>
 					<div class="modal-footer">
 						<p align="right">
-							<button type="button" class="btn btn-success btn-lg" onclick="invitar()">Invitar</button>
+							<button type="button" class="btn btn-success btn-lg" data-dismiss="modal" onclick="invitar()" >Invitar</button>
 							<button type="button" class="btn btn-danger"
 								data-dismiss="modal">Cerrar</button>
 					</div>
@@ -305,7 +305,7 @@ body {
 							$('#fecha').val(response.fecha);
 							$('#horaInicio').val(response.start);
 							$('#horaFin').val(response.end);
-
+							$('#idReunion').val(response.id);
 						},
 						error : function(response) {
 							alert(response.message);
@@ -315,7 +315,6 @@ body {
 
 					$('#modalTitle').text(event.title);
 					$('#modalBody').text(event.description);
-					//$('#eventUrl').attr('href',event.url);
 					$('#calendarModal').modal();
 
 				},
@@ -329,4 +328,5 @@ body {
 			calendar.render();
 		});
 	</script>
+	<script src="js/invite.js"></script>
 </html>
