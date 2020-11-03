@@ -90,7 +90,7 @@ public class Controller {
 		Usuario organizador = (Usuario) session.getAttribute("user");
 		String url = jso.getString("url");
 		String[] correosAsistentes = ((jso.getString("correos")).replace(" ", "")).split(",");
-		//Reunion.get().guardarReunion(titulo, descripcion, horaI, horaF, organizador, correosAsistentes, url);
+		Reunion.get().guardarReunion(titulo, descripcion, horaI, horaF, organizador, correosAsistentes, url);
 
 	}
 	
@@ -112,7 +112,21 @@ public class Controller {
 		Usuario usuario = (Usuario) session.getAttribute("user");
 		JSONObject jso = new JSONObject();
 		jso.put("invitaciones", Invitacion.get().recibirInvitacion(usuario));
+		System.out.println(jso);
 		return jso.toString();	
 	}
+	
+	@PostMapping("/responderInvitacion")
+	public void aceptarInvitacion (HttpSession session, @RequestBody Map<String, Object> camposReunion) {
+		JSONObject jso = new JSONObject(camposReunion);
+		String idInvitacion = jso.getString("idInvitacion");
+		if (jso.getString("type").equals("aceptarInvitacion")) {
+			Invitacion.get().aceptarInvitacion(idInvitacion);
+		}else if(jso.getString("type").equals("aceptarInvitacion"))
+			Invitacion.get().rechazarInvitacion(idInvitacion);
+		
+	}
+	
+	
 
 }

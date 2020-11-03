@@ -2,6 +2,8 @@ package com.agibilibus.SIGET.model;
 
 
 import java.util.List;
+import java.util.Optional;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,14 +68,9 @@ public class Invitacion {
 		this.estado = estado;
 	}
 
-	public void aceptarInvitacion() {
-	}
-
-	public void rechazarInvitacion() {
-	}
-
 	public JSONObject toJSON() {
 		JSONObject jso = new JSONObject();
+		jso.put("id", this.idInvitacion);
 		jso.put("usuario", this.usuario.getNombre());
 		jso.put("reunion", this.reunion.toJSON());
 		jso.put("estado", this.estado);
@@ -96,18 +93,29 @@ public class Invitacion {
 
 	public JSONArray recibirInvitacion(Usuario user) {
 		JSONArray jsaInvitaciones = new JSONArray();
-
+		Optional<Usuario> optUser = userdao.findById(user.getUser());
+		if (optUser.isPresent()) {
+			user = optUser.get();
+		}
 		List<Invitacion> invitaciones = invitaciondao.findAll();
-
 		for (Invitacion inv : invitaciones) {
-			if ((inv.getReunion().getAsistentes().contains(user)) && inv.getEstado() == EstadoInvitacion.pendiente) {
+			System.out.println(inv.getReunion().getTitulo());
+			
+	
+			if ((inv.getReunion().getAsistentes()).contains(user)&& inv.getEstado() == EstadoInvitacion.pendiente) {
+				System.out.println("entra");
 				jsaInvitaciones.put(inv.toJSON());
 			}
 		}
 		return jsaInvitaciones;
 	}
 
-	public void responderInvitacion() {
+	public void aceptarInvitacion(String idInvitacion2) {
+		
 	}
+	
+	public void rechazarInvitacion(String idInvitacion2) {
+	}
+
 
 }
