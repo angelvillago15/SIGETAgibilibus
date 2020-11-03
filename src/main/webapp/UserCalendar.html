@@ -80,10 +80,10 @@ body {
 }
 
 .list-notificacao {
-    min-width: 35px;
+	min-width: 35px;
 	background: #ffffff;
 	min-height: 75px;
-    left: -200px;
+	left: -200px;
 }
 
 .list-notificacao li {
@@ -125,8 +125,8 @@ body {
 	margin-left: -10px
 }
 
-.clickable{
-    cursor: pointer;
+.clickable {
+	cursor: pointer;
 }
 </style>
 </head>
@@ -196,6 +196,76 @@ body {
 	<div id="holder" class="row"></div>
 </div>
 
+<div id="calendarModal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">×</span> <span class="sr-only">close</span>
+				</button>
+				<h4 id="modalTitle" class="modal-title"></h4>
+			</div>
+			<div id="modalBody" class="modal-body">
+				<form>
+					<div class="form-group row row-md-6">
+						<label class="col-sm-2 col-form-label">Nombre Reunion:</label>
+						<div class="col-sm-3">
+							<input type="text" class="form-control" id="nombreReunion"
+								readonly>
+						</div>
+						<label class="col-sm-1 col-form-label">URL:</label>
+						<div class="col-sm-3">
+							<input type="text" class="form-control" id="url" required="true"
+								readonly>
+						</div>
+
+					</div>
+					<div class="form-group row row-md-6" id=idReunion>
+						<label for="example-date-input" class="col-sm-2 col-form-label">Fecha</label>
+						<div class="col-sm-3">
+							<input class="form-control" type="text" id="fecha"
+								required="true" readonly>
+						</div>
+					</div>
+
+					<div class="form-group row row-md-6">
+						<label class="col-sm-2 col-form-label">Hora de inicio: </label>
+						<div class="col-sm-3">
+							<input type="text" class="form-control" id="horaInicio" readonly>
+						</div>
+						<label class="col-sm-1 col-form-label">Hora de fin:</label>
+						<div class="col-sm-3">
+							<input type="text" class="form-control" id="horaFin"
+								required="true" readonly>
+						</div>
+					</div>
+					<div class="form-group row row-md-6">
+						<label class="col-sm-2 col-form-label">Descripcion:</label>
+						<div class="col-sm-3">
+							<textarea class="form-control" id="descripcion" readonly></textarea>
+						</div>
+					</div>
+
+					<div class="form-group row row-md-6">
+						<label class="col-sm-1 col-form-label offset-md-1">Invitar:</label>
+						<div class="col-sm-4">
+							<input type="text" class="form-control" id="correos"
+								required="true"
+								placeholder="ejemplo1@correo.com , ejemplo2@correo.com,...">
+						</div>
+
+					</div>
+			</div>
+			<div class="modal-footer">
+				<p align="right">
+					<button type="button" class="btn btn-success btn-lg"
+						data-dismiss="modal" onclick="invitar()">Invitar</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 </body>
 <script src="js/UserCalendar.js"></script>
 <script src='fullcalendar/main.js'></script>
@@ -218,14 +288,44 @@ body {
 				failure : function() {
 					alert('Hay un error cargando los eventos!');
 				},
-				color : 'gray',
-				editable : true
+
+				editable : true,
+				selectable : true
 			} ],
+			eventClick : function(event, jsEvent, view) {
+				var msg = {
+					type : "load Reunion",
+					id : event.event._def.publicId,
+				};
+				data = {
+					data : JSON.stringify(msg),
+					url : "loadReunion",
+					type : "post",
+					contentType : 'application/json',
+					dataType : 'json',
+					success : function(response) {
+						$('#nombreReunion').val(response.title);
+						$('#descripcion').val(response.descripcion);
+						$('#url').val(response.url);
+						$('#fecha').val(response.fecha);
+						$('#horaInicio').val(response.start);
+						$('#horaFin').val(response.end);
+						$('#idReunion').val(response.id);
+					},
+					error : function(response) {
+						alert(response.message);
+					}
+				}
+				$.ajax(data);
+
+				$('#modalTitle').text(event.title);
+				$('#modalBody').text(event.description);
+				$('#calendarModal').modal();
+
+			},
 			locale : 'es',
 			initialView : 'timeGridWeek',
 			navLinks : true, // can click day/week names to navigate views
-			editable : true,
-			selectable : true,
 			selectMirror : true,
 			dayMaxEvents : true, // allow "more" link when too many events
 		});
@@ -233,24 +333,27 @@ body {
 		calendar.render();
 	});
 
-    $(document).on('click', '.panel div.clickable', function (e) {
-    var $this = $(this); //Heading
-    var $panel = $this.parent('.panel');
-    var $panel_body = $panel.children('.panel-body');
-    var $display = $panel_body.css('display');
+	$(document).on('click', '.panel div.clickable', function(e) {
+		var $this = $(this); //Heading
+		var $panel = $this.parent('.panel');
+		var $panel_body = $panel.children('.panel-body');
+		var $display = $panel_body.css('display');
 
-        if ($display == 'block') {
-            $panel_body.slideUp();
-        } else if($display == 'none') {
-            $panel_body.slideDown();
-        }
-    });
+		if ($display == 'block') {
+			$panel_body.slideUp();
+		} else if ($display == 'none') {
+			$panel_body.slideDown();
+		}
+	});
 
-    $(document).ready(function(e){
-        var $classy = '.panel.autocollapse';
-
-        var $found = $($classy);
-        $found.find('.panel-body').hide();
-        $found.removeClass($classy);
-    });
+	$(document).ready(function(e) {
+		var $classy = '.panel.autocollapse';
+		var $found = $($classy);
+		$found.find('.panel-body').hide();
+		$found.removeClass($classy);
+	});
 </script>
+
+<script src="js/invite.js"></script>
+</html>
+
