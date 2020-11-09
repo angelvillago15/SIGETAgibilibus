@@ -2,6 +2,13 @@ language: java
 script:
   - mvn test
 before_install:
-  - chmod +x mvnw  
+  - chmod +x mvnw
+  
+deploy:
+  provider: heroku
+  api-key: 
+    secure: "05c65690-c2af-4adb-821a-0e60d102c7d4"
+  app: sigetagibilibus
+   
 notifications:
   slack: uclm-grupo:T8sWAkWMCWVNyfOHGX4vMo00
