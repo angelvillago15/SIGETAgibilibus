@@ -1,16 +1,14 @@
 language: java
 script:
-  - mvn test
+- mvn test
 before_install:
-  - chmod +x mvnw
-  
+- chmod +x mvnw
 deploy:
   provider: heroku
-  api-key: 
-    secure: "05c65690-c2af-4adb-821a-0e60d102c7d4"
   app: sigetagibilibus
   on:
-      branch: Develop
-   
+    branch: Develop
+  api_key:
+    secure: hAXttWuLUOafZ5nbLrOqlhzR+aAv11+IrCAnM3L3vdBE3JajPiNhMINDy5/ayaTggDlRs/lAUFSnNoJsyT86quzceNGHxUi4WJBt9O1tYPWA1jHDKxKTAi0UWdX8A0z7Mc9XrN/0ZNLNeW+cwJrZcK87TtdrQKRlnSuERRNJbi2MmSxRY08c8GKvvP8fm0tJps6Gon/vhbdQZyR3a23+9doW9lXq4jvRHGEoh92DpL1FtriATK4dqsmO1QAUbGrnhwOMNS3T2mFm4NUM4Jxd+PHETWRPWuKWMrCzKhntDgy58acGOGavHXepMUn31008wOGeKrZbeLtMozRIWo0ZLsxGe/12xjhp/8VAIlcQ8u8V5CfVQI7kKGYzLQUe2YVFUlre86z4yaYcGxcCCrqbPgsUmuViKvVdVrzuTjLuJnukj95WHH35jQQeso2QJOr4LoCK44Cni97l6amgcopelQDb2E8Uniguo0RefVfCS5JvlwkBogQ2AN5JHxM7i4QpsXJuIIBIc1yQi0PrlY3rvA9T6lwPPW4E5fgLymqE8zNYr8p7M2lh1a0pvr8jUr8wfoqmn3yM8BHYmn13s8a14tuk8Mc5hphVWputSKo3XphHRXUUwh8myGutJG3NHhRRLtlGAtr6vERl+0ySwycEsHfQTNn5bWgKV09dNGhbg7Y=
 notifications:
   slack: uclm-grupo:T8sWAkWMCWVNyfOHGX4vMo00
