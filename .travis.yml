@@ -9,6 +9,8 @@ deploy:
   api-key: 
     secure: "05c65690-c2af-4adb-821a-0e60d102c7d4"
   app: sigetagibilibus
+  on:
+      branch: Develop
    
 notifications:
   slack: uclm-grupo:T8sWAkWMCWVNyfOHGX4vMo00
