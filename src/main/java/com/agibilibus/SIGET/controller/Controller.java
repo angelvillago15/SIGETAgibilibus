@@ -45,7 +45,7 @@ public class Controller {
 		try {
 			JSONObject jso = new JSONObject(credenciales);
 			String userName = jso.getString("userName");
-			String pwd = jso.getString("pwd");
+			String pwd = enc.encriptar(jso.getString("pwd"), key);
 			Sesion.get().login(session, userName, pwd);
 		} catch (Exception e) {
 			throw new Exception(e);
