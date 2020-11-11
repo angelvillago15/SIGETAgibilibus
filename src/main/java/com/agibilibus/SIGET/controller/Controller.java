@@ -1,7 +1,9 @@
 package com.agibilibus.SIGET.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
@@ -22,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.agibilibus.SIGET.model.Encriptador;
 import com.agibilibus.SIGET.model.Invitacion;
 import com.agibilibus.SIGET.model.Reunion;
 import com.agibilibus.SIGET.model.Sesion;
@@ -32,8 +33,6 @@ import com.agibilibus.SIGET.model.Usuario;
 public class Controller {
 	private static String error = "error";
 	private static String message = "message";
-	private Encriptador enc = new Encriptador();
-	private String key = "agibilibus";
 
 	@GetMapping("/")
 	public ModelAndView inicio(ModelMap model) {
@@ -43,9 +42,11 @@ public class Controller {
 	@PostMapping("/login")
 	public void login(HttpSession session, @RequestBody Map<String, Object> credenciales) throws Exception {
 		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
 			JSONObject jso = new JSONObject(credenciales);
 			String userName = jso.getString("userName");
-			String pwd = enc.encriptar(jso.getString("pwd"), key);
+			byte[] datosDesencriptados = md.digest(jso.getString("pwd").getBytes(StandardCharsets.UTF_8));
+			String pwd = new String(datosDesencriptados);
 			Sesion.get().login(session, userName, pwd);
 		} catch (Exception e) {
 			throw new Exception(e);
@@ -57,6 +58,7 @@ public class Controller {
 	public String register(HttpSession session, @RequestBody Map<String, Object> credenciales)
 	        throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException,
 	        IllegalBlockSizeException, BadPaddingException, JSONException {
+		MessageDigest md = MessageDigest.getInstance("MD5");
 		JSONObject jso = new JSONObject(credenciales);
 		String userCompletName = jso.getString("userCompletName");
 		String userName = jso.getString("userName");
@@ -65,8 +67,8 @@ public class Controller {
 		String userDni = jso.getString("userDni");
 		int userTelf = Integer.parseInt(jso.getString("userTelf"));
 		String userMail = jso.getString("userMail");
-		String pwd1 = enc.encriptar(jso.getString("pwd1"), key);
-		
+		byte[] datosDesencriptados = md.digest(jso.getString("pwd1").getBytes(StandardCharsets.UTF_8));
+		String pwd1 =new String(datosDesencriptados);
 
 		DateTime fecha = DateTime.parse(userDate);
 
