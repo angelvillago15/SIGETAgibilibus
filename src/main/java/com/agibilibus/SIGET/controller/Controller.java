@@ -1,11 +1,18 @@
 package com.agibilibus.SIGET.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.servlet.http.HttpSession;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.agibilibus.SIGET.model.Encriptador;
 import com.agibilibus.SIGET.model.Invitacion;
 import com.agibilibus.SIGET.model.Reunion;
 import com.agibilibus.SIGET.model.Sesion;
@@ -24,11 +32,13 @@ import com.agibilibus.SIGET.model.Usuario;
 public class Controller {
 	private static String error = "error";
 	private static String message = "message";
-	
+	private Encriptador enc = new Encriptador();
+	private String key = "agibilibus";
+
 	@GetMapping("/")
 	public ModelAndView inicio(ModelMap model) {
-        return new ModelAndView("redirect:/Login.html", model);
-    }
+		return new ModelAndView("redirect:/Login.html", model);
+	}
 
 	@PostMapping("/login")
 	public void login(HttpSession session, @RequestBody Map<String, Object> credenciales) throws Exception {
@@ -44,7 +54,9 @@ public class Controller {
 	}
 
 	@PostMapping("/register")
-	public String register(HttpSession session, @RequestBody Map<String, Object> credenciales) {
+	public String register(HttpSession session, @RequestBody Map<String, Object> credenciales)
+	        throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException,
+	        IllegalBlockSizeException, BadPaddingException, JSONException {
 		JSONObject jso = new JSONObject(credenciales);
 		String userCompletName = jso.getString("userCompletName");
 		String userName = jso.getString("userName");
@@ -53,28 +65,21 @@ public class Controller {
 		String userDni = jso.getString("userDni");
 		int userTelf = Integer.parseInt(jso.getString("userTelf"));
 		String userMail = jso.getString("userMail");
-		String pwd1 = jso.getString("pwd1");
-		String pwd2 = jso.getString("pwd2");
+		String pwd1 = enc.encriptar(jso.getString("pwd1"), key);
+		
 
 		DateTime fecha = DateTime.parse(userDate);
 
 		JSONObject resultado = new JSONObject();
 
-		if (pwd1.equals(pwd2)) {
-			try {
+		try {
+			Usuario.get().crearUsuario(pwd1, userCompletName, userName, userApellidos, fecha, userDni, userTelf,
+			        userMail);
+			resultado.put("type", "OK");
 
-				// Usuario user = new Usuario();
-
-				Usuario.get().crearUsuario(pwd1, userCompletName, userName, userApellidos, fecha, userDni, userTelf, userMail);
-				resultado.put("type", "OK");
-				
-			} catch (Exception e) {
-				resultado.put("type", error);
-				resultado.put(message, e.getMessage());
-			}
-		} else {
+		} catch (Exception e) {
 			resultado.put("type", error);
-			resultado.put(message, "las password no coinciden.");
+			resultado.put(message, e.getMessage());
 		}
 
 		return resultado.toString();
@@ -100,7 +105,7 @@ public class Controller {
 		Reunion.get().guardarReunion(titulo, descripcion, horaI, horaF, organizador, correosAsistentes, url);
 
 	}
-	
+
 	@PostMapping("/loadReunion")
 	public String loadReunion(HttpSession session, @RequestBody Map<String, Object> loadReunion) throws Exception {
 		JSONObject jso = new JSONObject(loadReunion);
@@ -113,7 +118,6 @@ public class Controller {
 		Usuario usuario = (Usuario) session.getAttribute("user");
 		return Reunion.get().getReuniones(usuario).toString();
 	}
-	
 
 	@PostMapping("/recibirInvitacion")
 	public String getInvitaciones(HttpSession session) {

@@ -48,6 +48,7 @@ public class Sesion {
 				Usuario user = optUser.get();
 
 				if (user.getPassword().equals(pwd)) {
+					
 
 					Sesion sesion = new Sesion(user, httpSession);
 					this.connectedUsersByUserName.put(userName, user);

@@ -82,9 +82,7 @@ $(document).ready(function() {
                     type : "post",
                     contentType: 'application/json',
 
-                    success : function() {
-                        alert("OK");
-                    },
+                    
                     error : function(response) {
                         alert(response.responseText);
                     }
