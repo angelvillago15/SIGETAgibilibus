@@ -98,7 +98,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		},
 		locale : 'es',
-		initialView : 'timeGridWeek',
 		navLinks : true, // can click day/week names to navigate views
 		selectMirror : true,
 		dayMaxEvents : true, // allow "more" link when too many events
