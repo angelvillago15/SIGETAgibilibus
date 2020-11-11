@@ -174,4 +174,9 @@ public class Usuario implements Serializable {
 
 		return ((Usuario)obj).getNombre().equals(this.nombre);
 	}
+	@Override
+	  public int hashCode() {
+	    return super.hashCode();
+	  }
+
 }
