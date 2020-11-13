@@ -1,0 +1,44 @@
+body {
+            background: url('../recursos/cielo.jpg') center no-repeat;
+            min-height:100%;
+            background-size:cover;
+        }
+        ul, li {
+            margin:0;
+            padding:0;
+            list-style-type:none;
+        }
+        #container {
+            width:400px;
+            height:290px;
+            background:#fefefe;
+            margin:auto;  
+            border-top-color:#d3dbde;
+            border-bottom-color:#bfc9dc;
+            box-shadow:0 1px 1px #ccc;
+            border-radius:5px;
+            position:relative;
+        }
+        h2 {
+            margin:0;
+            padding:10px 0;
+            font-size:24px;
+            text-align:center;
+            background:#eff4f7;
+            border-bottom:1px solid #dde0e7;
+            box-shadow:0 -1px 0 #fff inset;
+            border-radius:5px 5px 0 0; /* otherwise we get some uncut corners with container div */
+            text-shadow:1px 1px 0 #fff;
+        }
+        #username,#pass{
+            display: inline-block;
+            width: 200px;
+        }
+        .flexContainer {
+            display:flex;
+            align-items:center;
+        }
+
+        .customSpan {
+            margin:0 0 4px 4px;  
+        }

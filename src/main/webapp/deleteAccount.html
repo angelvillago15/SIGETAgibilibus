@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Eliminar Cuenta</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> 
+  <link href='css/deleteAccount.css' rel='stylesheet' />
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <div class="left">
+          <a href="UserCalendar.html"><span class="logo"><img src="recursos/logo.png" alt="logotipo" width="60" height="60"></span>
+        </div>
+    </a>
+    </div>  
+  </nav>
+
+<br>
+<br>
+
+<div class="container">
+  <h2>Eliminar Cuenta</h2>
+<br>  
+  <div class="panel-group">
+    
+    <div class="panel panel-default">
+      <div class="panel-heading"><strong>Advertencia</strong></div>
+      <div class="panel-body">
+      	<form>
+          <p>Del equipo de Agibílibus:</p>
+          <p>Sentimos que quiera eliminar la cuenta.<br>
+          Si elige tal opción, <strong>tendrá que elegir un motivo en el cuadro a continuación.</strong></p>
+          <p>¡Esperamos que hayas disfrutado!</p>
+          <select class="mdb-select md-form" id="cause"> 
+            <option value="" disabled selected>Quiero eliminar la cuenta porque</option>
+            <option value="1">Estoy usando otr aplicación</option>
+            <option value="2">No entiendo muy bien como funciona la aplicación</option>
+            <option value="2">No veo manera de implantar la aplicación a mi negocio</option>
+            <option value="3">No me siento seguro</option>
+            <option value="4">Esto es temporal. Volveré</option>
+            <option value="5">Otro</option>
+          </select>
+          <br>
+          <br>
+          </form>
+          <div class="form-group">
+            <label for="comment">Si has escogido la opción "otro" o quieres especificar la razón, puedes dejar un comentario par ayudarnos a mejorar:</label>
+            <textarea class="form-control" rows="5" id="comment"></textarea>
+          </div>
+          <p align="center"><input type="button" class="btn btn-danger" id="remove" value="Eliminar esta cuenta"></p>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="js/DeleteAccount.js"></script>
+</body>
+
+</html>
+
