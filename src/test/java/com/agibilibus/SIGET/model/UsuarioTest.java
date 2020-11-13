@@ -6,6 +6,7 @@ import static org.testng.Assert.assertTrue;
 import org.junit.Test;
 
 import com.agibilibus.SIGET.dao.UserDAO;
+import com.sun.el.parser.ParseException;
 
 import junit.framework.Assert;
 
@@ -24,55 +25,64 @@ public class UsuarioTest {
 	@Test
 	public void testgetNombre() {
 		inicio();
-		assertEquals(true, usu.getNombre());
+		usu.setNombre("pwd1");
+		assertEquals("pwd1", usu.getNombre());
 	}
 	
 	@Test
 	public void testgetApellido() {
 		inicio();
-		assertEquals(true, usu.getApellidos());
+		usu.setApellidos("Fernandez");
+		assertEquals("Fernandez", usu.getApellidos());
 	}
 	
 	@Test
 	public void testgetTelefono() {
 		inicio();
-		assertEquals(true, usu.getTelefono());
+		usu.setTelefono(92929);
+		assertEquals(92929, usu.getTelefono());
 	}
 	
 	@Test
 	public void testgetEmail() {
 		inicio();
-		assertEquals(true, usu.getEmail());
+		usu.setEmail("ala@uclm.es");
+		assertEquals("ala@uclm.es", usu.getEmail());
 	}
 	
 	@Test
 	public void testgetDate() {
 		inicio();
+		//usu.setDate();
 		assertEquals(true, usu.getDate());
 	}
 	
 	@Test
 	public void testgetUser() {
 		inicio();
-		assertEquals(true, usu.getUser());
+		usu.setUser("Perico");
+		assertEquals("Perico", usu.getUser());
 	}
 	
 	@Test
 	public void testgetDNI() {
 		inicio();
-		assertEquals(true, usu.getDNI());
+		usu.setDNI("7878");
+		assertEquals("7878", usu.getDNI());
 	}
 	
 	@Test
 	public void testgetPassword() {
 		inicio();
-		assertEquals(true, usu.getPassword());
+		usu.setPassword("aaa22");
+		assertEquals("aaa22", usu.getPassword());
 	}
 	
 	@Test
 	public void testgetRol() {
 		inicio();
-		assertEquals(true, usu.getRol());
+		usu.setRol("usuario");
+		assertEquals("usuario", usu.getRol());
 	}
 
 	@Test
@@ -84,14 +94,30 @@ public class UsuarioTest {
 
 
 	@Test
-	public void testCrearUsuario() {
+	public void testCrearUsuario() throws ParseException{
 		inicio();
-		assertEquals(false, usu.crearUsuario("pwd1", "nombreCompleto", "nombre", "apellidos", null, "userDni", 9855000, "email@email.com"));
+		usu.setNombre("Juan");
+		usu.setApellidos("aaaa");
+		usu.setTelefono(9825448);
+		usu.setDNI("71486");
+		usu.setEmail("aa@oaskao.com");
+		usu.setDate(null);
+		usu.setUser("momo");
+		usu.setPassword("pwf44");
+		usu.setRol("usuario");
+		
+		try {
+			usu.crearUsuario("pwd1", "nombreCompleto", "nombre", "apellidos", null, "userDni", 9855000, "email@email.com");
+			fail("Excepcion");
+		}catch(Exception e){
+			System.out.println("Crear Usuario:" + usu.toString());
+		}
+		//assertEquals(false, usu.crearUsuario("pwd1", "nombreCompleto", "nombre", "apellidos", null, "userDni", 9855000, "email@email.com"));
 	}
 
 	@Test
 	public void testModificarUsuario() {
-		
+		inicio();
 		assertEquals(false, usu.modificarUsuario(usu1));
 	}
 	
