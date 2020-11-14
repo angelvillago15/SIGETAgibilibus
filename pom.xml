@@ -100,15 +100,15 @@
 		</dependency>
 
 		<dependency>
-		    <groupId>org.apache.maven.plugins</groupId>
-		    <artifactId>maven-compiler-plugin</artifactId>
-		    <version>3.8.1</version>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>3.8.1</version>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>org.seleniumhq.selenium</groupId>
-		    <artifactId>selenium-java</artifactId>
-		    <version>3.141.59</version>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>3.141.59</version>
 		</dependency>
 	</dependencies>
 
@@ -139,6 +139,20 @@
 								</artifactItem>
 							</artifactItems>
 						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.5</version>
+				<executions>
+					<execution>
+						<id>report</id>
+						<goals>
+							<goal>report</goal>
+						</goals>
+						<phase>verify</phase>
 					</execution>
 				</executions>
 			</plugin>

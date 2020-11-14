@@ -1,23 +1,31 @@
 package com.agibilibus.SIGET;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.fail;
 import javax.servlet.http.HttpSession;
-
-import org.junit.Assert;
+import org.joda.time.DateTime;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.agibilibus.SIGET.dao.UserDAO;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import com.agibilibus.SIGET.model.Sesion;
+import com.agibilibus.SIGET.model.Usuario;
 
-
-class LoginTest {
+@RunWith(SpringRunner.class)
+@SpringBootTest
+class TestLogin {
 	
 	@Autowired
-	//HttpSession sesion;
-	UserDAO dao;
+	HttpSession sesion;
 	
 	@Test
 	void test() {
-		Assert.assertNotNull(dao.existsById("pepe"));
+		try {
+			Usuario.get().crearUsuario("99999999A", "Cristina", "cris", "pruebas", DateTime.parse("2020-11-30"), "99999999A", 666666666, "cristina@gmail.com");
+			Sesion.get().login(sesion, "cris", "99999999A");
+		}catch (Exception e) {
+			fail("Se ha lanzado una excepcion inesperada: " + e);
+		}
 	}
 
 }

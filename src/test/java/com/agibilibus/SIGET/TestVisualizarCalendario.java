@@ -18,7 +18,7 @@ public class TestVisualizarCalendario {
 	public void testGetReuniones() {
 		
 		try {
-			Usuario cristina = Usuario.get().crearUsuario("99999999A", "Cristina", "cris", "pruebas", DateTime.parse("2020-11-30"), "99999999A", 666666666, "cristina@gmail.com");
+		Usuario.get().crearUsuario("99999999A", "Cristina", "cris", "pruebas", DateTime.parse("2020-11-30"), "99999999A", 666666666, "cristina@gmail.com");
 		} catch (Exception e) {
 			fail("Se ha lanzado una excepcion inesperada: " + e);
 		}
