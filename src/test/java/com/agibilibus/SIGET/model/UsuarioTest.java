@@ -3,6 +3,7 @@ package com.agibilibus.SIGET.model;
 import static org.junit.Assert.*;
 import static org.testng.Assert.assertTrue;
 
+import org.joda.time.DateTime;
 import org.junit.Test;
 
 import com.agibilibus.SIGET.dao.UserDAO;
@@ -13,128 +14,72 @@ import junit.framework.Assert;
 public class UsuarioTest {
 	static Usuario usu;
 	static Usuario usu1;
-	
-	static UserDAO userdao;
+	static Usuario usu2;
+	static UserDAO dao;
 	
 	public void inicio() {
-		usu = new Usuario();
+		usu = new Usuario("Alfonso", "oaijsdoiajs", "Alfon", "megia", 66846864, "alf@gmail.com", "1648498a", DateTime.parse("2019-01-02"), "usuario");
 		usu1= new Usuario();
+		usu2= new Usuario();
 	}
 	
-	
-	@Test
-	public void testgetNombre() {
-		inicio();
-		usu.setNombre("pwd1");
-		assertEquals("pwd1", usu.getNombre());
-	}
-	
-	@Test
-	public void testgetApellido() {
-		inicio();
-		usu.setApellidos("Fernandez");
-		assertEquals("Fernandez", usu.getApellidos());
-	}
-	
-	@Test
-	public void testgetTelefono() {
-		inicio();
-		usu.setTelefono(92929);
-		assertEquals(92929, usu.getTelefono());
-	}
-	
-	@Test
-	public void testgetEmail() {
-		inicio();
-		usu.setEmail("ala@uclm.es");
-		assertEquals("ala@uclm.es", usu.getEmail());
-	}
-	
-/*	@Test
-	public void testgetDate() {
-		inicio();
-		//usu.setDate();
-		assertEquals(, usu.getDate());
-	}*/
-	
-	@Test
-	public void testgetUser() {
-		inicio();
-		usu.setUser("Perico");
-		assertEquals("Perico", usu.getUser());
-	}
-	
-	@Test
-	public void testgetDNI() {
-		inicio();
-		usu.setDNI("7878");
-		assertEquals("7878", usu.getDNI());
-	}
-	
-	@Test
-	public void testgetPassword() {
-		inicio();
-		usu.setPassword("aaa22");
-		assertEquals("aaa22", usu.getPassword());
-	}
-	
-	@Test
-	public void testgetRol() {
-		inicio();
-		usu.setRol("usuario");
-		assertEquals("usuario", usu.getRol());
-	}
 
 	@Test
 	public void testRegister() {
-		assertEquals(true, usu1);
-	
+		
 	}
 
 
 	@Test
-	public void testCrearUsuario() throws ParseException{
+	public void testCrearUsuarioTrue() throws ParseException{
 		inicio();
-		usu.setNombre("Juan");
-		usu.setApellidos("aaaa");
-		usu.setTelefono(9825448);
-		usu.setDNI("71486");
-		usu.setEmail("aa@oaskao.com");
-		usu.setDate(null);
-		usu.setUser("pwd1");
-		usu.setPassword("pwf44");
-		usu.setRol("usuario");
 		
 		try {
-			usu.crearUsuario("pwd1", "nombreCompleto", "nombre", "apellidos", null, "userDni", 9855000, "email@email.com");
+			usu1.crearUsuario("Al442ss", "Alberto ", "Alber", "Fernandez",DateTime.parse("2019-01-02") , "7022548R", 9855000, "email@email.com");
 			fail("Excepcion");
 		}catch(Exception e){
-			System.out.println("Crear Usuario:" + usu.getNombre());
+			System.out.println("Crear Usuario:" + usu1.getDNI());
 		}
-		//assertEquals(false, usu.crearUsuario("pwd1", "nombreCompleto", "nombre", "apellidos", null, "userDni", 9855000, "email@email.com"));
+		
+	}
+	
+	@Test
+	public void testCrearUsuarioFalse() throws ParseException{
+		inicio();
+		
+		try {
+			usu2.crearUsuario("Juan", null, "nombre", "apellidos",DateTime.parse("2019-01-02") , "userDni", 9855000, "email@email.com");
+			fail("Excepcion");
+		}catch(Exception e){
+			System.out.println("Error al crear el usuario: " + usu2.getNombre());
+		}
+		
 	}
 
 	@Test
 	public void testModificarUsuario() {
 		inicio();
-		assertEquals(usu1, usu.modificarUsuario(usu1));
+		usu.setApellidos("Palencia");
+		usu.setDNI("78484984");
+		usu.setDate(DateTime.parse("2015-01-02"));
+		usu.setEmail("kaoskopa@gmail.com");
+		usu.setNombre("Fernanda");
+		usu.setPassword("asdsad33");
+		usu.setTelefono(48948984);
+		usu.setRol("Administrador");
+		usu.setUser("Fler");
+		
+		assertEquals("Palencia", usu.getApellidos());
+		assertEquals("78484984", usu.getDNI());
+		assertEquals(DateTime.parse("2015-01-02"), usu.getDate());
+		assertEquals("kaoskopa@gmail.com", usu.getEmail());
+		assertEquals("Fernanda", usu.getNombre());
+		assertEquals("asdsad33", usu.getPassword());
+		assertEquals(48948984, usu.getTelefono());
+		assertEquals("Administrador", usu.getRol());
+		assertEquals("Fler", usu.getUser());
+		
 	}
 	
-	/*
-
-	@Test
-	public void testEliminarUsuario() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGet() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testEqualsObject() {
-		fail("Not yet implemented");
-	}
-*/
+	
 }
