@@ -1,14 +1,13 @@
-package defecto;
+package com.agibilibus.SIGET;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.testng.Assert.fail;
-
 import javax.servlet.http.HttpSession;
+
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.agibilibus.SIGET.dao.UserDAO;
 
-import junit.framework.Assert;
 
 class LoginTest {
 	
