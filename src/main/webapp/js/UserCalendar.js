@@ -1,13 +1,36 @@
 function openNav() {
-	document.getElementById("mySidenav").style.width = "250px";
-	document.getElementById("main").style.marginLeft = "250px";
+	document.getElementById("mySidenav").style.width = "270px";
+	document.getElementById("main").style.marginLeft = "270px";
 	document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+	getRol();
 }
 
 function closeNav() {
 	document.getElementById("mySidenav").style.width = "0";
 	document.getElementById("main").style.marginLeft = "0";
 	document.body.style.backgroundColor = "white";
+	
+}
+
+function getRol(){
+
+	var data ={
+		url: "getRol",
+		type: "post",
+		
+		success: function(response) {
+			var datos = JSON.parse(response);
+			if (datos.rol=="admin")
+				 $("#gestionUser").show();
+			else
+				 $("#gestionUser").hide();
+				
+		},
+		error: function(response) {
+		alert("hay un error");
+		}
+	};
+	$.ajax(data);
 }
 
 function getInvitaciones() {
