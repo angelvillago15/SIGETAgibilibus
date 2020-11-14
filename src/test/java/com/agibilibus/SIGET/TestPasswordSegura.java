@@ -32,17 +32,6 @@ public class TestPasswordSegura {
 	@Autowired
 	UserDAO userdao;
 
-	/*@Test
-	public void testPasswordEncriptadaLogin() throws Exception {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("userName", "Prueba");
-		map.put("pwd", "contraseña");
-		cont.login(null, map);
-		assertNotEquals(map.get("pwd"),userdao.findById("Prueba").get().getPassword());
-		
-
-	}*/
-
 	@Test
 	public void testPasswordEncriptadaRegister()
 	        throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException,
