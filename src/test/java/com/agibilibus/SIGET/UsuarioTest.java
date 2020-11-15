@@ -50,7 +50,7 @@ public class UsuarioTest {
 		inicio();
 
 		try {
-			usu2.get().crearUsuario(null, null, "nombre", "apellidos", DateTime.parse("2019-01-02"), "userDni", 9855000,
+			usu2.crearUsuario(null, null, "nombre", "apellidos", DateTime.parse("2019-01-02"), "userDni", 9855000,
 					"email@email.com");
 		} catch (Exception e) {
 			System.out.println("Error al crear el usuario: " + usu2.getNombre());
