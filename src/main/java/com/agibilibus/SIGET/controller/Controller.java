@@ -56,8 +56,7 @@ public class Controller {
 
 	@PostMapping("/register")
 	public String register(HttpSession session, @RequestBody Map<String, Object> credenciales)
-	        throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException,
-	        IllegalBlockSizeException, BadPaddingException, JSONException {
+	        throws NoSuchAlgorithmException, JSONException {
 		MessageDigest md = MessageDigest.getInstance("MD5");
 		JSONObject jso = new JSONObject(credenciales);
 		String userCompletName = jso.getString("userCompletName");
