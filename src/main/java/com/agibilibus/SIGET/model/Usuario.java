@@ -146,12 +146,22 @@ public class Usuario implements Serializable {
 	        String userDni, int userTelf, String email) {
 		Usuario user;
 		user = new Usuario(nombre, pwd1, nombreCompleto, apellidos, userTelf, email, userDni, userDate, "usuario");
-
 		return userdao.save(user);
 	}
 
-	public Usuario modificarUsuario(Usuario u) {
-		return null;
+	public Usuario modificarUsuario(Usuario u, String pwd1, String nombre, String apellidos, DateTime userDate,
+	        String userDni, int userTelf, String email, String rol) {
+		/*u.setApellidos(apellidos);
+		u.setPassword(pwd1);
+		u.setDate(userDate);
+		u.setDNI(userDni);
+		u.setEmail(email);
+		u.setNombre(nombre);
+		u.setPassword(email);
+		u.setTelefono(userTelf);
+		u.setRol(rol);*/
+		
+		return userdao.save(u);
 	}
 
 	public void eliminarUsuario(Usuario u) {
