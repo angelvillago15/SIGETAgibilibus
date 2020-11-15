@@ -125,7 +125,6 @@ public class Controller {
 		Usuario usuario = (Usuario) session.getAttribute("user");
 		JSONObject jso = new JSONObject();
 		jso.put("rol", usuario.getRol());
-		System.out.println(jso.toString());
 		return jso.toString();
 	}
 
