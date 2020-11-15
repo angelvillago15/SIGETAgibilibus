@@ -120,6 +120,15 @@ public class Controller {
 		Usuario usuario = (Usuario) session.getAttribute("user");
 		return Reunion.get().getReuniones(usuario).toString();
 	}
+	
+	@PostMapping("/getRol")
+	public String getRol(HttpSession session) {
+		Usuario usuario = (Usuario) session.getAttribute("user");
+		JSONObject jso = new JSONObject();
+		jso.put("rol", usuario.getRol());
+		System.out.println(jso.toString());
+		return jso.toString();
+	}
 
 	@PostMapping("/recibirInvitacion")
 	public String getInvitaciones(HttpSession session) {
