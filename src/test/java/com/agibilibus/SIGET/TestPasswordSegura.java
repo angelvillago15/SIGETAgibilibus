@@ -1,21 +1,12 @@
 package com.agibilibus.SIGET;
 
 import static org.junit.Assert.*;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
-import java.io.UnsupportedEncodingException;
-import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-
-import org.joda.time.DateTime;
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +25,7 @@ public class TestPasswordSegura {
 
 	@Test
 	public void testPasswordEncriptadaRegister()
-	        throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException,
-	        IllegalBlockSizeException, BadPaddingException, JSONException {
+	        throws  NoSuchAlgorithmException, JSONException {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("userCompletName", "Prueba");
 		map.put("userName", "Prueba");
