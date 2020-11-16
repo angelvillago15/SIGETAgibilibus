@@ -56,8 +56,7 @@ public class Controller {
 
 	@PostMapping("/register")
 	public String register(HttpSession session, @RequestBody Map<String, Object> credenciales)
-	        throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException,
-	        IllegalBlockSizeException, BadPaddingException, JSONException {
+	        throws NoSuchAlgorithmException, JSONException {
 		MessageDigest md = MessageDigest.getInstance("MD5");
 		JSONObject jso = new JSONObject(credenciales);
 		String userCompletName = jso.getString("userCompletName");
@@ -126,7 +125,6 @@ public class Controller {
 		Usuario usuario = (Usuario) session.getAttribute("user");
 		JSONObject jso = new JSONObject();
 		jso.put("rol", usuario.getRol());
-		System.out.println(jso.toString());
 		return jso.toString();
 	}
 
@@ -147,6 +145,7 @@ public class Controller {
 
 	}
 	
+<<<<<<< HEAD
 	@PostMapping("/responderInvitacion")
 	public String responderInvitacion(HttpSession session) {
 		Usuario usuario = (Usuario) session.getAttribute("user");
@@ -154,5 +153,36 @@ public class Controller {
 		jso.put("invitaciones", Invitacion.get().recibirInvitacion(usuario));
 		return jso.toString();
 	}
+=======
+	@PostMapping("/modifyUser")
+	public void modificar(HttpSession session, Usuario u, @RequestBody Map<String, Object> credenciales)
+	        throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException,
+	        IllegalBlockSizeException, BadPaddingException, JSONException {
+		/*JSONObject jso = new JSONObject(credenciales);
+		String userName = jso.getString("userName");
+		String userApellidos = jso.getString("userApellidos");
+		String userDate = jso.getString("userDate");
+		String userDni = jso.getString("userDni");
+		int userTelf = Integer.parseInt(jso.getString("userTelf"));
+		String userMail = jso.getString("userMail");
+		String pwd1 = jso.getString("pwd1");
+		String rol = jso.getString("rol"); 
 
+		DateTime fecha = DateTime.parse(userDate);*/
+		
+		JSONObject resultado = new JSONObject();
+
+		/*try {
+			Usuario.get().modificarUsuario(u, pwd1, userName, userApellidos, fecha, userDni, userTelf,
+			        userMail, rol);
+			resultado.put("type", "OK");
+>>>>>>> Develop
+
+		} catch (Exception e) {
+			resultado.put("type", error);
+			resultado.put(message, e.getMessage());
+		}*/
+
+		
+	}
 }
