@@ -16,7 +16,7 @@ import com.agibilibus.SIGET.model.Usuario;
 class TestLogin {
 	
 	@Autowired
-	HttpSession sesion;
+	private HttpSession sesion;
 	
 	@Test
 	void test() {
