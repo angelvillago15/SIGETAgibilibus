@@ -1,6 +1,7 @@
 package com.agibilibus.SIGET.model;
 
 import java.io.Serializable;
+import java.util.Optional;
 
 import org.joda.time.DateTime;
 import org.json.JSONObject;
@@ -164,8 +165,10 @@ public class Usuario implements Serializable {
 		return userdao.save(u);
 	}
 
-	public void eliminarUsuario(Usuario u) {
-
+	public void eliminarUsuario(String idUsuario) {
+		Optional<Usuario> opt = userdao.findById(idUsuario);
+		if (opt.isPresent()) 
+			userdao.deleteById(idUsuario);
 	}
 
 	private static class UsuarioHolder {
