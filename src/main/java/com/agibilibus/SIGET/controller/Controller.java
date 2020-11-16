@@ -145,7 +145,6 @@ public class Controller {
 
 	}
 	
-<<<<<<< HEAD
 	@PostMapping("/responderInvitacion")
 	public String responderInvitacion(HttpSession session) {
 		Usuario usuario = (Usuario) session.getAttribute("user");
@@ -153,7 +152,7 @@ public class Controller {
 		jso.put("invitaciones", Invitacion.get().recibirInvitacion(usuario));
 		return jso.toString();
 	}
-=======
+
 	@PostMapping("/modifyUser")
 	public void modificar(HttpSession session, Usuario u, @RequestBody Map<String, Object> credenciales)
 	        throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException,

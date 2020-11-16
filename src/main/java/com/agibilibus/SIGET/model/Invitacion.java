@@ -115,20 +115,6 @@ public class Invitacion {
 	}
 
 	public void responderInvitacion(Usuario user, Invitacion inv) {
-		JSONArray invitaciones = new JSONArray();
-		invitaciones = recibirInvitacion(user);
-		Reunion r = new Reunion();
-		
-		if (inv.getEstado().equals("aceptado")) {
-			invitaciones.remove(inv);
-			r = inv.getReunion();
-			r.guardarReunion(r.getTitulo(), r.getDescripcion(), r.getHoraInicio(), r.getHoraFin(), r.getOrganizador(), r.getAsistentes(), r.getUrl());	
-		}
-		else if (inv.getEstado().equals("rechazado")) {
-			invitaciones.remove(inv);
-		}
-
-
 
 	}
 
