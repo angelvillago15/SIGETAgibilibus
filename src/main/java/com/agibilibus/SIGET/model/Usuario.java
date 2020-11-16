@@ -1,6 +1,7 @@
 package com.agibilibus.SIGET.model;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Optional;
 
 import org.joda.time.DateTime;
@@ -167,8 +168,20 @@ public class Usuario implements Serializable {
 
 	public void eliminarUsuario(String idUsuario) {
 		Optional<Usuario> opt = userdao.findById(idUsuario);
-		if (opt.isPresent()) 
+		
+		if (opt.isPresent()) {
+			Usuario u = opt.get();
+			List<Reunion> reuniones = Reunion.get().getListReuniones(u);
+			for (Reunion r : reuniones) {
+				if (r.getOrganizador().getUser().equals(u.getUser())) 
+					Reunion.get().cambiarOrganizarReunion(r);
+				else
+					Reunion.get().eliminarAsistenteReunion(u, r);
+			} 
+			Invitacion.get().eliminarTodasInvitacionesUsuario(u);
 			userdao.deleteById(idUsuario);
+			
+		}
 	}
 
 	private static class UsuarioHolder {

@@ -207,6 +207,19 @@ public class Reunion {
 		}
 		return jsaReuniones;
 	}
+	
+	public List<Reunion> getListReuniones(Usuario u) {
+		Optional<Usuario> optUser = userdao.findById(u.getUser());
+		List<Reunion> reunionesUsuario = new ArrayList<>();
+		if (optUser.isPresent()) {
+			Usuario usuario = optUser.get();
+			reunionesUsuario = reuniondao.findAll();
+			for (Reunion r : reunionesUsuario)
+				if (r.getOrganizador().getUser().equals(usuario.getUser()) || r.getAsistentes().contains(usuario))
+					reunionesUsuario.add(r);
+		}
+		return reunionesUsuario;
+	}
 
 	private static class ReunionHolder {
 		static Reunion singleton = new Reunion();
@@ -224,6 +237,28 @@ public class Reunion {
 			r = reunion.get();
 		}
 		return r.toJSON();
+	}
+	
+	public void cambiarOrganizarReunion(Reunion reunion) {
+		Optional<Reunion> optReunion = reuniondao.findById(reunion.getIdReunion());
+		if (optReunion.isPresent()) {
+			if (optReunion.get().getAsistentes().isEmpty())
+				reuniondao.deleteById(reunion.getIdReunion());
+			else {
+				Reunion r = optReunion.get();
+				r.setOrganizador(r.getAsistentes().get(0));
+				reuniondao.save(r);
+			}
+		}
+	}
+
+	public void eliminarAsistenteReunion(Usuario u, Reunion r) {
+		List<Usuario> asistentesReunion= r.getAsistentes();
+		asistentesReunion.remove(asistentesReunion.indexOf(u));
+		r.setAsistentes(asistentesReunion);
+		Optional<Reunion> optReunion = reuniondao.findById(r.getIdReunion());
+		if(optReunion.isPresent())
+			reuniondao.save(r);
 	}
 
 }
