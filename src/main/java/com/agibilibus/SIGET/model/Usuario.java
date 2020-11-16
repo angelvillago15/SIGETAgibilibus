@@ -175,7 +175,7 @@ public class Usuario implements Serializable {
 			for (Reunion r : reuniones) {
 				if (r.getOrganizador().getUser().equals(u.getUser())) 
 					Reunion.get().cambiarOrganizarReunion(r);
-				else
+				else if (r.getAsistentes().contains(u))
 					Reunion.get().eliminarAsistenteReunion(u, r);
 			} 
 			Invitacion.get().eliminarTodasInvitacionesUsuario(u);
