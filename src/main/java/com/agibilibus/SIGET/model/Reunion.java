@@ -182,7 +182,6 @@ public class Reunion {
 				String idInv=r.getIdReunion()+u.getUser();
 				invitaciondao.save(new Invitacion(idInv, u, r, EstadoInvitacion.pendiente));
 			}
-			
 		}
 	}
 
@@ -195,11 +194,13 @@ public class Reunion {
 	}
 
 	public JSONArray getReuniones(Usuario u) {
+		
 		JSONArray jsaReuniones = new JSONArray();
 		Optional<Usuario> optUser = userdao.findById(u.getUser());
 		if (optUser.isPresent()) {
 			Usuario usuario = optUser.get();
 			List<Reunion> reuniones = reuniondao.findAll();
+			List<Usuario> usuarios =userdao.findAll();
 			for (Reunion r : reuniones) {
 				if (r.getOrganizador().getUser().equals(usuario.getUser()) || r.getAsistentes().contains(usuario))
 					jsaReuniones.put(r.toEvent());
