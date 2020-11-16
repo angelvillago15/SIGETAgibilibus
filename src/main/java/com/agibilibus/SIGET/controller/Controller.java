@@ -146,5 +146,13 @@ public class Controller {
 		Invitacion.get().enviarInivitacion(id, correosAsistentes);
 
 	}
+	
+	@PostMapping("/responderInvitacion")
+	public String responderInvitacion(HttpSession session) {
+		Usuario usuario = (Usuario) session.getAttribute("user");
+		JSONObject jso = new JSONObject();
+		jso.put("invitaciones", Invitacion.get().recibirInvitacion(usuario));
+		return jso.toString();
+	}
 
 }

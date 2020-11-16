@@ -34,8 +34,6 @@ public class TestInvitacion {
 	@Test
 	public void TestCrearYEnviarInvitacion() {
 		
-
-		Map<String, Object> credenciales1 = new HashMap<String, Object>();
 		credenciales1.put("userName", "Elisa");
 		credenciales1.put("pwd", "Seguridad2020");
 

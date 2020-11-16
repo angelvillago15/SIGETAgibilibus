@@ -17,8 +17,6 @@ import com.agibilibus.SIGET.dao.InvitacionDAO;
 import com.agibilibus.SIGET.dao.ReunionDAO;
 import com.agibilibus.SIGET.dao.UserDAO;
 
-
-
 import lombok.Data;
 
 @Component
@@ -52,6 +50,14 @@ public class Invitacion {
 
 	}
 
+	public String getIdInvitacion() {
+		return idInvitacion;
+	}
+
+	public void setIdInvitacion(String idInvitacion) {
+		this.idInvitacion = idInvitacion;
+	}
+
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -76,11 +82,6 @@ public class Invitacion {
 		this.estado = estado;
 	}
 
-	public void aceptarInvitacion() {
-	}
-
-	public void rechazarInvitacion() {
-	}
 
 	public JSONObject toJSON() {
 		JSONObject jso = new JSONObject();
@@ -100,8 +101,6 @@ public class Invitacion {
 		return InvitacionHolder.singleton;
 	}
 
-
-
 	public JSONArray recibirInvitacion(Usuario user) {
 		JSONArray jsaInvitaciones = new JSONArray();
 
@@ -115,13 +114,27 @@ public class Invitacion {
 		return jsaInvitaciones;
 	}
 
-	public void responderInvitacion() {
-	
+	public void responderInvitacion(Usuario user, Invitacion inv) {
+		JSONArray invitaciones = new JSONArray();
+		invitaciones = recibirInvitacion(user);
+		Reunion r = new Reunion();
+		
+		if (inv.getEstado().equals("aceptado")) {
+			invitaciones.remove(inv);
+			r = inv.getReunion();
+			r.guardarReunion(r.getTitulo(), r.getDescripcion(), r.getHoraInicio(), r.getHoraFin(), r.getOrganizador(), r.getAsistentes(), r.getUrl());	
+		}
+		else if (inv.getEstado().equals("rechazado")) {
+			invitaciones.remove(inv);
+		}
+
+
+
 	}
 
 	public void enviarInivitacion(String id, String[] correosAsistentes) {
 		Optional<Reunion> optReunion = reuniondao.findById(id);
-		String idInv ="";
+		String idInv = "";
 		List<Usuario> asist = new ArrayList<>();
 		if (optReunion.isPresent()) {
 			Reunion r = optReunion.get();
@@ -129,25 +142,20 @@ public class Invitacion {
 				Optional<Usuario> a = userdao.findByEmail(correo);
 				if (a.isPresent()) {
 					Usuario usuario = a.get();
-					if(!r.getAsistentes().contains(usuario)) {
+					if (!r.getAsistentes().contains(usuario)) {
 						asist.add(usuario);
-						idInv=r.getIdReunion()+usuario.getUser();
+						idInv = r.getIdReunion() + usuario.getUser();
 						invitaciondao.save(new Invitacion(idInv, usuario, r, EstadoInvitacion.pendiente));
 					}
 				}
 			}
-			List <Usuario> asistReunion = r.getAsistentes();
+			List<Usuario> asistReunion = r.getAsistentes();
 			asistReunion.addAll(asist);
-			
+
 			r.setAsistentes(asistReunion);
 			reuniondao.save(r);
 
 		}
-	}
-
-	public void responderInvitacion(Reunion reunion2, Usuario asistente) {
-		// TODO Auto-generated method stub
-
 	}
 
 }
