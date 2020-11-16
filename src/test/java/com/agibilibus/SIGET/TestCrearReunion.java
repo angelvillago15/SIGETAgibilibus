@@ -11,7 +11,9 @@ import java.util.Map;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import javax.servlet.http.HttpSession;
 
+import org.joda.time.DateTime;
 import org.json.JSONException;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -21,29 +23,50 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.agibilibus.SIGET.controller.Controller;
 import com.agibilibus.SIGET.dao.UserDAO;
+import com.agibilibus.SIGET.model.Reunion;
+import com.agibilibus.SIGET.model.Usuario;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 class TestCrearReunion {
-	Controller controller = new Controller();
+	
 	@Autowired
-	UserDAO userdao;
+	private HttpSession sesion;
+
+	private Controller controller = new Controller();
+	private Map<String, Object> reunion = new HashMap<String, Object>();
+	private String nombreTest = "test";
+
 
 	@Test
-	void testCrearReunion()  throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException,
-    IllegalBlockSizeException, BadPaddingException, JSONException {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("titulo", "Mi reunion");
-		map.put("descripcion", "Es una reunion para probar test");
-		map.put("fecha", "17-11-2020");
-		map.put("horaIni", "09:00");
-		map.put("horaFin", "11:00");
+	void testCrearReunion()  {
+		Map<String, Object> credenciales = new HashMap<String, Object>();
+		credenciales.put("userName", "Alberto ");
+		credenciales.put("pwd", "Al442ss");
+
 		try {
-			controller.guardarReunion(null, map);
-		} catch (Exception e) {
+			controller.login(sesion, credenciales);
+		} catch (Exception e1) {
+			fail("Error creando reunion: "+ e1);
+
+		}
+		reunion.put("nombre", "Mañanera");
+		reunion.put("fecha", "2020-15-01");
+		reunion.put("horaInicio", "11:00:00");
+		reunion.put("horaFin", "13:00:00");
+		reunion.put("descripcion", "Fallos");
+		reunion.put("url", "https://www.google.com/");
+		reunion.put("correos", "a@gmail.com");
+		
+		try {
+			controller.guardarReunion(sesion, reunion);
+		}catch(Exception e) {
+			fail("Error creando reunion: "+ e);
 			
-			e.printStackTrace();
 		}
 	}
+	
+
+
 
 }
