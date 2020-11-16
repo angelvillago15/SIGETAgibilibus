@@ -1,9 +1,10 @@
 var buscador = $("#table").DataTable();
-
+getUsuarios();
 $(document).ready(function() {
-    $("#input-search").keyup(function(){
+	getUsuarios();
+	$("#input-search").keyup(function(){
         buscador.search($(this).val()).draw();
-        getUsuarios();
+        
         if($("input-search").val()==""){
             $(".content-search").fadeout();
         }else{
@@ -30,12 +31,13 @@ function getUsuarios() {
 			var cnt = datos.usuarios.length;
 			$('#cnt').text(cnt);
 
+			var txt = "<thead><tr><td></td></tr></thead>";
 
 			for (var i in datos.usuarios) {
-			
-				var user = datos.usuarios[i];
-				txt = txt + "<tr> <td>" + user.nombre + "</a></td></tr>";
-				
+				var inv = datos.usuarios[i];
+				txt = txt + "<tbody><tr> <td><a href=""#"">" + user.nombre + "</a></td></tr>";
+					if (i+1===null)
+						txt = txt + "</tbody>";
 			}
 				document.getElementById('usuarios').innerHTML = txt;
 			},
