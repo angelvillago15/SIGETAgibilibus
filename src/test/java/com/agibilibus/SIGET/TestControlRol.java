@@ -34,7 +34,6 @@ public class TestControlRol {
 		MockHttpSession session = new MockHttpSession();
 
 		session.setAttribute("user", userdao.findById("carlos").get());
-		System.out.println(cont.getRol(session));
 		Assert.assertEquals("{\"rol\":\"admin\"}",cont.getRol(session));
 		
 	}

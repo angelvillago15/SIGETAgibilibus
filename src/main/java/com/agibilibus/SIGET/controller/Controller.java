@@ -156,7 +156,7 @@ public class Controller {
 	}
 
 	@PostMapping("/modifyUser")
-	public void modificar(HttpSession session, Usuario u, @RequestBody Map<String, Object> credenciales)
+	public void modificar(HttpSession session, @RequestBody Map<String, Object> credenciales)
 	        throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException,
 	        IllegalBlockSizeException, BadPaddingException, JSONException {
 		/*JSONObject jso = new JSONObject(credenciales);
@@ -184,6 +184,11 @@ public class Controller {
 			resultado.put(message, e.getMessage());
 		}*/
 
+		
+	}
+	@PostMapping("/eliminarUsuario")
+	public void eliminarUsuario(HttpSession session, @RequestBody Map<String, Object> credenciales) {
+		// TODO Auto-generated method stub
 		
 	}
 }

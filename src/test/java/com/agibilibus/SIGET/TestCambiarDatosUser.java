@@ -1,5 +1,6 @@
-/*package com.agibilibus.SIGET;
+package com.agibilibus.SIGET;
 
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.fail;
 
 import java.util.HashMap;
@@ -25,16 +26,23 @@ class TestCambiarDatosUser {
 	private HttpSession sesion;
 	
 	private Controller controller = new Controller();
-	private Map<String, Object> credenciales = new HashMap<String, Object>();
 	
 	@Test
 	void testCambiarDatosUser() {
 		try {
-			Usuario u = new Usuario("cris", "99999999A", "Cristina", "pruebas", 666666666, "cristina@gmail.com","99999999A", DateTime.parse("2020-11-30"), "usuario");
-			controller.modificar(sesion, u, credenciales);
+			Map<String, Object> credenciales = new HashMap<String, Object>();
+			credenciales.put("userCompletName", "Prueba");
+			credenciales.put("userName", "Prueba");
+			credenciales.put("userApellidos", "Prueba");
+			credenciales.put("userDate", "1999-11-10");
+			credenciales.put("userDni", "Prueba");
+			credenciales.put("userTelf", 666);
+			credenciales.put("userMail", "Prueba");
+			credenciales.put("pwd1", "contraseña");
+			controller.modificar(sesion, credenciales);
 		}catch (Exception e) {
 			fail("Se ha lanzado una excepcion inesperada: " + e);
 		}
 	}
 
-}*/
+}
