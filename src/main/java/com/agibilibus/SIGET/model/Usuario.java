@@ -1,6 +1,7 @@
 package com.agibilibus.SIGET.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.joda.time.DateTime;
 import org.json.JSONObject;
@@ -168,6 +169,10 @@ public class Usuario implements Serializable {
 
 	}
 
+	public void getUsuarios() {
+		List<Usuario> usuarios =userdao.findAll();
+	}
+	
 	private static class UsuarioHolder {
 		static Usuario singleton = new Usuario();
 	}
