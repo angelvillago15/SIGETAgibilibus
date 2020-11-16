@@ -31,7 +31,7 @@ public class TestVisualizarCalendario {
 	private HttpSession sesion;
 	@Autowired
 	private ReunionDAO reuniondao;
-	Controller controller = new Controller();
+	private Controller controller = new Controller();
 	
 	@Test
 	public void testGetReuniones() throws JSONException {
