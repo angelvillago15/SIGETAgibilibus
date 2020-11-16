@@ -1,4 +1,4 @@
-/*package com.agibilibus.SIGET;
+package com.agibilibus.SIGET;
 
 import static org.junit.Assert.fail;
 
@@ -37,4 +37,4 @@ class TestCambiarDatosUser {
 		}
 	}
 
-}*/
+}
