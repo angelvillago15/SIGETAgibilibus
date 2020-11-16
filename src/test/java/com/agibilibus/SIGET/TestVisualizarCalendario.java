@@ -1,43 +1,88 @@
 package com.agibilibus.SIGET;
 
-import static org.junit.Assert.*;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.junit.Assert;
 
-import org.joda.time.DateTime;
+import static org.junit.Assert.fail;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.agibilibus.SIGET.model.ERol;
-import com.agibilibus.SIGET.model.Usuario;
+import com.agibilibus.SIGET.controller.Controller;
+import com.agibilibus.SIGET.dao.ReunionDAO;
+import com.agibilibus.SIGET.model.Reunion;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class TestVisualizarCalendario {
 	
+	@Autowired
+	private HttpSession sesion;
+	@Autowired
+	private ReunionDAO reuniondao;
+	Controller controller = new Controller();
+	
 	@Test
-	public void testGetReuniones() {
-		
+	public void testGetReuniones() throws JSONException {
+
+		Map<String, Object> credenciales = new HashMap<String, Object>();
+		credenciales.put("userName", "Elisa");
+		credenciales.put("pwd", "Seguridad2020");
+
 		try {
-		Usuario.get().crearUsuario("99999999A", "Cristina", "cris", "pruebas", DateTime.parse("2020-11-30"), "99999999A", 666666666, "cristina@gmail.com");
+			controller.login(sesion, credenciales);
 		} catch (Exception e) {
-			fail("Se ha lanzado una excepcion inesperada: " + e);
+			fail("Excepcion inesperada haciendo login en testGetReuniones: " + e);
 		}
-		
+		JSONArray reuniones = new JSONArray(controller.getReuniones(sesion));
+		Assert.assertTrue(reuniones.length() > 0);
 	}
 	
 	@Test
-	public void testUsuarioSinReuniones() {
+	public void testUsuarioSinReuniones() throws JSONException {
 	
+		Map<String, Object> credenciales = new HashMap<String, Object>();
+		credenciales.put("userName", "SinReuniones");
+		credenciales.put("pwd", "11111111A");
+
 		try {
-			Usuario cristina = new Usuario("Cristina", "99999999A", "Cristina", "Marugan", 666666666, "cristina@gmail.com", "00000000X", DateTime.parse("2020-11-30"), "usuario");
-			
-			//fail("Esperaba NoHayReunionesException");
-		} /*catch(NoHayReunionesException e) {
-			
-		} */catch (Exception e) {
-			fail("Se ha lanzado una excepcion inesperada: " + e);
+			controller.login(sesion, credenciales);
+		} catch (Exception e) {
+			fail("Excepcion inesperada haciendo login en testUsuarioSinReuniones: " + e);
 		}
+		JSONArray reuniones = new JSONArray(controller.getReuniones(sesion));
+		Assert.assertEquals(reuniones.length(), 0);
+	}
+	
+	@Test
+	public void testVisualizarDatosReunion () throws JSONException, Exception {
+		
+		Map<String, Object> credenciales = new HashMap<String, Object>();
+		Map<String, Object> loadReunion = new HashMap<String, Object>();
+		Reunion reunion = reuniondao.findById("Elisa#graduacion#2020-12-01T10:00:00.000+01:00#2020-12-01T12:00:00.000+01:00#jaime").get();
+		credenciales.put("userName", "Elisa");
+		credenciales.put("pwd", "Seguridad2020");
+		loadReunion.put("id", reunion.getIdReunion());
+
+		try {
+			controller.login(sesion, credenciales);
+		} catch (Exception e) {
+			fail("Excepcion inesperada haciendo login en testVisualizarDatosReunion: " + e);
+		}
+		JSONObject reunionjso = new JSONObject(controller.loadReunion(sesion, loadReunion));
+		Assert.assertEquals(reunionjso.getString("id"), reunion.toJSON().getString("id"));
+
 	}
 	
 }
