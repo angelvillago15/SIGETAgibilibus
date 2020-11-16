@@ -175,4 +175,9 @@ public class Controller {
 
 		
 	}
+	@PostMapping("/eliminarUsuario")
+	public void eliminarUsuario(HttpSession session, @RequestBody Map<String, Object> credenciales) {
+		// TODO Auto-generated method stub
+		
+	}
 }
