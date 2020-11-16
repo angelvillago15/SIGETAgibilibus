@@ -62,7 +62,7 @@ public class TestVisualizarCalendario {
 			fail("Excepcion inesperada haciendo login en testUsuarioSinReuniones: " + e);
 		}
 		JSONArray reuniones = new JSONArray(controller.getReuniones(sesion));
-		Assert.assertEquals(reuniones.length(), 0);
+		Assert.assertEquals(0, reuniones.length());
 	}
 	
 	@Test
