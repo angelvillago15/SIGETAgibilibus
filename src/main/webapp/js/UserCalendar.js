@@ -1,3 +1,5 @@
+var invitaciones;
+
 function openNav() {
 	document.getElementById("mySidenav").style.width = "270px";
 	document.getElementById("main").style.marginLeft = "270px";
@@ -41,7 +43,9 @@ function getInvitaciones() {
 
 		success: function(response) {
 			var datos = JSON.parse(response);
-
+			
+			invitaciones = datos.invitaciones;
+			
 			var cnt = datos.invitaciones.length;
 			$('#cnt').text(cnt);
 
@@ -50,8 +54,8 @@ function getInvitaciones() {
 			for (var i in datos.invitaciones) {
 				var inv = datos.invitaciones[i];
 				txt = txt + "<p><label>" + inv.reunion.organizador.nombre + "</label> te ha invitado a una reunión</p>"
-					+ " <button type='button' class='btn btn-success'>Aceptar</button>"
-					+ " <button type='button' class='btn btn-danger'>Rechazar</button>"
+					+ " <button type='button' class='btn btn-success' onclick='aceptarInvitacion('+i+')'>Aceptar</button>"
+					+ " <button type='button' class='btn btn-danger' onclick='rechazarInvitacion('+i+')'>Rechazar</button>"
 					+ " <br><div class='panel panel-info autocollapse'>"
 					+ " <div class='panel-heading clickable'><h6 class='panel-title'>Quiero saber más</h6></div>"
 					+ " <div class='panel-body'><div class='alert alert-info' role='alert'>"
@@ -67,6 +71,50 @@ function getInvitaciones() {
 	$.ajax(data);
 }
 getInvitaciones();
+
+
+function aceptarInvitacion(i) {
+            var info = {
+                idInv : invitaciones[i].getId(),
+                opcion : true
+            };
+            
+            var data = {
+                    data : JSON.stringify(info),
+                    url : "responderInvitacion",
+                    type : "post",
+                    contentType: 'application/json',
+
+                    
+                    error : function(response) {
+                        alert(response.responseText);
+                    }
+                };
+                $.ajax(data);
+                alert("Invitacion aceptada");
+}
+
+function rechazarInvitacion(i) {
+            var info = {
+                idInv : invitaciones[i].getId(),
+                opcion : false
+            };
+            
+            var data = {
+                    data : JSON.stringify(info),
+                    url : "responderInvitacion",
+                    type : "post",
+                    contentType: 'application/json',
+
+                    
+                    error : function(response) {
+                        alert(response.responseText);
+                    }
+                };
+                $.ajax(data);
+                alert("Invitacion rechazada");
+}
+
 
 document.addEventListener('DOMContentLoaded', function() {
 

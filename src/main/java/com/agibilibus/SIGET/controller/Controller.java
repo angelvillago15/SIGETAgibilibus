@@ -146,11 +146,13 @@ public class Controller {
 	}
 	
 	@PostMapping("/responderInvitacion")
-	public String responderInvitacion(HttpSession session) {
+	public void responderInvitacion(HttpSession session, @RequestBody Map <String, Object> opcionesInvitacion) {
 		Usuario usuario = (Usuario) session.getAttribute("user");
-		JSONObject jso = new JSONObject();
-		jso.put("invitaciones", Invitacion.get().recibirInvitacion(usuario));
-		return jso.toString();
+		JSONObject jso = new JSONObject(opcionesInvitacion);
+		String idInv = jso.getString("idInv");
+		boolean opcion = jso.getBoolean("opcion");
+		Invitacion.get().responderInvitacion(usuario, idInv, opcion);
+
 	}
 
 	@PostMapping("/modifyUser")

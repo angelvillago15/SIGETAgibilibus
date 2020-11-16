@@ -114,8 +114,24 @@ public class Invitacion {
 		return jsaInvitaciones;
 	}
 
-	public void responderInvitacion(Usuario user, Invitacion inv) {
-
+	public void responderInvitacion(Usuario user, String idInv, boolean opcion) {
+		Optional<Invitacion> optInv = invitaciondao.findById(idInv);
+		List <Usuario> asistentes = new ArrayList();
+		Invitacion inv = optInv.get();
+		
+		asistentes = inv.getReunion().getAsistentes();
+		
+		if (opcion == true) {
+			inv.setEstado(EstadoInvitacion.aceptado);
+			asistentes.add(user);	
+		}else if (opcion == false) {
+			inv.setEstado(EstadoInvitacion.rechazado);
+			asistentes.remove(user);
+		}
+		
+		invitaciondao.save(inv);
+		reuniondao.save(inv.getReunion());
+		
 	}
 
 	public void enviarInivitacion(String id, String[] correosAsistentes) {
