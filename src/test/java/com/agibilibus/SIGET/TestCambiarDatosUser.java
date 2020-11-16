@@ -32,7 +32,6 @@ class TestCambiarDatosUser {
 	void testCambiarDatosUser() {
 		try {
 			Usuario u = new Usuario("cris", "99999999A", "Cristina", "pruebas", 666666666, "cristina@gmail.com","99999999A", DateTime.parse("2020-11-30"), "usuario");
-			u.crearUsuario("99999999A", "Cristina", "cris", "pruebas", DateTime.parse("2020-11-30"), "99999999A", 666666666, "cristina@gmail.com");
 			controller.modificar(sesion, u, credenciales);
 		}catch (Exception e) {
 			fail("Se ha lanzado una excepcion inesperada: " + e);
