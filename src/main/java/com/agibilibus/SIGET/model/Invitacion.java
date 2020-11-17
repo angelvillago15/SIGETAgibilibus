@@ -82,9 +82,9 @@ public class Invitacion {
 		this.estado = estado;
 	}
 
-
 	public JSONObject toJSON() {
 		JSONObject jso = new JSONObject();
+		jso.put("id", getIdInvitacion());
 		jso.put("usuario", this.usuario.getNombre());
 		jso.put("reunion", this.reunion.toJSON());
 		jso.put("estado", this.estado);
@@ -114,24 +114,30 @@ public class Invitacion {
 		return jsaInvitaciones;
 	}
 
-	public void responderInvitacion(Usuario user, String idInv, boolean opcion) {
+	public void responderInvitacion(Usuario user, String idInv, boolean opcion) throws Exception {
 		Optional<Invitacion> optInv = invitaciondao.findById(idInv);
-		List <Usuario> asistentes = new ArrayList<Usuario>();
-		Invitacion inv = optInv.get();
-		
-		asistentes = inv.getReunion().getAsistentes();
-		
-		if (opcion) {
-			inv.setEstado(EstadoInvitacion.aceptado);
-			asistentes.add(user);	
-		}else if (!opcion) {
-			inv.setEstado(EstadoInvitacion.rechazado);
-			asistentes.remove(user);
-		}
-		
-		invitaciondao.save(inv);
-		reuniondao.save(inv.getReunion());
-		
+
+		if (optInv.isPresent()) {
+			Invitacion inv = optInv.get();
+
+			Optional<Reunion> optReunion = reuniondao.findById(inv.getReunion().getIdReunion());
+			if (optReunion.isPresent()) {
+				Reunion reunion = optReunion.get();
+
+				if (opcion) {
+					inv.setEstado(EstadoInvitacion.aceptado);
+					reunion.getAsistentes().add(user);
+					reuniondao.save(reunion);
+				} else {
+					inv.setEstado(EstadoInvitacion.rechazado);
+				}
+				invitaciondao.save(inv);
+				
+			}
+			else
+				throw new Exception("Error al cargar la reunión de le invitación");
+		} else
+			throw new Exception("La invitación no existe");
 	}
 
 	public void enviarInivitacion(String id, String[] correosAsistentes) {

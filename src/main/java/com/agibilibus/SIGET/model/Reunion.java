@@ -166,13 +166,13 @@ public class Reunion {
 		String id = organizador.getUser() + "#" + titulo + "#" + horaInicio.toString() + "#" + horaFin.toString();
 		// Formato para guardar el id:
 		// Organizador#Titulo#HoraInicio#HoraFin#Asistente1#Asistente2....
-		for (String asistente : correosAsistentes) {
+		/*for (String asistente : correosAsistentes) {
 			Optional<Usuario> a = userdao.findByEmail(asistente);
 			if (a.isPresent()) {
 				asist.add(a.get());
 				id += "#" + a.get().getUser();
 			}
-		}
+		}*/
 		Optional<Usuario> optUser = userdao.findById(organizador.getUser());
 		if (optUser.isPresent()) {
 			Usuario or = optUser.get();
@@ -199,10 +199,10 @@ public class Reunion {
 		Optional<Usuario> optUser = userdao.findById(u.getUser());
 		if (optUser.isPresent()) {
 			Usuario usuario = optUser.get();
-			List <Invitacion> invitaciones = invitaciondao.findAll();
-			for (Invitacion inv : invitaciones) {
-				if ((inv.getReunion().getOrganizador().getUser().equals(usuario.getUser()) || inv.getReunion().getAsistentes().contains(usuario)) && (inv.getEstado()==EstadoInvitacion.aceptado)) {
-					jsaReuniones.put(inv.getReunion().toEvent());
+			List <Reunion> reuniones = reuniondao.findAll();
+			for (Reunion r : reuniones) {
+				if ((r.getOrganizador().getUser().equals(usuario.getUser())) || (r.getAsistentes().contains(usuario))) {
+					jsaReuniones.put(r.toEvent());
 				}
 			}
 		}

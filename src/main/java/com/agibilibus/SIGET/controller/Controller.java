@@ -6,6 +6,7 @@ import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -146,11 +147,13 @@ public class Controller {
 	}
 	
 	@PostMapping("/responderInvitacion")
-	public void responderInvitacion(HttpSession session, @RequestBody Map <String, Object> opcionesInvitacion) {
+	public void responderInvitacion(HttpSession session, @RequestBody Map <String, Object> opcionesInvitacion) throws Exception {
 		Usuario usuario = (Usuario) session.getAttribute("user");
 		JSONObject jso = new JSONObject(opcionesInvitacion);
+		
 		String idInv = jso.getString("idInv");
 		boolean opcion = jso.getBoolean("opcion");
+		
 		Invitacion.get().responderInvitacion(usuario, idInv, opcion);
 
 	}

@@ -1,4 +1,4 @@
-var invitaciones;
+var invitaciones = [];
 
 function openNav() {
 	document.getElementById("mySidenav").style.width = "270px";
@@ -54,8 +54,8 @@ function getInvitaciones() {
 			for (var i in datos.invitaciones) {
 				var inv = datos.invitaciones[i];
 				txt = txt + "<p><label>" + inv.reunion.organizador.nombre + "</label> te ha invitado a una reunión</p>"
-					+ " <button type='button' class='btn btn-success' onclick='aceptarInvitacion('+i+')'>Aceptar</button>"
-					+ " <button type='button' class='btn btn-danger' onclick='rechazarInvitacion('+i+')'>Rechazar</button>"
+					+ " <button type='button' class='btn btn-success' onclick='aceptarInvitacion("+i+")'>Aceptar</button>"
+					+ " <button type='button' class='btn btn-danger' onclick='rechazarInvitacion("+i+")'>Rechazar</button>"
 					+ " <br><div class='panel panel-info autocollapse'>"
 					+ " <div class='panel-heading clickable'><h6 class='panel-title'>Quiero saber más</h6></div>"
 					+ " <div class='panel-body'><div class='alert alert-info' role='alert'>"
@@ -75,7 +75,7 @@ getInvitaciones();
 
 function aceptarInvitacion(i) {
             var info = {
-                idInv : i.getIdInvitacion(),
+                idInv : invitaciones[i].id,
                 opcion : true
             };
             
@@ -85,18 +85,21 @@ function aceptarInvitacion(i) {
                     type : "post",
                     contentType: 'application/json',
 
-                    
+                    success: function(response) {
+                    	alert("Invitacion aceptada");
+                    	location.reload();
+                    },
                     error : function(response) {
                         alert(response.responseText);
                     }
                 };
                 $.ajax(data);
-                alert("Invitacion aceptada");
+       
 }
 
 function rechazarInvitacion(i) {
             var info = {
-                idInv : i.getIdInvitacion(),
+                idInv : invitaciones[i].id,
                 opcion : false
             };
             
@@ -106,13 +109,16 @@ function rechazarInvitacion(i) {
                     type : "post",
                     contentType: 'application/json',
 
-                    
+                    success: function(response) {
+                    	alert("Invitacion rechazada");
+                    	location.reload();
+                    },
                     error : function(response) {
                         alert(response.responseText);
                     }
                 };
                 $.ajax(data);
-                alert("Invitacion rechazada");
+                
 }
 
 
