@@ -208,8 +208,9 @@ public class Usuario implements Serializable {
 
 	public JSONObject getMyAccount(Usuario usuario) {
 		Optional<Usuario> optUser = userdao.findById(usuario.getUser());
-		if (optUser.isPresent())
+		if (optUser.isPresent()) {
 			return optUser.get().toJSON();
+		}
 		else
 			return null;
 	}
