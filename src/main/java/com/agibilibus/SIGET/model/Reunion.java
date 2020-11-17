@@ -166,13 +166,13 @@ public class Reunion {
 		String id = organizador.getUser() + "#" + titulo + "#" + horaInicio.toString() + "#" + horaFin.toString();
 		// Formato para guardar el id:
 		// Organizador#Titulo#HoraInicio#HoraFin#Asistente1#Asistente2....
-		/*for (String asistente : correosAsistentes) {
+		for (String asistente : correosAsistentes) {
 			Optional<Usuario> a = userdao.findByEmail(asistente);
 			if (a.isPresent()) {
 				asist.add(a.get());
 				id += "#" + a.get().getUser();
 			}
-		}*/
+		}
 		Optional<Usuario> optUser = userdao.findById(organizador.getUser());
 		if (optUser.isPresent()) {
 			Usuario or = optUser.get();
