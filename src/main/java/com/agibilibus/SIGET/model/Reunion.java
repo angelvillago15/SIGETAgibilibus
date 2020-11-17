@@ -209,15 +209,11 @@ public class Reunion {
 	}
 	
 	public List<Reunion> getListReuniones(Usuario u) {
-		Optional<Usuario> optUser = userdao.findById(u.getUser());
+		List<Reunion> todasReuniones = reuniondao.findAll();
 		List<Reunion> reunionesUsuario = new ArrayList<>();
-		if (optUser.isPresent()) {
-			Usuario usuario = optUser.get();
-			reunionesUsuario = reuniondao.findAll();
-			for (Reunion r : reunionesUsuario)
-				if (r.getOrganizador().getUser().equals(usuario.getUser()) || r.getAsistentes().contains(usuario))
-					reunionesUsuario.add(r);
-		}
+		for (Reunion r : todasReuniones)
+			if (r.getOrganizador().getUser().equals(u.getUser()) || r.getAsistentes().contains(u))
+				reunionesUsuario.add(r);
 		return reunionesUsuario;
 	}
 
@@ -247,6 +243,7 @@ public class Reunion {
 			else {
 				Reunion r = optReunion.get();
 				r.setOrganizador(r.getAsistentes().get(0));
+				r.getAsistentes().remove(0);
 				reuniondao.save(r);
 			}
 		}
