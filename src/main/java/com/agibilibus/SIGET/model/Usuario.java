@@ -182,7 +182,6 @@ public class Usuario implements Serializable {
 				Invitacion.get().eliminarTodasInvitacionesUsuario(u);
 			}
 			userdao.deleteById(idUsuario);
-			
 		}
 	}
 
