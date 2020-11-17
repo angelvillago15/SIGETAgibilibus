@@ -17,8 +17,6 @@ import com.agibilibus.SIGET.dao.InvitacionDAO;
 import com.agibilibus.SIGET.dao.ReunionDAO;
 import com.agibilibus.SIGET.dao.UserDAO;
 
-
-
 import lombok.Data;
 
 @Component
@@ -51,13 +49,13 @@ public class Invitacion {
 		this.estado = estado;
 
 	}
-	
+
 	public String getIdInvitacion() {
-		return this.idInvitacion;
+		return idInvitacion;
 	}
-	
-	public void setIdInvitacion(String nuevoId) {
-		this.idInvitacion = nuevoId;
+
+	public void setIdInvitacion(String idInvitacion) {
+		this.idInvitacion = idInvitacion;
 	}
 
 	public Usuario getUsuario() {
@@ -84,14 +82,9 @@ public class Invitacion {
 		this.estado = estado;
 	}
 
-	public void aceptarInvitacion() {
-	}
-
-	public void rechazarInvitacion() {
-	}
-
 	public JSONObject toJSON() {
 		JSONObject jso = new JSONObject();
+		jso.put("id", getIdInvitacion());
 		jso.put("usuario", this.usuario.getNombre());
 		jso.put("reunion", this.reunion.toJSON());
 		jso.put("estado", this.estado);
@@ -108,8 +101,6 @@ public class Invitacion {
 		return InvitacionHolder.singleton;
 	}
 
-
-
 	public JSONArray recibirInvitacion(Usuario user) {
 		JSONArray jsaInvitaciones = new JSONArray();
 
@@ -123,13 +114,35 @@ public class Invitacion {
 		return jsaInvitaciones;
 	}
 
-	public void responderInvitacion() {
-	
+	public void responderInvitacion(Usuario user, String idInv, boolean opcion) throws Exception {
+		Optional<Invitacion> optInv = invitaciondao.findById(idInv);
+
+		if (optInv.isPresent()) {
+			Invitacion inv = optInv.get();
+
+			Optional<Reunion> optReunion = reuniondao.findById(inv.getReunion().getIdReunion());
+			if (optReunion.isPresent()) {
+				Reunion reunion = optReunion.get();
+
+				if (opcion) {
+					inv.setEstado(EstadoInvitacion.aceptado);
+					reunion.getAsistentes().add(user);
+					reuniondao.save(reunion);
+				} else {
+					inv.setEstado(EstadoInvitacion.rechazado);
+				}
+				invitaciondao.save(inv);
+				
+			}
+			else
+				throw new Exception("Error al cargar la reunión de le invitación");
+		} else
+			throw new Exception("La invitación no existe");
 	}
 
 	public void enviarInivitacion(String id, String[] correosAsistentes) {
 		Optional<Reunion> optReunion = reuniondao.findById(id);
-		String idInv ="";
+		String idInv = "";
 		List<Usuario> asist = new ArrayList<>();
 		if (optReunion.isPresent()) {
 			Reunion r = optReunion.get();
@@ -137,40 +150,20 @@ public class Invitacion {
 				Optional<Usuario> a = userdao.findByEmail(correo);
 				if (a.isPresent()) {
 					Usuario usuario = a.get();
-					if(!r.getAsistentes().contains(usuario)) {
+					if (!r.getAsistentes().contains(usuario)) {
 						asist.add(usuario);
-						idInv=r.getIdReunion()+usuario.getUser();
+						idInv = r.getIdReunion() + usuario.getUser();
 						invitaciondao.save(new Invitacion(idInv, usuario, r, EstadoInvitacion.pendiente));
 					}
 				}
 			}
-			List <Usuario> asistReunion = r.getAsistentes();
+			List<Usuario> asistReunion = r.getAsistentes();
 			asistReunion.addAll(asist);
-			
+
 			r.setAsistentes(asistReunion);
 			reuniondao.save(r);
 
 		}
 	}
-
-	public void responderInvitacion(Reunion reunion2, Usuario asistente) {
-		// TODO Auto-generated method stub
-
-	}
-	
-	public void eliminarInvitacion(Invitacion invitacion) {
-		Optional <Invitacion> optInv = invitaciondao.findById(invitacion.getIdInvitacion());
-		if(optInv.isPresent()) 
-			invitaciondao.deleteById(optInv.get().getIdInvitacion());
-	}
-	
-	public void eliminarTodasInvitacionesUsuario (Usuario usuario) {
-		List<Invitacion> invitaciones = invitaciondao.findAll();
-		if (!invitaciones.isEmpty())
-			for (Invitacion i : invitaciones)
-				if (i.getUsuario().getUser().equals(usuario.getUser()))
-					eliminarInvitacion(i);
-	}
-	
 
 }
