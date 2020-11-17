@@ -111,7 +111,10 @@ public class Controller {
 	public String loadReunion(HttpSession session, @RequestBody Map<String, Object> loadReunion) throws Exception {
 		JSONObject jso = new JSONObject(loadReunion);
 		String id = jso.getString("id");
-		return Reunion.get().loadReunion(id).toString();
+		JSONObject jsoReunion = Reunion.get().loadReunion(id);
+		Usuario usuario = (Usuario) session.getAttribute("user");
+		jsoReunion.put("userSesion",usuario.getUser());
+		return jsoReunion.toString();
 	}
 
 	@PostMapping("/getReuniones")

@@ -23,7 +23,8 @@
 		<div class="container">
 			<a class="navbar-brand" href="#">
 				<div class="left">
-					<span class="logo"><img src="recursos/logo.png" alt="logotipo" width="60" height="60"></span>
+					<span class="logo"><img src="recursos/logo.png"
+						alt="logotipo" width="60" height="60"></span>
 				</div>
 			</a>
 			<div class="right">
@@ -66,11 +67,13 @@
 	</div>
 </nav>
 <div id="mySidenav" class="sidenav">
-	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()" >&times;</a>
-	<a href="newEvent.html"><span class="glyphicon glyphicon-plus-sign"></span>Nuevo Evento</a> 
-	<a href="AboutUs.html"><span class="glyphicon glyphicon-briefcase"></span> Sobre Nosotros</a>
-	<a href="GestionUser.html"><span class="glyphicon glyphicon-user" ></span>  Gestion Usuarios</a>
-		
+	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+	<a href="newEvent.html"><span class="glyphicon glyphicon-plus-sign"></span>Nuevo
+		Evento</a> <a href="AboutUs.html"><span
+		class="glyphicon glyphicon-briefcase"></span> Sobre Nosotros</a> <a
+		href="GestionUser.html"><span class="glyphicon glyphicon-user"></span>
+		Gestion Usuarios</a>
+
 </div>
 
 <div id="main">
@@ -97,38 +100,38 @@
 						<label class="col-sm-2 col-form-label">Nombre Reunion:</label>
 						<div class="col-sm-3">
 							<input type="text" class="form-control" id="nombreReunion"
-								readonly>
+								readonly="true">
 						</div>
 						<label class="col-sm-1 col-form-label">URL:</label>
 						<div class="col-sm-3">
 							<input type="text" class="form-control" id="url" required="true"
-								readonly>
+								readonly="true">
 						</div>
-
 					</div>
 					<div class="form-group row row-md-6" id=idReunion>
 						<label for="example-date-input" class="col-sm-2 col-form-label">Fecha</label>
 						<div class="col-sm-3">
 							<input class="form-control" type="text" id="fecha"
-								required="true" readonly>
+								required="true" readonly="true">
 						</div>
 					</div>
 
 					<div class="form-group row row-md-6">
 						<label class="col-sm-2 col-form-label">Hora de inicio: </label>
 						<div class="col-sm-3">
-							<input type="text" class="form-control" id="horaInicio" readonly>
+							<input type="text" class="form-control" id="horaInicio"
+								readonly="true">
 						</div>
 						<label class="col-sm-1 col-form-label">Hora de fin:</label>
 						<div class="col-sm-3">
 							<input type="text" class="form-control" id="horaFin"
-								required="true" readonly>
+								required="true" readonly="true">
 						</div>
 					</div>
 					<div class="form-group row row-md-6">
 						<label class="col-sm-2 col-form-label">Descripcion:</label>
 						<div class="col-sm-3">
-							<textarea class="form-control" id="descripcion" readonly></textarea>
+							<textarea class="form-control" id="descripcion" readonly="true"></textarea>
 						</div>
 					</div>
 
@@ -141,21 +144,21 @@
 						</div>
 
 					</div>
-			</div>
-			<div class="modal-footer">
-				<p align="right">
-					<button type="button" class="btn btn-success"
-						data-dismiss="modal" onclick="invitar()">Invitar</button>
-					<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+
+					<div class="modal-footer">
+						<p align="right">
+							<button type="button" class="btn btn-success"
+								data-dismiss="modal" onclick="invitar()">Invitar</button>
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+					</div>
 			</div>
 		</div>
 	</div>
-</div>
 
-</body>
-<script src="js/UserCalendar.js"></script>
-<script src='fullcalendar/main.js'></script>
-<script src='fullcalendar/local/es.js'></script>
-<script src="js/invite.js"></script>
+	</body>
+	<script src="js/UserCalendar.js"></script>
+	<script src='fullcalendar/main.js'></script>
+	<script src='fullcalendar/local/es.js'></script>
+	<script src="js/invite.js"></script>
 </html>
 
