@@ -29,7 +29,7 @@ function getUsuarios() {
 			
 			for (var i in datos.usuarios) {
 				var usuario = datos.usuarios[i];
-				var txt ="<tr><td><a href='javascript:mostrarUsuario(\""+usuario.user+"\");'>" + usuario.user + "</a></td></tr>";
+				var txt ="<tr><td><a href='javascript:mostrarUsuario(\""+usuario+"\");'>" + usuario.user + "</a></td></tr>";
 				buscador.row.add([txt]);
 			}
 		},
@@ -41,8 +41,14 @@ function getUsuarios() {
 }
 
 function mostrarUsuario(usuario){
-	alert(usuario);
-	
+	document.getElementById("userDni").value=usuario.dni;
+	document.getElementById("userCompletName").value=usuario.nombre;
+	document.getElementById("userApellidos").value=usuario.apellidos;
+	document.getElementById("userTelf").value=usuario.telefono;
+	document.getElementById("userDate").value=usuario.nacimiento;
+	document.getElementById("userName").value=usuario;
+	document.getElementById("pwd1").value=usuario.password;
+	document.getElementById("userMail").value=usuario.email;	
 }
 
 
