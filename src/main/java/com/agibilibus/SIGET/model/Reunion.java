@@ -144,7 +144,6 @@ public class Reunion {
 		jso.put("start", horaInicio);
 		jso.put("end", horaFin);
 		jso.put("organizador", this.organizador.getUser());
-		System.out.println( this.organizador.getUser());
 		for (Usuario u : this.asistentes)
 			jsaAsistentes.put(u.toJSON());
 		jso.put("asistentes", jsaAsistentes);

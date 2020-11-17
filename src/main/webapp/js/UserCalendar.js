@@ -12,16 +12,6 @@ function closeNav() {
 
 }
 
-/*
- * document.getElementById("nombreReunion").readOnly = false;
- * document.getElementById("url").readOnly = false;
- * document.getElementById("fecha").readOnly = false;
- * document.getElementById("horaInicio").readOnly = false;
- * document.getElementById("horaFin").readOnly = false;
- * document.getElementById("descripcion").readOnly = false;
- * 
- */
-
 function getRol() {
 
 	var data = {
@@ -144,12 +134,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
 			}
 			$.ajax(data);
-
+			
 			$('#modalTitle').text(event.title);
 			$('#modalBody').text(event.description);
 			$('#calendarModal').modal();
 
 		},
+		
 		locale : 'es',
 		navLinks : true, // can click day/week names to navigate views
 		selectMirror : true,
@@ -158,6 +149,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	calendar.render();
 });
+
+
 
 $(document).on('click', '.panel div.clickable', function(e) {
 	var $this = $(this); // Heading

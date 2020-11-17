@@ -183,4 +183,19 @@ public class Controller {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@PostMapping("/modificarReunion")
+	public void modificarReunion(HttpSession session, @RequestBody Map<String, Object> datosModificados) throws Exception{
+	 
+	 JSONObject jso = new JSONObject(datosModificados);
+	 String id = jso.getString("id");
+	 String nombreReunion = jso.getString("nombreReunion");
+	 String fecha = jso.getString("fecha");
+	 String horaI = jso.getString("horaInicio");
+	 String horaF = jso.getString("horaFin");
+	 String descripcion = jso.getString("descripcion");
+	 String url = jso.getString("url");
+     String[] correosAsistentes = ((jso.getString("correos")).replace(" ", "")).split(",");
+	 
+	}
 }
