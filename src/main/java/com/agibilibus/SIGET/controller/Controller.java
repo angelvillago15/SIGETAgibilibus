@@ -120,6 +120,13 @@ public class Controller {
 		return Reunion.get().getReuniones(usuario).toString();
 	}
 	
+	@PostMapping("/getUsuarios")
+	public String getUsuarios(HttpSession session) {
+		JSONObject jso = new JSONObject();
+		jso.put("usuarios", Usuario.get().getUsuarios());
+		return jso.toString();
+	}
+	
 	@PostMapping("/getRol")
 	public String getRol(HttpSession session) {
 		Usuario usuario = (Usuario) session.getAttribute("user");

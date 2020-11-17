@@ -2,7 +2,10 @@ package com.agibilibus.SIGET.model;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
+
 import org.joda.time.DateTime;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -183,8 +186,13 @@ public class Usuario implements Serializable {
 		}
 	}
 
-	public void getUsuarios() {
-		List<Usuario> usuarios =userdao.findAll();
+	public JSONArray getUsuarios() {
+		List<Usuario> usuarios= userdao.findAll();
+		JSONArray jsaUsuarios = new JSONArray();
+		for (Usuario usr : usuarios) {
+			jsaUsuarios.put(usr.toJSON());
+		}
+		return jsaUsuarios;
 	}
 	
 	private static class UsuarioHolder {
