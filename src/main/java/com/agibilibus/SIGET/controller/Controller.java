@@ -176,9 +176,12 @@ public class Controller {
 
 		
 	}
+	
 	@PostMapping("/eliminarUsuario")
-	public void eliminarUsuario(HttpSession session, @RequestBody Map<String, Object> credenciales) {
-		// TODO Auto-generated method stub
+	public void eliminarUsuario(HttpSession session, @RequestBody Map<String, Object> datosUsuario) {
+		JSONObject jso = new JSONObject(datosUsuario);
+		String idUsuario = jso.getString("id");
+		Usuario.get().eliminarUsuario(idUsuario);
 		
 	}
 }

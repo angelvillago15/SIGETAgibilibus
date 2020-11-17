@@ -15,3 +15,19 @@ $(document).ready(function() {
         $("#table").hide();
     });
 });
+
+function Delete(){
+	var data;
+	var msg ={
+            type : "eliminar Usuario",
+			id : document.getElementById("userName").value
+        };
+        data = {
+            data : JSON.stringify(msg),
+            url : "eliminarUsuario",
+            type : "post",
+            contentType : 'application/json',
+            dataType : 'json'
+        }
+        $.ajax(data);
+};
