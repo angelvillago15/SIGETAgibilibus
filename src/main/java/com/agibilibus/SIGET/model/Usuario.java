@@ -180,7 +180,7 @@ public class Usuario implements Serializable {
 					else if (r.getAsistentes().contains(u))
 						Reunion.get().eliminarAsistenteReunion(u, r);
 				} 
-	//			Invitacion.get().eliminarTodasInvitacionesUsuario(u);
+				Invitacion.get().eliminarTodasInvitacionesUsuario(u);
 			}
 			userdao.deleteById(idUsuario);
 		}
