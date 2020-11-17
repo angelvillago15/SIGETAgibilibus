@@ -33,15 +33,13 @@ public class TestInvitacion {
 
 	@Test
 	public void TestCrearYEnviarInvitacion() {
-		
 
-		Map<String, Object> credenciales1 = new HashMap<String, Object>();
 		credenciales1.put("userName", "Elisa");
 		credenciales1.put("pwd", "Seguridad2020");
 
 		try {
 			controller.login(sesion, credenciales1);
-		} catch (Exception e1) {
+		} catch (Exception e) {
 			fail();
 
 		}
@@ -54,15 +52,11 @@ public class TestInvitacion {
 		datosReunion.put("url", "https://www.youtube.com/?hl=es&gl=ES");
 		datosReunion.put("correos", "jaime@jaime.com");
 
-
-				try {
-					controller.guardarReunion(sesion, datosReunion);
-				} catch (Exception e) {
-					fail();
-				}
-
-
-
+		try {
+			controller.guardarReunion(sesion, datosReunion);
+		} catch (Exception e) {
+			fail();
+		}
 
 	}
 
@@ -72,15 +66,12 @@ public class TestInvitacion {
 		credenciales2.put("userName", "jaime");
 		credenciales2.put("pwd", "Seguridad2020");
 
-
-			try {
-				controller.login(sesion, (Map<String, Object>) credenciales2);
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				fail();
-			}
-
-
+		try {
+			controller.login(sesion, (Map<String, Object>) credenciales2);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			fail();
+		}
 
 		String invitaciones = controller.getInvitaciones(sesion);
 		JSONObject jso = null;
