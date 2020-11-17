@@ -17,32 +17,33 @@ $(document).ready(function() {
 });
 
 function getUsuarios() {
-alert("hola!");
-var data = {
+	alert("hola!");
+	var data = {
 
-	url: "getUsuarios",
-	type: "post",
+		url: "getUsuarios",
+		type: "post",
 
-	success: function(response) {
-		var datos = JSON.parse(response);
+		success: function(response) {
+			var datos = JSON.parse(response);
 
-		var cnt = datos.usuarios.length;
-		$('#cnt').text(cnt);
+			var cnt = datos.usuarios.length;
+			$('#cnt').text(cnt);
 
+			var txt = "<thead><tr><td></td></tr></thead>";
 
-		for (var i in datos.usuarios) {
-		
-			var user = datos.usuarios[i];
-			txt = txt + "<tr> <td>" + user.nombre + "</a></td></tr>";
-			
+			for (var i in datos.usuarios) {
+				var inv = datos.usuarios[i];
+				txt = txt + "<tbody><tr> <td><a href=""#"">" + user.nombre + "</a></td></tr>";
+					if (i+1===null)
+						txt = txt + "</tbody>";
+			}
+				document.getElementById('usuarios').innerHTML = txt;
+			},
+			error: function(response) {
+			alert(response.message);
 		}
-			document.getElementById('usuarios').innerHTML = txt;
-		},
-		error: function(response) {
-		alert(response.message);
-	}
-};
-$.ajax(data);
+	};
+	$.ajax(data);
 }
 
 function Delete(){
