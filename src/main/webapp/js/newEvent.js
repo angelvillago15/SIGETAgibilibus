@@ -94,7 +94,6 @@ class Reunion{
             contentType : 'application/json',
             dataType : 'json'
         }
-        //  con esto se pasa a json JSON.stringify(msg)
-        // con Macario se mandaba asi self.ws.send(JSON.stringify(msg)); ahora es con el api rest (no se bien como es)
+      
     }
 }
