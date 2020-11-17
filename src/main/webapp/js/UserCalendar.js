@@ -75,7 +75,7 @@ getInvitaciones();
 
 function aceptarInvitacion(i) {
             var info = {
-                idInv : invitaciones[i].getId(),
+                idInv : i.getIdInvitacion(),
                 opcion : true
             };
             
@@ -96,7 +96,7 @@ function aceptarInvitacion(i) {
 
 function rechazarInvitacion(i) {
             var info = {
-                idInv : invitaciones[i].getId(),
+                idInv : i.getIdInvitacion(),
                 opcion : false
             };
             

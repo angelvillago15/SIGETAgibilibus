@@ -116,15 +116,15 @@ public class Invitacion {
 
 	public void responderInvitacion(Usuario user, String idInv, boolean opcion) {
 		Optional<Invitacion> optInv = invitaciondao.findById(idInv);
-		List <Usuario> asistentes = new ArrayList();
+		List <Usuario> asistentes = new ArrayList<Usuario>();
 		Invitacion inv = optInv.get();
 		
 		asistentes = inv.getReunion().getAsistentes();
 		
-		if (opcion == true) {
+		if (opcion) {
 			inv.setEstado(EstadoInvitacion.aceptado);
 			asistentes.add(user);	
-		}else if (opcion == false) {
+		}else if (!opcion) {
 			inv.setEstado(EstadoInvitacion.rechazado);
 			asistentes.remove(user);
 		}
