@@ -29,7 +29,7 @@ function validarCampo(campo) { // comprobar que no hay campos vacios
 	return valido;
 };
 
-var data2;
+
 function modificar() {
 
 	var msg = {
@@ -43,7 +43,7 @@ function modificar() {
 		url : $("#url").val(),
 		correos : $("#correos").val()
 	};
-	data2 = {
+	var data = {
 		data2 : JSON.stringify(msg),
 		url : "modificarReunion",
 		type : "post",
@@ -51,7 +51,7 @@ function modificar() {
 		dataType : 'json'
 	}
 
-	$.ajax(data2);
+	$.ajax(data);
 	document.getElementById("correos").value = "";
 	alert('Se ha modificado la reunión');
 };
@@ -62,7 +62,7 @@ function asistir() {
 	
 	if (opcion == true) {
 		var msg = {
-			type : "load Reunion",
+			type : "Eliminar Reunion",
 			id : $("#idReunion").val()
 		};
 		data3 = {
