@@ -29,7 +29,6 @@ function validarCampo(campo) { // comprobar que no hay campos vacios
 	return valido;
 };
 
-
 function modificar() {
 
 	var msg = {
@@ -44,7 +43,7 @@ function modificar() {
 		correos : $("#correos").val()
 	};
 	var data = {
-		data2 : JSON.stringify(msg),
+		data : JSON.stringify(msg),
 		url : "modificarReunion",
 		type : "post",
 		contentType : 'application/json',
@@ -56,24 +55,23 @@ function modificar() {
 	alert('Se ha modificado la reunión');
 };
 
-var data3;
+
 function asistir() {
 	var opcion = confirm("¿Estás seguro que no desea asisitir a esta reunión?");
 	
 	if (opcion == true) {
 		var msg = {
-			type : "Eliminar Reunion",
-			id : $("#idReunion").val()
+			type : "eliminar Reunion",
+			idReunion : $("#idReunion").val()
 		};
-		data3 = {
-			data3 : JSON.stringify(msg),
+		var data = {
+			data : JSON.stringify(msg),
 			url : "eliminarReunionUsuario",
 			type : "post",
 			contentType : 'application/json',
 			dataType : 'json'
 		}
-
-		$.ajax(data3);
+		$.ajax(data);
 		alert('Usted dejó de asistir a la reunión');
 	} else {
 		window.location.href = "UserCalendar.html";

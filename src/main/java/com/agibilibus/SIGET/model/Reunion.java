@@ -259,4 +259,18 @@ public class Reunion {
 			reuniondao.save(r);
 	}
 
+	public void eliminarReunionUsuario(Usuario usuario, String idReunion) {
+		Optional<Reunion> optReunion = reuniondao.findById(idReunion);
+		if(optReunion.isPresent()) {
+			Reunion r =optReunion.get();
+			if(r.getOrganizador().getUser().equals(usuario.getUser()))
+				cambiarOrganizarReunion(r);
+			else if(r.getAsistentes().contains(usuario))
+				eliminarAsistenteReunion(usuario, r);
+			Invitacion i = Invitacion.get().getInvitacion(r, usuario);
+			if(i!=null)
+				i.setEstado(EstadoInvitacion.rechazado);
+		}
+	}
+
 }

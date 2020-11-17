@@ -214,6 +214,14 @@ public class Controller {
 		return Usuario.get().getMyAccount(usuario).toString();
 	}
 	
+	@PostMapping("/eliminarReunionUsuario")
+	public void eliminarReunionUsuario(HttpSession session, @RequestBody Map<String, Object> reunion) {
+		Usuario usuario = (Usuario) session.getAttribute("user");
+		JSONObject jso = new JSONObject(reunion);
+		String idReunion = jso.getString("idReunion");
+		Reunion.get().eliminarReunionUsuario(usuario, idReunion);
+	}
+
 	@PostMapping("/modificarReunion")
 	public void modificarReunion(HttpSession session, @RequestBody Map<String, Object> datosModificados) throws Exception{
 	 

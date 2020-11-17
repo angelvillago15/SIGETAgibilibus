@@ -165,5 +165,28 @@ public class Invitacion {
 
 		}
 	}
+	
+	public void eliminarInvitacion(Invitacion invitacion) {
+		Optional <Invitacion> optInv = invitaciondao.findById(invitacion.getIdInvitacion());
+		if(optInv.isPresent()) 
+			invitaciondao.deleteById(optInv.get().getIdInvitacion());
+	}
+	
+	public void eliminarTodasInvitacionesUsuario (Usuario usuario) {
+		List<Invitacion> invitaciones = invitaciondao.findAll();
+		if (!invitaciones.isEmpty())
+			for (Invitacion i : invitaciones)
+				if (i.getUsuario().getUser().equals(usuario.getUser()))
+					eliminarInvitacion(i);
+	}
+	
+	public Invitacion getInvitacion(Reunion reunion, Usuario usuario) {
+		List<Invitacion> listaInvitaciones = invitaciondao.findAll();
+		for (Invitacion i : listaInvitaciones) {
+			if(i.getReunion().getIdReunion().equals(reunion.getIdReunion())&&i.getUsuario().getUser().equals(usuario.getUser()))
+				return i;
+		}
+		return null;
+	}
 
 }
