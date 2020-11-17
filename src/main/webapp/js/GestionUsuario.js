@@ -26,19 +26,21 @@ function getUsuarios() {
 
 		success: function(response) {
 			var datos = JSON.parse(response);
-			var txt ="";
 			
 			for (var i in datos.usuarios) {
 				var usuario = datos.usuarios[i];
-				txt =txt+ "<tr> <td><a href='AboutUs.html'>" + usuario.nombre + "</a></td></tr>";
+				var txt ='<tr><td><a href="AboutUs.html">' + usuario.user + '</a></td></tr>';
+				buscador.row.add([txt]);
 			}
-			buscador.row.add([txt]);
 		},
 		error: function(response) {
 			alert(response.message);
 		}
 	};
 	$.ajax(data);
+}
+function mostrar(){
+	alert('Hola');
 }
 
 function Delete() {
