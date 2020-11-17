@@ -216,4 +216,13 @@ public class Usuario implements Serializable {
 	    return super.hashCode();
 	  }
 
+	public JSONObject getMyAccount(Usuario usuario) {
+		Optional<Usuario> optUser = userdao.findById(usuario.getUser());
+		if (optUser.isPresent()) {
+			return optUser.get().toJSON();
+		}
+		else
+			return null;
+	}
+
 }
