@@ -260,7 +260,7 @@ public class Reunion {
 	}
 
 	public void eliminarReunionUsuario(Usuario usuario, String idReunion) {
-		Optional<Reunion> optReunion = reuniondao.findById("idReunion");
+		Optional<Reunion> optReunion = reuniondao.findById(idReunion);
 		if(optReunion.isPresent()) {
 			Reunion r =optReunion.get();
 			if(r.getOrganizador().getUser().equals(usuario.getUser()))
