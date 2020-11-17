@@ -181,6 +181,11 @@ public class Controller {
 		JSONObject jso = new JSONObject(datosUsuario);
 		String idUsuario = jso.getString("id");
 		Usuario.get().eliminarUsuario(idUsuario);
-		
+	}
+	
+	@PostMapping("/getMyAccount")
+	public String getMyAccount(HttpSession session) {
+		Usuario usuario = (Usuario) session.getAttribute("user");
+		return Usuario.get().getMyAccount(usuario).toString();
 	}
 }
