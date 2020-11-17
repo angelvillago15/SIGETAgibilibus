@@ -112,7 +112,10 @@ public class Controller {
 	public String loadReunion(HttpSession session, @RequestBody Map<String, Object> loadReunion) throws Exception {
 		JSONObject jso = new JSONObject(loadReunion);
 		String id = jso.getString("id");
-		return Reunion.get().loadReunion(id).toString();
+		JSONObject jsoReunion = Reunion.get().loadReunion(id);
+		Usuario usuario = (Usuario) session.getAttribute("user");
+		jsoReunion.put("userSesion",usuario.getUser());
+		return jsoReunion.toString();
 	}
 
 	@PostMapping("/getReuniones")
@@ -217,7 +220,20 @@ public class Controller {
 		JSONObject jso = new JSONObject(reunion);
 		String idReunion = jso.getString("idReunion");
 		Reunion.get().eliminarReunionUsuario(usuario, idReunion);
-		
 	}
 
+	@PostMapping("/modificarReunion")
+	public void modificarReunion(HttpSession session, @RequestBody Map<String, Object> datosModificados) throws Exception{
+	 
+	 JSONObject jso = new JSONObject(datosModificados);
+	 String id = jso.getString("id");
+	 String nombreReunion = jso.getString("nombreReunion");
+	 String fecha = jso.getString("fecha");
+	 String horaI = jso.getString("horaInicio");
+	 String horaF = jso.getString("horaFin");
+	 String descripcion = jso.getString("descripcion");
+	 String url = jso.getString("url");
+     String[] correosAsistentes = ((jso.getString("correos")).replace(" ", "")).split(",");
+	 
+	}
 }
