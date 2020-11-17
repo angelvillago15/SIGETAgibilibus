@@ -13,7 +13,7 @@ $(document).ready(function() {
 	}).focus(function() {
 		$("#table").show();
 	}).blur(function() {
-		$("#table").hide();
+		$("#table").hide(500);
 	});
 	getUsuarios();
 });
@@ -29,7 +29,7 @@ function getUsuarios() {
 			
 			for (var i in datos.usuarios) {
 				var usuario = datos.usuarios[i];
-				var txt ='<tr><td><a href="AboutUs.html">' + usuario.user + '</a></td></tr>';
+				var txt ="<tr><td><a href='javascript:mostrarUsuario(\""+usuario.user+"\");'>" + usuario.user + "</a></td></tr>";
 				buscador.row.add([txt]);
 			}
 		},
@@ -39,9 +39,12 @@ function getUsuarios() {
 	};
 	$.ajax(data);
 }
-function mostrar(){
-	alert('Hola');
+
+function mostrarUsuario(usuario){
+	alert(usuario);
+	
 }
+
 
 function Delete() {
 	var data;
