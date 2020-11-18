@@ -17,6 +17,7 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.agibilibus.SIGET.dao.UserDAO;
 import com.agibilibus.SIGET.model.Invitacion;
 import com.agibilibus.SIGET.model.Reunion;
 import com.agibilibus.SIGET.model.Sesion;
@@ -34,6 +36,9 @@ import com.agibilibus.SIGET.model.Usuario;
 public class Controller {
 	private static String error = "error";
 	private static String message = "message";
+	
+	@Autowired
+	private UserDAO dao;
 
 	@GetMapping("/")
 	public ModelAndView inicio(ModelMap model) {
@@ -119,10 +124,12 @@ public class Controller {
 	}
 	
 	@PostMapping("/loadUser")
-	public String loadUser(HttpSession session, @RequestBody Map<String, Object> loadUser) throws Exception {
+	public JSONObject loadUser(@RequestBody Map<String, Object> loadUser) {
 		JSONObject jso = new JSONObject(loadUser);
-		String id = jso.getString("id");
-		return Reunion.get().loadReunion(id).toString();
+		String username = jso.getString("username");
+		Optional <Usuario> usuario = dao.findById(username);
+		Usuario user = usuario.get();
+		return user.getMyAccount(user);
 	}
 
 	@PostMapping("/getReuniones")
