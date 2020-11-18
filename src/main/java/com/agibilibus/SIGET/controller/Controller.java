@@ -113,6 +113,13 @@ public class Controller {
 		String id = jso.getString("id");
 		return Reunion.get().loadReunion(id).toString();
 	}
+	
+	@PostMapping("/loadUser")
+	public String loadUser(HttpSession session, @RequestBody Map<String, Object> loadUser) throws Exception {
+		JSONObject jso = new JSONObject(loadUser);
+		String id = jso.getString("id");
+		return Reunion.get().loadReunion(id).toString();
+	}
 
 	@PostMapping("/getReuniones")
 	public String getReuniones(HttpSession session) {
