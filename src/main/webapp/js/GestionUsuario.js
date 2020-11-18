@@ -3,7 +3,6 @@ var buscador = $("#table").DataTable();
 $(document).ready(function() {
 	
 	$("#input-search").keyup(function() {
-		getUsuarios();
 		buscador.search($(this).val()).draw();
 
 		if ($("input-search").val() == "") {
@@ -42,16 +41,14 @@ function getUsuarios() {
 
 function mostrarUsuario(username){
 	var data = {
-
-			url: "getUsuarios",
+			data : JSON.stringify(msg),
+			url: "loadUser",
 			type: "post",
 			contentType : 'application/json',
 			dataType : 'json',
 
 			success: function(response) {
-				var datos = JSON.parse(response);
-				
-				document.getElementById("userDni").innerHTML = datos.dni;
+				document.getElementById("userDni").innerHTML = response.dni;
 				document.getElementById("userCompletName").value = $('#datos.nombre');
 				document.getElementById("userApellidos").value = $('#datos.apellidos');
 				document.getElementById("userTelf").value = ('#datos.telefono');
