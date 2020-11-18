@@ -41,27 +41,25 @@ function getUsuarios() {
 }
 
 function mostrarUsuario(username){
-	/*var data = {
+	var data = {
 
 			url: "getUsuarios",
 			type: "post",
 
-			success: function(response) {*/
-				document.getElementById("userDni").value=usuario.userDni;
-				document.getElementById("userCompletName").value=usuario.userCompletName;
-				document.getElementById("userApellidos").value=usuario.userApellidos;
-				document.getElementById("userTelf").value=usuario.userTelf;
-				document.getElementById("userDate").value=usuario.userDate;
-				document.getElementById("userName").value=usuario.user;
-				document.getElementById("pwd1").value=usuario.pwd1;
-				document.getElementById("userMail").value=usuario.userMail;	
-	
-			/*},
+			success: function(response) {
+				var datos = JSON.parse(response);
+				
+				userDni = datos.dni.value;
+				userCompletName = datos.nombre.value;
+				userApellidos = datos.apellidos.value;
+				userTelf = datos.telefono.value;
+				userDate = datos.nacimiento.value;
+			},	
 			error: function(response) {
 				alert(response.message);
 			}
 		};
-		$.ajax(data);*/
+		$.ajax(data);
 }
 
 

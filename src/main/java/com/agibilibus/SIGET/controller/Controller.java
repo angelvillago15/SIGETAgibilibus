@@ -124,12 +124,14 @@ public class Controller {
 	}
 	
 	@PostMapping("/loadUser")
-	public JSONObject loadUser(@RequestBody Map<String, Object> loadUser) {
+	public String loadUser(@RequestBody Map<String, Object> loadUser) {
 		JSONObject jso = new JSONObject(loadUser);
+		Usuario user = new Usuario();
 		String username = jso.getString("username");
 		Optional <Usuario> usuario = dao.findById(username);
-		Usuario user = usuario.get();
-		return user.getMyAccount(user);
+		if (usuario.isPresent())
+			 user = usuario.get();
+		return user.getMyAccount(user).toString();
 	}
 
 	@PostMapping("/getReuniones")
