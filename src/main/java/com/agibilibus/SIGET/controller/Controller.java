@@ -6,6 +6,7 @@ import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -111,7 +112,10 @@ public class Controller {
 	public String loadReunion(HttpSession session, @RequestBody Map<String, Object> loadReunion) throws Exception {
 		JSONObject jso = new JSONObject(loadReunion);
 		String id = jso.getString("id");
-		return Reunion.get().loadReunion(id).toString();
+		JSONObject jsoReunion = Reunion.get().loadReunion(id);
+		Usuario usuario = (Usuario) session.getAttribute("user");
+		jsoReunion.put("userSesion",usuario.getUser());
+		return jsoReunion.toString();
 	}
 	
 	@PostMapping("/loadUser")
@@ -160,6 +164,18 @@ public class Controller {
 
 	}
 	
+	@PostMapping("/responderInvitacion")
+	public void responderInvitacion(HttpSession session, @RequestBody Map <String, Object> opcionesInvitacion) throws Exception {
+		Usuario usuario = (Usuario) session.getAttribute("user");
+		JSONObject jso = new JSONObject(opcionesInvitacion);
+		
+		String idInv = jso.getString("idInv");
+		boolean opcion = jso.getBoolean("opcion");
+		
+		Invitacion.get().responderInvitacion(usuario, idInv, opcion);
+
+	}
+
 	@PostMapping("/modifyUser")
 	public void modificar(HttpSession session, @RequestBody Map<String, Object> credenciales)
 	        throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException,
@@ -182,6 +198,7 @@ public class Controller {
 			Usuario.get().modificarUsuario(u, pwd1, userName, userApellidos, fecha, userDni, userTelf,
 			        userMail, rol);
 			resultado.put("type", "OK");
+>>>>>>> Develop
 
 		} catch (Exception e) {
 			resultado.put("type", error);
@@ -196,6 +213,34 @@ public class Controller {
 		JSONObject jso = new JSONObject(datosUsuario);
 		String idUsuario = jso.getString("id");
 		Usuario.get().eliminarUsuario(idUsuario);
-		
+	}
+	
+	@PostMapping("/getMyAccount")
+	public String getMyAccount(HttpSession session) {
+		Usuario usuario = (Usuario) session.getAttribute("user");
+		return Usuario.get().getMyAccount(usuario).toString();
+	}
+	
+	@PostMapping("/eliminarReunionUsuario")
+	public void eliminarReunionUsuario(HttpSession session, @RequestBody Map<String, Object> reunion) {
+		Usuario usuario = (Usuario) session.getAttribute("user");
+		JSONObject jso = new JSONObject(reunion);
+		String idReunion = jso.getString("idReunion");
+		Reunion.get().eliminarReunionUsuario(usuario, idReunion);
+	}
+
+	@PostMapping("/modificarReunion")
+	public void modificarReunion(HttpSession session, @RequestBody Map<String, Object> datosModificados) throws Exception{
+	 
+	 JSONObject jso = new JSONObject(datosModificados);
+	 String id = jso.getString("id");
+	 String nombreReunion = jso.getString("nombreReunion");
+	 String fecha = jso.getString("fecha");
+	 String horaI = jso.getString("horaInicio");
+	 String horaF = jso.getString("horaFin");
+	 String descripcion = jso.getString("descripcion");
+	 String url = jso.getString("url");
+     String[] correosAsistentes = ((jso.getString("correos")).replace(" ", "")).split(",");
+	 
 	}
 }

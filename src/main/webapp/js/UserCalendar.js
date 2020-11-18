@@ -1,3 +1,5 @@
+var invitaciones = [];
+
 function openNav() {
 	document.getElementById("mySidenav").style.width = "270px";
 	document.getElementById("main").style.marginLeft = "270px";
@@ -9,25 +11,25 @@ function closeNav() {
 	document.getElementById("mySidenav").style.width = "0";
 	document.getElementById("main").style.marginLeft = "0";
 	document.body.style.backgroundColor = "white";
-	
+
 }
 
-function getRol(){
+function getRol() {
 
-	var data ={
-		url: "getRol",
-		type: "post",
-		
-		success: function(response) {
+	var data = {
+		url : "getRol",
+		type : "post",
+
+		success : function(response) {
 			var datos = JSON.parse(response);
-			if (datos.rol=="admin")
-				 $("#gestionUser").show();
+			if (datos.rol == "admin")
+				$("#gestionUser").show();
 			else
-				 $("#gestionUser").hide();
-				
+				$("#gestionUser").hide();
+
 		},
-		error: function(response) {
-		alert("hay un error");
+		error : function(response) {
+			alert("hay un error");
 		}
 	};
 	$.ajax(data);
@@ -36,22 +38,25 @@ function getRol(){
 function getInvitaciones() {
 	var data = {
 
-		url: "recibirInvitacion",
-		type: "post",
+		url : "recibirInvitacion",
+		type : "post",
 
-		success: function(response) {
+		success : function(response) {
 			var datos = JSON.parse(response);
-
+			
+			invitaciones = datos.invitaciones;
+			
 			var cnt = datos.invitaciones.length;
 			$('#cnt').text(cnt);
 
 			var txt = "";
 
-			for (var i in datos.invitaciones) {
+			for ( var i in datos.invitaciones) {
 				var inv = datos.invitaciones[i];
+
 				txt = txt + "<p><label>" + inv.reunion.organizador.nombre + "</label> te ha invitado a una reunión</p>"
-					+ " <button type='button' class='btn btn-success'>Aceptar</button>"
-					+ " <button type='button' class='btn btn-danger'>Rechazar</button>"
+					+ " <button type='button' class='btn btn-success' onclick='aceptarInvitacion("+i+")'>Aceptar</button>"
+					+ " <button type='button' class='btn btn-danger' onclick='rechazarInvitacion("+i+")'>Rechazar</button>"
 					+ " <br><div class='panel panel-info autocollapse'>"
 					+ " <div class='panel-heading clickable'><h6 class='panel-title'>Quiero saber más</h6></div>"
 					+ " <div class='panel-body'><div class='alert alert-info' role='alert'>"
@@ -60,13 +65,63 @@ function getInvitaciones() {
 			}
 			document.getElementById('invitaciones').innerHTML = txt;
 		},
-		error: function(response) {
+		error : function(response) {
 			alert(response.message);
 		}
 	};
 	$.ajax(data);
 }
 getInvitaciones();
+
+
+function aceptarInvitacion(i) {
+            var info = {
+                idInv : invitaciones[i].id,
+                opcion : true
+            };
+            
+            var data = {
+                    data : JSON.stringify(info),
+                    url : "responderInvitacion",
+                    type : "post",
+                    contentType: 'application/json',
+
+                    success: function(response) {
+                    	alert("Invitacion aceptada");
+                    	location.reload();
+                    },
+                    error : function(response) {
+                        alert(response.responseText);
+                    }
+                };
+                $.ajax(data);
+       
+}
+
+function rechazarInvitacion(i) {
+            var info = {
+                idInv : invitaciones[i].id,
+                opcion : false
+            };
+            
+            var data = {
+                    data : JSON.stringify(info),
+                    url : "responderInvitacion",
+                    type : "post",
+                    contentType: 'application/json',
+
+                    success: function(response) {
+                    	alert("Invitacion rechazada");
+                    	location.reload();
+                    },
+                    error : function(response) {
+                        alert(response.responseText);
+                    }
+                };
+                $.ajax(data);
+                
+}
+
 
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -93,6 +148,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			var msg = {
 				type : "load Reunion",
 				id : event.event._def.publicId,
+
 			};
 			data = {
 				data : JSON.stringify(msg),
@@ -100,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				type : "post",
 				contentType : 'application/json',
 				dataType : 'json',
-				success : function(response) {
+				success : function(response) {					
 					$('#nombreReunion').val(response.title);
 					$('#descripcion').val(response.descripcion);
 					$('#url').val(response.url);
@@ -108,18 +164,33 @@ document.addEventListener('DOMContentLoaded', function() {
 					$('#horaInicio').val(response.start);
 					$('#horaFin').val(response.end);
 					$('#idReunion').val(response.id);
+					
+					var organizador = response.organizador;
+					var usuarioSesion=response.userSesion;
+					
+					if(organizador == usuarioSesion){
+						document.getElementById("nombreReunion").readOnly = false;
+						document.getElementById("url").readOnly = false;
+						document.getElementById("fecha").readOnly = false;
+						document.getElementById("horaInicio").readOnly = false;
+						document.getElementById("horaFin").readOnly = false;
+						document.getElementById("descripcion").readOnly = false;
+					}
+
 				},
 				error : function(response) {
 					alert(response.message);
 				}
+
 			}
 			$.ajax(data);
-
+			
 			$('#modalTitle').text(event.title);
 			$('#modalBody').text(event.description);
 			$('#calendarModal').modal();
 
 		},
+		
 		locale : 'es',
 		navLinks : true, // can click day/week names to navigate views
 		selectMirror : true,
@@ -129,8 +200,10 @@ document.addEventListener('DOMContentLoaded', function() {
 	calendar.render();
 });
 
+
+
 $(document).on('click', '.panel div.clickable', function(e) {
-	var $this = $(this); //Heading
+	var $this = $(this); // Heading
 	var $panel = $this.parent('.panel');
 	var $panel_body = $panel.children('.panel-body');
 	var $display = $panel_body.css('display');

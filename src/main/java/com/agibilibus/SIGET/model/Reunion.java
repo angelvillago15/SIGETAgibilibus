@@ -143,7 +143,7 @@ public class Reunion {
 		jso.put("fecha", fecha);
 		jso.put("start", horaInicio);
 		jso.put("end", horaFin);
-		jso.put("organizador", this.organizador.toJSON());
+		jso.put("organizador", this.organizador.getUser());
 		for (Usuario u : this.asistentes)
 			jsaAsistentes.put(u.toJSON());
 		jso.put("asistentes", jsaAsistentes);
@@ -199,10 +199,11 @@ public class Reunion {
 		Optional<Usuario> optUser = userdao.findById(u.getUser());
 		if (optUser.isPresent()) {
 			Usuario usuario = optUser.get();
-			List<Reunion> reuniones = reuniondao.findAll();
+			List <Reunion> reuniones = reuniondao.findAll();
 			for (Reunion r : reuniones) {
-				if (r.getOrganizador().getUser().equals(usuario.getUser()) || r.getAsistentes().contains(usuario))
+				if ((r.getOrganizador().getUser().equals(usuario.getUser())) || (r.getAsistentes().contains(usuario))) {
 					jsaReuniones.put(r.toEvent());
+				}
 			}
 		}
 		return jsaReuniones;
@@ -256,6 +257,20 @@ public class Reunion {
 		Optional<Reunion> optReunion = reuniondao.findById(r.getIdReunion());
 		if(optReunion.isPresent())
 			reuniondao.save(r);
+	}
+
+	public void eliminarReunionUsuario(Usuario usuario, String idReunion) {
+		Optional<Reunion> optReunion = reuniondao.findById(idReunion);
+		if(optReunion.isPresent()) {
+			Reunion r =optReunion.get();
+			if(r.getOrganizador().getUser().equals(usuario.getUser()))
+				cambiarOrganizarReunion(r);
+			else if(r.getAsistentes().contains(usuario))
+				eliminarAsistenteReunion(usuario, r);
+			Invitacion i = Invitacion.get().getInvitacion(r, usuario);
+			if(i!=null)
+				i.setEstado(EstadoInvitacion.rechazado);
+		}
 	}
 
 }

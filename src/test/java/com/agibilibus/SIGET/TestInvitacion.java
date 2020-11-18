@@ -27,21 +27,21 @@ public class TestInvitacion {
 
 	private Controller controller = new Controller();
 	private Map<String, Object> datosReunion = new HashMap<String, Object>();
+	private Map<String, Object> datosInvitacion1 = new HashMap<String, Object>();
+	private Map<String, Object> datosInvitacion2 = new HashMap<String, Object>();
 	private Map<String, Object> credenciales1 = new HashMap<String, Object>();
 	private Map<String, Object> credenciales2 = new HashMap<String, Object>();
-	private String nombreTest = "test";
+	private String nombreTest = "Reunion";
 
 	@Test
 	public void TestCrearYEnviarInvitacion() {
-		
 
-		Map<String, Object> credenciales1 = new HashMap<String, Object>();
 		credenciales1.put("userName", "Elisa");
 		credenciales1.put("pwd", "Seguridad2020");
 
 		try {
 			controller.login(sesion, credenciales1);
-		} catch (Exception e1) {
+		} catch (Exception e) {
 			fail();
 
 		}
@@ -54,33 +54,23 @@ public class TestInvitacion {
 		datosReunion.put("url", "https://www.youtube.com/?hl=es&gl=ES");
 		datosReunion.put("correos", "jaime@jaime.com");
 
-
-				try {
-					controller.guardarReunion(sesion, datosReunion);
-				} catch (Exception e) {
-					fail();
-				}
-
-
-
+		try {
+			controller.guardarReunion(sesion, datosReunion);
+		} catch (Exception e) {
+			fail();
+		}
 
 	}
 
 	@Test
 	public void TestRecibirInvitacion() {
 
-		credenciales2.put("userName", "jaime");
-		credenciales2.put("pwd", "Seguridad2020");
+		try {
+			controller.login(sesion, (Map<String, Object>) credenciales2);
+		} catch (Exception e) {
 
-
-			try {
-				controller.login(sesion, (Map<String, Object>) credenciales2);
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				fail();
-			}
-
-
+			fail();
+		}
 
 		String invitaciones = controller.getInvitaciones(sesion);
 		JSONObject jso = null;
@@ -88,7 +78,7 @@ public class TestInvitacion {
 		try {
 			jso = new JSONObject(invitaciones);
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
+	
 			fail();
 		}
 		try {
@@ -107,7 +97,39 @@ public class TestInvitacion {
 			assertTrue(flag);
 
 		} catch (JSONException e) {
+
+			fail();
+		}
+
+	}
+	
+	@Test
+	public void TestResponderInvitacion() {
+
+		try {
+			controller.login(sesion, (Map<String, Object>) credenciales1);
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			fail();
+		}
+		
+		datosInvitacion1.put("idInv", 0);
+		datosInvitacion1.put("opcion", true);
+		
+		datosInvitacion2.put("idInv", 1);
+		datosInvitacion2.put("opcion", false);
+
+		try {
+			controller.responderInvitacion(sesion, datosInvitacion1);
+		} catch (Exception e) {
+
+			fail();
+		}
+		
+		try {
+			controller.responderInvitacion(sesion, datosInvitacion2);
+		} catch (Exception e) {
+
 			fail();
 		}
 
