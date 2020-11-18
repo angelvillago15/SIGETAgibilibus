@@ -49,12 +49,12 @@ function mostrarUsuario(username){
 			success: function(response) {
 				var datos = JSON.parse(response);
 				
-				userDni = datos.dni.value;
-				userCompletName = datos.nombre.value;
-				userApellidos = datos.apellidos.value;
-				userTelf = datos.telefono.value;
-				userDate = datos.nacimiento.value;
-			},	
+				document.getElementById("userDni").value = datos.dni;
+				document.getElementById("userCompletName").value = datos.nombre;
+				document.getElementById("userApellidos").value = datos.apellidos;
+				document.getElementById("userTelf").value = datos.telefono;
+				document.getElementById("userDate").value = datos.nacimiento;
+			},
 			error: function(response) {
 				alert(response.message);
 			}
