@@ -3,7 +3,6 @@ var buscador = $("#table").DataTable();
 $(document).ready(function() {
 	
 	$("#input-search").keyup(function() {
-		getUsuarios();
 		buscador.search($(this).val()).draw();
 
 		if ($("input-search").val() == "") {
@@ -29,7 +28,7 @@ function getUsuarios() {
 			var datos = JSON.parse(response);
 			
 			for (var i in datos.usuarios) {
-				var txt ="<tr><td><a href='javascript:mostrarUsuario(\""+ datos.usuarios[i].user+"\");'>" + datos.usuarios[i].user + "</a></td></tr>";
+				var txt ="<tr><td><a href='javascript:mostrarUsuario(\""+datos.usuarios[i].user+"\");'>" + datos.usuarios[i].user + "</a></td></tr>";
 				buscador.row.add([txt]);
 			}
 		},
@@ -40,28 +39,9 @@ function getUsuarios() {
 	$.ajax(data);
 }
 
-function mostrarUsuario(username){
-	/*var data = {
-
-			url: "getUsuarios",
-			type: "post",
-
-			success: function(response) {*/
-				document.getElementById("userDni").value=usuario.userDni;
-				document.getElementById("userCompletName").value=usuario.userCompletName;
-				document.getElementById("userApellidos").value=usuario.userApellidos;
-				document.getElementById("userTelf").value=usuario.userTelf;
-				document.getElementById("userDate").value=usuario.userDate;
-				document.getElementById("userName").value=usuario.user;
-				document.getElementById("pwd1").value=usuario.pwd1;
-				document.getElementById("userMail").value=usuario.userMail;	
+function mostrarUsuario(usuario){
+	alert(usuario);
 	
-			/*},
-			error: function(response) {
-				alert(response.message);
-			}
-		};
-		$.ajax(data);*/
 }
 
 
@@ -77,6 +57,6 @@ function Delete() {
 		type: "post",
 		contentType: 'application/json',
 		dataType: 'json'
-	}
+	};
 	$.ajax(data);
-};
+}
