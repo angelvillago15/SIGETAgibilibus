@@ -45,15 +45,17 @@ function mostrarUsuario(username){
 
 			url: "getUsuarios",
 			type: "post",
+			contentType : 'application/json',
+			dataType : 'json',
 
 			success: function(response) {
 				var datos = JSON.parse(response);
 				
-				document.getElementById("userDni").value = datos.dni;
-				document.getElementById("userCompletName").value = datos.nombre;
-				document.getElementById("userApellidos").value = datos.apellidos;
-				document.getElementById("userTelf").value = datos.telefono;
-				document.getElementById("userDate").value = datos.nacimiento;
+				document.getElementById("userDni").innerHTML = datos.dni;
+				document.getElementById("userCompletName").value = $('#datos.nombre');
+				document.getElementById("userApellidos").value = $('#datos.apellidos');
+				document.getElementById("userTelf").value = ('#datos.telefono');
+				document.getElementById("userDate").value = $('#datos.nacimiento');
 			},
 			error: function(response) {
 				alert(response.message);
