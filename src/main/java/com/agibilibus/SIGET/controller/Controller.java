@@ -78,12 +78,12 @@ public class Controller {
 			        userMail);
 			resultado.put("type", "ok");
 			resultado.put(message, "Usuario registrado correctamente");
-
+			return resultado.toString();
 		} catch (Exception e) {
 			resultado.put("type", error);
 			resultado.put(message, e.getMessage());
+			return resultado.toString();
 		}
-		return resultado.toString();
 	}
 
 	@PostMapping("/nuevaTarea")

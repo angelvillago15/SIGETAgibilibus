@@ -82,10 +82,11 @@ $(document).ready(function() {
                     type : "post",
                     contentType: 'application/json',
                     success: function(response){
-                    	alert("Usuario registrado");
+                    	var respuesta = reponse.message
+                    	alert(""+respuesta);
                     },
                     error : function(response) {
-                        alert("Error al crear el usuario");
+                        alert(response.message);
                     }
                 };
                 $.ajax(data);
