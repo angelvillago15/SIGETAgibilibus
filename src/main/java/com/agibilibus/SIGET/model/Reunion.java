@@ -186,9 +186,6 @@ public class Reunion {
 		}
 	}
 
-	public Reunion modificarReunion(Reunion r) {
-		return null;
-	}
 
 	public void eliminarReunion(Reunion r) {
 		reuniondao.delete(r);
