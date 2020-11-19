@@ -6,7 +6,6 @@ import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
-import java.util.Optional;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -82,14 +81,14 @@ public class Controller {
 		try {
 			Usuario.get().crearUsuario(pwd1, userCompletName, userName, userApellidos, fecha, userDni, userTelf,
 			        userMail);
-			resultado.put("type", "OK");
-
+			resultado.put("type", "ok");
+			resultado.put(message, "Usuario registrado correctamente");
+			return resultado.toString();
 		} catch (Exception e) {
 			resultado.put("type", error);
 			resultado.put(message, e.getMessage());
+			return resultado.toString();
 		}
-
-		return resultado.toString();
 	}
 
 	@PostMapping("/nuevaTarea")
@@ -238,18 +237,19 @@ public class Controller {
 	}
 
 	@PostMapping("/modificarReunion")
-	public void modificarReunion(HttpSession session, @RequestBody Map<String, Object> datosModificados)
-	        throws Exception {
-
-		JSONObject jso = new JSONObject(datosModificados);
-		String id = jso.getString("id");
-		String nombreReunion = jso.getString("nombreReunion");
-		String fecha = jso.getString("fecha");
-		String horaI = jso.getString("horaInicio");
-		String horaF = jso.getString("horaFin");
-		String descripcion = jso.getString("descripcion");
-		String url = jso.getString("url");
-		String[] correosAsistentes = ((jso.getString("correos")).replace(" ", "")).split(",");
-
+	public void modificarReunion(HttpSession session, @RequestBody Map<String, Object> datosModificados) throws Exception{
+	 
+	 JSONObject jso = new JSONObject(datosModificados);
+	 String id = jso.getString("id");
+	 String nombreReunion = jso.getString("nombre");
+	 String[] fecha = jso.getString("fecha").split("-");
+	 String[] horaI = jso.getString("horaInicio").split(":");
+	 String[] horaF = jso.getString("horaFin").split(":");
+	 String descripcion = jso.getString("descripcion");
+	 String url = jso.getString("url");
+     String[] correosAsistentes = ((jso.getString("correos")).replace(" ", "")).split(",");
+     DateTime horaInicio = new DateTime(Integer.parseInt(fecha[0]), Integer.parseInt(fecha[1]), Integer.parseInt(fecha[2]),Integer.parseInt(horaI[0]), Integer.parseInt(horaI[1]), DateTimeZone.forID("Europe/Madrid"));
+     DateTime horaFin = new DateTime(Integer.parseInt(fecha[0]), Integer.parseInt(fecha[1]), Integer.parseInt(fecha[2]),Integer.parseInt(horaF[0]), Integer.parseInt(horaF[1]), DateTimeZone.forID("Europe/Madrid"));
+     Reunion.get().modificarReunion(id,nombreReunion,horaInicio,horaFin,descripcion,url,correosAsistentes);
 	}
 }
