@@ -53,13 +53,13 @@ function mostrarUsuario(username){
 			dataType : 'json',
 			
 			success : function(response) {
-				datos : JSON.parse(response);
+				var datos = JSON.parse(response);
 				
-				document.getElementById("userDni").innerHTML = datos.dni;
+				$('#userDni').value(datos.dni);
 				$('#userCompletName').value(datos.nombre);
-				$('#userApellidos').value(response.apellidos);
-				$('#userTelf').value(response.telefono);
-				$('#userDate').value(response.nacimiento);
+				$('#userApellidos').value(datos.apellidos);
+				$('#userTelf').value(datos.telefono);
+				$('#userDate').value(datos.nacimiento);
 			},
 			error : function(response) {
 				alert(response.message);
