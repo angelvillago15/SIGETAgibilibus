@@ -33,23 +33,34 @@ $(document).ready(function() {
     });
 });
 
-    $("#registro").click(function(){//solo estan como necesarios mail usuario y contraseña como dijimos en el drive
+    function comprobar(){
         var mail1 = $("#userMail").val();
         var username = $("#userName").val();
         var pass=$("#pwd1").val();
         var pass2=$("#pwd2").val();
         var mail2=$("#mail2").val();
-        
-        if(mail1.length==0 || mail2.length==0 || username.length==0 || pass.length==0){
-            alert("Rellena todos los campos");
-        }else if(pass!==pass2){
-            alert("Las contraseñas no puede ser distintas");
-        }else if(mail1!==mail2){
-            alert("Los e-mails no pueden ser distintos");
+        if(false!=(validarCampo("userMail") && validarCampo("userName") && validarCampo("pwd1")&& validarCampo("mail2") && validarCampo("userCompletName") && validarCampo("userApellidos") && validarCampo("userTelf")&& validarCampo("userDate"))){        
+        	if(pass!==pass2){
+        		alert("Las contraseñas no puede ser distintas");
+        	}else if(mail1!==mail2){
+        		alert("Los e-mails no pueden ser distintos");
+        	}else{
+        		register();
+        	}
+        	
+        } 
+    }
+
+    function validarCampo(campo) { // comprobar que no hay campos vacios
+        var valido = new Boolean(true); 
+        if (document.getElementById(campo).value == '') {
+          alert('El campo ' +campo +' está vacio');
+            valido=false;
         }
-    });
-
-
+        return valido;
+      };
+      
+      
     function limpiarCampos(){ // resetear todos los campos
         document.getElementById("userCompletName").value="";
         document.getElementById("userDni").value="";
@@ -65,7 +76,7 @@ $(document).ready(function() {
     function register(){
             var info = {
                 type : "Register",
-                userCompletName : userName.value,
+                userCompletName : userCompletName.value,
                 userName : userName.value,
                 userApellidos : userApellidos.value,
                 userDni : userDni.value,
