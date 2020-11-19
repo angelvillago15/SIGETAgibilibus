@@ -36,12 +36,9 @@ import com.agibilibus.SIGET.model.Usuario;
 public class Controller {
 	private static String error = "error";
 	private static String message = "message";
-	
-	@Autowired
-	private UserDAO dao;
 
 	@Autowired
-	UserDAO usuariodao;
+	private UserDAO userdao;
 
 	@GetMapping("/")
 	public ModelAndView inicio(ModelMap model) {
@@ -65,7 +62,7 @@ public class Controller {
 
 	@PostMapping("/register")
 	public String register(HttpSession session, @RequestBody Map<String, Object> credenciales)
-			throws NoSuchAlgorithmException, JSONException {
+	        throws NoSuchAlgorithmException, JSONException {
 		MessageDigest md = MessageDigest.getInstance("MD5");
 		JSONObject jso = new JSONObject(credenciales);
 		String userCompletName = jso.getString("userCompletName");
@@ -84,7 +81,7 @@ public class Controller {
 
 		try {
 			Usuario.get().crearUsuario(pwd1, userCompletName, userName, userApellidos, fecha, userDni, userTelf,
-					userMail);
+			        userMail);
 			resultado.put("type", "OK");
 
 		} catch (Exception e) {
@@ -104,11 +101,11 @@ public class Controller {
 		String[] horaIni = jso.getString("horaInicio").split(":");
 		String[] horaFin = jso.getString("horaFin").split(":");
 		DateTime horaI = new DateTime(Integer.parseInt(fecha[0]), Integer.parseInt(fecha[1]),
-				Integer.parseInt(fecha[2]), Integer.parseInt(horaIni[0]), Integer.parseInt(horaIni[1]),
-				DateTimeZone.forID("Europe/Madrid"));
+		        Integer.parseInt(fecha[2]), Integer.parseInt(horaIni[0]), Integer.parseInt(horaIni[1]),
+		        DateTimeZone.forID("Europe/Madrid"));
 		DateTime horaF = new DateTime(Integer.parseInt(fecha[0]), Integer.parseInt(fecha[1]),
-				Integer.parseInt(fecha[2]), Integer.parseInt(horaFin[0]), Integer.parseInt(horaFin[1]),
-				DateTimeZone.forID("Europe/Madrid"));
+		        Integer.parseInt(fecha[2]), Integer.parseInt(horaFin[0]), Integer.parseInt(horaFin[1]),
+		        DateTimeZone.forID("Europe/Madrid"));
 		Usuario organizador = (Usuario) session.getAttribute("user");
 		String url = jso.getString("url");
 		String[] correosAsistentes = ((jso.getString("correos")).replace(" ", "")).split(",");
@@ -129,13 +126,12 @@ public class Controller {
 	@PostMapping("/loadUser")
 	public String loadUser(@RequestBody Map<String, Object> loadUser) {
 		JSONObject jso = new JSONObject(loadUser);
-
-		Usuario user = new Usuario();
-		String username = jso.getString("username");
-		Optional <Usuario> usuario = dao.findById(username);
-		if (usuario.isPresent())
-			 user = usuario.get();
-		return user.getMyAccount(user).toString();
+		String username = jso.getString("userName");
+		Optional<Usuario> optUser = userdao.findById(username);
+		if (optUser.isPresent()) {
+			return optUser.get().toJSON().toString();
+		} else
+			return null;
 
 	}
 
@@ -180,7 +176,7 @@ public class Controller {
 
 	@PostMapping("/responderInvitacion")
 	public void responderInvitacion(HttpSession session, @RequestBody Map<String, Object> opcionesInvitacion)
-			throws Exception {
+	        throws Exception {
 		Usuario usuario = (Usuario) session.getAttribute("user");
 		JSONObject jso = new JSONObject(opcionesInvitacion);
 
@@ -193,8 +189,8 @@ public class Controller {
 
 	@PostMapping("/modifyUser")
 	public void modificar(HttpSession session, @RequestBody Map<String, Object> credenciales)
-			throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException,
-			IllegalBlockSizeException, BadPaddingException, JSONException {
+	        throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException,
+	        IllegalBlockSizeException, BadPaddingException, JSONException {
 		/*
 		 * JSONObject jso = new JSONObject(credenciales); String userName =
 		 * jso.getString("userName"); String userApellidos =
@@ -243,7 +239,7 @@ public class Controller {
 
 	@PostMapping("/modificarReunion")
 	public void modificarReunion(HttpSession session, @RequestBody Map<String, Object> datosModificados)
-			throws Exception {
+	        throws Exception {
 
 		JSONObject jso = new JSONObject(datosModificados);
 		String id = jso.getString("id");
