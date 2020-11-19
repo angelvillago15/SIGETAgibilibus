@@ -6,7 +6,6 @@ import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
-import java.util.Optional;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -77,14 +76,14 @@ public class Controller {
 		try {
 			Usuario.get().crearUsuario(pwd1, userCompletName, userName, userApellidos, fecha, userDni, userTelf,
 			        userMail);
-			resultado.put("type", "OK");
-
+			resultado.put("type", "ok");
+			resultado.put(message, "Usuario registrado correctamente");
+			return resultado.toString();
 		} catch (Exception e) {
 			resultado.put("type", error);
 			resultado.put(message, e.getMessage());
+			return resultado.toString();
 		}
-
-		return resultado.toString();
 	}
 
 	@PostMapping("/nuevaTarea")

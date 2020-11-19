@@ -177,10 +177,13 @@ public class Reunion {
 		if (optUser.isPresent()) {
 			Usuario or = optUser.get();
 			Reunion r=new Reunion(id, titulo, descripcion, horaInicio, horaFin, or, asist, url);
-			reuniondao.save(r);
+			try {
+				reuniondao.insert(r);
+			} catch(Exception e) {}
+			
 			for(Usuario u:asist) {
 				String idInv=r.getIdReunion()+u.getUser();
-				invitaciondao.save(new Invitacion(idInv, u, r, EstadoInvitacion.pendiente));
+				invitaciondao.insert(new Invitacion(idInv, u, r, EstadoInvitacion.pendiente));
 			}
 			
 		}
