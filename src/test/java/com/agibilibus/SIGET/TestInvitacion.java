@@ -42,22 +42,22 @@ public class TestInvitacion {
 		try {
 			controller.login(sesion, credenciales1);
 		} catch (Exception e) {
-			e.getStackTrace();
+			fail("Error al logearse en guardar reunion.");
 
 		}
 
 		datosReunion.put("titulo", nombreTest);
-		datosReunion.put("fecha", "2020-12-01");
-		datosReunion.put("horaInicio", "10:00:00");
-		datosReunion.put("horaFin", "12:00:00");
 		datosReunion.put("descripcion", "test");
+		datosReunion.put("fecha", "2020-12-01");
+		datosReunion.put("horaIni", "10:00:00");
+		datosReunion.put("horaFin", "12:00:00");
 		datosReunion.put("url", "https://www.youtube.com/?hl=es&gl=ES");
-		datosReunion.put("asistentes", "jaime@jaime.com");
+		datosReunion.put("correosAsistentes", "jaime@jaime.com");
 
 		try {
 			controller.guardarReunion(sesion, datosReunion);
 		} catch (Exception e) {
-			e.getStackTrace();
+			fail("Error al guardar la reunion.");
 		}
 
 	}
@@ -69,7 +69,7 @@ public class TestInvitacion {
 			controller.login(sesion, (Map<String, Object>) credenciales2);
 		} catch (Exception e) {
 
-			e.getStackTrace();
+			fail("Error al logearse en recibir inviracion.");
 		}
 
 		String invitaciones = controller.getInvitaciones(sesion);
@@ -78,8 +78,8 @@ public class TestInvitacion {
 		try {
 			jso = new JSONObject(invitaciones);
 		} catch (JSONException e) {
-	
-			fail();
+
+			fail("Error en getInvitaciones.");
 		}
 		try {
 			JSONArray jsa = (JSONArray) jso.get("invitaciones");
@@ -98,24 +98,24 @@ public class TestInvitacion {
 
 		} catch (JSONException e) {
 
-			fail();
+			fail("Error al recibir invitaciones.");
 		}
 
 	}
-	
+
 	@Test
 	public void TestResponderInvitacion() {
-		
+
 		try {
 			controller.login(sesion, (Map<String, Object>) credenciales1);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.getStackTrace();
+			fail("Error al logearse en responder invitacion.");
 		}
-		
+
 		datosInvitacion1.put("idInv", 0);
 		datosInvitacion1.put("opcion", true);
-		
+
 		datosInvitacion2.put("idInv", 1);
 		datosInvitacion2.put("opcion", false);
 
@@ -123,14 +123,14 @@ public class TestInvitacion {
 			controller.responderInvitacion(sesion, datosInvitacion1);
 		} catch (Exception e) {
 
-			e.getStackTrace();
+			fail("Error al responder invitacion.");
 		}
-		
+
 		try {
 			controller.responderInvitacion(sesion, datosInvitacion2);
 		} catch (Exception e) {
 
-			e.getStackTrace();
+			fail("Error al responder invitacion.");
 		}
 
 	}

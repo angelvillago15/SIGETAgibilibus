@@ -263,7 +263,9 @@ public class Reunion {
 		Optional<Reunion> optReunion = reuniondao.findById(idReunion);
 		if(optReunion.isPresent()) {
 			Reunion r =optReunion.get();
-			if(r.getOrganizador().getUser().equals(usuario.getUser()))
+
+			String c = usuario.getUser();
+			if(r.getOrganizador().getUser().equals(c))
 				cambiarOrganizarReunion(r);
 			else if(r.getAsistentes().contains(usuario))
 				eliminarAsistenteReunion(usuario, r);

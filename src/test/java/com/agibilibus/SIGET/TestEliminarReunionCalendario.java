@@ -6,18 +6,13 @@ import com.agibilibus.SIGET.dao.UserDAO;
 import com.agibilibus.SIGET.model.Reunion;
 import com.agibilibus.SIGET.model.Usuario;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
-import org.json.JSONObject;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,21 +34,24 @@ public class TestEliminarReunionCalendario {
 	private ReunionDAO reuniondao;
 
 	MockHttpSession session = new MockHttpSession();
-	Map<String, Object> reunion = new HashMap<String, Object>();
 
-	@Test
-	public void testOrganizador() {
-		MockHttpSession session = new MockHttpSession();
+	@Before
+	public void iniciar() {
+		
+		//me logueo como Elisa
+		session = new MockHttpSession();
 		Usuario u = userdao.findById("Elisa").get();
 		session.setAttribute("user", u);
-
-		reunion.put("titulo", "EliminarReunion");
+		
+		//creo una reunion
+		Map<String, Object> reunion = new HashMap<String, Object>();
+		reunion.put("nombre", "EliminarReunion");
+		reunion.put("descripcion", "Hola");
 		reunion.put("fecha", "2020-10-01");
 		reunion.put("horaInicio", "11:00:00");
 		reunion.put("horaFin", "13:00:00");
-		reunion.put("descripcion", "Hola");
-		reunion.put("asistentes", "jaime@jaime, pepa@pepa.com");
 		reunion.put("url", "https://www.google.com/");
+		reunion.put("correos", "jaime@jaime.com, pepa@pepa.com");
 
 		try {
 			controller.guardarReunion(session, reunion);
@@ -62,36 +60,36 @@ public class TestEliminarReunionCalendario {
 			e.getStackTrace();
 		}
 
-		boolean flag = false;
-		List<Usuario> asistentes = new ArrayList();
-		// Veo cual es el primer asistente que se tiene que convertir en organizador
+	}
 
-		asistentes = reuniondao.findById("EliminarReunionPruebas").get().getAsistentes();
-		Usuario primerAsistente = new Usuario();
-		primerAsistente = asistentes.get(0);
+	@Test
+	public void testOrganizador() {
+		
+		Map<String, Object> sendReunion = new HashMap<String, Object>();
+		sendReunion.put("idReunion","Elisa#EliminarReunion#2020-10-01T11:00:00.000+02:00#2020-10-01T13:00:00.000+02:00#jaime#Pepa");
+		
+		//cojo los asistentes
+		List<Usuario> asistentes = reuniondao.findById("Elisa#EliminarReunion#2020-10-01T11:00:00.000+02:00#2020-10-01T13:00:00.000+02:00#jaime#Pepa").get().getAsistentes();
+		Usuario jaime = asistentes.get(0);
+		Usuario pepa = asistentes.get(1);
 
-		controller.eliminarReunionUsuario(session, reunion);
 
-		if (reuniondao.findById("EliminarReunionPruebas").get().getOrganizador().equals(primerAsistente)) {
-			flag = true;
-		}
+		//estoy logueada como Elisa y cambio el organizador por jaime
+		controller.eliminarReunionUsuario(session, sendReunion);
+		Reunion reunion = reuniondao.findById("Elisa#EliminarReunion#2020-10-01T11:00:00.000+02:00#2020-10-01T13:00:00.000+02:00#jaime#Pepa").get();
+		assertEquals((reunion.getOrganizador()), jaime);
 
-		assertTrue(flag);
+		//me logueo como jaime cambio el organizador por pepa
+		session.setAttribute("user", jaime);
+		controller.eliminarReunionUsuario(session, sendReunion);
+		reunion = reuniondao.findById("Elisa#EliminarReunion#2020-10-01T11:00:00.000+02:00#2020-10-01T13:00:00.000+02:00#jaime#Pepa").get();
+		assertEquals((reunion.getOrganizador()), pepa);
+
+		// me logueo como pepa y elimino la reunion
+		session.setAttribute("user", pepa);
+		controller.eliminarReunionUsuario(session, sendReunion);
+		assertFalse(reuniondao.findById("Elisa#EliminarReunion#2020-10-01T11:00:00.000+02:00#2020-10-01T13:00:00.000+02:00#jaime#Pepa").isPresent());
 
 	}
-	/*
-	 * @Test public void testAsistente() { //Asistente elimina reunión
-	 * session.setAttribute("user", userdao.findById("Pepa"));
-	 * reunion.put("correos", "pepa@pepa.com, elisa@elisa.com"); //aceptan
-	 * invitacion controller.eliminarReunionUsuario(session, reunion);
-	 * 
-	 * }
-	 * 
-	 * @Test public void testUltimoOrganizador() { //Último organizador elimina
-	 * reunión, la reunión se borra de la bbdd reunion.put("correos", "");
-	 * controller.eliminarReunionUsuario(session, reunion);
-	 * 
-	 * }
-	 */
 
 }
