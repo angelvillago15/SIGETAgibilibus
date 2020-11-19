@@ -93,15 +93,16 @@ $(document).ready(function() {
                     type : "post",
                     contentType: 'application/json',
                     success: function(response){
-                    	var respuesta = reponse.message
-                    	alert(""+respuesta);
+                    	var respuesta = JSON.parse(response);
+                    	alert(respuesta.message);
+                    	window.location="Login.html";
                     },
                     error : function(response) {
+                    	var respuesta = JSON.parse(response);
                         alert(response.message);
                     }
                 };
                 $.ajax(data);
              
-                limpiarCampos();
-                window.location="Login.html";
+               limpiarCampos();
         }
