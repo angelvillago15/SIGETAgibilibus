@@ -26,10 +26,9 @@ function getUsuarios() {
 
 		success: function(response) {
 			var datos = JSON.parse(response);
-			var txt = "";
-			
+
 			for (var i in datos.usuarios) {
-				txt = txt + "<tr><td><a href='javascript:mostrarUsuario(\""+ datos.usuarios[i].user +"\");'>" + datos.usuarios[i].user + "</a></td></tr>";
+				var txt = "<tr><td><a href='javascript:mostrarUsuario(\"" + datos.usuarios[i].user + "\");'>" + datos.usuarios[i].user + "</a></td></tr>";
 				buscador.row.add([txt]);
 			}
 		},
@@ -39,6 +38,8 @@ function getUsuarios() {
 	};
 	$.ajax(data);
 }
+
+
 
 function mostrarUsuario(username){
 	var msg = {
@@ -51,15 +52,16 @@ function mostrarUsuario(username){
 			type : "post",
 			contentType : 'application/json',
 			dataType : 'json',
-			
 			success : function(response) {
-				var datos = JSON.parse(response);
-				
-				$('#userDni').value(datos.dni);
-				$('#userCompletName').value(datos.nombre);
-				$('#userApellidos').value(datos.apellidos);
-				$('#userTelf').value(datos.telefono);
-				$('#userDate').value(datos.nacimiento);
+				console.log(response);
+				document.getElementById("userDni").value = response.dni;
+				document.getElementById("userCompletName").value = response.nombre;
+				document.getElementById("userApellidos").value = response.apellidos;
+				document.getElementById("userTelf").value = response.telefono;
+				document.getElementById("userName").value = response.user;
+				document.getElementById("userDate").value = response.date;
+				document.getElementById("userMail").value = response.email;
+				document.getElementById("userRol").value = response.rol;
 			},
 			error : function(response) {
 				alert(response.message);

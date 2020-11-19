@@ -13,8 +13,6 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker.css" />
 <link href='css/Register.css' rel='stylesheet' />
 </head>
 <body>
@@ -72,22 +70,17 @@
 							<div class="col-sm-3">
 								<input type="text" class="form-control" id="userCompletName">
 							</div>
+							
+						</div>
+						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">Apellidos:</label>
 							<div class="col-sm-3">
 								<input type="text" class="form-control" id="userApellidos"
 									required="true">
 							</div>
-						</div>
-						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">Teléfono:</label>
 							<div class="col-sm-3">
 								<input type="number" class="form-control" id="userTelf"
-									required="true">
-							</div>
-							<label class="col-sm-2 col-form-label">Fecha de
-								Nacimiento:</label>
-							<div class="col-sm-3">
-								<input type="date" class="form-control" id="userDate"
 									required="true">
 							</div>
 						</div>
@@ -108,33 +101,17 @@
 							</div>
 
 						</div>
-						<div class="form-group row" id=userData>
-							<label class="col-sm-2 col-form-label">Contraseña:</label>
-							<div class="col-sm-3">
-								<input type="password" id="pwd1" class="form-control">
-							</div>
-
-							<div id="alertPass">
-								<h6>
-									<strong>La contraseña debe tener los siguientes
-										requisitos:</strong>
-								</h6>
-								<ul>
-									<li id="length" class="invalid">Al menos <strong>
-											8 caracteres</strong></li>
-									<li id="capital" class="invalid">Al menos <strong>una
-											letra mayúscula (A-Z)</strong></li>
-									<li id="letter" class="invalid">Al menos <strong>una
-											letra minúscula (a-z)</strong></li>
-									<li id="number" class="invalid">Al menos <strong>un
-											número</strong></li>
-								</ul>
-							</div>
-						</div>
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">E-mail:</label>
 							<div class="col-sm-3">
 								<input type="email" class="form-control" id="userMail">
+							</div>
+
+						</div>
+						<div class="form-group row">
+							<label class="col-sm-2 col-form-label">Rol:</label>
+							<div class="col-sm-3">
+								<input type="text" class="form-control" id="userRol">
 							</div>
 
 							<div class="col-sm-5">

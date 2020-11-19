@@ -101,10 +101,10 @@ public class Controller {
 		String[] horaIni = jso.getString("horaInicio").split(":");
 		String[] horaFin = jso.getString("horaFin").split(":");
 		DateTime horaI = new DateTime(Integer.parseInt(fecha[0]), Integer.parseInt(fecha[1]),
-		        Integer.parseInt(fecha[2]), Integer.parseInt(horaIni[0]), Integer.parseInt(horaIni[1]),
+				Integer.parseInt(fecha[2]), Integer.parseInt(horaIni[0]), Integer.parseInt(horaIni[1]),
 		        DateTimeZone.forID("Europe/Madrid"));
 		DateTime horaF = new DateTime(Integer.parseInt(fecha[0]), Integer.parseInt(fecha[1]),
-		        Integer.parseInt(fecha[2]), Integer.parseInt(horaFin[0]), Integer.parseInt(horaFin[1]),
+				Integer.parseInt(fecha[2]), Integer.parseInt(horaFin[0]), Integer.parseInt(horaFin[1]),
 		        DateTimeZone.forID("Europe/Madrid"));
 		Usuario organizador = (Usuario) session.getAttribute("user");
 		String url = jso.getString("url");
