@@ -76,13 +76,13 @@ public class Controller {
 		try {
 			Usuario.get().crearUsuario(pwd1, userCompletName, userName, userApellidos, fecha, userDni, userTelf,
 			        userMail);
-			resultado.put("type", "OK");
+			resultado.put("type", "ok");
+			resultado.put(message, "Usuario registrado correctamente");
 
 		} catch (Exception e) {
 			resultado.put("type", error);
-			resultado.put("message", e.getMessage());
+			resultado.put(message, e.getMessage());
 		}
-
 		return resultado.toString();
 	}
 
