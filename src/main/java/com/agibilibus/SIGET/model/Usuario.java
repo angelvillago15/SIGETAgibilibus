@@ -126,6 +126,10 @@ public class Usuario implements Serializable {
 		this.rol = rol;
 	}
 
+	public Usuario register() {
+		return userdao.save(this);
+	}
+
 	public JSONObject toJSON() {
 		JSONObject jso = new JSONObject();
 		jso.put("nombre", this.nombre);
@@ -143,8 +147,9 @@ public class Usuario implements Serializable {
 
 	public Usuario crearUsuario(String pwd1, String nombreCompleto, String nombre, String apellidos, DateTime userDate,
 	        String userDni, int userTelf, String email) {
-		Usuario usuario = new Usuario(nombre, pwd1, nombreCompleto, apellidos, userTelf, email, userDni, userDate, "usuario");
-		return userdao.insert(usuario);
+		Usuario user;
+		user = new Usuario(nombre, pwd1, nombreCompleto, apellidos, userTelf, email, userDni, userDate, "usuario");
+		return userdao.save(user);
 	}
 
 	public Usuario modificarUsuario(Usuario u, String pwd1, String nombre, String apellidos, DateTime userDate,
