@@ -81,14 +81,16 @@ $(document).ready(function() {
                     url : "register",
                     type : "post",
                     contentType: 'application/json',
-
-                    
+                    success: function(response){
+                    	var respuesta = reponse.message
+                    	alert(""+respuesta);
+                    },
                     error : function(response) {
-                        alert(response.responseText);
+                        alert(response.message);
                     }
                 };
                 $.ajax(data);
-                alert("Usuario registrado");
+             
                 limpiarCampos();
                 window.location="Login.html";
         }

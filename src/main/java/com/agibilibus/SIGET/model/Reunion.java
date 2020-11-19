@@ -164,8 +164,8 @@ public class Reunion {
 	        Usuario organizador, String[] correosAsistentes, String url) {
 		List<Usuario> asist = new ArrayList<>();
 		String id = organizador.getUser() + "#" + titulo + "#" + horaInicio.toString() + "#" + horaFin.toString();
-		// Formato para guardar el id:
-		// Organizador#Titulo#HoraInicio#HoraFin#Asistente1#Asistente2....
+		//Formato para guardar el id:
+		//Organizador#Titulo#HoraInicio#HoraFin#Asistente1#Asistente2....
 		for (String asistente : correosAsistentes) {
 			Optional<Usuario> a = userdao.findByEmail(asistente);
 			if (a.isPresent()) {
@@ -177,18 +177,18 @@ public class Reunion {
 		if (optUser.isPresent()) {
 			Usuario or = optUser.get();
 			Reunion r=new Reunion(id, titulo, descripcion, horaInicio, horaFin, or, asist, url);
-			reuniondao.save(r);
+			try {
+				reuniondao.insert(r);
+			} catch(Exception e) {}
+			
 			for(Usuario u:asist) {
 				String idInv=r.getIdReunion()+u.getUser();
-				invitaciondao.save(new Invitacion(idInv, u, r, EstadoInvitacion.pendiente));
+				invitaciondao.insert(new Invitacion(idInv, u, r, EstadoInvitacion.pendiente));
 			}
 			
 		}
 	}
 
-	public Reunion modificarReunion(Reunion r) {
-		return null;
-	}
 
 	public void eliminarReunion(Reunion r) {
 		reuniondao.delete(r);
@@ -263,7 +263,9 @@ public class Reunion {
 		Optional<Reunion> optReunion = reuniondao.findById(idReunion);
 		if(optReunion.isPresent()) {
 			Reunion r =optReunion.get();
-			if(r.getOrganizador().getUser().equals(usuario.getUser()))
+
+			String c = usuario.getUser();
+			if(r.getOrganizador().getUser().equals(c))
 				cambiarOrganizarReunion(r);
 			else if(r.getAsistentes().contains(usuario))
 				eliminarAsistenteReunion(usuario, r);
@@ -272,5 +274,27 @@ public class Reunion {
 				i.setEstado(EstadoInvitacion.rechazado);
 		}
 	}
-
+	
+	public void modificarReunion(String id, String nombreReunion, DateTime horaI, DateTime horaF, String descripcion, String url, String[] correosAsistentes) {
+		
+		Optional <Reunion> reunion =reuniondao.findById(id);
+		reunion.get().setTitulo(nombreReunion);
+		reunion.get().setDescripcion(descripcion);
+		reunion.get().setAsistentes(asistentes(correosAsistentes,reunion.get().getAsistentes()));
+		reunion.get().setUrl(url);
+		reunion.get().setHoraInicio(horaI);
+		reunion.get().setHoraFin(horaF);
+		reuniondao.save(reunion.get());	
+	}
+	
+	public List<Usuario> asistentes(String [] correoAsistentes, List<Usuario> asistentes){
+		for (String correo : correoAsistentes) {
+			if(!correo.equals("")) {
+				Optional<Usuario> usr = userdao.findByEmail(correo);
+				if(!asistentes.contains(usr.get()))
+					asistentes.add(usr.get());
+				}
+			}
+		return asistentes;	
+	}
 }
