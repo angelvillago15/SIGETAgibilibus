@@ -81,14 +81,15 @@ $(document).ready(function() {
                     url : "register",
                     type : "post",
                     contentType: 'application/json',
-
-                    
+                    success: function(response){
+                    	alert("Usuario registrado");
+                    },
                     error : function(response) {
-                        alert(response.responseText);
+                        alert("Error al crear el usuario");
                     }
                 };
                 $.ajax(data);
-                alert("Usuario registrado");
+             
                 limpiarCampos();
                 window.location="Login.html";
         }

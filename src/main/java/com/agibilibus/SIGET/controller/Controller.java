@@ -6,7 +6,6 @@ import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
-import java.util.Optional;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -81,7 +80,7 @@ public class Controller {
 
 		} catch (Exception e) {
 			resultado.put("type", error);
-			resultado.put(message, e.getMessage());
+			resultado.put("message", e.getMessage());
 		}
 
 		return resultado.toString();

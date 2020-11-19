@@ -180,7 +180,7 @@ public class Reunion {
 			reuniondao.save(r);
 			for(Usuario u:asist) {
 				String idInv=r.getIdReunion()+u.getUser();
-				invitaciondao.save(new Invitacion(idInv, u, r, EstadoInvitacion.pendiente));
+				invitaciondao.insert(new Invitacion(idInv, u, r, EstadoInvitacion.pendiente));
 			}
 			
 		}
