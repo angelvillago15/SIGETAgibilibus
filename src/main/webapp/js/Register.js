@@ -94,15 +94,21 @@ $(document).ready(function() {
                     contentType: 'application/json',
                     success: function(response){
                     	var respuesta = JSON.parse(response);
-                    	alert(respuesta.message);
-                    	window.location="Login.html";
+                    	if(respuesta.type==="ok"){
+                    		alert(respuesta.message);
+                        	limpiarCampos();
+                        	window.location="Login.html";
+                    	}
+                    	else
+                    		alert("Error: El nombre de usuario ya existe");
                     },
                     error : function(response) {
                     	var respuesta = JSON.parse(response);
-                        alert(response.message);
+                    	alert(respuesta.message);
+                    	
                     }
                 };
                 $.ajax(data);
              
-               limpiarCampos();
+            
         }
