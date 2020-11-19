@@ -57,7 +57,7 @@ public class TestInvitacion {
 		try {
 			controller.guardarReunion(sesion, datosReunion);
 		} catch (Exception e) {
-			e.getStackTrace();
+			fail();
 		}
 
 	}
@@ -69,7 +69,7 @@ public class TestInvitacion {
 			controller.login(sesion, (Map<String, Object>) credenciales2);
 		} catch (Exception e) {
 
-			e.getStackTrace();
+			fail();
 		}
 
 		String invitaciones = controller.getInvitaciones(sesion);
@@ -130,7 +130,7 @@ public class TestInvitacion {
 			controller.responderInvitacion(sesion, datosInvitacion2);
 		} catch (Exception e) {
 
-			e.getStackTrace();
+			fail();
 		}
 
 	}
