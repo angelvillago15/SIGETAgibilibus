@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	var msg = {
-			type : "get my account"
+			type : "get my account" 
 		};
 		data = {
 			data : JSON.stringify(msg),
