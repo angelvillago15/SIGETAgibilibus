@@ -31,7 +31,7 @@ public class TestInvitacion {
 	private Map<String, Object> datosInvitacion2 = new HashMap<String, Object>();
 	private Map<String, Object> credenciales1 = new HashMap<String, Object>();
 	private Map<String, Object> credenciales2 = new HashMap<String, Object>();
-	private String nombreTest = "Prueba";
+	private String nombreTest = "TestInvitaciones";
 
 	@Test
 	public void TestCrearYEnviarInvitacion() {
@@ -46,13 +46,13 @@ public class TestInvitacion {
 
 		}
 
-		datosReunion.put("nombre", nombreTest);
+		datosReunion.put("titulo", nombreTest);
 		datosReunion.put("fecha", "2020-12-01");
 		datosReunion.put("horaInicio", "10:00:00");
 		datosReunion.put("horaFin", "12:00:00");
 		datosReunion.put("descripcion", "test");
 		datosReunion.put("url", "https://www.youtube.com/?hl=es&gl=ES");
-		datosReunion.put("correos", "jaime@jaime.com");
+		datosReunion.put("asistentes", "jaime@jaime.com");
 
 		try {
 			controller.guardarReunion(sesion, datosReunion);
