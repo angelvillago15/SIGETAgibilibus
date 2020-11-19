@@ -227,13 +227,13 @@ public class Controller {
 	 
 	 JSONObject jso = new JSONObject(datosModificados);
 	 String id = jso.getString("id");
-	 String nombreReunion = jso.getString("nombreReunion");
+	 String nombreReunion = jso.getString("nombre");
 	 String fecha = jso.getString("fecha");
 	 String horaI = jso.getString("horaInicio");
 	 String horaF = jso.getString("horaFin");
 	 String descripcion = jso.getString("descripcion");
 	 String url = jso.getString("url");
      String[] correosAsistentes = ((jso.getString("correos")).replace(" ", "")).split(",");
-	 
+	 Reunion.get().modificarReunion(id,nombreReunion,fecha,horaI,horaF,descripcion,url,correosAsistentes);
 	}
 }
