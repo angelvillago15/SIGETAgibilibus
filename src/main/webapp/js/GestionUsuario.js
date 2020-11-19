@@ -41,18 +41,32 @@ function getUsuarios() {
 
 function mostrarUsuario(username){
 	var data = {
+<<<<<<< Updated upstream
 			data : JSON.stringify(msg),
+=======
+
+>>>>>>> Stashed changes
 			url: "loadUser",
 			type: "post",
 			contentType : 'application/json',
 			dataType : 'json',
 
 			success: function(response) {
+<<<<<<< Updated upstream
 				document.getElementById("userDni").innerHTML = response.dni;
 				document.getElementById("userCompletName").value = $('#datos.nombre');
 				document.getElementById("userApellidos").value = $('#datos.apellidos');
 				document.getElementById("userTelf").value = ('#datos.telefono');
 				document.getElementById("userDate").value = $('#datos.nacimiento');
+=======
+				var datos = JSON.parse(response);
+				
+				$('#userDni').datos.dni.value;
+				$('#userCompletName').datos.nombre.value;
+				$('#userApellidos').datos.apellidos.value;
+				$('#userTelf').datos.telefono.value;
+				$('#userDate').datos.nacimiento.value;
+>>>>>>> Stashed changes
 			},
 			error: function(response) {
 				alert(response.message);
