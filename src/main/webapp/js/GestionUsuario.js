@@ -39,32 +39,6 @@ function getUsuarios() {
 	$.ajax(data);
 }
 
-function mostrarUsuario2(username) {
-	var msg = {
-		type: "userSelect",
-		userName: username
-	}
-	var data = {
-		data: JSON.stringify(msg),
-		url: "loadUser",
-		type: "post",
-		success: function(response) {
-			var datos = JSON.parse(response);
-
-			document.getElementById("userDni").innerHTML = datos.dni;
-			document.getElementById("userCompletName").innerHTML = datos.nombre;
-			document.getElementById("userApellidos").innerHTML = datos.apellidos;
-			document.getElementById("userTelf").innerHTML = datos.telefono;
-			document.getElementById("userDate").innerHTML = datos.nacimiento;
-
-		},
-		error: function(response) {
-			alert(response.message);
-		}
-	};
-	$.ajax(data);
-}
-
 function mostrarUsuario(username){
 	var msg = {
 			type : "userSelect",
@@ -76,14 +50,16 @@ function mostrarUsuario(username){
 			type : "post",
 			contentType : 'application/json',
 			dataType : 'json',
+			
 			success : function(response) {
-				document.getElementById("dni").innerHTML = response.dni;
-				document.getElementById("nombre").innerHTML = response.nombre;
-				document.getElementById("apellidos").innerHTML = response.apellidos;
-				document.getElementById("telefono").innerHTML = response.telefono;
-				document.getElementById("username").innerHTML = response.user;
-				document.getElementById("mail").innerHTML = response.email;
-				document.getElementById("rol").innerHTML = response.rol;
+				datos : JSON.parse(response);
+				
+				document.getElementById("userDni").innerHTML = datos.dni;
+				$('#userCompletName').value(datos.nombre);
+				$('#userApellidos').value(response.apellidos);
+				$('#userTelf').value(response.telefono);
+				$('#userDate').value(response.nacimiento);
+
 			},
 			error : function(response) {
 				alert(response.message);
