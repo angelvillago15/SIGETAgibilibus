@@ -270,12 +270,14 @@ public class Reunion {
 		}
 	}
 	
-	public void modificarReunion(String id, String nombreReunion, String fecha, String horaI, String horaF, String descripcion, String url, String[] correosAsistentes) {
+	public void modificarReunion(String id, String nombreReunion, DateTime horaI, DateTime horaF, String descripcion, String url, String[] correosAsistentes) {
 		Optional <Reunion> reunion =reuniondao.findById(id);
 		reunion.get().setTitulo(nombreReunion);
 		reunion.get().setDescripcion(descripcion);
 		reunion.get().setAsistentes(asistentes(correosAsistentes,reunion.get().getAsistentes()));
 		reunion.get().setUrl(url);
+		reunion.get().setHoraInicio(horaI);
+		reunion.get().setHoraFin(horaF);
 		reuniondao.save(reunion.get());
 		
 	}
