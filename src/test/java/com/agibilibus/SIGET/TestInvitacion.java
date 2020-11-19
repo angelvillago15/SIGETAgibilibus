@@ -31,7 +31,7 @@ public class TestInvitacion {
 	private Map<String, Object> datosInvitacion2 = new HashMap<String, Object>();
 	private Map<String, Object> credenciales1 = new HashMap<String, Object>();
 	private Map<String, Object> credenciales2 = new HashMap<String, Object>();
-	private String nombreTest = "Reunion";
+	private String nombreTest = "Prueba";
 
 	@Test
 	public void TestCrearYEnviarInvitacion() {
@@ -42,7 +42,7 @@ public class TestInvitacion {
 		try {
 			controller.login(sesion, credenciales1);
 		} catch (Exception e) {
-			fail();
+			e.getStackTrace();
 
 		}
 
@@ -57,7 +57,7 @@ public class TestInvitacion {
 		try {
 			controller.guardarReunion(sesion, datosReunion);
 		} catch (Exception e) {
-			fail();
+			e.getStackTrace();
 		}
 
 	}
@@ -69,7 +69,7 @@ public class TestInvitacion {
 			controller.login(sesion, (Map<String, Object>) credenciales2);
 		} catch (Exception e) {
 
-			fail();
+			e.getStackTrace();
 		}
 
 		String invitaciones = controller.getInvitaciones(sesion);
@@ -88,7 +88,7 @@ public class TestInvitacion {
 				JSONObject invitacion = (JSONObject) jsa.get(i);
 				JSONObject reunion = (JSONObject) invitacion.get("reunion");
 
-				if (reunion.get("title").equals(nombreTest)) {
+				if (reunion.get("titulo").equals(nombreTest)) {
 					flag = true;
 				}
 
@@ -105,12 +105,12 @@ public class TestInvitacion {
 	
 	@Test
 	public void TestResponderInvitacion() {
-
+		
 		try {
 			controller.login(sesion, (Map<String, Object>) credenciales1);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			fail();
+			e.getStackTrace();
 		}
 		
 		datosInvitacion1.put("idInv", 0);
@@ -123,14 +123,14 @@ public class TestInvitacion {
 			controller.responderInvitacion(sesion, datosInvitacion1);
 		} catch (Exception e) {
 
-			fail();
+			e.getStackTrace();
 		}
 		
 		try {
 			controller.responderInvitacion(sesion, datosInvitacion2);
 		} catch (Exception e) {
 
-			fail();
+			e.getStackTrace();
 		}
 
 	}
