@@ -68,6 +68,40 @@ function mostrarUsuario(username){
 		$.ajax(data);
 }
 
+function Modify(){
+    var info = {
+        type : "Modify",
+        userCompletName : userCompletName.value,
+        userName : userName.value,
+        userApellidos : userApellidos.value,
+        userDni : userDni.value,
+        userDate : userDate.value,
+        userTelf : userTelf.value,
+        userMail : userMail.value,
+        UserRol : useRol.value
+
+    };
+    var data = {
+            data : JSON.stringify(info),
+            url : "loadUser",
+            type : "post",
+            contentType: 'application/json',
+            success: function(response){
+            	var respuesta = JSON.parse(response);
+            	if(respuesta.type==="ok"){
+            		alert("Usuario modificado");
+                	limpiarCampos();
+            	}
+            },
+            error : function(response) {
+            	var respuesta = JSON.parse(response);
+            	alert(respuesta.message);
+            	
+            }
+        };
+        $.ajax(data);
+}
+
 function Delete() {
 	var data;
 	var msg = {
@@ -82,4 +116,14 @@ function Delete() {
 		dataType: 'json'
 	}
 	$.ajax(data);
+};
+
+function limpiarCampos(){ // resetear todos los campos
+    document.getElementById("userDni").value="";
+    document.getElementById("userCompletName").value="";
+    document.getElementById("userName").value="";
+    document.getElementById("userApellidos").value="";
+    document.getElementById("userTelf").value="";
+    document.getElementById("userMail").value="";
+    document.getElementById("userRol").value="";
 };

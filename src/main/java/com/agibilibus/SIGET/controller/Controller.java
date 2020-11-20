@@ -204,13 +204,13 @@ public class Controller {
 		JSONObject resultado = new JSONObject();
 
 		
-		/*try { 
-			Usuario.get().modificarUsuario(userName, userApellidos, userDni, userTelf, userMail, rol);
+		try { 
+			Usuario.get().modificarUsuario(userName, userApellidos, userDni, rol, userTelf, userMail, rol);
 			resultado.put("type", "OK");
 		}catch (Exception e) { 
 			resultado.put("type", error); 
 			resultado.put(message, e.getMessage()); 
-		}*/
+		}
 
 	}
 
