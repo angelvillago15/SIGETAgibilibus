@@ -11,10 +11,8 @@ function getRol() {
 
 		success : function(response) {
 			var datos = JSON.parse(response);
-			if (datos.rol != "admin"){
-				alert("No tiene permiso para estar aquí")
+			if (datos.rol != "admin")
 				window.location="UserCalendar.html";
-			}
 		},
 		error : function(response) {
 			alert("hay un error");
