@@ -272,5 +272,26 @@ public class Reunion {
 				i.setEstado(EstadoInvitacion.rechazado);
 		}
 	}
-
+public void modificarReunion(String id, String nombreReunion, DateTime horaI, DateTime horaF, String descripcion, String url, String[] correosAsistentes) {
+		
+		Optional <Reunion> reunion =reuniondao.findById(id);
+		reunion.get().setTitulo(nombreReunion);
+		reunion.get().setDescripcion(descripcion);
+		reunion.get().setAsistentes(asistentes(correosAsistentes,reunion.get().getAsistentes()));
+		reunion.get().setUrl(url);
+		reunion.get().setHoraInicio(horaI);
+		reunion.get().setHoraFin(horaF);
+		reuniondao.save(reunion.get());	
+	}
+	
+	public List<Usuario> asistentes(String [] correoAsistentes, List<Usuario> asistentes){
+		for (String correo : correoAsistentes) {
+			if(!correo.equals("")) {
+				Optional<Usuario> usr = userdao.findByEmail(correo);
+				if(!asistentes.contains(usr.get()))
+					asistentes.add(usr.get());
+				}
+			}
+		return asistentes;	
+	}
 }
