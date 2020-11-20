@@ -1,16 +1,11 @@
 package com.agibilibus.SIGET.controller;
 
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
-import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 import java.util.Optional;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 import javax.servlet.http.HttpSession;
 
 import org.joda.time.DateTime;
@@ -188,24 +183,21 @@ public class Controller {
 	}
 
 	@PostMapping("/modifyUser")
-	public void modificar(HttpSession session, @RequestBody Map<String, Object> credenciales)
-	        throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException,
-	        IllegalBlockSizeException, BadPaddingException, JSONException {
+	public void modificar(HttpSession session, @RequestBody Map<String, Object> credenciales) {
 		
 		JSONObject jso = new JSONObject(credenciales); 
 		String userName = jso.getString("userName"); 
+		String nombre = jso.getString("userCompletName");
 		String userApellidos =jso.getString("userApellidos"); 
 		String userDni = jso.getString("userDni"); 
 		int userTelf = Integer.parseInt(jso.getString("userTelf")); 
 		String userMail = jso.getString("userMail"); 
 		String rol = jso.getString("rol");
-		 
-
 		JSONObject resultado = new JSONObject();
 
 		
 		try { 
-			Usuario.get().modificarUsuario(userName, userApellidos, userDni, rol, userTelf, userMail, rol);
+			Usuario.get().modificarUsuario(userName, nombre, userApellidos, userDni, userTelf, userMail, rol);
 			resultado.put("type", "OK");
 		}catch (Exception e) { 
 			resultado.put("type", error); 

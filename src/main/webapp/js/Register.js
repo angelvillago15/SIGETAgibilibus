@@ -84,8 +84,8 @@ $(document).ready(function() {
                 contentType: 'application/json',
                 success: function(response){
                 	var respuesta = JSON.parse(response);
-                	if(respuesta.type==="ok"){
-                		alert(respuesta.message);
+                	if(respuesta.type==="OK"){
+                		alert("Usuario registrado correctamente");
                     	limpiarCampos();
                     	window.location="Login.html";
                 	}
