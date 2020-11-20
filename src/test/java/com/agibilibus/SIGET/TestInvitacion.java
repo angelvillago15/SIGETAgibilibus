@@ -4,9 +4,6 @@ import static org.junit.Assert.*;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.servlet.http.HttpSession;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,8 +11,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.junit4.SpringRunner;
 import com.agibilibus.SIGET.controller.Controller;
+import com.agibilibus.SIGET.dao.InvitacionDAO;
+import com.agibilibus.SIGET.dao.ReunionDAO;
+import com.agibilibus.SIGET.dao.UserDAO;
+import com.agibilibus.SIGET.model.Usuario;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -23,39 +25,37 @@ import com.agibilibus.SIGET.controller.Controller;
 public class TestInvitacion {
 
 	@Autowired
-	private HttpSession sesion;
+	private MockHttpSession session;
+	@Autowired
+	private UserDAO userdao;
+	@Autowired
+	private InvitacionDAO invitaciondao;
+	@Autowired
+	private ReunionDAO reuniondao;
 
 	private Controller controller = new Controller();
-	private Map<String, Object> datosReunion = new HashMap<String, Object>();
-	private Map<String, Object> datosInvitacion1 = new HashMap<String, Object>();
-	private Map<String, Object> datosInvitacion2 = new HashMap<String, Object>();
-	private Map<String, Object> credenciales1 = new HashMap<String, Object>();
-	private Map<String, Object> credenciales2 = new HashMap<String, Object>();
-	private String nombreTest = "TestInvitaciones";
+
+	private String nombreTest = "TestInvitaciones2";
+	
 
 	@Test
 	public void TestCrearYEnviarInvitacion() {
+		//me logueo como Elisa
+		session = new MockHttpSession();
+		Usuario u = userdao.findById("Elisa").get();
+		session.setAttribute("user", u);
 
-		credenciales1.put("userName", "Elisa");
-		credenciales1.put("pwd", "Seguridad2020");
-
+		//creo una reunion
+		Map<String, Object> reunion = new HashMap<String, Object>();
+		reunion.put("nombre", nombreTest);
+		reunion.put("descripcion", "Hola");
+		reunion.put("fecha", "2020-10-01");
+		reunion.put("horaInicio", "11:00:00");
+		reunion.put("horaFin", "13:00:00");
+		reunion.put("url", "https://www.google.com/");
+		reunion.put("correos", "jaime@jaime.com, pepa@pepa.com");
 		try {
-			controller.login(sesion, credenciales1);
-		} catch (Exception e) {
-			fail("Error al logearse en guardar reunion.");
-
-		}
-
-		datosReunion.put("titulo", nombreTest);
-		datosReunion.put("descripcion", "test");
-		datosReunion.put("fecha", "2020-12-01");
-		datosReunion.put("horaIni", "10:00:00");
-		datosReunion.put("horaFin", "12:00:00");
-		datosReunion.put("url", "https://www.youtube.com/?hl=es&gl=ES");
-		datosReunion.put("correosAsistentes", "jaime@jaime.com");
-
-		try {
-			controller.guardarReunion(sesion, datosReunion);
+			controller.guardarReunion(session, reunion);
 		} catch (Exception e) {
 			fail("Error al guardar la reunion.");
 		}
@@ -63,76 +63,90 @@ public class TestInvitacion {
 	}
 
 	@Test
-	public void TestRecibirInvitacion() {
-
-		try {
-			controller.login(sesion, (Map<String, Object>) credenciales2);
-		} catch (Exception e) {
-
-			fail("Error al logearse en recibir inviracion.");
-		}
-
-		String invitaciones = controller.getInvitaciones(sesion);
+	public void TestRecibiryAceptarInvitacion() {
+		//me logueo como jaime
+		Usuario u = userdao.findById("jaime").get();
+		session.setAttribute("user", u);
+		String idInvitacion ="";
+		
+		//cojo mis invitaciones 
+		String invitaciones = controller.getInvitaciones(session);
 		JSONObject jso = null;
-
 		try {
 			jso = new JSONObject(invitaciones);
-		} catch (JSONException e) {
-
-			fail("Error en getInvitaciones.");
-		}
+		} catch (JSONException e) { fail("Error en getInvitaciones.");}
+		
+		//busco la invitacion de Elisa a la nueva reunion
 		try {
 			JSONArray jsa = (JSONArray) jso.get("invitaciones");
 			boolean flag = false;
-			for (int i = 0; i < jsa.length(); i++) {
+			
+			for (int i = 0; i < jsa.length() && !flag; i++) {
 				JSONObject invitacion = (JSONObject) jsa.get(i);
 				JSONObject reunion = (JSONObject) invitacion.get("reunion");
 
-				if (reunion.get("titulo").equals(nombreTest)) {
+				if (reunion.get("title").equals(nombreTest)) {
+					idInvitacion = invitacion.getString("id");
 					flag = true;
-				}
-
+					}
 			}
-
 			assertTrue(flag);
+			
+			//acepto la invitacion
+			Map<String, Object> sendAceptar = new HashMap<String, Object>();
+			sendAceptar.put("idInv", idInvitacion);
+			sendAceptar.put("opcion", true);
+			controller.responderInvitacion(session, sendAceptar);
 
+			
 		} catch (JSONException e) {
-
 			fail("Error al recibir invitaciones.");
 		}
+		 catch (Exception e) {e.printStackTrace();}
 
 	}
 
 	@Test
-	public void TestResponderInvitacion() {
+	public void TestRecibiryRechazarInvitacion() {
+		//me logueo como pepa
+				Usuario u = userdao.findById("Pepa").get();
+				session.setAttribute("user", u);
+				String idInvitacion ="";
+				
+				//cojo mis invitaciones 
+				String invitaciones = controller.getInvitaciones(session);
+				JSONObject jso = null;
+				JSONObject reunion = null;
+				try {
+					jso = new JSONObject(invitaciones);
+				} catch (JSONException e) { fail("Error en getInvitaciones.");}
+				
+				//busco la invitacion de Elisa a la nueva reunion
+				try {
+					JSONArray jsa = (JSONArray) jso.get("invitaciones");
+					boolean flag = false;
+					
+					for (int i = 0; i < jsa.length() && !flag; i++) {
+						JSONObject invitacion = (JSONObject) jsa.get(i);
+						reunion = (JSONObject) invitacion.get("reunion");
 
-		try {
-			controller.login(sesion, (Map<String, Object>) credenciales1);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			fail("Error al logearse en responder invitacion.");
-		}
-
-		datosInvitacion1.put("idInv", 0);
-		datosInvitacion1.put("opcion", true);
-
-		datosInvitacion2.put("idInv", 1);
-		datosInvitacion2.put("opcion", false);
-
-		try {
-			controller.responderInvitacion(sesion, datosInvitacion1);
-		} catch (Exception e) {
-
-			fail("Error al responder invitacion.");
-		}
-
-		try {
-			controller.responderInvitacion(sesion, datosInvitacion2);
-		} catch (Exception e) {
-
-			fail("Error al responder invitacion.");
-		}
-
+						if (reunion.get("title").equals(nombreTest)) {
+							idInvitacion = invitacion.getString("id");
+							flag = true;
+							}
+					}
+					
+					assertTrue(flag);
+					
+					//rechazo la invitacion
+					Map<String, Object> send = new HashMap<String, Object>();
+					send.put("idInv", idInvitacion);
+					send.put("opcion", false);
+					controller.responderInvitacion(session, send);
+					
+				} catch (JSONException e) {fail("Error al recibir invitaciones.");}
+				 catch (Exception e) {fail("Error al responder invitacion.");}
+				
 	}
 
 }
