@@ -44,11 +44,11 @@ $(document).ready(function() {
         		alert("Las contraseñas no puede ser distintas");
         	}else if(mail1!==mail2){
         		alert("Los e-mails no pueden ser distintos");
-        	}else{
+        		}
+        	else
         		register();
-        	}
-        	
-        } 
+        		
+        }	        
     }
 
     function validarCampo(campo) { // comprobar que no hay campos vacios
