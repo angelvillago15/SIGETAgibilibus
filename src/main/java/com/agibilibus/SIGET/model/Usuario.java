@@ -152,13 +152,15 @@ public class Usuario implements Serializable {
 		return userdao.save(user);
 	}
 
-	public Usuario modificarUsuario(Usuario u, String pwd1, String nombre, String apellidos, DateTime userDate,
-	        String userDni, int userTelf, String email, String rol) {
-		/*
-		 * u.setApellidos(apellidos); u.setPassword(pwd1); u.setDate(userDate);
-		 * u.setDNI(userDni); u.setEmail(email); u.setNombre(nombre);
-		 * u.setPassword(email); u.setTelefono(userTelf); u.setRol(rol);
-		 */
+	public Usuario modificarUsuario(Usuario u, String nombre, String apellidos, String userDni, int userTelf, String email, String rol) {
+		
+		 u.setApellidos(apellidos);
+		 u.setDNI(userDni);
+		 u.setEmail(email);
+		 u.setNombre(nombre);
+		 u.setPassword(email);
+		 u.setTelefono(userTelf);
+		 u.setRol(rol);
 
 		return userdao.save(u);
 	}
@@ -223,7 +225,6 @@ public class Usuario implements Serializable {
 	}
 	
 	public JSONObject loadUser(String userName) {
-		System.out.println(userName);
 		Optional<Usuario> optUser = userdao.findById(userName);
 		if (optUser.isPresent()) {
 			return optUser.get().toJSON();

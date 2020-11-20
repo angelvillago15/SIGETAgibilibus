@@ -191,28 +191,26 @@ public class Controller {
 	public void modificar(HttpSession session, @RequestBody Map<String, Object> credenciales)
 	        throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException,
 	        IllegalBlockSizeException, BadPaddingException, JSONException {
-		/*
-		 * JSONObject jso = new JSONObject(credenciales); String userName =
-		 * jso.getString("userName"); String userApellidos =
-		 * jso.getString("userApellidos"); String userDate = jso.getString("userDate");
-		 * String userDni = jso.getString("userDni"); int userTelf =
-		 * Integer.parseInt(jso.getString("userTelf")); String userMail =
-		 * jso.getString("userMail"); String pwd1 = jso.getString("pwd1"); String rol =
-		 * jso.getString("rol");
-		 * 
-		 * DateTime fecha = DateTime.parse(userDate);
-		 */
+		
+		JSONObject jso = new JSONObject(credenciales); 
+		String userName = jso.getString("userName"); 
+		String userApellidos =jso.getString("userApellidos"); 
+		String userDni = jso.getString("userDni"); 
+		int userTelf = Integer.parseInt(jso.getString("userTelf")); 
+		String userMail = jso.getString("userMail"); 
+		String rol = jso.getString("rol");
+		 
 
 		JSONObject resultado = new JSONObject();
 
-		/*
-		 * try { Usuario.get().modificarUsuario(u, pwd1, userName, userApellidos, fecha,
-		 * userDni, userTelf, userMail, rol); resultado.put("type", "OK"); >>>>>>>
-		 * Develop
-		 * 
-		 * } catch (Exception e) { resultado.put("type", error); resultado.put(message,
-		 * e.getMessage()); }
-		 */
+		
+		/*try { 
+			Usuario.get().modificarUsuario(userName, userApellidos, userDni, userTelf, userMail, rol);
+			resultado.put("type", "OK");
+		}catch (Exception e) { 
+			resultado.put("type", error); 
+			resultado.put(message, e.getMessage()); 
+		}*/
 
 	}
 
