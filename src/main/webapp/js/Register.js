@@ -75,42 +75,41 @@ $(document).ready(function() {
         document.getElementById("pwd2").value="";
         document.getElementById("mail2").value="";
     };
+    
     function register(){
-            var info = {
-                type : "Register",
-                userCompletName : userCompletName.value,
-                userName : userName.value,
-                userApellidos : userApellidos.value,
-                userDni : userDni.value,
-                userDate : userDate.value,
-                userTelf : userTelf.value,
-                userMail : userMail.value,
-                pwd1 : pwd1.value,
-                pwd2 : pwd2.value
 
+        var info = {
+            type : "Register",
+            userCompletName : userCompletName.value,
+            userName : userName.value,
+            userApellidos : userApellidos.value,
+            userDni : userDni.value,
+            userDate : userDate.value,
+            userTelf : userTelf.value,
+            userMail : userMail.value,
+            pwd1 : pwd1.value,
+            pwd2 : pwd2.value
+        };
+        var data = {
+                data : JSON.stringify(info),
+                url : "register",
+                type : "post",
+                contentType: 'application/json',
+                success: function(response){
+                	var respuesta = JSON.parse(response);
+                	if(respuesta.type==="OK"){
+                		alert("Usuario registrado correctamente");
+                    	limpiarCampos();
+                    	window.location="Login.html";
+                	}
+                	else
+                		alert("Error: El nombre de usuario ya existe");
+                },
+                error : function(response) {
+                	var respuesta = JSON.parse(response);
+                	alert(respuesta.message);
+                	
+                }
             };
-            var data = {
-                    data : JSON.stringify(info),
-                    url : "register",
-                    type : "post",
-                    contentType: 'application/json',
-                    success: function(response){
-                    	var respuesta = JSON.parse(response);
-                    	if(respuesta.type==="ok"){
-                    		alert(respuesta.message);
-                        	limpiarCampos();
-                        	window.location="Login.html";
-                    	}
-                    	else
-                    		alert("Error: El nombre de usuario ya existe");
-                    },
-                    error : function(response) {
-                    	var respuesta = JSON.parse(response);
-                    	alert(respuesta.message);
-                    	
-                    }
-                };
-                $.ajax(data);
-             
-            
-        }
+            $.ajax(data);
+    }

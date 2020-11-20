@@ -70,7 +70,6 @@ public class Sesion {
 
 	public Usuario logout(HttpSession httpSession, String userName) {
 		return user;
-
 	}
 
 	private static class SesionHolder {

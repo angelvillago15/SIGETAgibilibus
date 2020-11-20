@@ -126,6 +126,10 @@ public class Usuario implements Serializable {
 		this.rol = rol;
 	}
 
+	public Usuario register() {
+		return userdao.save(this);
+	}
+
 	public JSONObject toJSON() {
 		JSONObject jso = new JSONObject();
 		jso.put("nombre", this.nombre);
@@ -143,38 +147,42 @@ public class Usuario implements Serializable {
 
 	public Usuario crearUsuario(String pwd1, String nombreCompleto, String nombre, String apellidos, DateTime userDate,
 	        String userDni, int userTelf, String email) {
-		Usuario usuario = new Usuario(nombre, pwd1, nombreCompleto, apellidos, userTelf, email, userDni, userDate, "usuario");
-		return userdao.insert(usuario);
+		Usuario user;
+		user = new Usuario(nombre, pwd1, nombreCompleto, apellidos, userTelf, email, userDni, userDate, "usuario");
+		return userdao.save(user);
 	}
 
-	public Usuario modificarUsuario(Usuario u, String pwd1, String nombre, String apellidos, DateTime userDate,
-	        String userDni, int userTelf, String email, String rol) {
-		/*u.setApellidos(apellidos);
-		u.setPassword(pwd1);
-		u.setDate(userDate);
-		u.setDNI(userDni);
-		u.setEmail(email);
-		u.setNombre(nombre);
-		u.setPassword(email);
-		u.setTelefono(userTelf);
-		u.setRol(rol);*/
-		
-		return userdao.save(u);
+	public Usuario modificarUsuario(String username, String nombre, String apellidos, String userDni, int userTelf, String email, String rol) {
+		Optional <Usuario> u =userdao.findById(username);
+		Usuario user = null;
+		if(u.isPresent()) {
+			user = u.get();
+			user.setUser(username);
+			user.setApellidos(apellidos);
+			user.setDNI(userDni);
+			user.setEmail(email);
+			user.setNombre(nombre);
+			user.setEmail(email);
+			user.setTelefono(userTelf);
+			user.setRol(rol);
+		}
+
+		return userdao.save(user);
 	}
 
 	public void eliminarUsuario(String idUsuario) {
 		Optional<Usuario> opt = userdao.findById(idUsuario);
-		
+
 		if (opt.isPresent()) {
 			Usuario u = opt.get();
 			List<Reunion> reuniones = Reunion.get().getListReuniones(u);
-			if(!reuniones.isEmpty()) {
+			if (!reuniones.isEmpty()) {
 				for (Reunion r : reuniones) {
-					if (r.getOrganizador().getUser().equals(u.getUser())) 
+					if (r.getOrganizador().getUser().equals(u.getUser()))
 						Reunion.get().cambiarOrganizarReunion(r);
 					else if (r.getAsistentes().contains(u))
 						Reunion.get().eliminarAsistenteReunion(u, r);
-				} 
+				}
 				Invitacion.get().eliminarTodasInvitacionesUsuario(u);
 			}
 			userdao.deleteById(idUsuario);
@@ -182,14 +190,14 @@ public class Usuario implements Serializable {
 	}
 
 	public JSONArray getUsuarios() {
-		List<Usuario> usuarios= userdao.findAll();
+		List<Usuario> usuarios = userdao.findAll();
 		JSONArray jsaUsuarios = new JSONArray();
 		for (Usuario usr : usuarios) {
 			jsaUsuarios.put(usr.toJSON());
 		}
 		return jsaUsuarios;
 	}
-	
+
 	private static class UsuarioHolder {
 		static Usuario singleton = new Usuario();
 	}
@@ -198,25 +206,34 @@ public class Usuario implements Serializable {
 	public static Usuario get() {
 		return UsuarioHolder.singleton;
 	}
+
 	public boolean equals(Object obj) {
-		if(obj == null)
+		if (obj == null)
 			return false;
 		if (this.getClass() != obj.getClass())
-		    return false;
+			return false;
 
-		return ((Usuario)obj).getNombre().equals(this.nombre);
+		return ((Usuario) obj).getNombre().equals(this.nombre);
 	}
+
 	@Override
-	  public int hashCode() {
-	    return super.hashCode();
-	  }
+	public int hashCode() {
+		return super.hashCode();
+	}
 
 	public JSONObject getMyAccount(Usuario usuario) {
 		Optional<Usuario> optUser = userdao.findById(usuario.getUser());
 		if (optUser.isPresent()) {
 			return optUser.get().toJSON();
-		}
-		else
+		} else
+			return null;
+	}
+	
+	public JSONObject loadUser(String userName) {
+		Optional<Usuario> optUser = userdao.findById(userName);
+		if (optUser.isPresent()) {
+			return optUser.get().toJSON();
+		} else
 			return null;
 	}
 

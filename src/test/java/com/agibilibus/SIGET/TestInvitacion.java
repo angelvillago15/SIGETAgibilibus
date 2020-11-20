@@ -34,9 +34,9 @@ public class TestInvitacion {
 	private ReunionDAO reuniondao;
 
 	private Controller controller = new Controller();
-
 	private String nombreTest = "TestInvitaciones2";
 	
+
 
 	@Test
 	public void TestCrearYEnviarInvitacion() {
@@ -55,9 +55,11 @@ public class TestInvitacion {
 		reunion.put("url", "https://www.google.com/");
 		reunion.put("correos", "jaime@jaime.com, pepa@pepa.com");
 		try {
+
 			controller.guardarReunion(session, reunion);
+
 		} catch (Exception e) {
-			fail("Error al guardar la reunion.");
+			fail();
 		}
 
 	}
@@ -71,12 +73,15 @@ public class TestInvitacion {
 		
 		//cojo mis invitaciones 
 		String invitaciones = controller.getInvitaciones(session);
+
 		JSONObject jso = null;
 		try {
 			jso = new JSONObject(invitaciones);
+
 		} catch (JSONException e) { fail("Error en getInvitaciones.");}
 		
 		//busco la invitacion de Elisa a la nueva reunion
+
 		try {
 			JSONArray jsa = (JSONArray) jso.get("invitaciones");
 			boolean flag = false;
@@ -87,6 +92,7 @@ public class TestInvitacion {
 
 				if (reunion.get("title").equals(nombreTest)) {
 					idInvitacion = invitacion.getString("id");
+
 					flag = true;
 					}
 			}
@@ -101,11 +107,12 @@ public class TestInvitacion {
 			
 		} catch (JSONException e) {
 			fail("Error al recibir invitaciones.");
+
 		}
 		 catch (Exception e) {e.printStackTrace();}
 
 	}
-
+	
 	@Test
 	public void TestRecibiryRechazarInvitacion() {
 		//me logueo como pepa
@@ -146,7 +153,6 @@ public class TestInvitacion {
 					
 				} catch (JSONException e) {fail("Error al recibir invitaciones.");}
 				 catch (Exception e) {fail("Error al responder invitacion.");}
-				
 	}
 
 }
