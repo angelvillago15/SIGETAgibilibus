@@ -53,13 +53,11 @@ function mostrarUsuario(username){
 			contentType : 'application/json',
 			dataType : 'json',
 			success : function(response) {
-				console.log(response);
 				document.getElementById("userDni").value = response.dni;
 				document.getElementById("userCompletName").value = response.nombre;
 				document.getElementById("userApellidos").value = response.apellidos;
 				document.getElementById("userTelf").value = response.telefono;
 				document.getElementById("userName").value = response.user;
-				document.getElementById("userDate").value = response.date;
 				document.getElementById("userMail").value = response.email;
 				document.getElementById("userRol").value = response.rol;
 			},
