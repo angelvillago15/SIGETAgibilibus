@@ -45,7 +45,9 @@ $(document).ready(function() {
         	}else if(mail1!==mail2){
         		alert("Los e-mails no pueden ser distintos");
         		}
-        	else
+        	else if(userTelf.value.length>9)
+        		alert("El numero de telefono es demasiado largo");
+        	else 
         		register();
         		
         }	        
