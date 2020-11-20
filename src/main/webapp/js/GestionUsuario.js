@@ -75,23 +75,18 @@ function Modify(){
         userName : userName.value,
         userApellidos : userApellidos.value,
         userDni : userDni.value,
-        userDate : userDate.value,
         userTelf : userTelf.value,
         userMail : userMail.value,
-        UserRol : useRol.value
-
+        rol : userRol.value
     };
     var data = {
             data : JSON.stringify(info),
-            url : "loadUser",
+            url : "modifyUser",
             type : "post",
             contentType: 'application/json',
             success: function(response){
-            	var respuesta = JSON.parse(response);
-            	if(respuesta.type==="ok"){
-            		alert("Usuario modificado");
-                	limpiarCampos();
-            	}
+        		alert("Usuario modificado");
+            	limpiarCampos();
             },
             error : function(response) {
             	var respuesta = JSON.parse(response);
@@ -103,19 +98,26 @@ function Modify(){
 }
 
 function Delete() {
-	var data;
-	var msg = {
-		type: "eliminar Usuario",
-		id: document.getElementById("userName").value
-	};
-	data = {
-		data: JSON.stringify(msg),
-		url: "eliminarUsuario",
-		type: "post",
-		contentType: 'application/json',
-		dataType: 'json'
+	
+	var opcion = confirm("¿Estás seguro que quieres eliminar este usuario?");
+	if(opcion == true){
+		var data;
+		var msg = {
+			type: "eliminar Usuario",
+			id: document.getElementById("userName").value
+		};
+		data = {
+			data: JSON.stringify(msg),
+			url: "eliminarUsuario",
+			type: "post",
+			contentType: 'application/json',
+			dataType: 'json'
+		}
+		$.ajax(data);
+		alert("Usuario eliminado correctamente");
+    	limpiarCampos();
 	}
-	$.ajax(data);
+	
 };
 
 function limpiarCampos(){ // resetear todos los campos
