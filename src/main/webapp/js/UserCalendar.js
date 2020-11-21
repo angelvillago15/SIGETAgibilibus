@@ -221,3 +221,21 @@ $(document).ready(function(e) {
 	$found.find('.panel-body').hide();
 	$found.removeClass($classy);
 });
+
+function cerrarSesion() {
+	alert("has pinchado aqui");
+    $.ajax({
+        type: "POST",
+        url: "ValidarSession1.aspx/CerrarSesion",
+        data: {},
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        async: true,
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            alert(textStatus + ": " + XMLHttpRequest.responseText);
+        }
+    });
+    
+}
+} 
+	
