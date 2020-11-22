@@ -51,7 +51,6 @@ public class Controller {
 			Sesion.get().login(session, userName, pwd);
 		} catch (Exception e) {
 			throw new Exception(e);
-
 		}
 	}
 

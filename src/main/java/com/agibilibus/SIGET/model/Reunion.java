@@ -159,13 +159,14 @@ public class Reunion {
 		jsoEvento.put("end", this.horaFin);
 		return jsoEvento;
 	}
-
-	public void guardarReunion(String titulo, String descripcion, DateTime horaInicio, DateTime horaFin,
+	
+	// Formato para guardar el id:
+	// Organizador#Titulo#HoraInicio#HoraFin#Asistente1#Asistente2....
+	public Reunion guardarReunion(String titulo, String descripcion, DateTime horaInicio, DateTime horaFin,
 	        Usuario organizador, String[] correosAsistentes, String url) {
 		List<Usuario> asist = new ArrayList<>();
-		String id = organizador.getUser() + "#" + titulo + "#" + horaInicio.toString() + "#" + horaFin.toString();
-		// Formato para guardar el id:
-		// Organizador#Titulo#HoraInicio#HoraFin#Asistente1#Asistente2....
+		Reunion r = null;
+		String id = organizador.getUser() + "#" + titulo + "#" + horaInicio.toString() + "#" + horaFin.toString();		
 		for (String asistente : correosAsistentes) {
 			Optional<Usuario> a = userdao.findByEmail(asistente);
 			if (a.isPresent()) {
@@ -176,14 +177,14 @@ public class Reunion {
 		Optional<Usuario> optUser = userdao.findById(organizador.getUser());
 		if (optUser.isPresent()) {
 			Usuario or = optUser.get();
-			Reunion r=new Reunion(id, titulo, descripcion, horaInicio, horaFin, or, asist, url);
-			reuniondao.save(r);
+			r=new Reunion(id, titulo, descripcion, horaInicio, horaFin, or, asist, url);
 			for(Usuario u:asist) {
 				String idInv=r.getIdReunion()+u.getUser();
 				invitaciondao.save(new Invitacion(idInv, u, r, EstadoInvitacion.pendiente));
 			}
 			
 		}
+		return reuniondao.insert(r);
 	}
 
 	public Reunion modificarReunion(Reunion r) {
@@ -191,7 +192,8 @@ public class Reunion {
 	}
 
 	public void eliminarReunion(Reunion r) {
-		reuniondao.delete(r);
+		System.out.println("reunion:"+r.getIdReunion()); 
+		reuniondao.deleteById(r.getIdReunion());
 	}
 
 	public JSONArray getReuniones(Usuario u) {
