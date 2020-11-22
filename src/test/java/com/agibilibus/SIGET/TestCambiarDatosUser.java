@@ -39,6 +39,7 @@ class TestCambiarDatosUser {
 			credenciales.put("userTelf", 666);
 			credenciales.put("userMail", "Prueba");
 			credenciales.put("pwd1", "contraseña");
+			credenciales.put("rol", "usuario");
 			controller.modificar(sesion, credenciales);
 		}catch (Exception e) {
 			fail("Se ha lanzado una excepcion inesperada: " + e);
