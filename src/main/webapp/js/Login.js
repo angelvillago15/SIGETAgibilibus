@@ -20,6 +20,7 @@ $("#login").click(function(){
 			type : "post",
 			contentType : 'application/json',
 			success : function() {
+				sessionStorage.setItem("id", $("#username").val());
 				window.location.href = "UserCalendar.html";
 			},
 			error : function(response) {
