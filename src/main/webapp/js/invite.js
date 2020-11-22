@@ -30,6 +30,7 @@ function validarCampo(campo) { // comprobar que no hay campos vacios
 };
 
 function modificar() {
+	if (validarCampo("fecha") && validarCampo("horaFin") && validarCampo("horaInicio") && validarCampo("nombreReunion")) {
 
 	var msg = {
 		type : "modificar Reunion",
@@ -49,10 +50,11 @@ function modificar() {
 		contentType : 'application/json',
 		dataType : 'json'
 	}
-
+	alert('Se ha modificado la reunión');
+}
 	$.ajax(data);
 	document.getElementById("correos").value = "";
-	alert('Se ha modificado la reunión');
+	
 };
 
 
