@@ -246,4 +246,11 @@ public class Controller {
 
 
 	}
+	
+	@PostMapping("/cerrarSesion")
+	public void cerrarSesion(HttpSession session) throws Exception{
+		System.out.println("CONTROLLER");
+		//Sesion.get().logout(session, );
+		session.invalidate();
+	}
 }

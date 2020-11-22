@@ -68,8 +68,9 @@ public class Sesion {
 		}
 	}
 
-	public Usuario logout(HttpSession httpSession, String userName) {
-		return user;
+	public void logout(HttpSession httpSession, String userName) {
+		System.out.println("java");
+		httpSession.removeAttribute(userName);
 	}
 
 	private static class SesionHolder {

@@ -223,19 +223,18 @@ $(document).ready(function(e) {
 });
 
 function cerrarSesion() {
-	alert("has pinchado aqui");
-    $.ajax({
-        type: "POST",
-        url: "ValidarSession1.aspx/CerrarSesion",
-        data: {},
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        async: true,
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
-            alert(textStatus + ": " + XMLHttpRequest.responseText);
-        }
-    });
-    
+	var data = {
+			url : "cerrarSesion",
+			type : "post",
+			contentType : 'application/json',
+			success : function() {
+				window.location.href = "Login.html";
+			},
+			//solo para ver si hace la funcion, cuando esté bien quitar esta parte
+			error : function(response) {
+				alert(response.message);
+			}
+		};
+		$.ajax(data);
 }
-} 
 	
