@@ -107,7 +107,7 @@ public class Invitacion {
 		List<Invitacion> invitaciones = invitaciondao.findAll();
 
 		for (Invitacion inv : invitaciones) {
-			if ((inv.getReunion().getAsistentes().contains(user)) && inv.getEstado() == EstadoInvitacion.pendiente) {
+			if ((inv.getReunion().getAsistentes().contains(user)) && inv.getEstado() == EstadoInvitacion.PENDIENTE) {
 				jsaInvitaciones.put(inv.toJSON());
 			}
 		}
@@ -125,11 +125,11 @@ public class Invitacion {
 				Reunion reunion = optReunion.get();
 
 				if (opcion) {
-					inv.setEstado(EstadoInvitacion.aceptado);
+					inv.setEstado(EstadoInvitacion.ACEPTADO);
 					reunion.getAsistentes().add(user);
 					reuniondao.save(reunion);
 				} else {
-					inv.setEstado(EstadoInvitacion.rechazado);
+					inv.setEstado(EstadoInvitacion.RECHAZADO);
 				}
 				invitaciondao.save(inv);
 				
@@ -153,7 +153,7 @@ public class Invitacion {
 					if (!r.getAsistentes().contains(usuario)) {
 						asist.add(usuario);
 						idInv = r.getIdReunion() + usuario.getUser();
-						invitaciondao.save(new Invitacion(idInv, usuario, r, EstadoInvitacion.pendiente));
+						invitaciondao.save(new Invitacion(idInv, usuario, r, EstadoInvitacion.PENDIENTE));
 					}
 				}
 			}
