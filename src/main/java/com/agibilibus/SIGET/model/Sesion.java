@@ -68,11 +68,6 @@ public class Sesion {
 		}
 	}
 
-	public void logout(HttpSession httpSession, String userName) {
-		System.out.println("java");
-		httpSession.removeAttribute(userName);
-	}
-
 	private static class SesionHolder {
 		static Sesion singleton = new Sesion();
 	}

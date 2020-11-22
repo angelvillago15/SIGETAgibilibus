@@ -230,7 +230,6 @@ function cerrarSesion() {
 			success : function() {
 				window.location.href = "Login.html";
 			},
-			//solo para ver si hace la funcion, cuando esté bien quitar esta parte
 			error : function(response) {
 				alert(response.message);
 			}
