@@ -181,15 +181,11 @@ public class Reunion {
 			for(Usuario u:asist) {
 				String idInv=r.getIdReunion()+u.getUser();
 				invitaciondao.save(new Invitacion(idInv, u, r, EstadoInvitacion.PENDIENTE));
-
 			}
-
 		}
 		return reuniondao.insert(r);
 	}
 
-	public Reunion modificarReunion(Reunion r) {
-		return null;
 	}
 
 	public void eliminarReunion(Reunion r) {
