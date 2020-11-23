@@ -171,10 +171,12 @@ public class Reunion {
 		if (optUser.isPresent()) {
 			Usuario or = optUser.get();
 			r=new Reunion(id, titulo, descripcion, horaInicio, horaFin, or, asist, url);
-			for(String asistente:correosAsistentes) {
+			for(String asistente : correosAsistentes) {
 				Optional<Usuario> a = userdao.findByEmail(asistente);
-				if(a.isPresent())
+				if(a.isPresent()) {
+					id += "#"+a.get().getUser();
 					invitaciondao.save(new Invitacion(id, a.get(), r, EstadoInvitacion.PENDIENTE));
+				}
 			}
 		}
 		return reuniondao.insert(r);
