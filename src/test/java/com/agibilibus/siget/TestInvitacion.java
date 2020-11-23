@@ -3,10 +3,9 @@ package com.agibilibus.siget;
 import static org.junit.Assert.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.junit.AfterClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,10 @@ import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.agibilibus.siget.controller.Controller;
+import com.agibilibus.siget.dao.InvitacionDAO;
 import com.agibilibus.siget.dao.UserDAO;
+import com.agibilibus.siget.model.Invitacion;
+import com.agibilibus.siget.model.Reunion;
 import com.agibilibus.siget.model.Usuario;
 
 @RunWith(SpringRunner.class)
@@ -27,9 +29,22 @@ public class TestInvitacion {
 	private MockHttpSession session;
 	@Autowired
 	private UserDAO userdao;
+	@Autowired
+	private InvitacionDAO invitaciondao;
 
 	private Controller controller = new Controller();
 	private String nombreTest = "TestInvitaciones2";
+	private static Reunion reunion;
+	private static Invitacion invitacionJaime;
+	private static Invitacion invitacionPepe;
+	
+	@AfterClass
+	public static void liberaRecursos() {
+		Reunion.get().eliminarReunion(reunion);
+		Invitacion.get().eliminarInvitacion(invitacionJaime);
+		Invitacion.get().eliminarInvitacion(invitacionPepe);
+	}
+	
 
 	@Test
 	public void TestCrearYEnviarInvitacion() {
@@ -39,22 +54,20 @@ public class TestInvitacion {
 		session.setAttribute("user", u);
 
 		// creo una reunion
-		Map<String, Object> reunion = new HashMap<String, Object>();
-		reunion.put("nombre", nombreTest);
-		reunion.put("descripcion", "Hola");
-		reunion.put("fecha", "2020-10-01");
-		reunion.put("horaInicio", "11:00:00");
-		reunion.put("horaFin", "13:00:00");
-		reunion.put("url", "https://www.google.com/");
-		reunion.put("correos", "jaime@jaime.com, pepe");
+		Map<String, Object> datosReunion = new HashMap<String, Object>();
+		datosReunion.put("nombre", nombreTest);
+		datosReunion.put("descripcion", "Hola");
+		datosReunion.put("fecha", "2020-10-01");
+		datosReunion.put("horaInicio", "11:00:00");
+		datosReunion.put("horaFin", "13:00:00");
+		datosReunion.put("url", "https://www.google.com/");
+		datosReunion.put("correos", "jaime@jaime.com, pepe");
 		try {
-
-			controller.guardarReunion(session, reunion);
-
+			reunion = controller.guardarReunion(session, datosReunion);
+			
 		} catch (Exception e) {
-			fail();
+			fail(""+e);
 		}
-
 	}
 
 	@Test
@@ -62,50 +75,29 @@ public class TestInvitacion {
 		// me logueo como jaime
 		Usuario u = userdao.findById("jaime").get();
 		session.setAttribute("user", u);
-		String idInvitacion = "";
 
 		// cojo mis invitaciones
-		String invitaciones = controller.getInvitaciones(session);
-
-		JSONObject jso = null;
-		try {
-			jso = new JSONObject(invitaciones);
-
-		} catch (JSONException e) {
-			fail("Error en getInvitaciones.");
-		}
-
-		// busco la invitacion de Elisa a la nueva reunion
-
-		try {
-			JSONArray jsa = (JSONArray) jso.get("invitaciones");
-			boolean flag = false;
-
-			for (int i = 0; i < jsa.length() && !flag; i++) {
-				JSONObject invitacion = (JSONObject) jsa.get(i);
-				JSONObject usuario = (JSONObject) invitacion.get("usuario");
-
-				if (usuario.get("user").equals(u)) {
-					idInvitacion = invitacion.getString("id");
-
-					flag = true;
-				}
+		
+		List<Invitacion> listaInvitaciones = invitaciondao.findAll();
+		boolean flag = false;
+		for (Invitacion i : listaInvitaciones) {
+			if (i.getUsuario().getUser().equals("jaime")) {	
+				invitacionJaime = i;
+				
+				flag = true;
 			}
-			assertTrue(flag);
-
-			// acepto la invitacion
-			Map<String, Object> sendAceptar = new HashMap<String, Object>();
-			sendAceptar.put("idInv", idInvitacion);
-			sendAceptar.put("opcion", true);
-			controller.responderInvitacion(session, sendAceptar);
-
-		} catch (JSONException e) {
-			fail("Error al recibir invitaciones.");
-
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
-
+		assertTrue(flag);
+		
+		// acepto la invitacion
+		Map<String, Object> sendAceptar = new HashMap<String, Object>();
+		sendAceptar.put("idInv", invitacionJaime.getIdInvitacion());
+		sendAceptar.put("opcion", true);
+		try {
+			controller.responderInvitacion(session, sendAceptar);
+		} catch (Exception e) {
+			fail("Error al responder la invitacion"+e);
+		}
 	}
 
 	@Test
@@ -113,45 +105,24 @@ public class TestInvitacion {
 		// me logueo como pepe
 		Usuario u = userdao.findById("pepe").get();
 		session.setAttribute("user", u);
-		String idInvitacion = "";
-
 		// cojo mis invitaciones
-		String invitaciones = controller.getInvitaciones(session);
-		JSONObject jso = null;
-		JSONObject reunion = null;
-		try {
-			jso = new JSONObject(invitaciones);
-		} catch (JSONException e) {
-			fail("Error en getInvitaciones.");
-		}
-
-		// busco la invitacion de Elisa a la nueva reunion
-		try {
-			JSONArray jsa = (JSONArray) jso.get("invitaciones");
-			boolean flag = false;
-
-			for (int i = 0; i < jsa.length() && !flag; i++) {
-				JSONObject invitacion = (JSONObject) jsa.get(i);
-				reunion = (JSONObject) invitacion.get("reunion");
-
-				if (reunion.get("title").equals(nombreTest)) {
-					idInvitacion = invitacion.getString("id");
-					flag = true;
-				}
+		List<Invitacion> listaInvitaciones = invitaciondao.findAll();
+		boolean flag = false;
+		for (Invitacion i : listaInvitaciones) {
+			if (i.getUsuario().getUser().equals("pepe")) {	
+				invitacionPepe = i;
+				flag = true;
 			}
-
-			assertTrue(flag);
-
-			// rechazo la invitacion
-			Map<String, Object> send = new HashMap<String, Object>();
-			send.put("idInv", idInvitacion);
-			send.put("opcion", false);
+		}
+		assertTrue(flag);
+		// rechazo la invitacion
+		Map<String, Object> send = new HashMap<String, Object>();
+		send.put("idInv", invitacionPepe.getIdInvitacion());
+		send.put("opcion", false);
+		try {
 			controller.responderInvitacion(session, send);
-
-		} catch (JSONException e) {
-			fail("Error al recibir invitaciones.");
 		} catch (Exception e) {
-			fail("Error al responder invitacion.");
+			e.printStackTrace();
 		}
 	}
 

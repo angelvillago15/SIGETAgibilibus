@@ -145,29 +145,28 @@ public class Usuario implements Serializable {
 
 	}
 
-	public Usuario crearUsuario(String pwd1, String nombreCompleto, String nombre, String apellidos, DateTime userDate,
+	public Usuario crearUsuario(String pwd1, String nombreCompleto, String nombreUsuario, String apellidos, DateTime userDate,
 	        String userDni, int userTelf, String email) {
-		Usuario user;
-		user = new Usuario(nombre, pwd1, nombreCompleto, apellidos, userTelf, email, userDni, userDate, "usuario");
-		return userdao.save(user);
+		Usuario usuario = new Usuario(nombreUsuario, pwd1, nombreCompleto, apellidos, userTelf, email, userDni, userDate, "usuario");
+		return userdao.insert(usuario);
 	}
 
 	public Usuario modificarUsuario(String username, String nombre, String apellidos, String userDni, int userTelf, String email, String rol) {
 		Optional <Usuario> u =userdao.findById(username);
-		Usuario user = null;
+		Usuario usuario = null;
 		if(u.isPresent()) {
-			user = u.get();
-			user.setUser(username);
-			user.setApellidos(apellidos);
-			user.setDNI(userDni);
-			user.setEmail(email);
-			user.setNombre(nombre);
-			user.setEmail(email);
-			user.setTelefono(userTelf);
-			user.setRol(rol);
+			usuario = u.get();
+			usuario.setUser(username);
+			usuario.setApellidos(apellidos);
+			usuario.setDNI(userDni);
+			usuario.setEmail(email);
+			usuario.setNombre(nombre);
+			usuario.setEmail(email);
+			usuario.setTelefono(userTelf);
+			usuario.setRol(rol);
 		}
 
-		return userdao.save(user);
+		return userdao.save(usuario);
 	}
 
 	public void eliminarUsuario(String idUsuario) {
