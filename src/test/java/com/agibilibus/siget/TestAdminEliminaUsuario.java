@@ -1,4 +1,4 @@
-package com.agibilibus.SIGET;
+package com.agibilibus.siget;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.List;
@@ -16,13 +16,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.agibilibus.SIGET.controller.Controller;
-import com.agibilibus.SIGET.dao.InvitacionDAO;
-import com.agibilibus.SIGET.dao.ReunionDAO;
-import com.agibilibus.SIGET.dao.UserDAO;
-import com.agibilibus.SIGET.model.Invitacion;
-import com.agibilibus.SIGET.model.Reunion;
-import com.agibilibus.SIGET.model.Usuario;
+import com.agibilibus.siget.dao.InvitacionDAO;
+import com.agibilibus.siget.dao.ReunionDAO;
+import com.agibilibus.siget.dao.UserDAO;
+import com.agibilibus.siget.model.Invitacion;
+import com.agibilibus.siget.model.Reunion;
+import com.agibilibus.siget.model.Usuario;
+import com.agibilibus.siget.controller.Controller;
 
 
 @RunWith(SpringRunner.class)
