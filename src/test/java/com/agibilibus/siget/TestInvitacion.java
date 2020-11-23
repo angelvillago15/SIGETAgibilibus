@@ -16,7 +16,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.agibilibus.siget.controller.Controller;
 import com.agibilibus.siget.dao.InvitacionDAO;
 import com.agibilibus.siget.dao.UserDAO;
-import com.agibilibus.siget.model.EstadoInvitacion;
 import com.agibilibus.siget.model.Invitacion;
 import com.agibilibus.siget.model.Reunion;
 import com.agibilibus.siget.model.Usuario;

@@ -45,14 +45,14 @@ public class Controller {
 	}
 
 	@PostMapping("/login")
-	public void login(HttpSession session, @RequestBody Map<String, Object> credenciales) throws Exception {
+	public boolean login(HttpSession session, @RequestBody Map<String, Object> credenciales) throws Exception {
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			JSONObject jso = new JSONObject(credenciales);
 			String userName = jso.getString(USER_NAME);
 			byte[] datosDesencriptados = md.digest(jso.getString("pwd").getBytes(StandardCharsets.UTF_8));
 			String pwd = new String(datosDesencriptados);
-			Sesion.get().login(session, userName, pwd);
+			return Sesion.get().login(session, userName, pwd);
 		} catch (Exception e) {
 			throw new Exception(e);
 		}

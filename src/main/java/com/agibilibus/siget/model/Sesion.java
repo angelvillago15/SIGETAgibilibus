@@ -38,8 +38,9 @@ public class Sesion {
 
 	}
 
-	public void login(HttpSession httpSession, String userName, String pwd) throws Exception {
+	public boolean login(HttpSession httpSession, String userName, String pwd) throws Exception {
 		String msg = "Credenciales inválidas";
+		boolean correcto = false;
 		try {
 
 			Optional<Usuario> optUser = userdao.findById(userName);
@@ -48,8 +49,7 @@ public class Sesion {
 				Usuario user = optUser.get();
 
 				if (user.getPassword().equals(pwd)) {
-					
-
+					correcto = true;
 					Sesion sesion = new Sesion(user, httpSession);
 					this.connectedUsersByUserName.put(userName, user);
 					this.connectedUsersByHttpSession.put(httpSession.getId(), user);
@@ -66,6 +66,7 @@ public class Sesion {
 		} catch (SQLException e) {
 			throw new Exception(msg);
 		}
+		return correcto;
 	}
 
 	public Usuario logout(HttpSession httpSession, String userName) {
