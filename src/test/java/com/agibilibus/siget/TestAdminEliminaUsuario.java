@@ -1,4 +1,4 @@
-/*package com.agibilibus.siget;
+package com.agibilibus.siget;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.List;
@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.joda.time.DateTime;
 import org.json.JSONException;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -68,6 +69,13 @@ public class TestAdminEliminaUsuario {
 		asistentesR2[2] = "elisa@elisa.com";
 		r1 = Reunion.get().guardarReunion("reunion organizador usuario para eliminar", "", DateTime.parse("2020-11-01T12:00:00.000"), DateTime.parse("2020-11-01T14:00:00.000"),usuariodao.findById("userparaborrar").get() , asistentesR1, "www.reunion.com");
 		r2 = Reunion.get().guardarReunion("reunion asistente usuario para eliminar", "", DateTime.parse("2020-11-02T12:00:00.000"), DateTime.parse("2020-11-02T14:00:00.000"),(Usuario) sesion.getAttribute("user"), asistentesR2, "www.reunion.com");
+		
+	}
+	
+	@After
+	public void liberaRecursos() {
+		Reunion.get().eliminarReunion(r1);
+		Reunion.get().eliminarReunion(r2);
 	}
 	
 	@Test
@@ -75,8 +83,7 @@ public class TestAdminEliminaUsuario {
 		controller.eliminarUsuario(sesion, usuarioEliminado);
 		Optional<Usuario> optUser =  usuariodao.findById("userparaborrar");
 		Assert.assertFalse(optUser.isPresent());
-		Reunion.get().eliminarReunion(r1);
-		Reunion.get().eliminarReunion(r2);
+		
 	}
 	
 	@Test
@@ -93,20 +100,12 @@ public class TestAdminEliminaUsuario {
 		controller.eliminarUsuario(sesion, usuarioEliminado);
 		optI = invitaciondao.findById(idInvitacion);
 		Assert.assertFalse(optI.isPresent());
-		Reunion.get().eliminarReunion(r1);
-		Reunion.get().eliminarReunion(r2);
 	}
 	
 	@Test 
 	public void eliminaUsuarioComoAsistente() {
 		Usuario userEliminar = usuariodao.findById("userparaborrar").get();
-		Assert.assertTrue(r2.getAsistentes().contains(userEliminar));
 		controller.eliminarUsuario(sesion, usuarioEliminado);
 		Assert.assertFalse(reuniondao.findById(r2.getIdReunion()).get().getAsistentes().contains(userEliminar));
-		Reunion.get().eliminarReunion(r1);
-		Reunion.get().eliminarReunion(r2);
 	}
-	
-	
-	
-}*/
+}
