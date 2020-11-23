@@ -4,12 +4,11 @@ import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
-
 import org.json.JSONException;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockHttpSession;
@@ -22,14 +21,14 @@ import com.agibilibus.siget.model.Usuario;
 @SpringBootTest
 class TestLogin {
 	
-	private Controller controller = new Controller();
-	private Map<String, Object> usuarioLogin = new HashMap<String, Object>();
-	private MockHttpSession session = new MockHttpSession();
+	private static Controller controller = new Controller();
+	private static Map<String, Object> usuarioLogin = new HashMap<String, Object>();
+	private static MockHttpSession session = new MockHttpSession();
 	private Map<String, Object> credenciales = new HashMap<String, Object>();
 	
 	
-	@BeforeClass 
-	public void init() throws NoSuchAlgorithmException, JSONException {
+	@Before
+	public static void init() throws NoSuchAlgorithmException, JSONException {
 		usuarioLogin.put("userCompletName", "usuario");
 		usuarioLogin.put("userName", "usuarioLogin");
 		usuarioLogin.put("userApellidos", "login");
@@ -41,6 +40,11 @@ class TestLogin {
 		usuarioLogin.put("id", "usuarioLogin");
 		controller.register(session, usuarioLogin);
 		System.out.println("registrando");
+	}
+	
+	@After
+	public static void liberarRecursos() {
+		Usuario.get().eliminarUsuario("usuarioLogin");
 	}
 	
 	@Test
@@ -63,8 +67,5 @@ class TestLogin {
 		Assert.assertFalse(controller.login(session, credenciales));
 	}
 	
-	@AfterClass 
-	public void liberarRecursos() {
-		Usuario.get().eliminarUsuario("usuarioLogin");
-	}
+
 }
