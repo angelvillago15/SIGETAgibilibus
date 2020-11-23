@@ -15,7 +15,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import junit.framework.Assert;
 
-public class pruebasSelenium {
+public class SeleniumLogin {
 
  private WebDriver driver;
 
