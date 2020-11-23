@@ -83,9 +83,9 @@ public class TestInvitacion {
 
 			for (int i = 0; i < jsa.length() && !flag; i++) {
 				JSONObject invitacion = (JSONObject) jsa.get(i);
-				JSONObject reunion = (JSONObject) invitacion.get("reunion");
+				JSONObject usuario = (JSONObject) invitacion.get("usuario");
 
-				if (reunion.get("title").equals(nombreTest)) {
+				if (usuario.get("user").equals(u)) {
 					idInvitacion = invitacion.getString("id");
 
 					flag = true;
