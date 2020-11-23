@@ -1,4 +1,4 @@
-package com.agibilibus.SIGET;
+package com.agibilibus.siget;
 
 import static org.junit.Assert.fail;
 import javax.servlet.http.HttpSession;
@@ -8,8 +8,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import com.agibilibus.SIGET.model.Sesion;
-import com.agibilibus.SIGET.model.Usuario;
+
+import com.agibilibus.siget.model.Sesion;
+import com.agibilibus.siget.model.Usuario;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

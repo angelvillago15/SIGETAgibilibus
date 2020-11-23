@@ -1,3 +1,26 @@
+window.addEventListener('load', 
+     function() { 
+		getRol();
+     }, false);
+
+function getRol() {
+
+	var data = {
+		url : "getRol",
+		type : "post",
+
+		success : function(response) {
+			var datos = JSON.parse(response);
+			if (datos.rol != "admin")
+				window.location="UserCalendar.html";
+		},
+		error : function(response) {
+			alert("hay un error");
+		}
+	};
+	$.ajax(data);
+	
+}
 var buscador = $("#table").DataTable();
 
 $(document).ready(function() {
@@ -46,7 +69,7 @@ function mostrarUsuario(username){
 			type : "userSelect",
 			userName: username
 		};
-		data = {
+		var data = {
 			data : JSON.stringify(msg),
 			url : "loadUser",
 			type : "post",

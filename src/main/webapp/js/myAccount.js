@@ -2,7 +2,7 @@ $(document).ready(function() {
 	var msg = {
 			type : "get my account"
 		};
-		data = {
+		var data = {
 			data : JSON.stringify(msg),
 			url : "getMyAccount",
 			type : "post",
