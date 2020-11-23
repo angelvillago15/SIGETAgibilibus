@@ -107,14 +107,14 @@ public class Invitacion {
 		List<Invitacion> invitaciones = invitaciondao.findAll();
 
 		for (Invitacion inv : invitaciones) {
-			if ((inv.getReunion().getAsistentes().contains(user)) && inv.getEstado() == EstadoInvitacion.PENDIENTE) {
+			if ((inv.getUsuario().equals(user)) && inv.getEstado() == EstadoInvitacion.PENDIENTE) {
 				jsaInvitaciones.put(inv.toJSON());
 			}
 		}
 		return jsaInvitaciones;
 	}
 
-	public void responderInvitacion(Usuario user, String idInv, boolean opcion) throws Exception {
+	public String responderInvitacion(Usuario user, String idInv, boolean opcion) throws Exception {
 		Optional<Invitacion> optInv = invitaciondao.findById(idInv);
 		if (optInv.isPresent()) {
 			Invitacion inv = optInv.get();
@@ -125,20 +125,21 @@ public class Invitacion {
 					List<Reunion> listReunion = Reunion.get().getListReuniones(user);
 					for (Reunion reu : listReunion) {
 						if (haySolape(r, reu)) {
-							throw new Exception("No puedes aceptar una reunión que coincida con otra");
+							return "No puedes aceptar una reunión que coincida con otra";
 						}
 					}
 					inv.setEstado(EstadoInvitacion.ACEPTADO);
 					r.getAsistentes().add(user);
-					reuniondao.save(reunion);
+					reuniondao.save(r);
 				} else {
 					inv.setEstado(EstadoInvitacion.RECHAZADO);
 				}
 				invitaciondao.save(inv);
 			} else
-				throw new Exception("Error al cargar la reunión de la invitación");
+				return "Error al cargar la reunión de la invitación";
 		} else
-			throw new Exception("La invitación no existe");
+			return "La invitación no existe";
+		return "Invitación aceptada";
 	}
 
 	public boolean haySolape(Reunion r1, Reunion r2) {
