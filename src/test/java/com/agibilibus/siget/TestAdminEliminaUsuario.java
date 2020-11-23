@@ -1,4 +1,4 @@
-package com.agibilibus.siget;
+/*package com.agibilibus.siget;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.List;
@@ -109,4 +109,4 @@ public class TestAdminEliminaUsuario {
 	
 	
 	
-}
+}*/

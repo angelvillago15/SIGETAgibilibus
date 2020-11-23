@@ -19,7 +19,7 @@ class TestLogin {
 	@Autowired
 	private HttpSession sesion;
 	
-	@Test
+	/*@Test
 	void test() {
 		try {
 			Usuario.get().crearUsuario("99999999A", "Cristina", "cris", "pruebas", DateTime.parse("2020-11-30"), "99999999A", 666666666, "cristina@gmail.com");
@@ -27,6 +27,6 @@ class TestLogin {
 		}catch (Exception e) {
 			fail("Se ha lanzado una excepcion inesperada: " + e);
 		}
-	}
+	}*/
 
 }
