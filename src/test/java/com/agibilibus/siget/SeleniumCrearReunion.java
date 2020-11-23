@@ -25,7 +25,7 @@ public class SeleniumCrearReunion {
  }
 
  @Test
- public void testVisualizarCalendarioPage() {
+ public void testCrearReunion() {
   WebElement nReunion = driver.findElement(By.id("nombreReunion"));
   WebElement url = driver.findElement(By.id("url"));
   WebElement Fecha = driver.findElement(By.id("fecha"));
@@ -34,22 +34,24 @@ public class SeleniumCrearReunion {
   WebElement hFin = driver.findElement(By.name("horaFin"));
   WebElement descripcion = driver.findElement(By.id("descripcion"));
   WebElement btnCrear = driver.findElement(By.id("crear"));
-  
+
   nReunion.sendKeys("Selenium");
   url.sendKeys("https://sonarcloud.io/organizations/agibilibus/projects");
-  Fecha.sendKeys("17/11/2020");
+  Fecha.sendKeys("30/12/2020");
   invitar.sendKeys("cristina@gmail.com");
   hInicio.sendKeys("15:20");
   hFin.sendKeys("16:40");
   descripcion.sendKeys("Es una reunion de prueba");
-  
+
   btnCrear.click();
-  
+
+  String expectedUrl = "https://sigetagibilibus.herokuapp.com/Login.html";
+  String actualUrl = driver.getCurrentUrl();
+
+  assertEquals(actualUrl, expectedUrl);
 
  }
 
- 
- 
  @After
  public void tearDown() {
   driver.quit();

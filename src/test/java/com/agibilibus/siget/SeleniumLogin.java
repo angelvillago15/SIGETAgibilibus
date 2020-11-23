@@ -13,47 +13,44 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-
-
-
 public class SeleniumLogin {
 
-	private WebDriver driver;
+ private WebDriver driver;
 
-	@Before
-	public void setUp() {
+ @Before
+ public void setUp() {
 
-		System.setProperty("webdriver.chrome.driver", "./src/test/resources/ChromeDriver/chromedriver.exe");
-		driver = new ChromeDriver();
-		driver.manage().window().maximize();
-		driver.get("https://sigetagibilibus.herokuapp.com/Login.html");
+  System.setProperty("webdriver.chrome.driver", "./src/test/resources/ChromeDriver/chromedriver.exe");
+  driver = new ChromeDriver();
+  driver.manage().window().maximize();
+  driver.get("https://sigetagibilibus.herokuapp.com/Login.html");
 
-	}
+ }
 
-	@Test
-	public void testLoginPage() {
+ @Test
+ public void testLoginPage() {
 
-		WebElement nombreUsuario = driver.findElement(By.id("username"));
-		WebElement contraseña = driver.findElement(By.id("pass"));
-		WebElement btnLogin = driver.findElement(By.id("login"));
+  WebElement nombreUsuario = driver.findElement(By.id("username"));
+  WebElement contraseña = driver.findElement(By.id("pass"));
+  WebElement btnLogin = driver.findElement(By.id("login"));
 
-		nombreUsuario.clear();
-		nombreUsuario.sendKeys("Pilar");
+  nombreUsuario.clear();
+  nombreUsuario.sendKeys("Pilar");
 
-		contraseña.clear();
-		contraseña.sendKeys("Hola1234");
+  contraseña.clear();
+  contraseña.sendKeys("Hola1234");
 
-		btnLogin.click();
+  btnLogin.click();
 
-		String actualUrl = "https://sigetagibilibus.herokuapp.com/Login.html";
-		String expectedUrl = driver.getCurrentUrl();
+  String actualUrl = "https://sigetagibilibus.herokuapp.com/Login.html";
+  String expectedUrl = driver.getCurrentUrl();
 
-		assertEquals(actualUrl, expectedUrl);
+  assertEquals(actualUrl, expectedUrl);
 
-	}
+ }
 
-	@After
-	public void tearDown() {
-		driver.quit();
-	}
+ @After
+ public void tearDown() {
+  driver.quit();
+ }
 }
