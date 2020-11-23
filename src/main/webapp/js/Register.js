@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('input[type=password]').keyup(function() {
+    $('input[id=pwd1]').keyup(function() {
         var pswd = $(this).val();
         //length
         if ( pswd.length < 8 ) {
