@@ -58,7 +58,7 @@ function getInvitaciones() {
 					+ " <button type='button' class='btn btn-success' onclick='aceptarInvitacion("+i+")'>Aceptar</button>"
 					+ " <button type='button' class='btn btn-danger' onclick='rechazarInvitacion("+i+")'>Rechazar</button>"
 					+ " <br><div class='panel panel-info autocollapse'>"
-					+ " <div class='panel-heading clickable'><h6 class='panel-title'>Datos:</h6></div>"
+					+ " <div class='panel-heading clickable'><br><h6 class='panel-title'>Quiero saber más</h6></div>"
 					+ " <div class='panel-body'><div class='alert alert-info' role='alert'>"
 					+ " - Título: <label>" + inv.reunion.title + "</label><br> - Descripción: <label>" + inv.reunion.descripcion + "</label><br>"
 					+ " - Hora: <label> de " + inv.reunion.start + " a "+ inv.reunion.end +"</label><br>"
