@@ -167,29 +167,20 @@ public class Reunion {
 		List<Usuario> asist = new ArrayList<>();
 		Reunion r = null;
 		String id = organizador.getUser() + "#" + titulo + "#" + horaInicio.toString() + "#" + horaFin.toString();		
-		for (String asistente : correosAsistentes) {
-			Optional<Usuario> a = userdao.findByEmail(asistente);
-			if (a.isPresent()) {
-				asist.add(a.get());
-				id += "#" + a.get().getUser();
-			}
-		}
 		Optional<Usuario> optUser = userdao.findById(organizador.getUser());
 		if (optUser.isPresent()) {
 			Usuario or = optUser.get();
 			r=new Reunion(id, titulo, descripcion, horaInicio, horaFin, or, asist, url);
-			for(Usuario u:asist) {
-				String idInv=r.getIdReunion()+u.getUser();
-				invitaciondao.save(new Invitacion(idInv, u, r, EstadoInvitacion.PENDIENTE));
+			for(String asistente:correosAsistentes) {
+				Optional<Usuario> a = userdao.findByEmail(asistente);
+				if(a.isPresent())
+					invitaciondao.save(new Invitacion(id, a.get(), r, EstadoInvitacion.PENDIENTE));
 			}
 		}
 		return reuniondao.insert(r);
 	}
 
-	}
-
 	public void eliminarReunion(Reunion r) {
-		System.out.println("reunion:"+r.getIdReunion()); 
 		reuniondao.deleteById(r.getIdReunion());
 	}
 
