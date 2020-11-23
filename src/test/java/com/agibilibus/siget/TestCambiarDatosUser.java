@@ -1,6 +1,5 @@
-package com.agibilibus.SIGET;
+package com.agibilibus.siget;
 
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.fail;
 
 import java.util.HashMap;
@@ -8,25 +7,23 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.joda.time.DateTime;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.agibilibus.SIGET.controller.Controller;
-import com.agibilibus.SIGET.model.Usuario;
+import com.agibilibus.siget.controller.Controller;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 class TestCambiarDatosUser {
-	
+
 	@Autowired
 	private HttpSession sesion;
-	
+
 	private Controller controller = new Controller();
-	
+
 	@Test
 	void testCambiarDatosUser() {
 		try {
@@ -41,7 +38,7 @@ class TestCambiarDatosUser {
 			credenciales.put("pwd1", "contraseña");
 			credenciales.put("rol", "usuario");
 			controller.modificar(sesion, credenciales);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			fail("Se ha lanzado una excepcion inesperada: " + e);
 		}
 	}

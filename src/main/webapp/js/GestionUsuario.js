@@ -69,7 +69,7 @@ function mostrarUsuario(username){
 			type : "userSelect",
 			userName: username
 		};
-		data = {
+		var data = {
 			data : JSON.stringify(msg),
 			url : "loadUser",
 			type : "post",

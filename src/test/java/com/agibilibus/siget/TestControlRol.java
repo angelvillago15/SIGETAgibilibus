@@ -1,7 +1,5 @@
-package com.agibilibus.SIGET;
+package com.agibilibus.siget;
 
-import com.agibilibus.SIGET.controller.Controller;
-import com.agibilibus.SIGET.dao.UserDAO;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import com.agibilibus.siget.controller.Controller;
+import com.agibilibus.siget.dao.UserDAO;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				id : event.event._def.publicId,
 
 			};
-			data = {
+			var data = {
 				data : JSON.stringify(msg),
 				url : "loadReunion",
 				type : "post",

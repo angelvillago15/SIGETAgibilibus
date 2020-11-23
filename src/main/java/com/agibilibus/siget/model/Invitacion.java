@@ -1,4 +1,4 @@
-package com.agibilibus.SIGET.model;
+package com.agibilibus.siget.model;
 
 import org.json.JSONArray;
 
@@ -13,9 +13,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
 
-import com.agibilibus.SIGET.dao.InvitacionDAO;
-import com.agibilibus.SIGET.dao.ReunionDAO;
-import com.agibilibus.SIGET.dao.UserDAO;
+import com.agibilibus.siget.dao.InvitacionDAO;
+import com.agibilibus.siget.dao.ReunionDAO;
+import com.agibilibus.siget.dao.UserDAO;
 
 import lombok.Data;
 
@@ -107,7 +107,7 @@ public class Invitacion {
 		List<Invitacion> invitaciones = invitaciondao.findAll();
 
 		for (Invitacion inv : invitaciones) {
-			if ((inv.getReunion().getAsistentes().contains(user)) && inv.getEstado() == EstadoInvitacion.pendiente) {
+			if ((inv.getReunion().getAsistentes().contains(user)) && inv.getEstado() == EstadoInvitacion.PENDIENTE) {
 				jsaInvitaciones.put(inv.toJSON());
 			}
 		}
@@ -122,14 +122,14 @@ public class Invitacion {
 
 			Optional<Reunion> optReunion = reuniondao.findById(inv.getReunion().getIdReunion());
 			if (optReunion.isPresent()) {
-				Reunion reunion = optReunion.get();
+				Reunion r = optReunion.get();
 
 				if (opcion) {
-					inv.setEstado(EstadoInvitacion.aceptado);
-					reunion.getAsistentes().add(user);
+					inv.setEstado(EstadoInvitacion.ACEPTADO);
+					r.getAsistentes().add(user);
 					reuniondao.save(reunion);
 				} else {
-					inv.setEstado(EstadoInvitacion.rechazado);
+					inv.setEstado(EstadoInvitacion.RECHAZADO);
 				}
 				invitaciondao.save(inv);
 				
@@ -153,7 +153,7 @@ public class Invitacion {
 					if (!r.getAsistentes().contains(usuario)) {
 						asist.add(usuario);
 						idInv = r.getIdReunion() + usuario.getUser();
-						invitaciondao.save(new Invitacion(idInv, usuario, r, EstadoInvitacion.pendiente));
+						invitaciondao.save(new Invitacion(idInv, usuario, r, EstadoInvitacion.PENDIENTE));
 					}
 				}
 			}

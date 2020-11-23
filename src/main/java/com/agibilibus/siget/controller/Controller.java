@@ -1,4 +1,4 @@
-package com.agibilibus.SIGET.controller;
+package com.agibilibus.siget.controller;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -21,16 +21,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.agibilibus.SIGET.dao.UserDAO;
-import com.agibilibus.SIGET.model.Invitacion;
-import com.agibilibus.SIGET.model.Reunion;
-import com.agibilibus.SIGET.model.Sesion;
-import com.agibilibus.SIGET.model.Usuario;
+import com.agibilibus.siget.dao.UserDAO;
+import com.agibilibus.siget.model.Invitacion;
+import com.agibilibus.siget.model.Reunion;
+import com.agibilibus.siget.model.Sesion;
+import com.agibilibus.siget.model.Usuario;
 
 @RestController
 public class Controller {
 	private static String error = "error";
 	private static String message = "message";
+	private static final String ZONA_HORARIA = "Europe/Madrid";
+	private static final String USER_NAME = "userName";
+	private static final String CORREOS = "correos";
+	
 
 	@Autowired
 	private UserDAO userdao;
@@ -45,7 +49,7 @@ public class Controller {
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			JSONObject jso = new JSONObject(credenciales);
-			String userName = jso.getString("userName");
+			String userName = jso.getString(USER_NAME);
 			byte[] datosDesencriptados = md.digest(jso.getString("pwd").getBytes(StandardCharsets.UTF_8));
 			String pwd = new String(datosDesencriptados);
 			Sesion.get().login(session, userName, pwd);
@@ -61,7 +65,7 @@ public class Controller {
 		MessageDigest md = MessageDigest.getInstance("MD5");
 		JSONObject jso = new JSONObject(credenciales);
 		String userCompletName = jso.getString("userCompletName");
-		String userName = jso.getString("userName");
+		String userName = jso.getString(USER_NAME);
 		String userApellidos = jso.getString("userApellidos");
 		String userDate = jso.getString("userDate");
 		String userDni = jso.getString("userDni");
@@ -97,13 +101,13 @@ public class Controller {
 		String[] horaFin = jso.getString("horaFin").split(":");
 		DateTime horaI = new DateTime(Integer.parseInt(fecha[0]), Integer.parseInt(fecha[1]),
 				Integer.parseInt(fecha[2]), Integer.parseInt(horaIni[0]), Integer.parseInt(horaIni[1]),
-		        DateTimeZone.forID("Europe/Madrid"));
+		        DateTimeZone.forID(ZONA_HORARIA));
 		DateTime horaF = new DateTime(Integer.parseInt(fecha[0]), Integer.parseInt(fecha[1]),
 				Integer.parseInt(fecha[2]), Integer.parseInt(horaFin[0]), Integer.parseInt(horaFin[1]),
-		        DateTimeZone.forID("Europe/Madrid"));
+		        DateTimeZone.forID(ZONA_HORARIA));
 		Usuario organizador = (Usuario) session.getAttribute("user");
 		String url = jso.getString("url");
-		String[] correosAsistentes = ((jso.getString("correos")).replace(" ", "")).split(",");
+		String[] correosAsistentes = ((jso.getString(CORREOS)).replace(" ", "")).split(",");
 		Reunion.get().guardarReunion(titulo, descripcion, horaI, horaF, organizador, correosAsistentes, url);
 
 	}
@@ -121,7 +125,7 @@ public class Controller {
 	@PostMapping("/loadUser")
 	public String loadUser(@RequestBody Map<String, Object> loadUser) {
 		JSONObject jso = new JSONObject(loadUser);
-		String username = jso.getString("userName");
+		String username = jso.getString(USER_NAME);
 		Optional<Usuario> optUser = userdao.findById(username);
 		if (optUser.isPresent()) {
 			return optUser.get().toJSON().toString();
@@ -164,7 +168,7 @@ public class Controller {
 	public void nuevaInvitacion(HttpSession session, @RequestBody Map<String, Object> correos) throws Exception {
 		JSONObject jso = new JSONObject(correos);
 		String id = jso.getString("id");
-		String[] correosAsistentes = ((jso.getString("correos")).replace(" ", "")).split(",");
+		String[] correosAsistentes = ((jso.getString(CORREOS)).replace(" ", "")).split(",");
 		Invitacion.get().enviarInivitacion(id, correosAsistentes);
 
 	}
@@ -186,7 +190,7 @@ public class Controller {
 	public void modificar(HttpSession session, @RequestBody Map<String, Object> credenciales) {
 		
 		JSONObject jso = new JSONObject(credenciales); 
-		String userName = jso.getString("userName"); 
+		String userName = jso.getString(USER_NAME); 
 		String nombre = jso.getString("userCompletName");
 		String userApellidos =jso.getString("userApellidos"); 
 		String userDni = jso.getString("userDni"); 
@@ -239,9 +243,9 @@ public class Controller {
 		 String[] horaF = jso.getString("horaFin").split(":");
 		 String descripcion = jso.getString("descripcion");
 		 String url = jso.getString("url");
-	     String[] correosAsistentes = ((jso.getString("correos")).replace(" ", "")).split(",");
-	     DateTime horaInicio = new DateTime(Integer.parseInt(fecha[0]), Integer.parseInt(fecha[1]), Integer.parseInt(fecha[2]),Integer.parseInt(horaI[0]), Integer.parseInt(horaI[1]), DateTimeZone.forID("Europe/Madrid"));
-	     DateTime horaFin = new DateTime(Integer.parseInt(fecha[0]), Integer.parseInt(fecha[1]), Integer.parseInt(fecha[2]),Integer.parseInt(horaF[0]), Integer.parseInt(horaF[1]), DateTimeZone.forID("Europe/Madrid"));
+	     String[] correosAsistentes = ((jso.getString(CORREOS)).replace(" ", "")).split(",");
+	     DateTime horaInicio = new DateTime(Integer.parseInt(fecha[0]), Integer.parseInt(fecha[1]), Integer.parseInt(fecha[2]),Integer.parseInt(horaI[0]), Integer.parseInt(horaI[1]), DateTimeZone.forID(ZONA_HORARIA));
+	     DateTime horaFin = new DateTime(Integer.parseInt(fecha[0]), Integer.parseInt(fecha[1]), Integer.parseInt(fecha[2]),Integer.parseInt(horaF[0]), Integer.parseInt(horaF[1]), DateTimeZone.forID(ZONA_HORARIA));
 	     Reunion.get().modificarReunion(id,nombreReunion,horaInicio,horaFin,descripcion,url,correosAsistentes);
 
 

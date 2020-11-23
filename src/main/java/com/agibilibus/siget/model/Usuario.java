@@ -1,4 +1,4 @@
-package com.agibilibus.SIGET.model;
+package com.agibilibus.siget.model;
 
 import java.io.Serializable;
 import java.util.List;
@@ -13,7 +13,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
 
-import com.agibilibus.SIGET.dao.UserDAO;
+import com.agibilibus.siget.dao.UserDAO;
 
 import lombok.Data;
 

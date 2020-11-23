@@ -1,4 +1,4 @@
-package com.agibilibus.SIGET.model;
+package com.agibilibus.siget.model;
 
 import java.sql.SQLException;
 import java.util.Optional;
@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.annotation.Transient;
 import org.springframework.stereotype.Component;
 
-import com.agibilibus.SIGET.dao.UserDAO;
+import com.agibilibus.siget.dao.UserDAO;
 
 @Component
 public class Sesion {
