@@ -107,37 +107,46 @@ public class Invitacion {
 		List<Invitacion> invitaciones = invitaciondao.findAll();
 
 		for (Invitacion inv : invitaciones) {
-			if ((inv.getReunion().getAsistentes().contains(user)) && inv.getEstado() == EstadoInvitacion.PENDIENTE) {
+			if ((inv.getUsuario().equals(user)) && inv.getEstado() == EstadoInvitacion.PENDIENTE) {
 				jsaInvitaciones.put(inv.toJSON());
 			}
 		}
 		return jsaInvitaciones;
 	}
 
-	public void responderInvitacion(Usuario user, String idInv, boolean opcion) throws Exception {
+	public String responderInvitacion(Usuario user, String idInv, boolean opcion) throws Exception {
 		Optional<Invitacion> optInv = invitaciondao.findById(idInv);
-
 		if (optInv.isPresent()) {
 			Invitacion inv = optInv.get();
-
 			Optional<Reunion> optReunion = reuniondao.findById(inv.getReunion().getIdReunion());
 			if (optReunion.isPresent()) {
 				Reunion r = optReunion.get();
-
 				if (opcion) {
+					List<Reunion> listReunion = Reunion.get().getListReuniones(user);
+					for (Reunion reu : listReunion) {
+						if (haySolape(r, reu)) {
+							return "No puedes aceptar una reunión que coincida con otra";
+						}
+					}
 					inv.setEstado(EstadoInvitacion.ACEPTADO);
 					r.getAsistentes().add(user);
-					reuniondao.save(reunion);
+					reuniondao.save(r);
 				} else {
 					inv.setEstado(EstadoInvitacion.RECHAZADO);
 				}
 				invitaciondao.save(inv);
-				
-			}
-			else
-				throw new Exception("Error al cargar la reunión de le invitación");
+			} else
+				return "Error al cargar la reunión de la invitación";
 		} else
-			throw new Exception("La invitación no existe");
+			return "La invitación no existe";
+		return "Invitación aceptada";
+	}
+
+	public boolean haySolape(Reunion r1, Reunion r2) {
+
+		return !((r1.getHoraInicio().isBefore(r2.getHoraInicio()) && r1.getHoraFin().isBefore(r2.getHoraInicio()))
+		        || (r1.getHoraInicio().isAfter(r2.getHoraFin()) && r1.getHoraFin().isAfter(r2.getHoraFin())));
+
 	}
 
 	public void enviarInivitacion(String id, String[] correosAsistentes) {
@@ -165,25 +174,26 @@ public class Invitacion {
 
 		}
 	}
-	
+
 	public void eliminarInvitacion(Invitacion invitacion) {
-		Optional <Invitacion> optInv = invitaciondao.findById(invitacion.getIdInvitacion());
-		if(optInv.isPresent()) 
+		Optional<Invitacion> optInv = invitaciondao.findById(invitacion.getIdInvitacion());
+		if (optInv.isPresent())
 			invitaciondao.deleteById(optInv.get().getIdInvitacion());
 	}
-	
-	public void eliminarTodasInvitacionesUsuario (Usuario usuario) {
+
+	public void eliminarTodasInvitacionesUsuario(Usuario usuario) {
 		List<Invitacion> invitaciones = invitaciondao.findAll();
 		if (!invitaciones.isEmpty())
 			for (Invitacion i : invitaciones)
 				if (i.getUsuario().getUser().equals(usuario.getUser()))
 					eliminarInvitacion(i);
 	}
-	
+
 	public Invitacion getInvitacion(Reunion reunion, Usuario usuario) {
 		List<Invitacion> listaInvitaciones = invitaciondao.findAll();
 		for (Invitacion i : listaInvitaciones) {
-			if(i.getReunion().getIdReunion().equals(reunion.getIdReunion())&&i.getUsuario().getUser().equals(usuario.getUser()))
+			if (i.getReunion().getIdReunion().equals(reunion.getIdReunion())
+			        && i.getUsuario().getUser().equals(usuario.getUser()))
 				return i;
 		}
 		return null;

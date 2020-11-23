@@ -54,13 +54,14 @@ function getInvitaciones() {
 			for ( var i in datos.invitaciones) {
 				var inv = datos.invitaciones[i];
 
-				txt = txt + "<p><label>" + inv.reunion.organizador.nombre + "</label> te ha invitado a una reunión</p>"
+				txt = txt + "<p><label>" + inv.reunion.organizador + "</label> te ha invitado a una reunión</p>"
 					+ " <button type='button' class='btn btn-success' onclick='aceptarInvitacion("+i+")'>Aceptar</button>"
 					+ " <button type='button' class='btn btn-danger' onclick='rechazarInvitacion("+i+")'>Rechazar</button>"
 					+ " <br><div class='panel panel-info autocollapse'>"
-					+ " <div class='panel-heading clickable'><h6 class='panel-title'>Quiero saber más</h6></div>"
+					+ " <div class='panel-heading clickable'><h6 class='panel-title'>Datos:</h6></div>"
 					+ " <div class='panel-body'><div class='alert alert-info' role='alert'>"
 					+ " - Título: <label>" + inv.reunion.title + "</label><br> - Descripción: <label>" + inv.reunion.descripcion + "</label><br>"
+					+ " - Hora: <label> de " + inv.reunion.start + " a "+ inv.reunion.end +"</label><br>"
 					+ " </div></div></div>";
 			}
 			document.getElementById('invitaciones').innerHTML = txt;
@@ -87,12 +88,11 @@ function aceptarInvitacion(i) {
                     contentType: 'application/json',
 
                     success: function(response) {
-                    	alert("Invitacion aceptada");
+						var datos = JSON.parse(response);
+                    	alert(datos.msg);
                     	location.reload();
                     },
-                    error : function(response) {
-                        alert(response.responseText);
-                    }
+                  
                 };
                 $.ajax(data);
        
