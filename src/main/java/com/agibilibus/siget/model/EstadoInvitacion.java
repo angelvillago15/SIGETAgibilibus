@@ -1,4 +1,4 @@
-package com.agibilibus.SIGET.model;
+package com.agibilibus.siget.model;
 
 public enum EstadoInvitacion {
 	PENDIENTE, ACEPTADO, RECHAZADO

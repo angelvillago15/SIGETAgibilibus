@@ -1,4 +1,4 @@
-package com.agibilibus.SIGET;
+package com.agibilibus.siget;
 
 import static org.junit.Assert.*;
 
@@ -13,9 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.junit4.SpringRunner;
-import com.agibilibus.SIGET.controller.Controller;
-import com.agibilibus.SIGET.dao.UserDAO;
-import com.agibilibus.SIGET.model.Usuario;
+
+import com.agibilibus.siget.controller.Controller;
+import com.agibilibus.siget.dao.UserDAO;
+import com.agibilibus.siget.model.Usuario;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

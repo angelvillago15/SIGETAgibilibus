@@ -1,4 +1,4 @@
-package com.agibilibus.SIGET.model;
+package com.agibilibus.siget.model;
 
 import org.json.JSONArray;
 
@@ -13,9 +13,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
 
-import com.agibilibus.SIGET.dao.InvitacionDAO;
-import com.agibilibus.SIGET.dao.ReunionDAO;
-import com.agibilibus.SIGET.dao.UserDAO;
+import com.agibilibus.siget.dao.InvitacionDAO;
+import com.agibilibus.siget.dao.ReunionDAO;
+import com.agibilibus.siget.dao.UserDAO;
 
 import lombok.Data;
 
@@ -122,11 +122,11 @@ public class Invitacion {
 
 			Optional<Reunion> optReunion = reuniondao.findById(inv.getReunion().getIdReunion());
 			if (optReunion.isPresent()) {
-				Reunion reunion = optReunion.get();
+				Reunion r = optReunion.get();
 
 				if (opcion) {
 					inv.setEstado(EstadoInvitacion.ACEPTADO);
-					reunion.getAsistentes().add(user);
+					r.getAsistentes().add(user);
 					reuniondao.save(reunion);
 				} else {
 					inv.setEstado(EstadoInvitacion.RECHAZADO);

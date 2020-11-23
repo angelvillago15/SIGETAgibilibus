@@ -1,4 +1,4 @@
-package com.agibilibus.SIGET;
+package com.agibilibus.siget;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,9 +18,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.agibilibus.SIGET.controller.Controller;
-import com.agibilibus.SIGET.dao.ReunionDAO;
-import com.agibilibus.SIGET.model.Reunion;
+import com.agibilibus.siget.controller.Controller;
+import com.agibilibus.siget.dao.ReunionDAO;
+import com.agibilibus.siget.model.Reunion;
 
 
 @RunWith(SpringRunner.class)

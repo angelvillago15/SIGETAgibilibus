@@ -1,4 +1,4 @@
-package com.agibilibus.SIGET.controller;
+package com.agibilibus.siget.controller;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -21,11 +21,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.agibilibus.SIGET.dao.UserDAO;
-import com.agibilibus.SIGET.model.Invitacion;
-import com.agibilibus.SIGET.model.Reunion;
-import com.agibilibus.SIGET.model.Sesion;
-import com.agibilibus.SIGET.model.Usuario;
+import com.agibilibus.siget.dao.UserDAO;
+import com.agibilibus.siget.model.Invitacion;
+import com.agibilibus.siget.model.Reunion;
+import com.agibilibus.siget.model.Sesion;
+import com.agibilibus.siget.model.Usuario;
 
 @RestController
 public class Controller {
