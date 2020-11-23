@@ -57,7 +57,7 @@
 									class="glyphicon glyphicon-user"></span> Mi Cuenta</a></li>
 							<li><a href="editAccount.html"><span
 									class="glyphicon glyphicon-cog"></span> Editar Cuenta</a></li>
-							<li><a href="Login.html"><span
+							<li><a href="javascript:cerrarSesion()"><span
 									class="glyphicon glyphicon-log-out"></span> Cerrar Sesión
 									<nav></nav></a></li>
 						</ul></li>
@@ -93,10 +93,8 @@
 				<button type="button" class="close" data-dismiss="modal">
 					<span aria-hidden="true">×</span> <span class="sr-only">close</span>
 				</button>
-				<p align="right">
-					<button type="button"  data-dismiss="modal"  
-						onclick="asistir()">No asistir </button>
-				<h4 id="modalTitle" class="modal-title"></h4>
+				
+				<h4 id="modalTitle" class="modal-title"><strong>Datos de Reunión</strong></h4>
 			</div>
 			<div id="modalBody" class="modal-body">
 				<form>
@@ -150,16 +148,16 @@
 					</div>
 
 					<div class="modal-footer">
-						<p align="right">
-							<button type="button" class="btn btn-success"
-								data-dismiss="modal" onclick="invitar()">Invitar</button>
-							<button type="button" class="btn btn-success"
-								data-dismiss="modal" onclick="modificar()">Modificar</button>
-							<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+						<div class="row">
+    						<div class="col">
+								<span class="float-left"><button type="button"  class="btn btn-warning" data-dismiss="modal"  onclick="asistir()">No asistir </button></span>
+								<span class="float-right"><button type="button" class="btn btn-success" data-dismiss="modal" onclick="invitar()">Invitar</button>
+								<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="modificar()">Modificar</button></span>				
 					</div>
 			</div>
 		</div>
 	</div>
+</div>
 
 	</body>
 	<script src="js/UserCalendar.js"></script>
