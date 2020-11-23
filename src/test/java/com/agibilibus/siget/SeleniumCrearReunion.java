@@ -45,11 +45,6 @@ public class SeleniumCrearReunion {
   
   btnCrear.click();
   
-  
- /* String actualUrl ="https://sigetagibilibus.herokuapp.com/newEvent.html";
-  String expectedUrl = driver.getCurrentUrl();
-
-  assertEquals(actualUrl,expectedUrl);*/
 
  }
 
