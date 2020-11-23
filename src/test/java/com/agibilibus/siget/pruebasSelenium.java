@@ -1,4 +1,4 @@
-package com.agibilibus.SIGET;
+package com.agibilibus.siget;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
