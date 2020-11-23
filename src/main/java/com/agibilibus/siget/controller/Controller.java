@@ -91,7 +91,7 @@ public class Controller {
 	}
 
 	@PostMapping("/nuevaTarea")
-	public void guardarReunion(HttpSession session, @RequestBody Map<String, Object> datosReunion) throws Exception {
+	public Reunion guardarReunion(HttpSession session, @RequestBody Map<String, Object> datosReunion) throws Exception {
 		JSONObject jso = new JSONObject(datosReunion);
 		String titulo = jso.getString("nombre");
 		String descripcion = jso.getString("descripcion");
@@ -107,7 +107,7 @@ public class Controller {
 		Usuario organizador = (Usuario) session.getAttribute("user");
 		String url = jso.getString("url");
 		String[] correosAsistentes = ((jso.getString(CORREOS)).replace(" ", "")).split(",");
-		Reunion.get().guardarReunion(titulo, descripcion, horaI, horaF, organizador, correosAsistentes, url);
+		return Reunion.get().guardarReunion(titulo, descripcion, horaI, horaF, organizador, correosAsistentes, url);
 
 	}
 
