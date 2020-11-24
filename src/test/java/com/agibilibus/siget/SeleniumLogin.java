@@ -35,17 +35,17 @@ public class SeleniumLogin {
   WebElement btnLogin = driver.findElement(By.id("login"));
 
   nombreUsuario.clear();
-  nombreUsuario.sendKeys("Pilar");
+  nombreUsuario.sendKeys("pilar");
 
   contraseña.clear();
   contraseña.sendKeys("Hola1234");
 
   btnLogin.click();
 
-  String actualUrl = "https://sigetagibilibus.herokuapp.com/Login.html";
-  String expectedUrl = driver.getCurrentUrl();
+  String tituloEsperado = "Ventana de Usuario";
+  String tituloActual = driver.getTitle();
 
-  assertEquals(actualUrl, expectedUrl);
+  assertEquals(tituloEsperado, tituloActual);
 
  }
  
@@ -77,6 +77,6 @@ public class SeleniumLogin {
 
  @After
  public void tearDown() {
-  driver.quit();
+  // driver.quit();
  }
 }
