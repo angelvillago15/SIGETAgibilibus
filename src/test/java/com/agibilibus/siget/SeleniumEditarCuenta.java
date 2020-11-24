@@ -26,7 +26,7 @@ public class SeleniumEditarCuenta {
  }
 
  @Test
- public void testEditarCuenta() { 
+ public void testEditarCuenta() {
 
   WebElement nombreUsuario = driver.findElement(By.id("Nusername"));
   WebElement contraseña = driver.findElement(By.id("Npass"));
