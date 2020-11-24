@@ -26,7 +26,6 @@ public class SeleniumCrearReunion {
 
  @Test
  public void testCrearReunion() {
-
   WebElement nReunion = driver.findElement(By.id("nombreReunion"));
   WebElement url = driver.findElement(By.id("url"));
   WebElement Fecha = driver.findElement(By.id("fecha"));
@@ -36,7 +35,7 @@ public class SeleniumCrearReunion {
   WebElement descripcion = driver.findElement(By.id("descripcion"));
   WebElement btnCrear = driver.findElement(By.id("crear"));
 
-  nReunion.sendKeys("RRRRR");
+  nReunion.sendKeys("Selenium");
   url.sendKeys("https://sonarcloud.io/organizations/agibilibus/projects");
   Fecha.sendKeys("30/12/2020");
   invitar.sendKeys("cristina@gmail.com");
@@ -46,7 +45,7 @@ public class SeleniumCrearReunion {
 
   btnCrear.click();
 
-  String expectedUrl = "https://sigetagibilibus.herokuapp.com/UserCalendar.html";
+  String expectedUrl = "https://sigetagibilibus.herokuapp.com/Login.html";
   String actualUrl = driver.getCurrentUrl();
 
   assertEquals(actualUrl, expectedUrl);
