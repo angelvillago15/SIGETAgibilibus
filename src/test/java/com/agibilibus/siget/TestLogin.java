@@ -39,7 +39,6 @@ class TestLogin {
 		usuarioLogin.put("pwd1", "Hola1234");
 		usuarioLogin.put("id", "usuarioLogin");
 		controller.register(session, usuarioLogin);
-		System.out.println("registrando");
 	}
 	
 	@After
