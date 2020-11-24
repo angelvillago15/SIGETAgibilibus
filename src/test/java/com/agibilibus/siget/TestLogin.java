@@ -1,32 +1,71 @@
 package com.agibilibus.siget;
 
-import static org.junit.Assert.fail;
-import javax.servlet.http.HttpSession;
-import org.joda.time.DateTime;
-import org.junit.jupiter.api.Test;
+import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.json.JSONException;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.agibilibus.siget.model.Sesion;
+import com.agibilibus.siget.controller.Controller;
 import com.agibilibus.siget.model.Usuario;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 class TestLogin {
 	
-	@Autowired
-	private HttpSession sesion;
+	private static Controller controller = new Controller();
+	private static Map<String, Object> usuarioLogin = new HashMap<String, Object>();
+	private static MockHttpSession session = new MockHttpSession();
+	private Map<String, Object> credenciales = new HashMap<String, Object>();
+	
+	
+	@Before
+	public static void init() throws NoSuchAlgorithmException, JSONException {
+		usuarioLogin.put("userCompletName", "usuario");
+		usuarioLogin.put("userName", "usuarioLogin");
+		usuarioLogin.put("userApellidos", "login");
+		usuarioLogin.put("userDate", "2020-11-30");
+		usuarioLogin.put("userDni", "0000001");
+		usuarioLogin.put("userTelf", "666666666");
+		usuarioLogin.put("userMail", "user@login");
+		usuarioLogin.put("pwd1", "Hola1234");
+		usuarioLogin.put("id", "usuarioLogin");
+		controller.register(session, usuarioLogin);
+		System.out.println("registrando");
+	}
+	
+	@After
+	public static void liberarRecursos() {
+		Usuario.get().eliminarUsuario("usuarioLogin");
+	}
 	
 	@Test
-	void test() {
-		try {
-			Usuario.get().crearUsuario("99999999A", "Cristina", "cris", "pruebas", DateTime.parse("2020-11-30"), "99999999A", 666666666, "cristina@gmail.com");
-			Sesion.get().login(sesion, "cris", "99999999A");
-		}catch (Exception e) {
-			fail("Se ha lanzado una excepcion inesperada: " + e);
-		}
+	public void testLoginCorrecto() throws Exception {
+		credenciales.put("userName", "usuarioLogin");
+		credenciales.put("pwd", "Hola1234");
+		Assert.assertTrue(controller.login(session, credenciales));
 	}
+	
+	@Test
+	public void testUsuarioIncorrecto() throws Exception {	
+		credenciales.put("userName", "usuarioLogi");
+		credenciales.put("pwd", "Hola1234");
+		Assert.assertFalse(controller.login(session, credenciales));
+	}
+	@Test
+	public void testContraseñaIncorrecta() throws Exception {
+		credenciales.put("userName", "usuarioLogin");
+		credenciales.put("pwd", "Hola123");
+		Assert.assertFalse(controller.login(session, credenciales));
+	}
+	
 
 }

@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('input[type=password]').keyup(function() {
+    $('input[id=pwd1]').keyup(function() {
         var pswd = $(this).val();
         //length
         if ( pswd.length < 8 ) {
@@ -47,11 +47,31 @@ $(document).ready(function() {
         		}
         	else if(userTelf.value.length>9)
         		alert("El numero de telefono es demasiado largo");
+        	else if(!fechaCorrecta())
+        		alert("Debe tener al menos 16 años");
         	else 
         		register();
         		
         }	        
     }
+    function fechaCorrecta() {// el emleado tiene al menos 16 años
+	    var correcto = new Boolean(true); 
+	    var fecha=$("#userDate").val();
+	    var diaFormulario = fecha.substring(8,10);
+	    var mesFormularo = fecha.substring(5,7);
+	    var añoFormulario = fecha.substring(0,4);
+	    var edad = 16;
+	    var fechaFormulario = new Date();
+	    fechaFormulario.setFullYear(añoFormulario, mesFormularo-1, diaFormulario);
+
+	    var fechaHoy = new Date();
+
+	    fechaHoy.setFullYear(fechaHoy.getFullYear() - edad);
+
+	     if (fechaHoy <fechaFormulario)
+	       correcto=false;
+	    return correcto;
+	  }
 
     function validarCampo(campo) { // comprobar que no hay campos vacios
         var valido = new Boolean(true); 

@@ -45,17 +45,16 @@ public class Controller {
 	}
 
 	@PostMapping("/login")
-	public void login(HttpSession session, @RequestBody Map<String, Object> credenciales) throws Exception {
+	public boolean login(HttpSession session, @RequestBody Map<String, Object> credenciales) throws Exception {
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			JSONObject jso = new JSONObject(credenciales);
 			String userName = jso.getString(USER_NAME);
 			byte[] datosDesencriptados = md.digest(jso.getString("pwd").getBytes(StandardCharsets.UTF_8));
 			String pwd = new String(datosDesencriptados);
-			Sesion.get().login(session, userName, pwd);
+			return Sesion.get().login(session, userName, pwd);
 		} catch (Exception e) {
 			throw new Exception(e);
-
 		}
 	}
 
@@ -92,7 +91,7 @@ public class Controller {
 	}
 
 	@PostMapping("/nuevaTarea")
-	public void guardarReunion(HttpSession session, @RequestBody Map<String, Object> datosReunion) throws Exception {
+	public Reunion guardarReunion(HttpSession session, @RequestBody Map<String, Object> datosReunion) throws Exception {
 		JSONObject jso = new JSONObject(datosReunion);
 		String titulo = jso.getString("nombre");
 		String descripcion = jso.getString("descripcion");
@@ -108,7 +107,7 @@ public class Controller {
 		Usuario organizador = (Usuario) session.getAttribute("user");
 		String url = jso.getString("url");
 		String[] correosAsistentes = ((jso.getString(CORREOS)).replace(" ", "")).split(",");
-		Reunion.get().guardarReunion(titulo, descripcion, horaI, horaF, organizador, correosAsistentes, url);
+		return Reunion.get().guardarReunion(titulo, descripcion, horaI, horaF, organizador, correosAsistentes, url);
 
 	}
 
