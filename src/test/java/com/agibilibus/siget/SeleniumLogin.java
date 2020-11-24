@@ -48,6 +48,32 @@ public class SeleniumLogin {
   assertEquals(actualUrl, expectedUrl);
 
  }
+ 
+ @Test
+ public void testPrincipalPage() {
+		WebElement menu = driver.findElement(By.linkText("Menu"));
+		menu.click();
+		
+		WebElement evento = driver.findElement(By.linkText("Nuevo Evento"));
+		evento.click();
+		
+		String urlEsperada = "https://sigetagibilibus.herokuapp.com/newEvent.html";
+		String urlActual = driver.getCurrentUrl();
+		
+		assertEquals(urlEsperada, urlActual);
+		
+		WebElement logo = driver.findElement(By.linkText("logo"));
+		logo.click();
+		
+		
+		WebElement nosotros = driver.findElement(By.linkText("Sobre Nosotros"));
+		nosotros.click();
+		
+		String urlEsperada2 = "https://sigetagibilibus.herokuapp.com/AboutUs.html";
+		String urlActual2 = driver.getCurrentUrl();
+		
+		assertEquals(urlEsperada2, urlActual2);
+ }
 
  @After
  public void tearDown() {
